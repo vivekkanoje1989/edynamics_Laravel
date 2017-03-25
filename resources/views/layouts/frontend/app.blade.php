@@ -54,7 +54,7 @@
                         ?> 
                         
                         @if ( !Auth::guard('user')->check() ) 
-                            <li><a href="[[ url('user/login') ]]">User Login</a></li>
+                            <li><a href="[[ url('user/login') ]]">User Login  </a></li>
                             <li><a href="[[ url('user/register') ]]">User Register</a></li>
                         @else
                             <li class="dropdown">
