@@ -74,7 +74,7 @@ return [
             ],
             'driver' => 'mysql',
             'port' => 3306,
-            'database' => 'new_own_final',
+            'database' => 'new_own_master',
             'username' => 'bmsbuilder',
             'password' => 'bms123',
             'charset' => 'utf8',

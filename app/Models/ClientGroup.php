@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Mon, 06 Feb 2017 09:11:10 +0000.
+ * Date: Mon, 27 Mar 2017 16:29:09 +0530.
  */
 
 namespace App\Models;
@@ -21,10 +21,12 @@ class ClientGroup extends Eloquent
 {
 	public $incrementing = false;
 	public $timestamps = false;
+        protected $connection = 'masterdb';
+        
 
 	protected $casts = [
 		'id' => 'int',
-		'group_name' => 'int'
+		'group_name' => 'string'
 	];
 
 	protected $fillable = [
