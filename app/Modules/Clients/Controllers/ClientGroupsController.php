@@ -2,7 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Models\ClientGroup;
 use Illuminate\Http\Request;
 
 class ClientGroupsController extends Controller {
@@ -13,19 +13,22 @@ class ClientGroupsController extends Controller {
 	 * @return Response
 	 */
 	public function index()
-	{
-		return view("Clients::client_groups_index");
+	{    
+            return view("Clients::client_groups_index");
 	}
-
-	/**
-	 * Show the form for creating a new resource.
+        
+        /**
+	 * Client Groups listing
 	 *
 	 * @return Response
 	 */
-	public function create()
-	{
-		//
-	}
+        public function manageClientGroup()
+        {
+            $model = new ClientGroup();
+            return $model->getlist();
+        }        
+
+        
 
 	/**
 	 * Store a newly created resource in storage.
@@ -34,30 +37,14 @@ class ClientGroupsController extends Controller {
 	 */
 	public function store()
 	{
-		//
+            $postdata = file_get_contents('php://input');
+            $request = json_decode($postdata, true);
+            $model = new ClientGroup();
+            return $model->process($request);    
+            
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
+	
 
 	/**
 	 * Update the specified resource in storage.
@@ -70,15 +57,6 @@ class ClientGroupsController extends Controller {
 		//
 	}
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
+	
 
 }

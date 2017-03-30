@@ -78,6 +78,8 @@
         <script src="/backend/hrController.js"></script>
         <script src="/backend/cloudtelephonyController.js"></script>
         
+        <script src="/backend/clientGroupsController.js"></script>
+        
         <!-- Layout Related Directives -->
         <script src="/backend/app/directives/loading.js"></script>
         <script src="/backend/app/directives/skin.js"></script>
