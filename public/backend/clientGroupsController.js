@@ -10,6 +10,7 @@ app.controller('clientGroupCtrl', ['$scope', 'Data', '$rootScope','$timeout', fu
             $scope.id = id;
             $scope.group_name = name;
             $scope.index = index;
+            $scope.display_msg=false;
         }
         
         /*all list of client groups*/
@@ -39,11 +40,33 @@ app.controller('clientGroupCtrl', ['$scope', 'Data', '$rootScope','$timeout', fu
                         } 
                         else 
                         {
-                            $scope.clientgroupslist.push({'group_name': $scope.group_name,'id':response.id});
+                            $scope.clientgroupslist.push({'group_name': $scope.group_name,'id':response.lastRecordId});
                             $('#clientGroupsModal').modal('toggle');
                         }
                     });
-           }    
+           }
+           else
+           {
+                Data.put('clientgroups/'+$scope.id, {
+                    group_name: $scope.group_name, id: $scope.id}).then(function (response) {
+                  
+                    if (!response.success)
+                    {
+                        $scope.errorMsg = response.errormsg;
+                    } 
+                    else 
+                    {
+                        $scope.clientgroupslist.splice($scope.index, 1);
+                        $scope.clientgroupslist.splice($scope.index, 0, 
+                        {
+                            group_name: $scope.group_name, id: $scope.id
+                        });
+                        
+                        $('#clientGroupsModal').modal('toggle');
+                        
+                    }
+                });
+            }
            
        }
        

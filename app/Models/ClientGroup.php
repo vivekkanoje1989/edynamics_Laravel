@@ -80,21 +80,27 @@ class ClientGroup extends Eloquent
             else 
             {
                     $loggedInUserId = Auth::guard('admin')->user()->id;
-                    if(empty($request['blood_group_id']))
+                    if(empty($request['id']))
                     {
                        /* || === || insertion process || === || */
                         $create = CommonFunctions::insertMainTableRecords($loggedInUserId);
                         $input['clientGroupInfo'] = array_merge($request,$create);
                         $modelClientGroup = ClientGroup::create($input['clientGroupInfo']);
-                        $result = ['success' => true, 'result' => $modelClientGroup,'lastRecordId'=>$modelClientGroup->id];
-                        return json_encode($result); 
+                        $lastClientGroup = ClientGroup::latest('id')->first();
                         
-                        
-                        
+                        $result = ['success' => true, 'result' => $modelClientGroup,'lastRecordId'=>$lastClientGroup->id];
+                        return json_encode($result);   
                     }
-                    else if(!empty($request['blood_group_id']))
+                    else if(!empty($request['id']))
                     {
                         /* || === || updation process || === || */
+                        $update = CommonFunctions::updateMainTableRecords($loggedInUserId);
+                        $input['clientGroupInfo'] = array_merge($request,$update);
+                        $modelClientGroup = ClientGroup::where('id', $request['id'])->update($input['clientGroupInfo']);
+                        $result = ['success' => true, 'result' => $modelClientGroup];
+
+                     return json_encode($result);
+                        
                         
                     }    
             }

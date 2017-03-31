@@ -44,7 +44,7 @@
                             <td>{{$index + 1}}</td>
                             <td>{{ list.group_name}}</td>                          
                             <td class="fa-div">
-                                <div class="fa-hover" tooltip-html-unsafe="Edit" style="display: block;" data-toggle="modal" data-target="#bloodGroupModal"><a href="javascript:void(0);" ng-click="initialModal({{ list.id}},'{{list.group_name}}',$index)"><i class="fa fa-pencil"></i></a></div>
+                                <div class="fa-hover" tooltip-html-unsafe="Edit" style="display: block;" data-toggle="modal" data-target="#clientGroupsModal"><a href="javascript:void(0);" ng-click="initialModal({{ list.id}},'{{list.group_name}}',$index)"><i class="fa fa-pencil"></i></a></div>
                             </td>
                         </tr>
                     </tbody>
@@ -66,14 +66,14 @@
                 
                 <form ng-submit="clientGroupForm.$valid && processClientGroups()" name="clientGroupForm"  novalidate>
                     <div class="modal-body">
-                        <div class="form-group" ng-class="{ 'has-error' : btnClientGroup && (!clientGroupForm.group_name.$dirty && bloodGroupForm.group_name.$invalid)}">
+                        <div class="form-group" ng-class="{ 'has-error' : btnClientGroup && display_msg && (!clientGroupForm.group_name.$dirty && bloodGroupForm.group_name.$invalid)}">
                             
                             <input type="hidden" class="form-control" ng-model="id" name="id">
                             
                             <span class="input-icon icon-right">
                                 <input type="text" class="form-control" ng-model="group_name" name="group_name" placeholder="Client group" ng-change="errorMsg = null" required>
-                                <i class="fa fa-user thm-color circular"></i>
-                                <div class="help-block" ng-show="btnClientGroup" ng-messages="clientGroupForm.group_name.$error">
+                                <i class="fa fa-users thm-color circular"></i>
+                                <div class="help-block" ng-show="btnClientGroup" ng-if="display_msg" ng-messages="clientGroupForm.group_name.$error">
                                     <div ng-message="required">This field is required</div>
                                     <div ng-if="errorMsg">{{errorMsg}}</div>
                                 </div>
@@ -83,7 +83,7 @@
                         </div>
                     </div>
                     <div class="modal-footer" align="center">
-                        <button type="Submit" class="btn btn-sub" ng-click="btnClientGroup = true">Submit</button>
+                        <button type="Submit" class="btn btn-sub" ng-click="btnClientGroup = true;display_msg=true">Submit</button>
                     </div> 
                 </form>           
             </div>

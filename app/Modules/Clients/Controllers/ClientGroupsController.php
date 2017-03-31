@@ -54,7 +54,10 @@ class ClientGroupsController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+            $postdata = file_get_contents('php://input');
+            $request = json_decode($postdata, true);
+            $model = new ClientGroup();
+            return $model->process($request);    
 	}
 
 	
