@@ -11,6 +11,7 @@ app.controller('clientGroupCtrl', ['$scope', 'Data', '$rootScope','$timeout', fu
             $scope.group_name = name;
             $scope.index = index;
             $scope.display_msg=false;
+            $scope.errorMsg="";
         }
         
         /*all list of client groups*/
