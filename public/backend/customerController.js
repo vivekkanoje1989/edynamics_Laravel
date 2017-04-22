@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 'use strict';
-app.controller('customerController', ['$rootScope', '$scope', '$state', 'Data', 'Upload', '$timeout', '$parse', '$window', function ($rootScope, $scope, $state, Data, Upload, $timeout, $parse, $window) {
+app.controller('customerController', ['$rootScope', '$scope', '$state', 'Data', 'Upload', '$timeout', '$parse', '$window', 'toaster', function ($rootScope, $scope, $state, Data, Upload, $timeout, $parse, $window, toaster) {
         $scope.pageHeading = 'Create Customer';
         $scope.customerData = {};
         $scope.contactData = {};
@@ -165,12 +165,13 @@ app.controller('customerController', ['$rootScope', '$scope', '$state', 'Data', 
                         $('.errMsg').text('');
                         $window.sessionStorage.setItem("sessionContactData", "");
                         $scope.disableCreateButton = true;
-                        customerPhoto.result = response.data;
-                        $rootScope.alert('success', "Customer added successfully.");
-                        $('.alert-delay').delay(3000).fadeOut("slow");
-                        $timeout(function () {
-                            $state.go(getUrl + '.userIndex');
-                        }, 1000);
+//                        if($scope.searchData.customerId === 0 || $scope.searchData.customerId === ''){
+//                            toaster.pop('success', 'Customer', 'Record successfully created');}
+//                        else{
+//                            toaster.pop('success', 'Customer', 'Record successfully updated');}
+//                        $timeout(function () {
+                            $state.go(getUrl + '.enquiryCreate', { "customerId": response.data.customerId });
+//                        }, 2000);
                     }
                 });
             }, function (response) {
@@ -191,10 +192,10 @@ app.directive('checkMobileExist', function ($timeout, $q, Data) {
         require: 'ngModel',
         link: function($scope, element, attributes, model) {
             model.$asyncValidators.uniqueMobile = function(modelValue) {        
-                var mobileNumber = modelValue;
-                var customerId = $scope.searchData.customerId;        
+                var mobileNumber = modelValue;      
+                var customerId =  $scope.searchData.customerId;
                 return Data.post('master-sales/checkMobileExist',{
-                    data:{mobileNumber: mobileNumber,id:customerId},
+                    data:{mobileNumber: mobileNumber, customerId: customerId},
                 }).then(function(response){
                   $timeout(function(){
                     model.$setValidity('uniqueMobile', !!response.success); 

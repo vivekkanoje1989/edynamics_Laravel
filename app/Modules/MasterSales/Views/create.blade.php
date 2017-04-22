@@ -20,11 +20,11 @@
     <div class="widget flat radius-bordered ">
         <div class="col-lg-12 col-sm-12 col-xs-12" ng-controller="customerController">
             <h5 class="row-title before-themeprimary"><i class="fa  fa-arrow-circle-o-right themeprimary"></i>{{pageHeading}}</h5>
-            <div class="widget-body bordered-top bordered-sky col-lg-12 col-sm-12 col-xs-12">
+            <div class="widget-body bordered-top bordered-themeprimary col-lg-12 col-sm-12 col-xs-12">
                 <div id="customer-form">
                     <form novalidate role="form" name="customerForm" ng-submit="customerForm.$valid && createCustomer(customerData, customerData.image_file, contactData)">
                         <input type="hidden" ng-model="customerData.csrfToken" name="csrftoken" id="csrftoken" ng-init="customerData.csrfToken = '[[ csrf_token() ]]'">
-                        <input type="hidden" ng-model="searchData.customerId" name="customerId" id="custId" value="{{customerData.customerId}}">
+                        <input type="hidden" ng-model="searchData.customerId" name="customerId" id="custId" value="{{searchData.customerId}}">
                         <div class="row col-lg-12 col-sm-12 col-xs-12">
                             <div class="col-lg-6 col-sm-6 col-xs-12">
                                 <div class="form-title">
@@ -56,7 +56,7 @@
                                 </div>
                             </div>     
                         </div>
-                         <div class="row col-lg-12 col-sm-12 col-xs-12" ng-if="showDiv">
+                        <div class="row col-lg-12 col-sm-12 col-xs-12" ng-if="showDiv">
                         <hr class="wide" />
                             <div class="col-lg-12 col-sm-12 col-xs-12">
                                 <div class="form-title">
@@ -127,7 +127,7 @@
                                             <span class="input-icon icon-right">
                                                 <select ng-model="customerData.gender_id" name="gender_id" ng-controller="genderCtrl" class="form-control" required>
                                                     <option value="">Select Gender</option>
-                                                    <option ng-repeat="genderList in genders track by $index" value="{{genderList.gender_id}}" ng-selected="{{ genderList.gender_id == customerData.gender}}">{{genderList.gender_title}}</option>
+                                                    <option ng-repeat="genderList in genders track by $index" value="{{genderList.id}}" ng-selected="{{ genderList.id == customerData.gender}}">{{genderList.gender}}</option>
                                                 </select>
                                                 <i class="fa fa-sort-desc"></i>
                                                 <div ng-show="formButton" ng-messages="customerForm.gender_id.$error" class="help-block errMsg">
@@ -242,9 +242,9 @@
                                         <div class="form-group">
                                             <label for="">Source</label>
                                             <span class="input-icon icon-right">
-                                                <select class="form-control" ng-change="onEnquirySourceChange()" ng-model="customerData.source_id" name="source_id" id="source_id" required>
+                                                <select ng-change="onEnquirySourceChange(customerData.source_id)" class="form-control" ng-model="customerData.source_id" name="source_id"  id="source_id" required>
                                                     <option value="">Select Source</option>
-                                                    <option ng-repeat="source in sourceList" value="{{source.id}}" ng-selected="{{source.id == customerData.source_id}}">{{source.source_name}}</option>
+                                                    <option ng-repeat="source in sourceList" value="{{source.id}}" ng-selected="{{source.id == customerData.source_id}}">{{source.sales_source_name}}</option>
                                                 </select>
                                                 <i class="fa fa-sort-desc"></i>
                                                 <div ng-show="formButton" ng-messages="customerForm.source_id.$error" class="help-block errMsg">
@@ -323,7 +323,7 @@
                         </div>
                         <hr class="wide col-lg-12 col-xs-12 col-md-12" ng-if="showDiv"/>
                         <div class="col-lg-12 col-xs-12 col-md-12" align="center">
-                            <button type="submit" class="btn btn-primary" ng-show="showDiv" ng-click="formButton=true">Save & Continue</button>
+                            <button type="submit" class="btn btn-primary" ng-show="showDiv" ng-disabled="disableCreateButton" ng-click="formButton=true">Save & Continue</button>
                         </div>
                     </form>
                 </div>
@@ -576,7 +576,7 @@
                                 </div>   
                             </div>
                             <div class="modal-footer" align="center">
-                                <button type="submit" class="btn btn-sub" ng-click="modalSbtBtn=true">Submit</button>
+                                <button type="submit" class="btn btn-primary" ng-click="modalSbtBtn=true">Submit</button>
                             </div>
                         </form>
                     </div>

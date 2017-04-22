@@ -43,7 +43,7 @@ Route::get($getUrl.'/header', function () {
 });
 Route::get($getUrl.'/getToken', 'backend\Auth\LoginController@getToken');
 
-Route::group(['middleware' =>[ 'web']], function () {
+Route::group(['middleware' =>['web']], function () {
     $getUrl = config('global.getUrl');
     // ADMIN
     Route::get($getUrl.'/session', 'backend\Auth\LoginController@getSession');
@@ -71,17 +71,9 @@ Route::group(['middleware' =>[ 'web']], function () {
     Route::get('user/password/reset/{token}', 'frontend\Auth\ResetPasswordController@showResetForm');
     Route::post('user/password/reset', 'frontend\Auth\ResetPasswordController@reset');
     
-    
-    /*********************************************** API **********************************************************/
-    
-    Route::post('api/authenticate', 'backend\Auth\LoginController@authenticate');
-    Route::post('api/checkUserCredentials', 'backend\Auth\LoginController@checkUserCredentials');
-    Route::get('api/getMasterData', 'backend\AdminController@getMasterData');       
-    
-    /*********************************************** API **********************************************************/
 });
 
-Route::group(['middleware' =>[ 'auth:admin']], function () { 
+Route::group(['middleware' =>['auth:admin']], function () { 
     $getUrl = config('global.getUrl');
     /*************************** Admin Dashboard ****************************/
     Route::get($getUrl.'/dashboard', 'backend\AdminController@dashboard');
@@ -98,11 +90,19 @@ Route::group(['middleware' =>[ 'auth:admin']], function () {
     Route::get($getUrl.'/getEducationList', 'backend\AdminController@getEducationList');
     Route::get($getUrl.'/getProfessionList', 'backend\AdminController@getProfessionList');
     Route::get($getUrl.'/getCountries', 'backend\AdminController@getCountries');
-    Route::get($getUrl.'/getTeamLead', 'backend\AdminController@getTeamLead');    
     Route::get($getUrl.'/getWebPageList', 'backend\AdminController@getWebPageList'); //uma 
     Route::get($getUrl.'/getPropertyPortalType', 'backend\AdminController@getPropertyPortalType'); //uma 
+    Route::get($getUrl.'/getVerticals', 'backend\AdminController@getVerticals'); //uma
+    Route::get($getUrl.'/getDesignations', 'backend\AdminController@getDesignations'); //geeta
+    Route::get($getUrl.'/getProjects', 'backend\AdminController@getProjects'); //geeta
+    Route::get($getUrl.'/getCompany', 'backend\AdminController@getCompany'); //geeta
+    Route::get($getUrl.'/getStationary', 'backend\AdminController@getStationary'); //geeta
+    Route::get($getUrl.'/getBlockTypes', 'backend\AdminController@getBlockTypes'); //geeta
+    Route::get($getUrl.'/getSalesEnqCategory', 'backend\AdminController@getSalesEnqCategory'); //geeta
+    Route::post($getUrl.'/getSubBlocks', 'backend\AdminController@getSubBlocks'); //geeta
     Route::post($getUrl.'/getStates', 'backend\AdminController@getStates');
     Route::post($getUrl.'/getCities', 'backend\AdminController@getCities');
+    Route::post($getUrl.'/getLocations', 'backend\AdminController@getLocations');
     Route::post($getUrl.'/checkUniqueEmail', 'backend\AdminController@checkUniqueEmail');
     Route::get($getUrl.'/getEnquirySource', 'backend\AdminController@getEnquirySource');
     Route::post($getUrl.'/getEnquirySubSource', 'backend\AdminController@getEnquirySubSource');

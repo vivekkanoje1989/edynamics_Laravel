@@ -1,5 +1,6 @@
 'use strict';
 app.controller('propertyPortalsController', ['$rootScope', '$scope', '$state', 'Data', '$timeout', function ($rootScope, $scope, $state, Data, $timeout) {
+        $scope.lstAllEmployees=[];
         Data.get('getPropertyPortalType').then(function (response) {
             $scope.listPortals = response.records;
         });
@@ -48,7 +49,7 @@ app.controller('propertyPortalsController', ['$rootScope', '$scope', '$state', '
                     Data: {portalTypeId: portalTypeId, portalAccountId: portalAccountId}
                 }).then(function (response) {
                     $scope.portalData = angular.copy(response.records[0]);
-
+                    // $scope.portalData.
                 });
 
                 Data.post('propertyportals/getProperyAlias', {
@@ -58,8 +59,9 @@ app.controller('propertyPortalsController', ['$rootScope', '$scope', '$state', '
                 });
             }
         }
-        $scope.addEditProjects = function (modalData)
+        $scope.addEditProjects = function (modalData,index)
         {
+            alert("data"+modalData.project_id+"index"+index);
             var empname = '';
             var ids = '';
             var status = false;
@@ -79,7 +81,7 @@ app.controller('propertyPortalsController', ['$rootScope', '$scope', '$state', '
             {
                 for (var i = 0; i < count; i++)
                 {
-                    if ($scope.aliasLists[i]['project_id'] === modalData.project_id) {
+                    if ($scope.aliasLists[i]['project_id'] === modalData.project_id && index > 0) {
                         status = false;
                         break;
                     } else
@@ -93,12 +95,21 @@ app.controller('propertyPortalsController', ['$rootScope', '$scope', '$state', '
             }
             if (status === true)
             {
+               if(index > 0)
+               {
+                   	$scope.aliasLists.splice($scope.index - 1, 1);
+                       $scope.aliasLists.splice($scope.index - 1, 0, {
+                           project_id: modalData.project_id, project_alias:  modalData.project_alias,  project_employee_name: empname,project_employee_id: ids});
+               }
+               else
+               {
                 $scope.aliasLists.push({
                     project_id: modalData.project_id,
-                    project_alias_name: modalData.project_alias_name,
+                    project_alias: modalData.project_alias,
                     project_employee_name: empname,
                     project_employee_id: ids
-                });
+                });   
+               }                
             } else
             {
                 alert("Project alredy Add");
@@ -155,5 +166,22 @@ app.controller('propertyPortalsController', ['$rootScope', '$scope', '$state', '
                     $scope.modal.employee_id =response.records[0]['project_employee_id'];
                 });
         }
+        $scope.clearPopup =function()
+        {
+           $scope.modal={};
+        }
     }]);
 
+app.controller('assignEmployeeCtrl', function ($scope, Data, $timeout) {
+    $scope.lstAllEmployees=[];
+    $timeout(function () {
+        Data.get('propertyportals/getAllEmployees').then(function (response) {
+            if (!response.success) {
+                $scope.errorMsg = response.message;
+            } else {
+                //console.log(response);
+                $scope.lstAllEmployees = response.records;
+            }
+        });
+    }, 3000);
+});

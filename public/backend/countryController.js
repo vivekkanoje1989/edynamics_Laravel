@@ -1,4 +1,4 @@
-app.controller('countryCtrl', ['$scope', 'Data', '$rootScope','$timeout', function ($scope, Data, $rootScope,$timeout) {
+app.controller('countryCtrl', ['$scope', 'Data', function ($scope, Data) {
 
         $scope.itemsPerPage = 4;
         $scope.noOfRows = 1;
@@ -46,18 +46,13 @@ app.controller('countryCtrl', ['$scope', 'Data', '$rootScope','$timeout', functi
                     } else {
                         $scope.countryRow.splice($scope.index - 1, 1);
                         $scope.countryRow.splice($scope.index - 1, 0, {
-                            name: $scope.name, id: $scope.id, name: $scope.name,'sortname':$scope.sortname,'phonecode':$scope.phonecode});
-
+                            name: $scope.name, id: $scope.id, name: $scope.name,'sortname':$scope.sortname,'phonecode':$scope.phonecode });
                         $('#countryModal').modal('toggle');
-                        //$scope.success("Country details updated successfully");
                     }
                 });
             }
         }
-        $scope.success = function(message) {
-               Flash.create('success', message);
-           };
-
+      
         $scope.pageChangeHandler = function (num) {
             $scope.noOfRows = num;
             $scope.currentPage = num * $scope.itemsPerPage;

@@ -3,7 +3,7 @@
         <div class="col-lg-12 col-sm-12 col-xs-12">
             <div class="widget">
                 <div class="widget-header">
-                    <span class="widget-caption">Content Management</span>
+                    <span class="widget-caption">Web Page Management</span>
                     <div class="widget-buttons">
                         <a href="" widget-maximize></a>
                         <a href="" widget-collapse></a>
@@ -16,10 +16,9 @@
                             <ul class="nav nav-tabs" id="myTab9">
                                 <li class="active">
                                     <a data-toggle="tab" data-target="#pageManagement">
-                                        Page Management
+                                        Web Page Management
                                     </a>
                                 </li>
-
                                 <li class="tab-red">
                                     <a data-toggle="tab" data-target="#imageManagement">
                                         Image Management
@@ -28,7 +27,7 @@
                             </ul>
                             <div class="tab-content">
                                 <div id="pageManagement" class="tab-pane in active">
-                                    <center><h4>Update Page Content</h4></center>
+                                    <center><h4>Update Web Page Content</h4></center>
                                     <form name="contentPageForm" novalidate ng-submit="contentPageForm.$valid && updateWebPage(contentPage, [[ $pageId]])" ng-init="manageWebPage([[ $pageId ]])">  
                                         <div class="row">
                                             <div class="col-lg-12 col-sm-12 col-xs-12">
@@ -178,7 +177,7 @@
                                                     <div class="img-div2" data-title="name" ng-repeat="img in imgs track by $index" ng-model="imagePage.allimages">   
                                                         <i class="fa fa-times rem-icon"  title="{{ img }}" ng-click="removeImg('{{img}}',{{$index}},[[ $pageId]])"></i>
                                                         <!--<img src="[[ URL::to('/') ]]/images/{{ img }}" alt="" style="width: 60px;height: 60px;">-->
-                                                        <img src="[[config('global.s3Path')]]Banner-Images/{{ img }}" style="width: 60px;height: 60px;">
+                                                        <img src="[[ Session::get('s3Path') ]]website/banner-images/{{ img }}" style="width: 60px;height: 60px;">
                                                     </div>
                                                 </div>
                                             </div>

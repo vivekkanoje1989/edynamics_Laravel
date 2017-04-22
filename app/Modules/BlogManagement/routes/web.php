@@ -1,6 +1,6 @@
 <?php
 
-Route::group(array('module' => 'BlogManagement',  'namespace' => 'App\Modules\BlogManagement\Controllers'), function() {
+Route::group(array('module' => 'BlogManagement','middleware' => 'auth:admin',  'namespace' => 'App\Modules\BlogManagement\Controllers'), function() {
 
     $getUrl = config('global.getUrl');
     Route::resource($getUrl.'/manage-blog', 'BlogManagementController');
@@ -11,5 +11,5 @@ Route::group(array('module' => 'BlogManagement',  'namespace' => 'App\Modules\Bl
     Route::post($getUrl.'/manage-blog/update/{id}','BlogManagementController@update');
     
     Route::post($getUrl.'/manage-blog/getBlogsDetail','BlogManagementController@getBlogsDetail');   
- 
+    Route::post($getUrl.'/manage-blog/removeBlogImage','BlogManagementController@removeBlogImage');   
 });	

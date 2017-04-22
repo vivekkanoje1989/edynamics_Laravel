@@ -29,6 +29,17 @@ return [
         "WebPages",
         "BlogManagement",
         "Testimonials",
-        "Clients",
+        "EmailConfig",
+        "CareerManagement",
+        "DashBoard",
+        "CustomersData",
+        "Projects",
+        "EmployeeDevice",
+        "Alerts",
+        "CustomAlerts",
+        "Marketing",
+        "MyStorage",
+        "OperationalSettings",
+        "Wings"
     ),
 ];

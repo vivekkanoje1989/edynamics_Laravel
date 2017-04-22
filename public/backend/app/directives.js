@@ -44,7 +44,7 @@ var compareTo = function () {
 };
 app.directive("compareTo", compareTo);
 
-app.directive('checkLoginCredentials', function ($timeout, $q, Data) {
+app.directive('checkLoginCredentials', function ($timeout, $q, Data, $http) {
     return {
         restrict: 'AE',
         require: 'ngModel',
@@ -89,19 +89,32 @@ app.directive('getCustomerDetailsDirective', function ($filter, $q, Data, $windo
                             $scope.contacts[i].mobile_number = $scope.contactData[i].mobile_number = "+91-";
                         }else{
                             $scope.contacts[i].mobile_number = $scope.contactData[i].mobile_number = '+' + parseInt(response.customerContactDetails[i].mobile_calling_code) + '-' + parseInt(response.customerContactDetails[i].mobile_number);}
-                        if(response.customerContactDetails[i].landline_calling_code === parseInt(0) || response.customerContactDetails[i].landline_calling_code === '' || response.customerContactDetails[i].landline_calling_code === NULL){ 
+                        if(response.customerContactDetails[i].landline_calling_code === parseInt(0) || response.customerContactDetails[i].landline_calling_code === '' || response.customerContactDetails[i].landline_calling_code === null){ 
                             $scope.contacts[i].landline_number = $scope.contactData[i].landline_number = '+91-';
                         }else{
                             $scope.contacts[i].landline_number = $scope.contactData[i].landline_number = '+' + parseInt(response.customerContactDetails[i].landline_calling_code) + '-' + parseInt(response.customerContactDetails[i].landline_number);
                         }
                         if(response.customerContactDetails[i].pin === 0)
                             $scope.contacts[i].pin = $scope.contactData[i].landline_number = '';
+                        if(response.customerContactDetails[i].email_id === '' || response.customerContactDetails[i].email_id === 'null')
+                            $scope.contacts[i].email_id = $scope.contactData[i].email_id = '';
                     }
+                    Data.post('getEnquirySubSource', {
+                        data: {sourceId: response.customerPersonalDetails[0].source_id}}).then(function (response){
+                            $scope.subSourceList = '';
+                            if (!response.success){
+                                $scope.errorMsg = response.message;
+                            } else{
+                                $scope.subSourceList = response.records;
+                            }
+                    });
                     $window.sessionStorage.setItem("sessionContactData", JSON.stringify(angular.copy(response.customerContactDetails)));
                     $scope.searchData.searchWithMobile = customerMobileNo;
                     $scope.searchData.searchWithEmail = customerEmailId;
                     $scope.searchData.customerId = response.customerPersonalDetails[0].id;
-                    $scope.disableText = true; 
+                    $scope.disableText = true;
+                    
+                    
                 }
                 else{
                     $scope.showDiv=true;
@@ -133,17 +146,16 @@ app.directive('getCustomerDetailsDirective', function ($filter, $q, Data, $windo
         link: link
     }
 });
-
 app.directive('checkUniqueEmail', function ($timeout, $q, Data) {
     return {
         restrict: 'AE',
         require: 'ngModel',
         link: function($scope, element, attributes, model) {
             model.$asyncValidators.uniqueEmail = function() {               
-                var email = $scope.userData.email;
+                var personal_email1 = $scope.userData.personal_email1;
                 var employeeId = (typeof $scope.userData.id === "undefined" || $scope.userData.id === "0") ? "0" : $scope.userData.id;        
                 return Data.post('checkUniqueEmail',{
-                    data:{emailData: email,id:employeeId},
+                    data:{emailData: personal_email1,id:employeeId},
                 }).then(function(response){
                   $timeout(function(){
                     model.$setValidity('uniqueEmail', !!response.success); 
@@ -168,5 +180,32 @@ app.directive('intlTel', function(){
   }
 });
 
-
-
+app.directive("ngfSelect", [function () {
+    return {
+        restrict: 'AE',
+        require: 'ngModel',
+        link: function ($scope, el, ngModel) {
+            el.bind("change", function (e) {
+                $scope[ngModel.name] = [];
+                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp|.svg)$/;
+                var fileLength = $($(this)[0].files).length;
+                $($(this)[0].files).each(function () {
+                    var file = $(this);
+                    var imgName = file[0].name;
+                    if (regex.test(file[0].name.toLowerCase())) {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            $scope[ngModel.name+"_avtar"] = true;
+                            $scope[ngModel.name].push(e.target.result);
+                        }
+                        reader.readAsDataURL(file[0]);
+                    } else {
+                        $scope[ngModel.name+"_err"] = imgName + "is not a valid image file.";
+                        $scope[ngModel.name] = "";
+                        return false;
+                    }
+                });
+            })
+        }
+    }
+}]);
