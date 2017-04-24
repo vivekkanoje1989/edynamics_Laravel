@@ -81,7 +81,7 @@
         <script src="/backend/promotionalsmsController.js"></script>
         <script src="/backend/alertsController.js"></script>
         <script src="/backend/customalertsController.js"></script>
-        
+        <script src="/backend/clientGroupsController.js"></script>
         <!-- Layout Related Directives -->
         <script src="/backend/app/directives/loading.js"></script>
         <script src="/backend/app/directives/skin.js"></script>
@@ -90,6 +90,7 @@
         <script src="/backend/app/directives/navbar.js"></script>
         <script src="/backend/app/directives/chatbar.js"></script>
         <script src="/backend/app/directives/widget.js"></script>
+        
         
         
     </body>               

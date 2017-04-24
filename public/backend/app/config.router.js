@@ -2376,6 +2376,31 @@ angular.module('app')
                                                 ]
                                     }
                                 })
+                                
+                                  
+                            /***************************Rohit*******************************/
+                            .state(getUrl + '.clientsIndex', {
+                                url: '/clients/index',
+                                templateUrl: getUrl + '/clients/',
+                                requiredLogin: true,
+                                ncyBreadcrumb: {
+                                    label: 'Manage Clients'
+                                }
+                            })
+
+
+                            .state(getUrl + '.clientgroupsIndex', {
+                                url: '/clientgroups/index',
+                                templateUrl: getUrl + '/clientgroups/',
+                                
+                                requiredLogin: true,
+                                ncyBreadcrumb: {
+                                    label: 'Manage Client Groups'
+                                }
+                            })
+
+
+                            /***************************end rohit*******************************/
 
 
                                 /****************************MANOJ*********************************/
