@@ -2,8 +2,10 @@
  * client groups controller 
  */
 'use strict';
-app.controller('clientGroupCtrl', ['$scope', 'Data', '$rootScope','$timeout', function ($scope, Data, $rootScope,$timeout) {
-        
+app.controller('clientGroupCtrl', ['$scope', 'Data', 'toaster','$rootScope','$timeout', function ($scope, Data,toaster,$rootScope,$timeout) {
+        $scope.currentPage =  $scope.itemsPerPage = 4;
+        $scope.noOfRows = 1;
+    
         /* initial the Modal */
         $scope.initialModal = function (id, name, index) {
             $scope.heading = 'Client Group';
@@ -42,6 +44,7 @@ app.controller('clientGroupCtrl', ['$scope', 'Data', '$rootScope','$timeout', fu
                         else 
                         {
                             $scope.clientgroupslist.push({'group_name': $scope.group_name,'id':response.lastRecordId});
+                            toaster.pop('success', 'Manage Client Groups', 'Client group created successfully');
                             $('#clientGroupsModal').modal('toggle');
                         }
                     });
@@ -62,7 +65,7 @@ app.controller('clientGroupCtrl', ['$scope', 'Data', '$rootScope','$timeout', fu
                         {
                             group_name: $scope.group_name, id: $scope.id
                         });
-                        
+                        toaster.pop('success', 'Manage Client Groups', 'Client group updated successfully');
                         $('#clientGroupsModal').modal('toggle');
                         
                     }

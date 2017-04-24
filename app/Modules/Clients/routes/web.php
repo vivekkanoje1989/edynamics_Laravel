@@ -6,4 +6,7 @@ Route::group(array('module' => 'Clients', 'namespace' => 'App\Modules\Clients\Co
     Route::resource($getUrl.'/clientgroups', 'ClientGroupsController');
     Route::post($getUrl . '/clientgroups/manageClientGroup','ClientGroupsController@manageClientGroup');
     
+    Route::resource($getUrl.'/clients', 'ClientsController');
+    Route::post($getUrl . '/clients/manageClients','ClientsController@manageClients');
+    
 });	

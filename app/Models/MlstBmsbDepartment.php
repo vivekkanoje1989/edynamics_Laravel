@@ -36,6 +36,7 @@ class MlstBmsbDepartment extends Eloquent {
 
     public $timestamps = false;
     protected $primaryKey = 'id';
+    protected $connection = 'masterdb';
     protected $casts = [
         'client_id' => 'int',
         'vertical_id' => 'int',

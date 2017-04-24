@@ -325,7 +325,7 @@ class MenuItems {
                 )),
             )),
             8 => array('name' => 'Accounts', 'icon' => 'acc-img menu-icon-sz', 'ui-sref-active' => '', 'url' => '', 'slug' => 'accounts', 'has_submenu' => true, 'total_submenu' => 4,
-                'submenu_ids' => '0801,0802,0803,0804', 'anchorClass' => 'menu-dropdown', 'submenuClass' => 'submenu', 'liClass' => 'open', 'submenu' => array(
+                'submenu_ids' => '0801,0802,0803,0804,0805', 'anchorClass' => 'menu-dropdown', 'submenuClass' => 'submenu', 'liClass' => 'open', 'submenu' => array(
                 1 => array('id' => '0801', 'name' => 'BMS Invoices', 'icon' => '', 'ui-sref-active' => '', 'slug' => '#', 'has_submenu' => true, 'total_submenu' => 1,
                     'submenu_ids' => '080101', 'anchorClass' => 'menu-dropdown', 'submenuClass' => 'submenu', 'liClass' => 'open', 'submenu' => array(                    
                     1 => array('id' => '080101', 'name' => 'Invoices', 'icon' => '', 'url' => '#', 'slug' => '/'.$getUrl.'/', 'uiSrefActive' => 'active', 'total_submenu' => 1),
@@ -347,7 +347,13 @@ class MenuItems {
                 4 => array('id' => '0804', 'name' => 'Manage Bank Accounts', 'icon' => '', 'ui-sref-active' => '', 'slug' => '#', 'has_submenu' => true, 'total_submenu' => 1,
                     'submenu_ids' => '080401', 'anchorClass' => 'menu-dropdown', 'submenuClass' => 'submenu', 'liClass' => 'open', 'submenu' => array(                    
                     1 => array('id' => '080401', 'name' => 'Manage', 'icon' => '', 'url' => '#', 'slug' => '/'.$getUrl.'/', 'uiSrefActive' => 'active', 'total_submenu' => 1),
-                )),
+                )),   
+                5=>array('id' => '0805', 'name' => 'Manage Clients', 'icon' => '', 'ui-sref-active' => '', 'slug' => '#', 'has_submenu' => true, 'total_submenu' => 2,
+                        'submenu_ids' => '080501,080502', 'anchorClass' => 'menu-dropdown', 'submenuClass' => 'submenu', 'liClass' => 'open', 'submenu' => array(                    
+                        1 => array('id' => '080501', 'name' => 'Manage Client Groups', 'icon' => '', 'url' => '/'.$getUrl.'/clientgroups/index', 'slug' => '.clientgroupsIndex', 'uiSrefActive' => 'active', 'total_submenu' => 1),
+                        2 => array('id' => '080501', 'name' => 'Manage Clients', 'icon' => '', 'url' => '/'.$getUrl.'/clients/index', 'slug' => '.clientsIndex', 'uiSrefActive' => 'active', 'total_submenu' => 1),
+                        
+                )),  
             )),
             9 => array('name' => 'Reports', 'icon' => 'repo-img menu-icon-sz', 'ui-sref-active' => '', 'url' => '', 'slug' => 'reports', 'has_submenu' => true, 'total_submenu' => 2,
                 'submenu_ids' => '0901,0902,0903', 'anchorClass' => 'menu-dropdown', 'submenuClass' => 'submenu', 'liClass' => 'open', 'submenu' => array(

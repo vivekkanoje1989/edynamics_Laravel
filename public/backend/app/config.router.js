@@ -2385,18 +2385,84 @@ angular.module('app')
                                 requiredLogin: true,
                                 ncyBreadcrumb: {
                                     label: 'Manage Clients'
-                                }
+                                },
+                                resolve: {
+                                        deps:
+                                                [
+                                                    '$ocLazyLoad',
+                                                    function ($ocLazyLoad) {
+                                                        return $ocLazyLoad.load('toaster').then(
+                                                                function () {
+                                                                    return $ocLazyLoad.load({
+                                                                        serie: true,
+                                                                        files: [
+                                                                            '/backend/clientGroupsController.js'
+                                                                        ]
+                                                                    }
+                                                                    );
+                                                                }
+                                                        );
+                                                    }
+                                                ]
+                                    }
                             })
+
+                            .state(getUrl + '.createClient', {
+                                    url: '/clients/create',
+                                    templateUrl: getUrl + '/clients/create',
+                                    requiredLogin: true,
+                                    ncyBreadcrumb: {
+                                        label: 'Manage Clients',
+                                        description: ''
+                                    },
+                                    resolve: {
+                                        deps:
+                                                [
+                                                    '$ocLazyLoad',
+                                                    function ($ocLazyLoad) {
+                                                        return $ocLazyLoad.load(['textAngular', 'toaster']).then(
+                                                                function () {
+                                                                    return $ocLazyLoad.load({
+                                                                        serie: true,
+                                                                        files: [
+                                                                            '/backend/clientGroupsController.js',
+                                                                        ]
+                                                                    }
+                                                                    );
+                                                                }
+                                                        );
+                                                    }
+                                                ]
+                                    }
+                                })
 
 
                             .state(getUrl + '.clientgroupsIndex', {
                                 url: '/clientgroups/index',
                                 templateUrl: getUrl + '/clientgroups/',
-                                
                                 requiredLogin: true,
                                 ncyBreadcrumb: {
                                     label: 'Manage Client Groups'
-                                }
+                                },
+                                resolve: {
+                                        deps:
+                                                [
+                                                    '$ocLazyLoad',
+                                                    function ($ocLazyLoad) {
+                                                        return $ocLazyLoad.load('toaster').then(
+                                                                function () {
+                                                                    return $ocLazyLoad.load({
+                                                                        serie: true,
+                                                                        files: [
+                                                                            '/backend/clientGroupsController.js'
+                                                                        ]
+                                                                    }
+                                                                    );
+                                                                }
+                                                        );
+                                                    }
+                                                ]
+                                    }
                             })
 
 

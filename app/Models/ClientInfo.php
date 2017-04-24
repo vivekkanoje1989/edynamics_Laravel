@@ -78,4 +78,25 @@ class ClientInfo extends Eloquent
 		'updated_date',
 		'updated_by'
 	];
+        
+        public function getclientGroups()
+        {
+            return $this->belongsTo('App\Models\ClientGroup','group_id');
+        }
+        
+        public function getlist()
+        {
+            
+            $getClientLists = ClientInfo::select('id','marketing_name','client_id','client_key','group_id','legal_name','website')
+                                ->with(['getclientGroups'=>function($query){
+                                    $query->select('id','group_name');
+                                }])->get();
+            if (!empty($getClientLists)) {
+                $result = ['success' => true, 'records' => $getClientLists];
+                return json_encode($result);
+            } else {
+                $result = ['success' => false, 'message' => 'Something went wrong'];
+                return json_encode($result);
+            }
+        } 
 }

@@ -93,7 +93,7 @@ return [
             ],
             'driver' => 'mysql',
             'port' => 3306,
-            'database' => 'laravel_developement_builder_client',
+            'database' => 'laravel_developement_edynamics',
             'username' => 'bmsbuilder',
             'password' => 'bms123',
             'charset' => 'utf8',

@@ -81,7 +81,10 @@
         <script src="/backend/promotionalsmsController.js"></script>
         <script src="/backend/alertsController.js"></script>
         <script src="/backend/customalertsController.js"></script>
+        
+        <!--Rohit-->
         <script src="/backend/clientGroupsController.js"></script>
+        <script src="/backend/clientInfoController.js"></script>
         <!-- Layout Related Directives -->
         <script src="/backend/app/directives/loading.js"></script>
         <script src="/backend/app/directives/skin.js"></script>

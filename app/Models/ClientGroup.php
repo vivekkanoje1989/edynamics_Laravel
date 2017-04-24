@@ -22,7 +22,7 @@ class ClientGroup extends Eloquent
 {
 	public $incrementing = false;
 	public $timestamps = false;
-        protected $connection = 'masterdb';
+        protected $connection = 'mysql';
         
 
 	protected $casts = [

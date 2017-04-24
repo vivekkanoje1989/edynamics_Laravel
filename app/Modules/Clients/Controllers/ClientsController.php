@@ -2,7 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Models\ClientInfo;
 use Illuminate\Http\Request;
 
 class ClientsController extends Controller {
@@ -17,6 +17,13 @@ class ClientsController extends Controller {
 		return view("Clients::index");
 	}
 
+        
+        public function manageClients()
+        {
+            $model = new ClientInfo();
+            return $model->getlist();
+        }
+        
 	/**
 	 * Show the form for creating a new resource.
 	 *
@@ -24,7 +31,7 @@ class ClientsController extends Controller {
 	 */
 	public function create()
 	{
-		//
+            return view("Clients::create");
 	}
 
 	/**
