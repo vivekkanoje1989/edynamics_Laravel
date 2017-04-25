@@ -12,6 +12,38 @@ app.controller('clientInfoCtrl', ['$scope', 'Data', 'toaster','$rootScope','$tim
                 $scope.clientInfoList = response.records;
             });
         };
-       
-       
 }]);
+
+app.controller('getClientGroupsCtrl', function ($scope, $timeout, Data) {
+    Data.get('getClientGroupsList').then(function (response) {
+        if (!response.success) {
+            $scope.errorMsg = response.message;
+        } else {
+            $scope.clientGroupsList = response.records;
+        }
+    });
+});
+
+
+app.controller('getClientGroupsCtrl', function ($scope, $timeout, Data) {
+    Data.get('getClientGroupsList').then(function (response) {
+        if (!response.success) {
+            $scope.errorMsg = response.message;
+        } else {
+            $scope.clientGroupsList = response.records;
+        }
+    });
+});
+
+app.controller('getCompanyTypeCtrl', function ($scope, $timeout, Data) {
+    Data.get('getCompanyTypeList').then(function (response) {
+        if (!response.success) {
+            $scope.errorMsg = response.message;
+        } else {
+            $scope.companyTypeList = response.records;
+        }
+    });
+});
+
+
+

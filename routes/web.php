@@ -106,6 +106,9 @@ Route::group(['middleware' =>['auth:admin']], function () {
     Route::post($getUrl.'/checkUniqueEmail', 'backend\AdminController@checkUniqueEmail');
     Route::get($getUrl.'/getEnquirySource', 'backend\AdminController@getEnquirySource');
     Route::post($getUrl.'/getEnquirySubSource', 'backend\AdminController@getEnquirySubSource');
+    Route::get($getUrl.'/getClientGroupsList', 'backend\AdminController@getClientGroups');
+    Route::get($getUrl.'/getCompanyTypeList', 'backend\AdminController@getCompanyTypeList');
+    
     
     /***********************************MANDAR************************************/
     Route::get($getUrl.'/getClient', 'backend\AdminController@getClient');

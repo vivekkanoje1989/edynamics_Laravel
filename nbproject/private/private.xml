@@ -3,10 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/opt/lampp/htdocs/edynamics_Laravel/app/Modules/Clients/Views/client_groups_index.blade.php</file>
-            <file>file:/opt/lampp/htdocs/edynamics_Laravel/public/backend/hrController.js</file>
-            <file>file:/opt/lampp/htdocs/edynamics_Laravel/public/backend/clientGroupsController.js</file>
-            <file>file:/opt/lampp/htdocs/edynamics_Laravel/app/Modules/MasterHr/Views/index.blade.php</file>
+            <file>file:/opt/lampp/htdocs/edynamics_Laravel/app/Classes/MenuItems.php</file>
+            <file>file:/opt/lampp/htdocs/edynamics_Laravel/app/Modules/BlogManagement/routes/web.php</file>
+            <file>file:/opt/lampp/htdocs/edynamics_Laravel/app/Modules/Clients/Controllers/ClientsController.php</file>
+            <file>file:/opt/lampp/htdocs/edynamics_Laravel/app/Modules/Clients/routes/web.php</file>
+            <file>file:/opt/lampp/htdocs/edynamics_Laravel/app/Modules/BlogManagement/Controllers/BlogManagementController.php</file>
+            <file>file:/opt/lampp/htdocs/edynamics_Laravel/app/Modules/Clients/Controllers/ClientGroupsController.php</file>
+            <file>file:/opt/lampp/htdocs/edynamics_Laravel/app/Modules/BlogManagement/Views/create.blade.php</file>
+            <file>file:/opt/lampp/htdocs/edynamics_Laravel/app/Modules/BlogManagement/Views/index.blade.php</file>
+            <file>file:/opt/lampp/htdocs/edynamics_Laravel/public/backend/manageBlogController.js</file>
+            <file>file:/opt/lampp/htdocs/edynamics_Laravel/public/backend/clientInfoController.js</file>
+            <file>file:/opt/lampp/htdocs/edynamics_Laravel/app/Modules/Clients/Models/Clients.php</file>
+            <file>file:/opt/lampp/htdocs/edynamics_Laravel/app/Models/ClientInfo.php</file>
+            <file>file:/opt/lampp/htdocs/edynamics_Laravel/app/Modules/Clients/Views/index.blade.php</file>
+            <file>file:/opt/lampp/htdocs/edynamics_Laravel/app/Models/ClientGroup.php</file>
+            <file>file:/opt/lampp/htdocs/edynamics_Laravel/resources/views/backendApp.blade.php</file>
+            <file>file:/opt/lampp/htdocs/edynamics_Laravel/app/Modules/Clients/Views/create.php</file>
+            <file>file:/opt/lampp/htdocs/edynamics_Laravel/public/backend/app/config.router.js</file>
         </group>
     </open-files>
 </project-private>

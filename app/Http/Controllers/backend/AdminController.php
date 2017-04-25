@@ -29,6 +29,8 @@ use App\Models\Project;
 use App\Models\Company;
 use App\Models\CompanyStationary;
 use App\Models\MlstEnquirySalesCategory;
+use App\Models\ClientGroup;
+use App\Models\MlstCompanyType;
 use Illuminate\Http\Request;
 use App\Classes\Gupshup;
 use App\Modules\PropertyPortals\Models\MlstBmsbPropertyPortal;
@@ -459,6 +461,19 @@ class AdminController extends Controller {
         return json_encode($result);
     }
 
+    
+    public function getClientGroups(){
+        $modelClientGroups = new ClientGroup();
+        return $modelClientGroups->getlist();
+        
+    }
+    
+    public function getCompanyTypeList()
+    {
+        $modelCompanyType= new MlstCompanyType();
+        return $modelCompanyType->getlist();
+        
+    }        
     /***************************MANDAR*********************************/
     
     protected function guard() {
