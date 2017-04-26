@@ -30,8 +30,8 @@ use App\Models\Company;
 use App\Models\CompanyStationary;
 use App\Models\MlstEnquirySalesCategory;
 use App\Models\ClientGroup;
-use App\Models\MlstCompanyType;
 use Illuminate\Http\Request;
+use App\Models\MlstCompanyTypes;
 use App\Classes\Gupshup;
 use App\Modules\PropertyPortals\Models\MlstBmsbPropertyPortal;
 use App\Modules\WebPages\Models\WebPage;
@@ -470,8 +470,8 @@ class AdminController extends Controller {
     
     public function getCompanyTypeList()
     {
-        $modelCompanyType= new MlstCompanyType();
-        return $modelCompanyType->getlist();
+        $modelCompanyType= new MlstCompanyTypes();
+        return $modelCompanyType->getCompanyTypeList();
         
     }        
     /***************************MANDAR*********************************/
