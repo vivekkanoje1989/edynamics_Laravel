@@ -6,8 +6,10 @@
  */
 
 namespace App\Models;
-
+use Auth;
 use Reliese\Database\Eloquent\Model as Eloquent;
+use App\Classes\CommonFunctions;
+use App\Classes\S3;
 
 /**
  * Class ClientInfo
@@ -59,14 +61,16 @@ class ClientInfo extends Eloquent
 
 	protected $fillable = [
 		'client_id',
-		'right_click',
-		'client_code',
-		'group_id',
-		'marketing_name',
-		'legal_name',
-		'country_id',
+                'client_key',
+                'group_id',
+                'brand_id',
+                'country_id',
 		'state_id',
 		'city_id',
+		'right_click',
+		'marketing_name',
+		'legal_name',
+		'type_of_company',
 		'office_addres',
 		'pin_code',
 		'company_logo',
@@ -84,19 +88,69 @@ class ClientInfo extends Eloquent
             return $this->belongsTo('App\Models\ClientGroup','group_id');
         }
         
-        public function getlist()
+        public function getlist($request)
         {
-            
-            $getClientLists = ClientInfo::select('id','marketing_name','client_id','client_key','group_id','legal_name','website')
-                                ->with(['getclientGroups'=>function($query){
-                                    $query->select('id','group_name');
-                                }])->get();
-            if (!empty($getClientLists)) {
-                $result = ['success' => true, 'records' => $getClientLists];
-                return json_encode($result);
-            } else {
-                $result = ['success' => false, 'message' => 'Something went wrong'];
-                return json_encode($result);
+         
+            if(!empty($request['id']) && $request['id'] !=0  )
+            {
+                $getClientLists = ClientInfo::where('id' ,  $request['id'])->first();
+                if (!empty($getClientLists)) {
+                    $result = ['success' => true, 'records' => $getClientLists];
+                    return json_encode($result);
+                } else {
+                    $result = ['success' => false, 'message' => 'Something went wrong'];
+                    return json_encode($result);
+                }
+            }
+            else
+            {    
+                $getClientLists = ClientInfo::select('id','marketing_name','client_id','client_key','group_id','legal_name','website')
+                                    ->with(['getclientGroups'=>function($query){
+                                        $query->select('id','group_name');
+                                    }])->get();
+                if (!empty($getClientLists)) {
+                    $result = ['success' => true, 'records' => $getClientLists];
+                    return json_encode($result);
+                } else {
+                    $result = ['success' => false, 'message' => 'Something went wrong'];
+                    return json_encode($result);
+                }
             }
         } 
+        
+        
+        public function createClientInfo($request)
+        {
+            $autoKey;
+            $clientInfoCount = ClientInfo::count();
+            if(empty($clientInfoCount))
+                $autoKey=101;
+            else
+                $autoKey = 101 + $clientInfoCount;
+            
+            $create = CommonFunctions::insertMainTableRecords(Auth::guard('admin')->user()->id);
+            $input['clientInfo'] = array_merge($request['data'],$create);
+            $modelClientInfo = ClientInfo::create($input['clientInfo']);
+            
+            $clientId = $autoKey.'BMS'.@strtoupper(@substr($modelClientInfo->marketing_name,0,1).@substr($modelClientInfo->marketing_name,-1)).$modelClientInfo->id;
+            
+            $s3FolderName='client/'.$modelClientInfo->id."/";
+            $marketingName = str_replace("'"," ",$modelClientInfo->marketing_name);
+            $marketingName = str_replace('"'," ",$marketingName);
+            $marketingName = str_replace(" ","_",$marketingName);
+            
+            $imageName = time()."_".@strtolower($marketingName).".".$request['data']['company_logo']->getClientOriginalExtension();
+            
+            $tempPath=$request['data']['company_logo']->getPathName();
+            
+            S3::s3FileUplod($tempPath, $imageName, $s3FolderName);
+            
+            $modelClientInfo->client_id = $clientId;
+            $modelClientInfo->client_key = \Hash::make($clientId);
+            $modelClientInfo->company_logo= $imageName;
+            $modelClientInfo->update();
+            
+            $result = ['success' => true, 'result' => $modelClientInfo];
+            return $result;
+        }        
 }

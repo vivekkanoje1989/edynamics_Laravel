@@ -84,7 +84,7 @@
                             <td>{{ list.legal_name}}</td> 
                             <td>{{ list.website}}</td> 
                             <td class="fa-div">
-                                <div class="fa-hover" tooltip-html-unsafe="Edit" style="display: block;" data-toggle="modal" data-target="#clientGroupsModal"><a href="javascript:void(0);" ng-click="initialModal({{ list.id}},'{{list.group_name}}',$index)"><i class="fa fa-pencil"></i></a></div>
+                                <div class="fa-hover" tooltip-html-unsafe="Edit" style="display: block;" data-toggle="modal" data-target="#clientGroupsModal"><a href="#/[[config('global.getUrl')]]/clients/update/{{ list.id }}"><i class="fa fa-pencil"></i></a></div>
                             </td>
                         </tr>
                     </tbody>

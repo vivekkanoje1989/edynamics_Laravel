@@ -2435,6 +2435,39 @@ angular.module('app')
                                                 ]
                                     }
                                 })
+                                
+                                .state(getUrl + '.updateClient', {
+                                    url: '/clients/update/:id',
+                                    templateUrl: function (stateParams) {
+                                        return getUrl + '/clients/' + stateParams.id + '/edit';
+                                    },
+                                    requiredLogin: true,
+                                    ncyBreadcrumb: {
+                                        label: 'Manage Clients',
+                                        description: ''
+                                    },
+                                    resolve: {
+                                        deps:
+                                                [
+                                                    '$ocLazyLoad',
+                                                    function ($ocLazyLoad) {
+                                                        return $ocLazyLoad.load(['textAngular', 'toaster']).then(
+                                                                function () {
+                                                                    return $ocLazyLoad.load({
+                                                                        serie: true,
+                                                                        files: [
+                                                                            '/backend/clientGroupsController.js',
+                                                                        ]
+                                                                    }
+                                                                    );
+                                                                }
+                                                        );
+                                                    }
+                                                ]
+                                    }
+                                })
+                                
+                                
 
 
                             .state(getUrl + '.clientgroupsIndex', {

@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\ClientInfo;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 
 class ClientsController extends Controller {
@@ -20,8 +21,10 @@ class ClientsController extends Controller {
         
         public function manageClients()
         {
+            $postdata = file_get_contents("php://input");
+            $request = json_decode($postdata, true);
             $model = new ClientInfo();
-            return $model->getlist();
+            return $model->getlist($request);
         }
         
 	/**
@@ -31,7 +34,7 @@ class ClientsController extends Controller {
 	 */
 	public function create()
 	{
-            return view("Clients::create");
+            return view("Clients::create")->with("clientId", '0');
 	}
 
 	/**
@@ -41,7 +44,9 @@ class ClientsController extends Controller {
 	 */
 	public function store()
 	{
-		//
+            $request = Input::all();
+            $model = new ClientInfo();
+            return $model->createClientInfo($request);
 	}
 
 	/**
@@ -63,7 +68,7 @@ class ClientsController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+            return view("Clients::create")->with("clientId", $id);
 	}
 
 	/**
@@ -74,7 +79,7 @@ class ClientsController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+	 	//
 	}
 
 	/**
