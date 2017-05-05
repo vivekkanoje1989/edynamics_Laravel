@@ -243,11 +243,7 @@ app.controller('currentCountryListCtrl', function ($scope, Data) {
     
     $scope.country_id;
     
-    $scope.$on('countryEvent',function(value,args){
-            $scope.onCountryChange(args);
-            //$scope.country_id = args;
-    });
-   
+    
     Data.get('getCountries').then(function (response) {
         if (!response.success) {
             $scope.errorMsg = response.message;
@@ -255,13 +251,8 @@ app.controller('currentCountryListCtrl', function ($scope, Data) {
             $scope.countryList = response.records;
         }
     });
-    $scope.onCountryChange = function (args = 0) {//for state list
+    $scope.onCountryChange = function () {//for state list
         $scope.stateList = "";
-        
-        if(args ==0)
-            $scope.country_id = $("#current_country_id").val();
-        else
-            $scope.country_id = args;
         
         Data.post('getStates', {
             data: {countryId: $scope.country_id },
@@ -452,6 +443,80 @@ app.controller('vehiclemodelCtrl', function ($scope, Data) {
         }
     });
 });
+
+/*Rohit*/
+
+app.controller('CountryListCtrl', function ($scope, Data) {
+    
+    $scope.country_id;
+    $scope.state_id;
+    
+    $scope.$on('countryEvent',function(value,args){
+            $scope.onCountryChange(args);
+    });
+   
+   $scope.$on('stateEvent',function(value,args){
+            $scope.onStateChange(args);
+    });
+   
+    Data.get('getCountries').then(function (response) {
+        if (!response.success) {
+            $scope.errorMsg = response.message;
+        } else {
+            $scope.countryList = response.records;
+        }
+    });
+    $scope.onCountryChange = function (args = 0) {//for state list
+        $scope.stateList = "";
+        
+        if(args ==0)
+            $scope.country_id = $("#country_id").val();
+        else
+            $scope.country_id = args;
+        
+        Data.post('getStates', {
+            data: {countryId: $scope.country_id },
+        }).then(function (response) {
+            if (!response.success) {
+                $scope.errorMsg = response.message;
+            } else {
+                $scope.stateList = response.records;
+            }
+        });
+    };
+    
+    $scope.onStateChange = function (args = 0) {//for city list
+        $scope.cityList = "";
+        
+        if(args ==0)
+            $scope.state_id = $("#state_id").val();
+        else
+            $scope.state_id = args;
+        
+        Data.post('getCities', {
+            data: {stateId: $scope.state_id},
+        }).then(function (response) {
+            if (!response.success) {
+                $scope.errorMsg = response.message;
+            } else {
+                $scope.cityList = response.records;
+            }
+        });
+    };
+    $scope.onCityChange = function () { //for location list
+        $scope.locationList = "";
+        Data.post('getLocations', {
+            data: {countryId: $("#current_country_id").val(),stateId: $("#current_state_id").val(),cityId: $("#current_city_id").val()},
+        }).then(function (response) {
+            if (!response.success) {
+                $scope.errorMsg = response.message;
+            } else {
+                $scope.locationList = response.records;
+            }
+        });
+    };
+});
+
 /****************************MANDAR*********************************/
 
 //$(document).ready(function() {

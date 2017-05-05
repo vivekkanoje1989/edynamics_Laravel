@@ -8,5 +8,6 @@ Route::group(array('module' => 'Clients', 'namespace' => 'App\Modules\Clients\Co
     
     Route::resource($getUrl.'/clients', 'ClientsController');
     Route::post($getUrl . '/clients/manageClients','ClientsController@manageClients');
+    Route::post($getUrl.'/clients/update/{id}','ClientsController@update');
     
 });	

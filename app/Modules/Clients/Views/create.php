@@ -16,16 +16,16 @@
                     if(empty($clientId))
                        $clientId = 0;
                 ?>                                                                                                                   
-                <form ng-submit="frmcrtClients.$valid &&createClients(clientData)"  name="frmcrtClients"  novalidate enctype="multipart/form-data" ng-init="editClients(<?php echo $clientId;?>)">
+                <form ng-submit="frmcrtClients.$valid  &&createClients(clientData)"  name="frmcrtClients"  novalidate enctype="multipart/form-data" ng-init="editClients(<?php echo $clientId;?>)">
                     <input type="hidden" ng-model="csrfToken" name="csrftoken" id="csrftoken" ng-init="csrfToken = '<?php echo csrf_token(); ?>'" class="form-control">
-                    <table class="table table-hover table-striped table-bordered" at-config="config" ng-controller="currentCountryListCtrl">
+                    <table class="table table-hover table-striped table-bordered" at-config="config" ng-controller="CountryListCtrl">
                         <thead class="bord-bot">
                             <tr>
                                 <td colspan="2">Create Client</td>
                             <tr>
                         </thead>
                         <tbody>
-                        <input type="hidden" ng-model="id" name="blogId" id="blogId">    
+                        <input type="hidden" ng-model="clientData.id" name="id">    
                         <tr>
                             <td>Client Groups<span class="sp-err">*</span></td>
                             <td>
@@ -89,18 +89,30 @@
                             <td>Company Logo<span class="sp-err">*</span></td>
                             <td>
                                 <div class="form-group">
-                                    <input type="file" ngf-select name="company_logo"   ng-model="clientData.company_logo" name="company_logo" id="company_logo" accept="image/*" ngf-max-size="2MB" class="form-control imageFile"  ngf-model-invalid="errorFile" required>
+                                    <input type="file" ngf-select name="company_logo"   ng-model="clientData.company_logo" name="company_logo" id="company_logo" accept="image/*" ngf-max-size="2MB" class="form-control imageFile"  ngf-model-invalid="errorFile" ng-required='{{reqnone}}'>
                                 </div>
-                                <div class="help-block" ng-show="btnClientInfo" ng-messages="frmcrtClients.company_logo.$error">
+                                <div class="help-block" ng-show="btnClientInfo"  ng-if="companyLogoValidation" ng-messages="frmcrtClients.company_logo.$error">
                                             <div ng-message="required" class="sp-err" >Company Logo cannot be blank.</div>
-                                </div>
+                               </div>
+                                
+                                
+                                    <?php
+                                    if($clientId!=0)
+                                    {    
+                                        $s3Path = Session::get('s3Path'); 
+                                        ?>
+                                    <div>
+                                            <img  src="<?php echo $s3Path;?>client/{{clientData.id}}/{{ clientData.company}}"   class="thumb photoPreview"/>
+                                    </div>
+                                    <?php } ?>
+                                
                             </td>
                         </tr>
                         <tr>
                             <td>Address<span class="sp-err">*</span></td>
                             <td>
                                 <textarea ng-model="clientData.office_addres" name="office_addres" ng-maxlength="200"    class="form-control" required></textarea>
-                                <div class="help-block" ng-show="btnClientInfo" ng-messages="frmcrtClients.office_addres.$error">
+                                <div class="help-block" ng-show="btnClientInfo"  ng-messages="frmcrtClients.office_addres.$error ">
                                             <div ng-message="required" class="sp-err" >Office address cannot be blank.</div>
                                             <div ng-message="maxlength"  class="sp-err" >Maximum 200 Characters Allowed</div>
                                 </div>
@@ -124,7 +136,7 @@
                             <td>
                                 <div class="form-group">
                                     <span class="input-icon icon-right">
-                                        <select ng-model="clientData.country_id" ng-change="onCountryChange()" id="current_country_id"  name="country_id" class="form-control" required="required">
+                                        <select ng-model="clientData.country_id" ng-change="onCountryChange()" id="country_id"  name="country_id" class="form-control" required="required">
                                             <option value="">Select Country</option>
                                             <option ng-repeat="countryObj in countryList" value="{{countryObj.id}}" ng-selected="{{ countryObj.id == clientData.country_id}}">{{countryObj.name}}</option>
                                         </select>
@@ -141,7 +153,7 @@
                             <td>
                                 <div class="form-group">
                                     <span class="input-icon icon-right">
-                                        <select ng-model="clientData.state_id"  ng-change="onStateChange()" name="state_id" id="current_state_id" class="form-control" required>
+                                        <select ng-model="clientData.state_id"  ng-change="onStateChange()" name="state_id" id="state_id" class="form-control" required>
                                                         <option value="">Select State</option>
                                                         <option ng-repeat="stateObj in stateList" value="{{stateObj.id}}" ng-selected="{{ state_id == stateObj.id}}">{{stateObj.name}}</option>
                                         </select>

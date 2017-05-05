@@ -152,5 +152,40 @@ class ClientInfo extends Eloquent
             
             $result = ['success' => true, 'result' => $modelClientInfo];
             return $result;
+        } 
+        
+        
+        public function updateClientInfo($request)
+        {
+            $company_Logo = $request['data']['company'];
+            $company_Logo_flag=$request['data']['company_logo_flag'];
+            
+            unset($request['data']['company']);
+            unset($request['data']['company_logo_flag']);
+            
+            $modelClientInfo = ClientInfo::where('id', $request['data']['id'])->first();
+            if($company_Logo_flag == 1)
+            { 
+                $s3FolderName='client/'.$modelClientInfo->id."/";
+                $marketingName = str_replace("'"," ",$modelClientInfo->marketing_name);
+                $marketingName = str_replace('"'," ",$marketingName);
+                $marketingName = str_replace(" ","_",$marketingName);
+                $imageName = time()."_".@strtolower($marketingName).".".$request['data']['company_logo']->getClientOriginalExtension();
+                $tempPath=$request['data']['company_logo']->getPathName();
+                S3::s3FileUplod($tempPath, $imageName, $s3FolderName);
+                
+                $request['data']['company_logo'] = $imageName;
+            }
+            else
+            {
+                $request['data']['company_logo']= $company_Logo;
+            }    
+            
+            $update = CommonFunctions::updateMainTableRecords(Auth::guard('admin')->user()->id);
+            $input['clientInfo'] = array_merge($request['data'],$update);
+            $modelClientInfo->update($input['clientInfo']);
+            
+            $result = ['success' => true];
+            return $result;
         }        
 }

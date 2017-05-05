@@ -79,7 +79,9 @@ class ClientsController extends Controller {
 	 */
 	public function update($id)
 	{
-	 	//
+            $request = Input::all();
+            $model = new ClientInfo();
+            return $model->updateClientInfo($request);
 	}
 
 	/**

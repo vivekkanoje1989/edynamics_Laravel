@@ -142,7 +142,7 @@ class LoginController extends Controller {
             //update employee mobile_remember_token
             CommonFunctions::insertLoginLog($username, $password, $empId, 2, 0, $platformType); //loginStatus = 2(login), loginFailureReason = 0
             $session = SystemConfig::where('id',1)->get();            
-            session(['s3Path' => 'https://s3.'.$session[0]->region.'.amazonaws.com/'.$session[0]->aws_bucket_id.'/']);                
+            session(['s3Path' => 'https://s3.'.$session[0]->region.'.amazonaws.com/'.$session[0]->aws_bucket_id.'/']);       
             $result = ['success' => true, 'message' => 'Successfully logged in', 'loggedInUserId' => $empId];
         } else {
             if ($employee_status === 2) {
