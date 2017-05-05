@@ -21,15 +21,16 @@ app.controller('clientInfoCtrl', ['$scope', 'Data', 'toaster','$rootScope','Uplo
             
             if(id !=0)
             {
-               Data.post('clients/manageClients',{
-                    id: id,
-            }).then(function (response) {
-                     $scope.clientInfoList = response.records;
-            }); 
-                
-                
+                    Data.post('clients/manageClients',{
+                         id: id,
+                 }).then(function (response) {
+                          $scope.clientData = response.records;
+                          
+                          $scope.$broadcast('countryEvent',response.records.country_id);
+                          $scope.state_id = response.records.state_id;
+                          
+                 }); 
             }    
-            
         }
         
         /*Data.post('clients/manageClients',{

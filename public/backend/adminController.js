@@ -240,6 +240,14 @@ app.controller('blockTypeCtrl', function ($scope, Data) {
 });
 
 app.controller('currentCountryListCtrl', function ($scope, Data) {
+    
+    $scope.country_id;
+    
+    $scope.$on('countryEvent',function(value,args){
+            $scope.onCountryChange(args);
+            //$scope.country_id = args;
+    });
+   
     Data.get('getCountries').then(function (response) {
         if (!response.success) {
             $scope.errorMsg = response.message;
@@ -247,10 +255,16 @@ app.controller('currentCountryListCtrl', function ($scope, Data) {
             $scope.countryList = response.records;
         }
     });
-    $scope.onCountryChange = function () {//for state list
+    $scope.onCountryChange = function (args = 0) {//for state list
         $scope.stateList = "";
+        
+        if(args ==0)
+            $scope.country_id = $("#current_country_id").val();
+        else
+            $scope.country_id = args;
+        
         Data.post('getStates', {
-            data: {countryId: $("#current_country_id").val()},
+            data: {countryId: $scope.country_id },
         }).then(function (response) {
             if (!response.success) {
                 $scope.errorMsg = response.message;

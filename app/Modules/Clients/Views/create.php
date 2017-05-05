@@ -12,7 +12,11 @@
             </div>
                         
             <div class="widget-body table-responsive">     
-                <form ng-submit="frmcrtClients.$valid &&createClients(clientData)"  name="frmcrtClients"  novalidate enctype="multipart/form-data" ng-init="editClients([[ !empty($clientId) ?  $clientId : '0' ]])">
+                <?php 
+                    if(empty($clientId))
+                       $clientId = 0;
+                ?>                                                                                                                   
+                <form ng-submit="frmcrtClients.$valid &&createClients(clientData)"  name="frmcrtClients"  novalidate enctype="multipart/form-data" ng-init="editClients(<?php echo $clientId;?>)">
                     <input type="hidden" ng-model="csrfToken" name="csrftoken" id="csrftoken" ng-init="csrfToken = '<?php echo csrf_token(); ?>'" class="form-control">
                     <table class="table table-hover table-striped table-bordered" at-config="config" ng-controller="currentCountryListCtrl">
                         <thead class="bord-bot">
@@ -71,7 +75,7 @@
                                     <span class="input-icon icon-right">
                                         <select ng-model="clientData.type_of_company" name="type_of_company" class="form-control" required>
                                             <option value="">Select Company</option>
-                                            <option ng-repeat="companyTypeObj in companyTypeList" value="{{companyTypeObj.id}}" ng-selected="{{ companyTypeObj.id == type_of_company}}">{{companyTypeObj.type_of_company}}</option>
+                                            <option ng-repeat="companyTypeObj in companyTypeList" value="{{companyTypeObj.id}}" ng-selected="{{ companyTypeObj.id == clientData.type_of_company}}">{{companyTypeObj.type_of_company}}</option>
                                         </select>
                                         <i class="fa fa-sort-desc"></i>
                                         <div class="help-block" ng-show="btnClientInfo" ng-messages="frmcrtClients.type_of_company.$error">
@@ -122,7 +126,7 @@
                                     <span class="input-icon icon-right">
                                         <select ng-model="clientData.country_id" ng-change="onCountryChange()" id="current_country_id"  name="country_id" class="form-control" required="required">
                                             <option value="">Select Country</option>
-                                            <option ng-repeat="countryObj in countryList" value="{{countryObj.id}}" ng-selected="{{ countryObj.id == country_id}}">{{countryObj.name}}</option>
+                                            <option ng-repeat="countryObj in countryList" value="{{countryObj.id}}" ng-selected="{{ countryObj.id == clientData.country_id}}">{{countryObj.name}}</option>
                                         </select>
                                         <i class="fa fa-sort-desc"></i>
                                         <div class="help-block" ng-show="btnClientInfo" ng-messages="frmcrtClients.country_id.$error">
@@ -139,7 +143,7 @@
                                     <span class="input-icon icon-right">
                                         <select ng-model="clientData.state_id"  ng-change="onStateChange()" name="state_id" id="current_state_id" class="form-control" required>
                                                         <option value="">Select State</option>
-                                                        <option ng-repeat="stateObj in stateList" value="{{stateObj.id}}" ng-selected="{{ stateObj.id == state_id}}">{{stateObj.name}}</option>
+                                                        <option ng-repeat="stateObj in stateList" value="{{stateObj.id}}" ng-selected="{{ state_id == stateObj.id}}">{{stateObj.name}}</option>
                                         </select>
                                         <i class="fa fa-sort-desc"></i>
                                         <div class="help-block" ng-show="btnClientInfo" ng-messages="frmcrtClients.state_id.$error">
@@ -157,7 +161,7 @@
                                     <span class="input-icon icon-right">
                                         <select ng-model="clientData.city_id"  name="city_id" class="form-control" required>
                                                         <option value="">Select City</option>
-                                                        <option ng-repeat="cityObj in cityList" value="{{cityObj.id}}" ng-selected="{{ cityObj.id == state_id}}">{{cityObj.name}}</option>
+                                                        <option ng-repeat="cityObj in cityList" value="{{cityObj.id}}" ng-selected="{{ cityObj.id == clientData.city_id}}">{{cityObj.name}}</option>
                                         </select>
                                         <i class="fa fa-sort-desc"></i>
                                         <div class="help-block" ng-show="btnClientInfo" ng-messages="frmcrtClients.city_id.$error">

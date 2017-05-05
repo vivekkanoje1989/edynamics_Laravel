@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/opt/lampp/htdocs/edynamics_Laravel/app/Models/MlstCompanyTypes.php</file>
-            <file>file:/opt/lampp/htdocs/edynamics_Laravel/app/Modules/Clients/Views/client_groups_index.blade.php</file>
-            <file>file:/opt/lampp/htdocs/edynamics_Laravel/app/Models/ClientInfo.php</file>
-            <file>file:/opt/lampp/htdocs/edynamics_Laravel/app/Models/ClientGroup.php</file>
-            <file>file:/opt/lampp/htdocs/edynamics_Laravel/app/Http/Controllers/backend/AdminController.php</file>
+            <file>file:/opt/lampp/htdocs/edynamics_Laravel/public/backend/adminController.js</file>
             <file>file:/opt/lampp/htdocs/edynamics_Laravel/app/Modules/Clients/Views/create.php</file>
-            <file>file:/opt/lampp/htdocs/edynamics_Laravel/app/Modules/MasterHr/Views/create.blade.php</file>
+            <file>file:/opt/lampp/htdocs/edynamics_Laravel/public/backend/clientInfoController.js</file>
+            <file>file:/opt/lampp/htdocs/edynamics_Laravel/app/Modules/CloudTelephony/Views/create.blade.php</file>
         </group>
     </open-files>
 </project-private>
