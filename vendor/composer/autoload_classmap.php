@@ -35,6 +35,7 @@ return array(
     'CreateMyStoragesTable' => $baseDir . '/database/migrations/2017_04_06_152450_create_my_storages_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreatePaymentHeadingsTable' => $baseDir . '/database/migrations/2017_03_16_143830_create_payment_headings_table.php',
+    'CreateProductsTable' => $baseDir . '/database/migrations/2017_05_15_113953_create_products_table.php',
     'CreateProjectPaymentStagesTable' => $baseDir . '/database/migrations/2017_03_17_161019_create_project_payment_stages_table.php',
     'CreateProjectsTable' => $baseDir . '/database/migrations/2017_03_30_160750_create_projects_table.php',
     'CreateSocialWebsitesTable' => $baseDir . '/database/migrations/2017_03_18_100842_create_social_websites_table.php',

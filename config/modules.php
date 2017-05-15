@@ -41,6 +41,7 @@ return [
         "MyStorage",
         "OperationalSettings",
         "Wings",
-        "Clients"
+        "Clients",
+        "Products"
     ),
 ];

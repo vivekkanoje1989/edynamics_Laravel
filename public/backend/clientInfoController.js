@@ -1,5 +1,5 @@
 /* 
- * client groups controller 
+ * client controller 
  */
 'use strict';
 app.controller('clientInfoCtrl', ['$scope', 'Data', 'toaster','$rootScope','Upload','$state','$timeout', function ($scope, Data,toaster,$rootScope,Upload,$state,$timeout) {

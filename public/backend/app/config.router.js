@@ -2499,6 +2499,65 @@ angular.module('app')
                             })
 
 
+                            .state(getUrl + '.productsIndex', {
+                                url: '/products/index',
+                                templateUrl: getUrl + '/products/',
+                                requiredLogin: true,
+                                ncyBreadcrumb: {
+                                    label: 'Manage Products'
+                                },
+                                resolve: {
+                                        deps:
+                                                [
+                                                    '$ocLazyLoad',
+                                                    function ($ocLazyLoad) {
+                                                        return $ocLazyLoad.load('toaster').then(
+                                                                function () {
+                                                                    return $ocLazyLoad.load({
+                                                                        serie: true,
+                                                                        files: [
+                                                                            '/backend/productsController.js'
+                                                                        ]
+                                                                    }
+                                                                    );
+                                                                }
+                                                        );
+                                                    }
+                                                ]
+                                    }
+                            })
+                            
+                            .state(getUrl + '.subproductsIndex', {
+                                url: '/subproducts/index',
+                                templateUrl: getUrl + '/subproducts/',
+                                requiredLogin: true,
+                                ncyBreadcrumb: {
+                                    label: 'Manage Sub Products'
+                                },
+                                resolve: {
+                                        deps:
+                                                [
+                                                    '$ocLazyLoad',
+                                                    function ($ocLazyLoad) {
+                                                        return $ocLazyLoad.load('toaster').then(
+                                                                function () {
+                                                                    return $ocLazyLoad.load({
+                                                                        serie: true,
+                                                                        files: [
+                                                                            '/backend/subproductsController.js'
+                                                                        ]
+                                                                    }
+                                                                    );
+                                                                }
+                                                        );
+                                                    }
+                                                ]
+                                    }
+                            })
+
+
+
+
                             /***************************end rohit*******************************/
 
 

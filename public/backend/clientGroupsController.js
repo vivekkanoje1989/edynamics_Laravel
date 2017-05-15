@@ -63,7 +63,7 @@ app.controller('clientGroupCtrl', ['$scope', 'Data', 'toaster','$rootScope','$ti
                         $scope.clientgroupslist.splice($scope.index, 1);
                         $scope.clientgroupslist.splice($scope.index, 0, 
                         {
-                            group_name: $scope.group_name, id: $scope.id
+                            'group_name': $scope.group_name, 'id': $scope.id
                         });
                         toaster.pop('success', 'Manage Client Groups', 'Client group updated successfully');
                         $('#clientGroupsModal').modal('toggle');
