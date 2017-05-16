@@ -6,7 +6,8 @@
  */
 
 namespace App\Models;
-use App\Models\Subproduct;
+use Auth;
+use App\Classes\CommonFunctions;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
@@ -81,16 +82,77 @@ class Subproduct extends Eloquent
 		'deleted_mac_id'
 	];
         
-        
-         public function getSubProductList()
+        /*relation with product table*/
+        public function getProductInfo()
         {
-            $getSubProductLists = Subproduct::all();
+            return $this->belongsTo('App\Models\Product','product_id');
+        }
+        
+        
+        /*listing the Sub product*/
+        public function getSubProductList()
+        {
+            $getSubProductLists = Subproduct::select('subproduct_id','subproduct_name','product_id','status')
+                                            ->with([
+                                                    'getProductInfo'=>function($query){
+                                                         $query->select('product_id','product_name');
+                                                    }])
+                                            ->get();
             if (!empty($getSubProductLists)) {
-                $result = ['success' => true, 'records' => $getSubProductLists];
+                $count=count($getSubProductLists);
+                $result = ['success' => true, 'records' => $getSubProductLists,'count'=>$count];
                 return json_encode($result);
             } else {
-                $result = ['success' => false, 'message' => 'Something went wrong'];
+                $result = ['success' => false, 'message' => 'Something went wrong','count'=>0];
                 return json_encode($result);
             }
         }
+        
+        
+        /*creating the sub product*/
+        public function createSubProduct($request)
+        {
+            $countSubProduct = Subproduct::where(['subproduct_name' => $request['subproduct_name']])->get()->count();   
+            if($countSubProduct)
+            {
+                $result = ['success' => false, 'errormsg' => 'Sub Product name already exists'];
+                return json_encode($result);  
+            }  
+            else 
+            {
+                $loggedInUserId = Auth::guard('admin')->user()->id;
+                $create = CommonFunctions::insertMainTableRecords($loggedInUserId);
+                $input['subproductInfo'] = array_merge($request,$create);
+                $modelSubProduct = Subproduct::create($input['subproductInfo']);
+                $modelSubProduct= Subproduct::latest('subproduct_id')
+                                                ->with([
+                                                    'getProductInfo'=>function($query){
+                                                         $query->select('product_id','product_name');
+                                                    }])
+                                                ->first();
+                $result = ['success' => true, 'result' => $modelSubProduct];
+                return json_encode($result);   
+
+            }
+            
+            
+        }      
+        
+        /*updating the sub product*/
+        public function updateSubProduct($request)
+        {
+            $loggedInUserId = Auth::guard('admin')->user()->id;
+            $update = CommonFunctions::updateMainTableRecords($loggedInUserId);
+            $input['subproductInfo'] = array_merge($request,$update);
+            $modelSubProduct = Subproduct::where('subproduct_id', $request['subproduct_id'])->update($input['subproductInfo']);
+            $modelSubProduct= Subproduct::select('subproduct_id','subproduct_name','product_id','status')
+                                            ->where('subproduct_id', $request['subproduct_id'])
+                                            ->with([
+                                                    'getProductInfo'=>function($query){
+                                                         $query->select('product_id','product_name');
+                                                    }])
+                                            ->first();
+            $result = ['success' => true, 'result' => $modelSubProduct];
+            return json_encode($result);
+        }        
 }

@@ -3,21 +3,30 @@
  */
 'use strict';
 app.controller('clientInfoCtrl', ['$scope', 'Data', 'toaster','$rootScope','Upload','$state','$timeout', function ($scope, Data,toaster,$rootScope,Upload,$state,$timeout) {
-        $scope.currentPage =  $scope.itemsPerPage = 4;
+        $scope.currentPage =  $scope.itemsPerPage = 10;
         $scope.noOfRows = 1;
         $scope.clientData={};
         $scope.clientPkId=0;
         $scope.clientData.company;
         $scope.companyLogoValidation;
         $scope.reqnone;
+        $scope.totalrecords;
         /*all list of client groups*/
         $scope.manageClients = function () {
             
             Data.post('clients/manageClients').then(function (response) {
                 $scope.clientInfoList = response.records;
+                $scope.totalrecords = response.count;
             });
             
         };
+        
+        /*display page no.*/
+        $scope.pageChangeHandler = function(num) {
+            $scope.noOfRows = num;
+            $scope.currentPage = num * $scope.itemsPerPage;
+        };
+        
         
         $scope.editClients = function (id) {
             

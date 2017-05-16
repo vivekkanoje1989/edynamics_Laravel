@@ -87,12 +87,14 @@
                                 <div class="fa-hover" tooltip-html-unsafe="Edit" style="display: block;" data-toggle="modal" data-target="#clientGroupsModal"><a href="#/[[config('global.getUrl')]]/clients/update/{{ list.id }}"><i class="fa fa-pencil"></i></a></div>
                             </td>
                         </tr>
+                        <tr ng-if='totalrecords == 0'>
+                            <td colspan='7' align='center'>- No Records Found -</td>
+                        </tr>
                     </tbody>
                 </table>
                 <div class="DTTTFooter">
                     <div class="col-sm-6">
-                        <!--<div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing {{itemsPerPage * (noOfRows-1)+1}} to of {{ listUsersLength }} entries</div>-->
-                        <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">&nbsp;</div>
+                        <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Page No. {{noOfRows}}</div>
                     </div>
                     <div class="col-sm-6">
                         <div class="dataTables_paginate paging_bootstrap" id="DataTables_Table_0_paginate">

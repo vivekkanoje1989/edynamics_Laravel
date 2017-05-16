@@ -10,7 +10,7 @@ app.controller('hrController', ['$scope', '$state', 'Data', 'Upload', '$timeout'
     $scope.userData.employee_status = "1";
     $scope.userData.personal_mobile1 = $scope.userData.office_mobile_no = $scope.userData.personal_mobile2 = $scope.userData.personal_landline_no = "+91-";
     $scope.disableCreateButton = false;
-    $scope.currentPage =  $scope.itemsPerPage = 4;
+    $scope.currentPage =  $scope.itemsPerPage = 10;
     $scope.noOfRows = 1;
     
     $scope.validateMobileNumber = function (value) {

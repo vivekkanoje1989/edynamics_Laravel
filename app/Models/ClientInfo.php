@@ -95,10 +95,11 @@ class ClientInfo extends Eloquent
             {
                 $getClientLists = ClientInfo::where('id' ,  $request['id'])->first();
                 if (!empty($getClientLists)) {
-                    $result = ['success' => true, 'records' => $getClientLists];
+                    $count=count($getClientLists);
+                    $result = ['success' => true, 'records' => $getClientLists,'count'=>$count];
                     return json_encode($result);
                 } else {
-                    $result = ['success' => false, 'message' => 'Something went wrong'];
+                    $result = ['success' => false, 'message' => 'Something went wrong','count'=>$count];
                     return json_encode($result);
                 }
             }
@@ -109,10 +110,12 @@ class ClientInfo extends Eloquent
                                         $query->select('id','group_name');
                                     }])->get();
                 if (!empty($getClientLists)) {
-                    $result = ['success' => true, 'records' => $getClientLists];
+                    $count=count($getClientLists);
+                    $result = ['success' => true, 'records' => $getClientLists,'count'=>$count];
                     return json_encode($result);
                 } else {
-                    $result = ['success' => false, 'message' => 'Something went wrong'];
+                    $count=count($getClientLists);
+                    $result = ['success' => false, 'message' => 'Something went wrong','count'=>$count];
                     return json_encode($result);
                 }
             }

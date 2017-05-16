@@ -1,4 +1,11 @@
 <div class="row" ng-controller="clientInfoCtrl" >  
+    <?php 
+                    if(empty($clientId))
+                       $clientId = 0;
+                    
+                ?>           
+    
+    <div style="display:none">{{clientData.id=  <?php echo $clientId;?>  }}</div>        
     <div class="col-xs-12 col-md-12" >
         <div class="widget">
             <div class="widget-header ">
@@ -10,14 +17,12 @@
                     <a href="" widget-dispose></a>
                 </div>
             </div>
-                        
+                    
             <div class="widget-body table-responsive">     
-                <?php 
-                    if(empty($clientId))
-                       $clientId = 0;
-                ?>                                                                                                                   
+                
                 <form ng-submit="frmcrtClients.$valid  &&createClients(clientData)"  name="frmcrtClients"  novalidate enctype="multipart/form-data" ng-init="editClients(<?php echo $clientId;?>)">
                     <input type="hidden" ng-model="csrfToken" name="csrftoken" id="csrftoken" ng-init="csrfToken = '<?php echo csrf_token(); ?>'" class="form-control">
+                    
                     <table class="table table-hover table-striped table-bordered" at-config="config" ng-controller="CountryListCtrl">
                         <thead class="bord-bot">
                             <tr>
@@ -25,7 +30,8 @@
                             <tr>
                         </thead>
                         <tbody>
-                        <input type="hidden" ng-model="clientData.id" name="id">    
+                            
+                        <input type="hidden" ng-model="clientData.id"  name="id">    
                         <tr>
                             <td>Client Groups<span class="sp-err">*</span></td>
                             <td>

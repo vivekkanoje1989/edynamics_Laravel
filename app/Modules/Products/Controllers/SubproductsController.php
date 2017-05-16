@@ -34,8 +34,8 @@ class SubproductsController extends Controller {
 	{
             $postdata = file_get_contents('php://input');
             $request = json_decode($postdata, true);
-            $model = new Product();
-            return $model->createProduct($request);
+            $model = new Subproduct();
+            return $model->createSubProduct($request);
 	}
 
 	
@@ -50,8 +50,8 @@ class SubproductsController extends Controller {
 	{
             $postdata = file_get_contents('php://input');
             $request = json_decode($postdata, true);
-            $model = new Product();
-            return $model->updateProduct($request);
+            $model = new Subproduct();
+            return $model->updateSubProduct($request);
 	}
 
 	

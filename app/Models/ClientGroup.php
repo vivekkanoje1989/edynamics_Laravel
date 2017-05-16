@@ -60,10 +60,11 @@ class ClientGroup extends Eloquent
             
             $getClientGroupLists = ClientGroup::all();
             if (!empty($getClientGroupLists)) {
-                $result = ['success' => true, 'records' => $getClientGroupLists];
+                $count=count($getClientGroupLists);
+                $result = ['success' => true, 'records' => $getClientGroupLists,'count'=>$count];
                 return json_encode($result);
             } else {
-                $result = ['success' => false, 'message' => 'Something went wrong'];
+                $result = ['success' => false, 'message' => 'Something went wrong','count'=>$count];
                 return json_encode($result);
             }
         }     

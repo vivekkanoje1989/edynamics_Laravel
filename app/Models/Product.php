@@ -6,7 +6,6 @@
  */
 
 namespace App\Models;
-use App\Models\Product;
 use Auth;
 use App\Classes\CommonFunctions;
 use Reliese\Database\Eloquent\Model as Eloquent;
@@ -83,12 +82,13 @@ class Product extends Eloquent
         
         public function getProductList()
         {
-            $getProductLists = Product::all();
+            $getProductLists = Product::select('product_id','product_name','status')->get();
             if (!empty($getProductLists)) {
-                $result = ['success' => true, 'records' => $getProductLists];
+                $count=count($getProductLists);
+                $result = ['success' => true, 'records' => $getProductLists,'count'=>$count];
                 return json_encode($result);
             } else {
-                $result = ['success' => false, 'message' => 'Something went wrong'];
+                $result = ['success' => false, 'message' => 'Something went wrong','count'=>0];
                 return json_encode($result);
             }
         }

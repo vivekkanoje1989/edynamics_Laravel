@@ -7,7 +7,7 @@
         <div class="widget">
             <div class="widget-header ">
                 <span class="widget-caption">Manage Sub Products</span>
-                <a href="" data-toggle="modal" data-target="#productModal" ng-click="initialProductModal(0,'',0,'')" class="btn btn-info">Create New Product</a>&nbsp;&nbsp;&nbsp;
+                <a href="" data-toggle="modal" data-target="#subproductModal" ng-click="initialSubProductModal(0,'',1,'','')" class="btn btn-info">Create New Sub Product</a>&nbsp;&nbsp;&nbsp;
                 <div class="widget-buttons">
                     <a href="" widget-maximize></a>
                     <a href="" widget-collapse></a>
@@ -34,13 +34,19 @@
                                 SR. No.
                             </th>                       
                             <th style="width: 30%">
+                                <a href="javascript:void(0);" ng-click="orderByField = 'subproduct_name'; reverseSort = !reverseSort">Sub Products
+                                    <span ng-show="orderByField == 'subproduct_name'">
+                                        <span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
+                                    </span>
+                                </a>
+                            </th>  
+                            <th style="width: 30%">
                                 <a href="javascript:void(0);" ng-click="orderByField = 'product_name'; reverseSort = !reverseSort">Products
                                     <span ng-show="orderByField == 'product_name'">
                                         <span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
                                     </span>
                                 </a>
-                            </th>  
-                            
+                            </th>
                             <th style="width: 30%">
                                 <a href="javascript:void(0);" ng-click="orderByField = 'status'; reverseSort = !reverseSort">Status
                                     <span ng-show="orderByField == 'status'">
@@ -53,21 +59,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr role="row" dir-paginate="list in productList| filter:search |itemsPerPage:itemsPerPage| orderBy:orderByField:reverseSort">
+                        <tr role="row" dir-paginate="list in subProductList| filter:search |itemsPerPage:itemsPerPage| orderBy:orderByField:reverseSort">
                             <td>{{ itemsPerPage * (noOfRows-1)+$index+1 }}</td>
-                            <td>{{ list.product_name}}</td>                          
+                            <td>{{ list.subproduct_name}}</td> 
+                            <td>{{ list.get_product_info.product_name}}</td> 
                             <td>{{ list.status === 1 ? "Active" : "Deactive"}}</td>                          
                             <td class="fa-div">
-                                <div class="fa-hover" tooltip-html-unsafe="Edit" style="display: block;" data-toggle="modal" data-target="#productModal"><a href="javascript:void(0);" ng-click="initialProductModal({{ list.product_id}},'{{list.product_name}}',{{ list.status}},$index)"><i class="fa fa-pencil"></i></a></div>
+                                <div class="fa-hover" tooltip-html-unsafe="Edit" style="display: block;" data-toggle="modal" data-target="#subproductModal"><a href="javascript:void(0);" ng-click="initialSubProductModal({{ list.subproduct_id}},'{{list.subproduct_name}}',{{ list.status}},{{list.get_product_info.product_id}},$index)"><i class="fa fa-pencil"></i></a></div>
                             </td>
-                            
+                        </tr>
+                        <tr ng-if='totalrecords == 0'>
+                            <td colspan='5' align='center'>- No Records Found -</td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="DTTTFooter">
                     <div class="col-sm-6">
-                        <!--<div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing {{itemsPerPage * (noOfRows-1)+1}} to of {{ listUsersLength }} entries</div>-->
-                        <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">&nbsp;</div>
+                        <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Page No. {{noOfRows}}</div>
                     </div>
                     <div class="col-sm-6">
                         <div class="dataTables_paginate paging_bootstrap" id="DataTables_Table_0_paginate">
@@ -79,9 +87,9 @@
         </div>
     </div>
     
-    <?php /*
+    
      <!-- Modal -->
-    <div class="modal fade" id="productModal" role="dialog" tabindex="-1">    
+    <div class="modal fade" id="subproductModal" role="dialog" tabindex="-1">    
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
@@ -90,17 +98,32 @@
                     <h4 class="modal-title" align="center">{{heading}}</h4>
                 </div>
                 
-                <form ng-submit="frmProduct.$valid && processProducts()" name="frmProduct"  novalidate>
+                <form ng-submit="frmSubproduct.$valid && processSubproducts()" name="frmSubproduct" ng-init="getProductList()"  novalidate>
                     <div class="modal-body">
                         <div ng-if="errorMsg" class="sp-err">{{errorMsg}}</div>
+                        <br>
+                        <div class="form-group" >
+                            <span class="input-icon icon-right">
+                                <select ng-model="product_id"  name="product_id" class="form-control" required="required">
+                                    <option value="">Select Product</option>
+                                    <option ng-repeat="productObj in productList" value="{{productObj.product_id}}" ng-selected="{{ productObj.product_id == product_id}}">{{productObj.product_name}}</option>
+                                </select>
+                                <i class="fa fa-sort-desc"></i>
+                                <div class="help-block" ng-show="btnSubProduct" ng-if="display_msg" ng-messages="frmSubproduct.product_id.$error">
+                                    <div ng-message="required" class="sp-err" > Product cannot be blank.</div>
+                                </div>
+                            </span>
+                        </div>
+                        
+                        
                         <div class="form-group">
-                            <input type="hidden" class="form-control" ng-model="product_id" name="product_id">
+                            <input type="hidden" class="form-control" ng-model="subproduct_id" name="subproduct_id">
                             
                             <span class="input-icon icon-right">
-                                <input type="text" class="form-control" ng-model="product_name" name="product_name" placeholder="Product Name" ng-change="errorMsg = null" required>
-                                <i class="fa fa-users thm-color circular"></i>
-                                <div class="help-block" ng-show="btnProduct" ng-if="display_msg" ng-messages="frmProduct.product_name.$error">
-                                    <div ng-message="required" class="sp-err">Product name cannot be blank.</div>
+                                <input type="text" class="form-control" ng-model="subproduct_name" name="subproduct_name" placeholder="Sub Product Name" ng-change="errorMsg = null" required>
+                                <i class="fa fa-archive thm-color circular"></i>
+                                <div class="help-block" ng-show="btnSubProduct" ng-if="display_msg" ng-messages="frmSubproduct.subproduct_name.$error">
+                                    <div ng-message="required" class="sp-err">Sub Product name cannot be blank.</div>
                                 </div>
                             </span>
                         </div>
@@ -118,7 +141,7 @@
                                             <span class="text"> Deactive</span>
                                         </label>
                                     </div>
-                                    <div class="help-block" ng-show="btnProduct"  ng-if="display_msg" ng-messages="frmProduct.status.$error">
+                                    <div class="help-block" ng-show="btnSubProduct"  ng-if="display_msg" ng-messages="frmSubproduct .status.$error">
                                            <div ng-message="required" class="sp-err" >Status cannot be blank.</div>
                                     </div>
                                 </div>
@@ -126,13 +149,12 @@
                         
                     </div>
                     <div class="modal-footer" align="center">
-                        <button type="Submit" class="btn btn-sub" ng-click="btnProduct = true;display_msg=true">Submit</button>
+                        <button type="Submit" class="btn btn-sub" ng-click="btnSubProduct = true;display_msg=true">Submit</button>
                     </div> 
                 </form>           
             </div>
         </div>
     </div>
-     */
-    ?>
+     
 </div>
 

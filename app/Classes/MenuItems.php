@@ -265,24 +265,6 @@ class MenuItems {
                     2 => array('id' => '050102', 'name' => 'Manage Sub Products', 'icon' => '', 'url' => '/'.$getUrl.'/subproducts/index', 'slug' => '.subproductsIndex', 'uiSrefActive' => 'active', 'total_submenu' => 1),
                     
                 )),
-                    
-                
-                    
-                   
-                
-                2 => array('id' => '0502', 'name' => 'Manage Project Stages', 'icon' => '', 'url' => '#', 'slug' => '/'.$getUrl.'/', 'has_submenu' => true,'uiSrefActive' => 'active','total_submenu' => 1,
-                    'submenu_ids' => '050201', 'anchorClass' => 'menu-dropdown', 'submenuClass' => 'submenu', 'liClass' => 'open', 'submenu' => array(                    
-                    1 => array('id' => '050201', 'name' => 'Manage', 'icon' => '', 'url' => '#', 'slug' => '/'.$getUrl.'/', 'uiSrefActive' => 'active', 'total_submenu' => 1),
-                )),
-                3 => array('id' => '0503', 'name' => 'Manage Block Stages', 'icon' => '', 'ui-sref-active' => '', 'slug' => '#', 'has_submenu' => true, 'total_submenu' => 1,
-                    'submenu_ids' => '050301', 'anchorClass' => 'menu-dropdown', 'submenuClass' => 'submenu', 'liClass' => 'open', 'submenu' => array(                    
-                    1 => array('id' => '050301', 'name' => 'Manage', 'icon' => '', 'url' => '#', 'slug' => '/'.$getUrl.'/', 'uiSrefActive' => 'active', 'total_submenu' => 1),
-                )),
-                4 => array('id' => '0504', 'name' => 'Rate Management', 'icon' => '', 'ui-sref-active' => '', 'slug' => '#', 'has_submenu' => true, 'total_submenu' => 2,
-                    'submenu_ids' => '050401,050402', 'anchorClass' => 'menu-dropdown', 'submenuClass' => 'submenu', 'liClass' => 'open', 'submenu' => array(                    
-                    1 => array('id' => '050401', 'name' => 'Manage Rate\'s', 'icon' => '', 'url' => '#', 'slug' => '/'.$getUrl.'/', 'uiSrefActive' => 'active', 'total_submenu' => 1),
-                    2 => array('id' => '050402', 'name' => 'Manage Floor Rise', 'icon' => '', 'url' => '#', 'slug' => '/'.$getUrl.'/', 'uiSrefActive' => 'active', 'total_submenu' => 1),
-                )),
             )),
             6 => array('name' => 'Response', 'icon' => 'resp-img menu-icon-sz', 'ui-sref-active' => '', 'url' => '', 'slug' => 'response', 'has_submenu' => true, 'total_submenu' => 4,
                 'submenu_ids' => '0601,0602,0603,0604', 'anchorClass' => 'menu-dropdown', 'submenuClass' => 'submenu', 'liClass' => 'open', 'submenu' => array(

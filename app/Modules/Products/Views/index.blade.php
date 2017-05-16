@@ -6,7 +6,7 @@
         <div class="widget">
             <div class="widget-header ">
                 <span class="widget-caption">Manage Products</span>
-                <a href="" data-toggle="modal" data-target="#productModal" ng-click="initialProductModal(0,'',0,'')" class="btn btn-info">Create New Product</a>&nbsp;&nbsp;&nbsp;
+                <a href="" data-toggle="modal" data-target="#productModal" ng-click="initialProductModal(0,'',1,'')" class="btn btn-info">Create New Product</a>&nbsp;&nbsp;&nbsp;
                 <div class="widget-buttons">
                     <a href="" widget-maximize></a>
                     <a href="" widget-collapse></a>
@@ -25,6 +25,7 @@
                       <input type="number" min="1" max="50" style="width:25%;" class="form-control" ng-model="itemsPerPage">
                     </div>
                 </div><br>
+                
                 <table class="table table-hover table-striped table-bordered" at-config="config">
                     <thead class="bord-bot">
                         <tr>
@@ -59,14 +60,15 @@
                             <td class="fa-div">
                                 <div class="fa-hover" tooltip-html-unsafe="Edit" style="display: block;" data-toggle="modal" data-target="#productModal"><a href="javascript:void(0);" ng-click="initialProductModal({{ list.product_id}},'{{list.product_name}}',{{ list.status}},$index)"><i class="fa fa-pencil"></i></a></div>
                             </td>
-                            
+                        </tr>
+                        <tr ng-if='totalrecords == 0'>
+                            <td colspan='4' align='center'>- No Records Found -</td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="DTTTFooter">
                     <div class="col-sm-6">
-                        <!--<div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing {{itemsPerPage * (noOfRows-1)+1}} to of {{ listUsersLength }} entries</div>-->
-                        <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">&nbsp;</div>
+                        <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Page No. {{noOfRows}}</div>
                     </div>
                     <div class="col-sm-6">
                         <div class="dataTables_paginate paging_bootstrap" id="DataTables_Table_0_paginate">
@@ -97,7 +99,7 @@
                             
                             <span class="input-icon icon-right">
                                 <input type="text" class="form-control" ng-model="product_name" name="product_name" placeholder="Product Name" ng-change="errorMsg = null" required>
-                                <i class="fa fa-users thm-color circular"></i>
+                                <i class="fa fa-archive thm-color circular"></i>
                                 <div class="help-block" ng-show="btnProduct" ng-if="display_msg" ng-messages="frmProduct.product_name.$error">
                                     <div ng-message="required" class="sp-err">Product name cannot be blank.</div>
                                 </div>

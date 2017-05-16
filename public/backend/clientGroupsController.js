@@ -3,8 +3,9 @@
  */
 'use strict';
 app.controller('clientGroupCtrl', ['$scope', 'Data', 'toaster','$rootScope','$timeout', function ($scope, Data,toaster,$rootScope,$timeout) {
-        $scope.currentPage =  $scope.itemsPerPage = 4;
+        $scope.currentPage =  $scope.itemsPerPage = 10;
         $scope.noOfRows = 1;
+        $scope.totalrecords;
     
         /* initial the Modal */
         $scope.initialModal = function (id, name, index) {
@@ -16,10 +17,18 @@ app.controller('clientGroupCtrl', ['$scope', 'Data', 'toaster','$rootScope','$ti
             $scope.errorMsg="";
         }
         
+        /*display page no. */
+        $scope.pageChangeHandler = function(num) {
+            $scope.noOfRows = num;
+            $scope.currentPage = num * $scope.itemsPerPage;
+        };
+        
+        
         /*all list of client groups*/
         $scope.manageClientGroups = function () {
             Data.post('clientgroups/manageClientGroup').then(function (response) {
                 $scope.clientgroupslist = response.records;
+                $scope.totalrecords = response.count;
             });
         };
        
@@ -44,6 +53,7 @@ app.controller('clientGroupCtrl', ['$scope', 'Data', 'toaster','$rootScope','$ti
                         else 
                         {
                             $scope.clientgroupslist.push({'group_name': $scope.group_name,'id':response.lastRecordId});
+                            $scope.totalrecords = $scope.clientgroupslist.length;
                             toaster.pop('success', 'Manage Client Groups', 'Client group created successfully');
                             $('#clientGroupsModal').modal('toggle');
                         }
@@ -65,6 +75,7 @@ app.controller('clientGroupCtrl', ['$scope', 'Data', 'toaster','$rootScope','$ti
                         {
                             'group_name': $scope.group_name, 'id': $scope.id
                         });
+                        $scope.totalrecords = $scope.clientgroupslist.length;
                         toaster.pop('success', 'Manage Client Groups', 'Client group updated successfully');
                         $('#clientGroupsModal').modal('toggle');
                         

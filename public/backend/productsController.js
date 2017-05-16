@@ -5,12 +5,14 @@
 app.controller('productsCtrl', ['$scope', 'Data', 'toaster','$rootScope','Upload','$state','$timeout', function ($scope, Data,toaster,$rootScope,Upload,$state,$timeout) {
         $scope.currentPage =  $scope.itemsPerPage = 10;
         $scope.noOfRows = 1;
+        $scope.totalrecords;
         
         /*all list of products*/
         $scope.manageProducts = function () {
             
             Data.post('products/manageProducts').then(function (response) {
                 $scope.productList = response.records;
+                $scope.totalrecords = response.count;
             });
             
         };
@@ -25,6 +27,11 @@ app.controller('productsCtrl', ['$scope', 'Data', 'toaster','$rootScope','Upload
             $scope.errorMsg="";
             
         }
+        
+        $scope.pageChangeHandler = function(num) {
+            $scope.noOfRows = num;
+            $scope.currentPage = num * $scope.itemsPerPage;
+        };
         
         $scope.processProducts = function()
         {
@@ -49,6 +56,7 @@ app.controller('productsCtrl', ['$scope', 'Data', 'toaster','$rootScope','Upload
                             
                             $scope.productList.push({'product_name': $scope.product_name,'product_id':response.lastRecordId,status:response.result.status});
                             
+                            $scope.totalrecords =  $scope.productList.length;
                             toaster.pop('success', 'Manage Products', 'Product created successfully');
                             $('#productModal').modal('toggle');
                         }
@@ -71,6 +79,7 @@ app.controller('productsCtrl', ['$scope', 'Data', 'toaster','$rootScope','Upload
                         {
                            'product_name': $scope.product_name, 'product_id': $scope.product_id,'status':$scope.status
                         });
+                        $scope.totalrecords =  $scope.productList.length;
                         toaster.pop('success', 'Manage Products', 'Product updated successfully');
                         $('#productModal').modal('toggle');
 
