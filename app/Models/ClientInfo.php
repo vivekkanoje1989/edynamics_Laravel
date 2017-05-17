@@ -7,6 +7,7 @@
 
 namespace App\Models;
 use Auth;
+use App\Models\ClientContactPerson;
 use Reliese\Database\Eloquent\Model as Eloquent;
 use App\Classes\CommonFunctions;
 use App\Classes\S3;
@@ -94,12 +95,14 @@ class ClientInfo extends Eloquent
             if(!empty($request['id']) && $request['id'] !=0  )
             {
                 $getClientLists = ClientInfo::where('id' ,  $request['id'])->first();
+                $contactInfo    = ClientContactPerson::where('client_id',$request['id'])->get();
+                
                 if (!empty($getClientLists)) {
                     $count=count($getClientLists);
-                    $result = ['success' => true, 'records' => $getClientLists,'count'=>$count];
+                    $result = ['success' => true, 'records' => $getClientLists,'count'=>$count,'contactflag'=>1,'contactinfo'=>$contactInfo];
                     return json_encode($result);
                 } else {
-                    $result = ['success' => false, 'message' => 'Something went wrong','count'=>$count];
+                    $result = ['success' => false, 'message' => 'Something went wrong','contactflag'=>0,'count'=>$count];
                     return json_encode($result);
                 }
             }
@@ -153,6 +156,21 @@ class ClientInfo extends Eloquent
             $modelClientInfo->company_logo= $imageName;
             $modelClientInfo->update();
             
+            $clientContactList = $request['data']['contactInfo'];
+            foreach($clientContactList as $clientcontact)
+            {
+                $clientcontact['client_id'] = $modelClientInfo->id;
+                $clientcontact['group_id'] = $modelClientInfo->group_id;
+                unset($clientcontact['id']);                   
+                $createContact = CommonFunctions::insertMainTableRecords(Auth::guard('admin')->user()->id);
+                $input['clientContactInfo'] = array_merge($clientcontact,$createContact);
+                $modelClientContactInfo = ClientContactPerson::create($input['clientContactInfo']);
+                    
+                   
+            }
+            
+            
+            
             $result = ['success' => true, 'result' => $modelClientInfo];
             return $result;
         } 
@@ -188,6 +206,32 @@ class ClientInfo extends Eloquent
             $input['clientInfo'] = array_merge($request['data'],$update);
             $modelClientInfo->update($input['clientInfo']);
             
+            
+            $clientContactList = $request['data']['contactInfo'];
+            foreach($clientContactList as $clientcontact)
+            {
+                $clientcontact['client_id'] = $modelClientInfo->id;
+                $clientcontact['group_id'] = $modelClientInfo->group_id;
+                if($clientcontact['id'] == 0)
+                {
+                    unset($clientcontact['id']);                   
+                    $createContact = CommonFunctions::insertMainTableRecords(Auth::guard('admin')->user()->id);
+                    $input['clientContactInfo'] = array_merge($clientcontact,$createContact);
+                    $modelClientContactInfo = ClientContactPerson::create($input['clientContactInfo']);
+                }    
+                else
+                {
+                    $modelClientContactInfo = ClientContactPerson::where('id', $clientcontact['id'])->first(); 
+                    $update = CommonFunctions::updateMainTableRecords(Auth::guard('admin')->user()->id);
+                    $input['clientContactInfo'] = array_merge($clientcontact,$update);
+                    $modelClientContactInfo->update($input['clientContactInfo']);
+                    
+                    
+                }    
+            }
+            
+            
+                        
             $result = ['success' => true];
             return $result;
         }        
