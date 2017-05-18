@@ -21,36 +21,22 @@ app.controller('clientInfoCtrl', ['$scope', 'Data', 'toaster','$rootScope','Uplo
             Data.post('clients/manageClients').then(function (response) {
                 $scope.clientInfoList = response.records;
                 $scope.totalrecords = response.count;
-                
                 $scope.clientContactInfo = response;
-                console.log(response.contactinfo);
                 
             });
             
         };
-        //{{ list.id}},'{{list.first_name}}','{{list.last_name}}',{{list.title_id}},{{list.designation_id}},{{list.gender_id}},{{list.mobile_number}},'{{list.email_id}}','{{list.password}}',{{list.high_security_password_type}},{{list.high_security_password}},$index
+        
         /*init the contact modal*/
-        $scope.initialContactModal = function (id,list,index)
+        $scope.initialContactModal = function (id,list,isexitsContact,index)
         {
             $scope.contactModalHeading = 'Contact Information';  
             $scope.clt_contact_display_msg = false;
             $scope.cltcontactdata=list;
-//            $scope.cltcontactdata.person_type = person_type;
-//            $scope.cltcontactdata.first_name = first_name;
-//            $scope.cltcontactdata.last_name = last_name;
-//            $scope.cltcontactdata.title_id = title_id;
-//            $scope.cltcontactdata.designation_id = designation_id;
-//            $scope.cltcontactdata.gender_id = gender_id;
-//            $scope.cltcontactdata.mobile_number = mobile_number;
-//            $scope.cltcontactdata.email_id = email_id;
-//            $scope.cltcontactdata.password = password;
-//            $scope.cltcontactdata.high_security_password_type = high_security_password_type;
-//            $scope.cltcontactdata.high_security_password = high_security_password;
-//            $scope.cltcontactdata.status = status;
-            $scope.cltcontactdata.index = index;
+            $scope.index = index;
             $scope.display_msg=false;
             
-            if(id !="")
+            if(isexitsContact == 1)
                 $scope.isexitsContact = 1;
             else 
                 $scope.isexitsContact = 0;
@@ -59,8 +45,6 @@ app.controller('clientInfoCtrl', ['$scope', 'Data', 'toaster','$rootScope','Uplo
         /*push client the contact info*/
         $scope.processCltContactInfo = function(cltcontactdata)
         {
-            
-            
             $('#contactInfoModal').modal('toggle');
             if($scope.isexitsContact == 1)
             {    
@@ -77,9 +61,10 @@ app.controller('clientInfoCtrl', ['$scope', 'Data', 'toaster','$rootScope','Uplo
                     'mobile_number':cltcontactdata.mobile_number,
                     'email_id':cltcontactdata.email_id,
                     'password':cltcontactdata.password,
+                    'password_confirmation':cltcontactdata.password_confirmation,
                     'high_security_password_type':cltcontactdata.high_security_password_type,
                     'high_security_password':cltcontactdata.high_security_password,
-                    'status':$scope.status
+                    'status':cltcontactdata.status
                 });
                 toaster.pop('success', 'Contact Information', 'contact information updated successfully');
             }
@@ -97,6 +82,7 @@ app.controller('clientInfoCtrl', ['$scope', 'Data', 'toaster','$rootScope','Uplo
                     'mobile_number':cltcontactdata.mobile_number,
                     'email_id':cltcontactdata.email_id,
                     'password':cltcontactdata.password,
+                    'password_confirmation':cltcontactdata.password_confirmation,
                     'high_security_password_type':cltcontactdata.high_security_password_type,
                     'high_security_password':cltcontactdata.high_security_password,
                     'status':cltcontactdata.status

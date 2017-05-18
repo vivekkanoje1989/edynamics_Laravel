@@ -8,6 +8,7 @@
 namespace App\Models;
 use Auth;
 use App\Models\ClientContactPerson;
+use Illuminate\Support\Facades\DB;
 use Reliese\Database\Eloquent\Model as Eloquent;
 use App\Classes\CommonFunctions;
 use App\Classes\S3;
@@ -157,20 +158,21 @@ class ClientInfo extends Eloquent
             $modelClientInfo->update();
             
             $clientContactList = $request['data']['contactInfo'];
-            foreach($clientContactList as $clientcontact)
-            {
-                $clientcontact['client_id'] = $modelClientInfo->id;
-                $clientcontact['group_id'] = $modelClientInfo->group_id;
-                unset($clientcontact['id']);                   
-                $createContact = CommonFunctions::insertMainTableRecords(Auth::guard('admin')->user()->id);
-                $input['clientContactInfo'] = array_merge($clientcontact,$createContact);
-                $modelClientContactInfo = ClientContactPerson::create($input['clientContactInfo']);
-                    
-                   
+            if(!empty($request['data']['contactInfo']))
+            {    
+                foreach($clientContactList as $clientcontact)
+                {
+                    $clientcontact['client_id'] = $modelClientInfo->id;
+                    $clientcontact['group_id'] = $modelClientInfo->group_id;
+                    $clientcontact['password'] = \Hash::make($clientcontact['password']);
+                    unset($clientcontact['id']);                   
+                    $createContact = CommonFunctions::insertMainTableRecords(Auth::guard('admin')->user()->id);
+                    $input['clientContactInfo'] = array_merge($clientcontact,$createContact);
+                    $modelClientContactInfo = ClientContactPerson::create($input['clientContactInfo']);
+
+
+                }
             }
-            
-            
-            
             $result = ['success' => true, 'result' => $modelClientInfo];
             return $result;
         } 
@@ -185,6 +187,7 @@ class ClientInfo extends Eloquent
             unset($request['data']['company_logo_flag']);
             
             $modelClientInfo = ClientInfo::where('id', $request['data']['id'])->first();
+            
             if($company_Logo_flag == 1)
             { 
                 $s3FolderName='client/'.$modelClientInfo->id."/";
@@ -206,29 +209,43 @@ class ClientInfo extends Eloquent
             $input['clientInfo'] = array_merge($request['data'],$update);
             $modelClientInfo->update($input['clientInfo']);
             
-            
-            $clientContactList = $request['data']['contactInfo'];
-            foreach($clientContactList as $clientcontact)
+            if(!empty($request['data']['contactInfo']))
             {
-                $clientcontact['client_id'] = $modelClientInfo->id;
-                $clientcontact['group_id'] = $modelClientInfo->group_id;
-                if($clientcontact['id'] == 0)
+                $clientContactList = $request['data']['contactInfo'];
+                foreach($clientContactList as $clientcontact)
                 {
-                    unset($clientcontact['id']);                   
-                    $createContact = CommonFunctions::insertMainTableRecords(Auth::guard('admin')->user()->id);
-                    $input['clientContactInfo'] = array_merge($clientcontact,$createContact);
-                    $modelClientContactInfo = ClientContactPerson::create($input['clientContactInfo']);
-                }    
-                else
-                {
-                    $modelClientContactInfo = ClientContactPerson::where('id', $clientcontact['id'])->first(); 
-                    $update = CommonFunctions::updateMainTableRecords(Auth::guard('admin')->user()->id);
-                    $input['clientContactInfo'] = array_merge($clientcontact,$update);
-                    $modelClientContactInfo->update($input['clientContactInfo']);
-                    
-                    
-                }    
-            }
+                    $clientcontact['client_id'] = $modelClientInfo->id;
+                    $clientcontact['group_id'] = $modelClientInfo->group_id;
+                    if($clientcontact['id'] == 0)
+                    {
+                        unset($clientcontact['id']);                   
+                        $clientcontact['password'] = \Hash::make($clientcontact['password']);
+                        $createContact = CommonFunctions::insertMainTableRecords(Auth::guard('admin')->user()->id);
+                        $input['clientContactInfo'] = array_merge($clientcontact,$createContact);
+                        $modelClientContactInfo = ClientContactPerson::create($input['clientContactInfo']);
+                    }    
+                    else
+                    {
+                        if($clientcontact['high_security_password_type'] == 0)
+                        {
+                            $clientcontact['high_security_password'] = "0";
+                        }
+                        
+                        $modelClientContactInfo = ClientContactPerson::where('id', $clientcontact['id'])->first(); 
+                        $modelOldClientContactData = $modelClientContactInfo['attributes'];
+                        $update = CommonFunctions::updateMainTableRecords(Auth::guard('admin')->user()->id);
+                        $input['clientContactInfo'] = array_merge($clientcontact,$update);
+                        $modelClientContactInfo->update($input['clientContactInfo']);
+                        
+                        
+                        $changeupdate_diff = array_diff_assoc($modelOldClientContactData,$clientcontact);
+                        $clientContactInfoArr = implode(",", array_keys($changeupdate_diff));
+                        $lastLogsInfo = DB::table('client_contact_persons_logs')->select('id')->orderBy('id', 'DESC')->first();
+                        $lastUpdateLog = DB::table('client_contact_persons_logs')->where('id', $lastLogsInfo->id)->update(['column_names' => $clientContactInfoArr]);
+
+                    }    
+                }
+            }    
             
             
                         

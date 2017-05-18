@@ -179,7 +179,7 @@
                                         </div>
                                         <?php
                                         if ($clientId != 0) {
-                                            $s3Path = Session::get('s3Path');
+                                            $s3Path = 'https://s3.ap-south-1.amazonaws.com/bmsbuilderv2/';
                                             ?>
                                             <div>
                                                 <img  src="<?php echo $s3Path; ?>client/{{clientData.id}}/{{ clientData.company}}"   class="thumb photoPreview"/>
@@ -260,11 +260,13 @@
                         </div>
                     </div>       
                     <div class="step-pane" id="wiredstep2">	
-                        <div class="form-title">
-                            Contact Information
-                            <span style="float: right">
-                                <a href="" data-toggle="modal" data-target="#contactInfoModal" ng-click="initialContactModal(0, '', '', '')" class="btn btn-info">Create New Contact</a>&nbsp;&nbsp;&nbsp;
-                            </span>
+                        <div class="form-title col-xs-12 col-md-12">
+                            <p style="float:left">
+                                Contact Information
+                            </p>    
+                            <p style="float: right">
+                                <a href="" data-toggle="modal" data-target="#contactInfoModal" ng-click="initialContactModal(0, '',0, '')" class="btn btn-info">Create New Contact</a>&nbsp;&nbsp;&nbsp;
+                            </p>
                         </div>
                         <div class="row">
                             <div class="col-md-12 col-xs-12" align="right">
@@ -292,7 +294,7 @@
                                             <td>{{ list.first_name}}</td>                          
                                             <td>{{ list.last_name}}</td>                                                                                                                                               
                                             <td class="fa-div">
-                                                <div class="fa-hover" tooltip-html-unsafe="Edit" style="display: block;" data-toggle="modal" data-target="#contactInfoModal"><a href="javascript:void(0);" ng-click="initialContactModal({{ list.id}},{{list}},$index)"><i class="fa fa-pencil"></i></a></div>
+                                                <div class="fa-hover" tooltip-html-unsafe="Edit" style="display: block;" data-toggle="modal" data-target="#contactInfoModal"><a href="javascript:void(0);" ng-click="initialContactModal({{ list.id}},{{list}},1,$index)"><i class="fa fa-pencil"></i></a></div>
                                             </td>
                                         </tr>
                                         <tr ng-if='totalrecords == 0'>
@@ -304,6 +306,7 @@
                         </div> 
                         <div class="row">
                             <div class="col-md-12 col-xs-12" align="right">
+                                <br>
                                 <button type="button" class="btn btn-primary btn-pre2">Prev</button>
                                 <button type="submit" class="btn btn-primary btn-submit-last" >Submit</button>
                             </div>
@@ -327,7 +330,7 @@
             </div>
 
             <form ng-submit="frmCltContactInfo.$valid && processCltContactInfo(cltcontactdata)" name="frmCltContactInfo"  novalidate>
-                <div class="modal-body">
+                <div class="modal-body row">
                     <div ng-if="errorMsg" class="sp-err">{{errorMsg}}</div>
 
 
@@ -472,7 +475,40 @@
                                 </div>
                             </div>   
                         </div>
-                         
+                         <div class="row">
+                            <div class="col-sm-6" ng-if="isexitsContact == 0">
+                                <div class="form-group">
+                                    <label for="">Password <span class="sp-err">*</span></label>
+                                    <span class="input-icon icon-right">
+                                        <input type="password" class="form-control" ng-maxlength="6"  ng-minlength="6" ng-model="cltcontactdata.password" name="password"  required>
+                                        <div class="help-block" ng-show="btnAddContact" ng-if="clt_contact_display_msg" ng-messages="frmCltContactInfo.password.$error">
+                                            <div ng-message="required" class="sp-err" >Password cannot be blank.</div>
+                                            <div ng-message="maxlength"  class="sp-err" >Maximum 6 Characters Allowed.</div>
+                                            <div ng-message="minlength"  class="sp-err" >Minimum 6 Characters Allowed.</div>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                             
+                            <div class="col-sm-6" ng-if="isexitsContact == 0">
+                                <div class="form-group">
+                                    <label>Re Enter Password <span ng-show="isexitsContact == 0" class="sp-err">*</span></label>
+                                    <span class="input-icon icon-right">
+                                        <input type="password" ng-model="cltcontactdata.password_confirmation" name="password_confirmation" ng-minlength="6" ng-maxlength="6" class="form-control" compare-to="cltcontactdata.password" required> 
+                                        <i class="fa fa-lock"></i>
+                                        <div ng-show="btnAddContact" ng-messages="frmCltContactInfo.password_confirmation.$error" class="help-block">
+                                            <div ng-message="required" class="sp-err">Re Enter Password cannot be blank.</div>
+                                            <div ng-message="compareTo" class="sp-err">Must match password and confirm password.</div>
+                                            <div ng-message="minlength" class="sp-err">Minimum 6 Characters Allowed.</div>
+                                        </div>
+                                    </span>
+                                </div>
+                        </div>
+                            
+                              
+                        </div>
+                        
+                        
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -499,21 +535,8 @@
                                 </div>
                             </div> 
                         </div>
-                        
+                                             
                         <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="">Password <span class="sp-err">*</span></label>
-                                    <span class="input-icon icon-right">
-                                        <input type="text" class="form-control" ng-maxlength="20" ng-model="cltcontactdata.password" name="password"  required>
-                                        
-                                        <div class="help-block" ng-show="btnAddContact" ng-if="clt_contact_display_msg" ng-messages="frmCltContactInfo.password.$error">
-                                            <div ng-message="required" class="sp-err" >Password cannot be blank.</div>
-                                            <div ng-message="maxlength"  class="sp-err" >Maximum 20 Characters Allowed</div>
-                                        </div>
-                                    </span>
-                                </div>
-                            </div>
                             <div class="col-sm-6" ng-if="cltcontactdata.high_security_password_type == 1">
                                 <div class="form-group">
                                     <label for="">High Security Password <span class="sp-err">*</span></label>
@@ -527,12 +550,7 @@
                                     </span>
                                 </div>
                             </div>
-                              
-                        </div>
-                       
-                        <div class="row">
-                            
-                            <div class="col-sm-12">
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Status <span class="sp-err">*</span></label>
                                     <span class="input-icon icon-right">
@@ -571,21 +589,21 @@
 
 <script>
     $(document).ready(function(){
-    $(".btn-nxt1").mouseup(function(e)
-    {
-        if ($(".step1").hasClass("ng-active")) 
+        $(".btn-nxt1").mouseup(function(e)
         {
-            e.preventDefault();
-        } 
-        else
-        {
-            $("#wiredstep1").hide();
-            $("#wiredstep2").show();
-            $(".wiredstep2").addClass("active");
-            $(".wiredstep1").removeClass("active");
-            $(".wiredstep1").addClass("complete");
-        }
-    });
+            if ($(".step1").hasClass("ng-active")) 
+            {
+                e.preventDefault();
+            } 
+            else
+            {
+                $("#wiredstep1").hide();
+                $("#wiredstep2").show();
+                $(".wiredstep2").addClass("active");
+                $(".wiredstep1").removeClass("active");
+                $(".wiredstep1").addClass("complete");
+            }
+        });
     
     $(".btn-nxt2").click(function(e)
     {

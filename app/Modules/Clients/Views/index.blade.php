@@ -4,15 +4,29 @@
      </div>
     <div class="col-xs-12 col-md-12">
         <div class="widget">
-            <div class="widget-header ">
-                <span class="widget-caption">Manage Clients</span>
-                <a href="#/[[config('global.getUrl')]]/clients/create" title="Create New Client" class="btn btn-info">Create New Client</a>&nbsp;&nbsp;&nbsp;
-                
+            <div class="widget-header col-xs-12 col-md-12">
                 <div class="widget-buttons">
                     <a href="" widget-maximize></a>
                     <a href="" widget-collapse></a>
                     <a href="" widget-dispose></a>
                 </div>
+                
+                
+         
+                <div class=" col-xs-12 col-md-12" style="border-top:1px dotted #ccc;padding-top:10px;">
+                <div class="row">    
+                    <p style="float:left">
+                        Manage Clients 
+                    </p>    
+                    <p style="float: right">
+                           <a href="#/[[config('global.getUrl')]]/clients/create" title="Create New Client" class="btn btn-info">Create New Client</a>&nbsp;&nbsp;&nbsp;
+                    </p>
+                </div>
+                </div>
+               </div>
+                
+                
+                
             </div>
             <div class="widget-body table-responsive">  
                 <div class="row">
@@ -26,6 +40,7 @@
                       <input type="number" min="1" max="50" style="width:25%;" class="form-control" ng-model="itemsPerPage">
                     </div>
                 </div><br>
+                <div class="table-responsive">
                 <table class="table table-hover table-striped table-bordered" at-config="config">
                     <thead class="bord-bot">
                         <tr>
@@ -92,6 +107,8 @@
                         </tr>
                     </tbody>
                 </table>
+                
+            </div>
                 <div class="DTTTFooter">
                     <div class="col-sm-6">
                         <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Page No. {{noOfRows}}</div>
