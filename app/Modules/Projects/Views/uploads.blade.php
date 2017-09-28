@@ -2,32 +2,25 @@
     <div class="col-lg-12 col-sm-6 col-xs-12">
         <tabset class="tabs-left">
             <tab heading="Images">
-                <div data-ng-include=" '[[ config('global.getUrl') ]]/projects/uploads/images' "></div>
+                <div data-ng-include=" '/projects/uploads/images'"></div>
             </tab>
             <tab heading="Status">
-                <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.</p>
-                <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.</p>
+                <div data-ng-include=" '/projects/uploads/status' "></div>
             </tab>
             <tab heading="Layout">
-               <div data-ng-include=" '[[ config('global.getUrl') ]]/projects/uploads/layouts' "></div>
+               <div data-ng-include=" '/projects/uploads/layouts' "></div>
             </tab>
             <tab heading="Map">
-                <div data-ng-include=" '[[ config('global.getUrl') ]]/projects/uploads/maps' "></div>
+                <div data-ng-include=" '/projects/uploads/maps' "></div>
             </tab>
             <tab heading="Amenities">
-                <div data-ng-include=" '[[ config('global.getUrl') ]]/projects/uploads/amenities' "></div>
+                <div data-ng-include=" '/projects/uploads/amenities' "></div>
             </tab>
             <tab heading="Specification">
-                <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade.</p>
-                <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade.</p>
+                <div data-ng-include=" '/projects/uploads/specification' "></div>
             </tab>
             <tab heading="Gallery">
-                <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade.</p>
-                <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade.</p>
-            </tab>
-            <tab heading="Events">
-                <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade.</p>
-                <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade.</p>
+                <div data-ng-include=" '/projects/uploads/gallery' "></div>
             </tab>
         </tabset>
         <div class="horizontal-space"></div>

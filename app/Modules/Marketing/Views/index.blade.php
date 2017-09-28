@@ -1,6 +1,6 @@
 <form name="promotionalsmsForm" novalidate ng-submit="promotionalsmsForm.$valid && sendPromotionalSMS(promotionalsmsData,promotionalsmsData.mobilenumbers)" ng-controller="promotionalsmsController">
     <input type="hidden" ng-model="promotionalsmsForm.csrfToken" name="csrftoken" id="csrftoken" ng-init="promotionalsmsForm.csrfToken = '<?php echo csrf_token(); ?>'" class="form-control">
-<div class="col-lg-10 col-sm-10 col-xs-12">
+<div class="col-lg-12 col-sm-12 col-xs-12">
     <h5 class="row-title before-themeprimary"><i class="fa  fa-arrow-circle-o-right themeprimary"></i>{{ pageHeading}}</h5>
                         <div class="widget flat radius-bordered">
                             <div class="widget-header bordered-bottom bordered-themeprimary">
@@ -23,7 +23,7 @@
                                                     <label>
                                                        <input name="send_sms_type" ng-model="promotionalsmsData.send_sms_type" type="radio" value="3">
                                                         <span class="text">Send SMS to Customer </span>
-                                                    </label>
+                                                    </label>                                                    
                                                 </div>
                                                 </div>
                                             </div>
@@ -31,13 +31,16 @@
                                                 <div class="form-group">
                                                     <label for="">SMS Type <span class="sp-err">*</span></label>
                                                     <span class="input-icon icon-right">
-                                                        <select ng-model="promotionalsmsData.sms_type" ng-init="promotionalsmsData.sms_type=2" name="sms_type"  class="form-control">
+                                                        <select ng-model="promotionalsmsData.sms_type" ng-init="promotionalsmsData.sms_type=1" name="sms_type"  class="form-control">
                                                             <option value="1">Regular SMS</option>
                                                              <option value="2">Flash SMS</option>                                                 
                                                         </select>
                                                        <i class="fa fa-sort-desc"></i>
                                                     </span>
                                                 </div>
+                                            </div>
+                                             <div class="col-md-6 col-sm-6 col-xs-12" ng-show="promotionalsmsData.send_sms_type == 3">
+                                             <h5 style="margin-top:20px">Total Customer Count : <span id ="totalcustomer">{{customertotalcount}} </span></h5>  
                                             </div>
                                         </div>
                                         <div class="row">
@@ -47,12 +50,14 @@
                                                     <textarea ng-model="promotionalsmsData.sms_body" id="sms_body" name="sms_body" class="form-control" rows="8" required></textarea>
                                                     <span class="input-icon icon-right">
                                                         <div ng-show="step1" ng-messages="promotionalsmsForm.sms_body.$error" class="help-block step1">
-                                                            <div ng-message="required">This field is required.</div>
+                                                            <div ng-message="required" class="sp-err">Please enter text Message.</div>
                                                         </div>
                                                     </span>
                                                 </div>
                                                 <h5 style="margin-top:20px">SMS Count : <span id ="totalsms">1</span> SMS Characters Count : <span id="totalcharacters">0</span></h5>
+                                                
                                             </div>
+                                            
                                             <div class="col-md-6 col-sm-6 col-xs-12" ng-show="promotionalsmsData.send_sms_type == 1">
                                                 <div class="form-group" ng-class="{ 'has-error' : step1 && (!promotionalsmsForm.smsnumbers.$dirty && promotionalsmsForm.smsnumbers.$invalid)}">
                                                     <label for="">Enter Comma Separated Mobile Numbers </label>
@@ -78,17 +83,23 @@
                                                     <span><a class="sample-link" href="https://s3-ap-south-1.amazonaws.com/lms-auto-common/bulk_file/sample_bulk_sms_file.xlsx" target="_blank">Download Sample</a></span>
                                                 </div>
                                             </div>
-                                        </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-12" ng-show="promotionalsmsData.send_sms_type == 3"> 
+                                                <div class="form-group">
+                                                    <input type="hidden" ngf-select   ng-model="promotionalsmsData.mobilenumbers"  id="mobilenumber" class="form-control" name="mobilenumbers" />
+                                                </div>
+                                            </div>
+                                    
 
                                         </div>
                                         <div class="row">
-                                            <center><button type="submit" class="btn btn-primary" ng-click="step1=true">Submit</button></center>
+                                            <center><button type="submit" class="btn btn-primary" ng-click="step1=true" ng-disabled="btnsend">Submit</button></center>
                                         </div>
                                   
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div data-ng-include="'/Marketing/enqshowFilter'"></div>
       </form>
 
 
@@ -128,6 +139,8 @@
                             e.preventDefault();
                     }
 	});
+        
+        
         
     });
     

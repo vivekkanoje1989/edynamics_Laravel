@@ -5,6 +5,9 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
+
 
 class Handler extends ExceptionHandler
 {
@@ -44,7 +47,17 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        /*if ($exception instanceof TokenMismatchException){
+            Auth()->guard('admin')->logout();
+            \Session::flush();
+            return response()->json(['error' => 'Unauthenticated.'], 200);
+        }*/
         return parent::render($request, $exception);
+    }
+    
+    protected function guard()
+    {
+        return Auth::guard('admin');
     }
 
     /**
@@ -56,10 +69,17 @@ class Handler extends ExceptionHandler
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-        if ($request->expectsJson()) {
-            return response()->json(['error' => 'Unauthenticated.'], 401);
+        /*if ($request->expectsJson()) {
+            return response()->json(['error' => 'Unauthenticated.'], 200);
         }
-
-        return redirect()->guest('login');
+        Auth()->guard('admin')->logout();
+        \Session::flush();
+        return response()->json(['error' => 'Unauthenticated.'], 200);
+        return redirect('/sessiontimeout');*/
+        if ($request->expectsJson()) {
+            return redirect('/sessiontimeout');
+//            return response()->json(['error' => 'Unauthenticated.'], 401);
+        }
+        return redirect('/sessiontimeout');
     }
 }

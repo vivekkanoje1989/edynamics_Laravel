@@ -22,5 +22,8 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('/authenticate', 'backend\Auth\LoginController@authenticate');
     Route::post('/checkUserCredentials', 'backend\Auth\LoginController@checkUserCredentials'); 
     Route::get('/getEmployees', 'backend\AdminController@getEmployees'); 
+    Route::post('/getCities','backend\AdminController@getCities');
+    Route::post('/getMenuItems', 'backend\AdminController@getMenuItems');
+    Route::post('/checkDomainExists', 'backend\Auth\LoginController@checkDomainExists');
 });
 

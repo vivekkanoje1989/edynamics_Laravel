@@ -1,13 +1,48 @@
 <?php
-/* 
+
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
- //$data = DB::table('system_configs')->where('id', 1)->get();
+
+/* old data
+
 return [
     'getUrl' => 'office',
-    'companyName' => 'BMS BUILDER',
+    'getWebsiteUrl' => 'website',
+    //'companyName' => 'BMS BUILDER',
+    'companyName' => 'Edynamics BMS',
     'rootPath' => base_path(),
-    'randomNoDigits'=>4,
+    'randomNoDigits' => 4,
+    's3Path' => "https://s3.ap-south-1.amazonaws.com/bmsbuilderv2",
+    'themeName' => '',
+    'backendUrl' => 'office.php',
+    'recordsPerPage' =>30,
+    'client_id' => 1,
+    'recordsPerPage' => 30,
+];
+*/
+
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+return [
+    'getUrl' => 'office',
+    's3Path'=>'https://storage.googleapis.com/bkt_bms_laravel',
+    //'s3Path'=>'https://storage.googleapis.com/'.$GLOBALS['aws_bucket_id'],
+    'mastergcsPath'=>'https://storage.googleapis.com/businessapps.co.in',
+    'getWebsiteUrl' => 'website',
+    'companyName' => 'Edynamics BMS',
+    'rootPath' => base_path(),
+    'randomNoDigits' => 4,
+    'themeName' => '',
+    'backendUrl' => 'office.php',
+    'recordsPerPage' =>30,
+    'client_id' =>1,
+    //'client_info'=>$GLOBALS['client_info'],
 ];

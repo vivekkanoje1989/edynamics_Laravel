@@ -1,9 +1,15 @@
 <?php
 
-Route::group(array('module' => 'BloodGroups','namespace' => 'App\Modules\BloodGroups\Controllers'), function() {
+Route::group(array('module' => 'BloodGroups','middleware' => ['auth:admin'],'namespace' => 'App\Modules\BloodGroups\Controllers'), function() {
 
     $getUrl = config('global.getUrl');
-    Route::resource($getUrl . '/blood-groups', 'BloodGroupsController');
-    Route::post($getUrl . '/blood-groups/manageBloodGroup','BloodGroupsController@manageBloodGroups');
+    Route::get('/blood-groups/exportToxls', 'BloodGroupsController@exportToxls');
+    Route::resource('/blood-groups', 'BloodGroupsController');
+    Route::post('/blood-groups/manageBloodGroup','BloodGroupsController@manageBloodGroups');
+    Route::post('/blood-groups/filteredData', 'BloodGroupsController@filteredData');
+     
+    Route::get('/BloodGroups/showFilter', function () {
+        return View::make('BloodGroups::showFilter');
+    });
     
 });	

@@ -58,7 +58,11 @@ class MlstBmsbDepartment extends Eloquent {
         'updated_by',
         'updated_IP',
         'updated_browser',
-        'updated_mac_id'
+        'updated_mac_id',
     ];
 
+    
+    public function vertical() {
+        return $this->belongsTo('App\Modules\ManageDepartment\Models\MlstBmsbVerticals', 'vertical_id','id')->select("id", "name");
+    }
 }

@@ -6,13 +6,13 @@
  */
 
 namespace App\Models;
-use Auth;
+
 use App\Models\ClientContactPerson;
 use Illuminate\Support\Facades\DB;
 use Reliese\Database\Eloquent\Model as Eloquent;
 use App\Classes\CommonFunctions;
 use App\Classes\S3;
-
+use Auth;
 /**
  * Class ClientInfo
  * 
@@ -42,6 +42,8 @@ use App\Classes\S3;
 class ClientInfo extends Eloquent
 {
 	public $timestamps = false;
+        
+        protected $connection = 'masterdb';
 
 	protected $casts = [
 		'right_click' => 'bool',
@@ -150,11 +152,11 @@ class ClientInfo extends Eloquent
             
             $tempPath=$request['data']['company_logo']->getPathName();
             
-            S3::s3FileUplod($tempPath, $imageName, $s3FolderName);
+            $name = S3::s3FileUpload($tempPath, $imageName, $s3FolderName);
             
             $modelClientInfo->client_id = $clientId;
             $modelClientInfo->client_key = \Hash::make($clientId);
-            $modelClientInfo->company_logo= $imageName;
+            $modelClientInfo->company_logo= $name;
             $modelClientInfo->update();
             
             $clientContactList = $request['data']['contactInfo'];
@@ -196,9 +198,8 @@ class ClientInfo extends Eloquent
                 $marketingName = str_replace(" ","_",$marketingName);
                 $imageName = time()."_".@strtolower($marketingName).".".$request['data']['company_logo']->getClientOriginalExtension();
                 $tempPath=$request['data']['company_logo']->getPathName();
-                S3::s3FileUplod($tempPath, $imageName, $s3FolderName);
-                
-                $request['data']['company_logo'] = $imageName;
+                $name = S3::s3FileUpload($tempPath, $imageName, $s3FolderName);
+                $request['data']['company_logo'] = $name;
             }
             else
             {
@@ -238,10 +239,10 @@ class ClientInfo extends Eloquent
                         $modelClientContactInfo->update($input['clientContactInfo']);
                         
                         
-                        $changeupdate_diff = array_diff_assoc($modelOldClientContactData,$clientcontact);
-                        $clientContactInfoArr = implode(",", array_keys($changeupdate_diff));
-                        $lastLogsInfo = DB::table('client_contact_persons_logs')->select('id')->orderBy('id', 'DESC')->first();
-                        $lastUpdateLog = DB::table('client_contact_persons_logs')->where('id', $lastLogsInfo->id)->update(['column_names' => $clientContactInfoArr]);
+//                        $changeupdate_diff = array_diff_assoc($modelOldClientContactData,$clientcontact);
+//                        $clientContactInfoArr = implode(",", array_keys($changeupdate_diff));
+//                        $lastLogsInfo = DB::table('client_contact_persons_logs')->select('id')->orderBy('id', 'DESC')->first();
+//                        $lastUpdateLog = DB::table('client_contact_persons_logs')->where('id', $lastLogsInfo->id)->update(['column_names' => $clientContactInfoArr]);
 
                     }    
                 }

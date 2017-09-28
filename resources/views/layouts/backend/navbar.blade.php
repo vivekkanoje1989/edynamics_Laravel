@@ -13,15 +13,15 @@
         <!-- Sidebar Collapse -->
         <div class="sidebar-collapse"></div>
         <!-- /Sidebar Collapse -->
-        <!-- Account Area and Settings --->
+        <!-- Account Area and Settings -->
         <div class="navbar-header pull-right">
             <div class="navbar-account">
                 <ul class="account-area">
-                    <li>
+                    <!--<li>
                         <a class=" dropdown-toggle" data-toggle="dropdown" title="Help" href="#">
                             <i class="icon fa fa-warning"></i>
                         </a>
-                        <!--Notification Dropdown-->
+                        Notification Dropdown
                         <ul class="pull-right dropdown-menu dropdown-arrow dropdown-notifications">
                             <li>
                                 <a href="#">
@@ -97,14 +97,14 @@
                                 </span>
                             </li>
                         </ul>
-                        <!--/Notification Dropdown-->
+                        /Notification Dropdown
                     </li>
                     <li>
                         <a class="dropdown-toggle" data-toggle="dropdown" title="Mails" href="#">
                             <i class="icon fa fa-envelope"></i>
                             <span class="badge">3</span>
                         </a>
-                        <!--Messages Dropdown-->
+                        Messages Dropdown
                         <ul class="pull-right dropdown-menu dropdown-arrow dropdown-messages">
                             <li>
                                 <a href="#">
@@ -164,7 +164,7 @@
                                 </a>
                             </li>
                         </ul>
-                        <!--/Messages Dropdown-->
+                        /Messages Dropdown
                     </li>
 
                     <li>
@@ -172,7 +172,7 @@
                             <i class="icon fa fa-tasks"></i>
                             <span class="badge">4</span>
                         </a>
-                        <!--Tasks Dropdown-->
+                        Tasks Dropdown
                         <ul class="pull-right dropdown-menu dropdown-tasks dropdown-arrow ">
                             <li class="dropdown-header bordered-darkorange">
                                 <i class="fa fa-tasks"></i>
@@ -221,35 +221,36 @@
                                 <button class="btn btn-xs btn-default shiny darkorange icon-only pull-right"><i class="fa fa-check"></i></button>
                             </li>
                         </ul>
-                        <!--/Tasks Dropdown-->
+                        /Tasks Dropdown
                     </li>
                     <li>
                         <a chat-link class="wave in" title="Chat"></a>
-                    </li>
+                    </li>-->
                     <li>
-                        <a class="login-area dropdown-toggle" data-toggle="dropdown">
+                        <a class="login-area dropdown-toggle" data-toggle="dropdown" ng-controller="hrController">
                             <div class="avatar" title="View your public profile">
-                                <img src="/backend/assets/img/avatars/adam-jansen.jpg">
+                                <img ng-if="!imageUrl" src="[[ config('global.s3Path').'/employee-photos/'.Auth::guard('admin')->user()->employee_photo_file_name;]]">
+                                <img ng-if="imageUrl" ng-src="{{imageUrl}}">
                             </div>
                             <section>
-                                <h2><span class="profile"><span>David Stevman</span></span></h2>
+                                <h2><span class="profile"><strong>[[Auth::guard('admin')->user()->first_name;]] [[Auth::guard('admin')->user()->last_name;]]</strong></span></h2>
                             </section>
                         </a>
                         <!--Login Area Dropdown-->
                         <ul class="pull-right dropdown-menu dropdown-arrow dropdown-login-area">
-                            <li class="username"><a>David Stevenson</a></li>
-                            <li class="email"><a>David.Stevenson@live.com</a></li>
+                            <li class="username" ><a>[[Auth::guard('admin')->user()->first_name;]]</a></li>
+                            <li class="email" ><a style="color:black;"><strong>[[Auth::guard('admin')->user()->username;]]</strong></a></li>
                             <!--Avatar Area-->
                             <li>
                                 <div class="avatar-area">
-                                    <img src="/backend/assets/img/avatars/adam-jansen.jpg" class="avatar">
-                                    <span class="caption">Change Photo</span>
+                                    <img ng-if="!imageUrl" src="[[ config('global.s3Path').'/employee-photos/'.Auth::guard('admin')->user()->employee_photo_file_name;]]" class="avatar">
+                                    <img ng-if="imageUrl" ng-src="{{imageUrl}}" class="avatar">
                                 </div>
                             </li>
                             <!--Avatar Area-->
                             <li class="edit">
-                                <a href="profile.html" class="pull-left">Profile</a>
-                                <a href="#" class="pull-right">Setting</a>
+                                <a href="office.php#/user/profile" class="text-center" style="color:black;"><strong>Manage Profile</strong></a>
+                                <!--<a href="#" class="pull-right">Setting</a>-->
                             </li>
                             <!--Theme Selector Area-->
                             <li class="theme-area">
@@ -269,7 +270,7 @@
                                 </ul>
                             </li>
                             <!--/Theme Selector Area-->
-                            <li class="dropdown-footer" ng-controller="adminController">
+                            <li class="dropdown-footer" ng-controller="adminController" >
                                 <a href="" ng-click="logout(logoutData)">
                                     Sign out
                                 </a>
@@ -284,8 +285,10 @@
                     <!--Note: notice that setting div must start right after account area list.
                     no space must be between these elements-->
                     <!-- Settings -->
-                </ul><div class="setting">
-                </div><div class="setting-container">
+                </ul>
+            <!--<div class="setting">
+                </div>-->
+                <div class="setting-container">
                     <label>
                         <input type="checkbox" id="checkbox_fixednavbar" ng-model="settings.fixed.navbar">
                         <span class="text">Fixed Navbar</span>

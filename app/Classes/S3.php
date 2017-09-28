@@ -1,15 +1,9 @@
 <?php
-
+//Manoj new code on 23 Sept 2017
 /*
-
- * Developed By :Uma Shinde(22-03-2017)
- * purpose : Managing images on AWS S3 Buckets
- * 1) s3Configuration() : This function is for s3 configuratio. We can set access key,secret key,region,bucket dynamically from system_configs table.
- * 2) s3FileUplod() : This function will upload image to the s3 bucket with folder name.
- * 3)s3FileDelete() : Delete file from s3 bucket if exist. Pass folder name as parameter to delete file under that folder.
-  This will return true if file exist, otherwise deletes the file and returns false.
- * 4)s3FileLists() :listing all files from bucket. It returns file names in json array.
-
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 
 namespace App\Classes;
@@ -19,160 +13,124 @@ use Config;
 use DB;
 use App\Models\backend\Employee;
 use Auth;
-use App\Http\Requests;
-use Session;
 
 class S3 {
-    /*
-     * s3Configuration function use to set access key,secret key,region,bucket dynamically from system_configs table 
-     * if values are not in session otherwise set from session.
-     */
-
+    // google storage
     public static function s3Configuration() {
-
-        if (Session::has('bucket')) {
-            Config::set('filesystems.disks.s3.bucket', Session::get('bucket'));
-            Config::set('filesystems.disks.s3.secret', Session::get('secretKey'));
-            Config::set('filesystems.disks.s3.key', Session::get('accessKey'));
-            Config::set('filesystems.disks.s3.driver', 's3');
-            Config::set('filesystems.disks.s3.region', Session::get('bucketRegion'));
-        } else {
-            $data = DB::table('system_configs')->where('id', 1)->get();
-            session(['bucket' => $data[0]->aws_bucket_id]);
-            session(['secretKey' => $data[0]->aws_secret_key]);
-            session(['accessKey' => $data[0]->aws_access_key]);
-            session(['bucketRegion' => $data[0]->region]);
-            Config::set('filesystems.disks.s3.bucket', $data[0]->aws_bucket_id);
-            Config::set('filesystems.disks.s3.secret', $data[0]->aws_secret_key);
-            Config::set('filesystems.disks.s3.key', $data[0]->aws_access_key);
-            Config::set('filesystems.disks.s3.driver', 's3');
-            Config::set('filesystems.disks.s3.region', $data[0]->region);
-            // session(['s3Path' => 'https://s3.'.$data[0]->region.'.amazonaws.com/'.$data[0]->aws_bucket_id]);
+       $data = DB::table('system_configs')->where('id', 1)->get();
+       
+     //  Config::set('filesystems.disks.gcs.bucket', $data[0]->aws_bucket_id);
+        //  Config::set('filesystems.disks.gcs.bucket', 'bkt_bms_laravel');
+        Config::set('filesystems.disks.gcs.bucket', 'edynamicsdevelopment');
+        Config::set('filesystems.disks.gcs.project_id','756686641793');
+        Config::set('filesystems.disks.gcs.driver', 'gcs');
+        
     }
-    }
-    /*
-     * s3FileUplod() used for upload file to s3 bucket
-     * parameters-
-     *          1)$image - image file temporary name or pathname
-     *          2)$imageFileName -image file name which we want to upload with extention
-     *          3)$s3FolderName  - folderpath (e.g project/banner-images )
-     *          image name is in the form of modulename_id_fourDigitRandomNumber (e.g - website_10_1234.jpg)
-     * For App-same as above
-     */
 
-    public static function s3FileUplod($image, $imageFileName, $s3FolderName) {
+    public static function s3FileUplod($image, $s3FolderName,$cnt) {
         S3::s3Configuration();
-        $s3 = \Storage::disk('s3');
-        $filePath = '' . $s3FolderName . '/' . $imageFileName;
-        $val = $s3->put($filePath, file_get_contents($image), 'public');
-        if ($val) {
-            $result = ['success' => true, 'message' => 'File Uploaded Successfully'];
-            return json_encode($result);
-        } else {
-            $result = ['success' => false, 'files' => 'File not upload'];
-            return json_encode($result);
+        $name = '';
+        $random = rand(1,1000);
+        //print_r($image);exit;
+        for ($i = 0; $i < $cnt; $i++) {
+            $imageFileName = time().'_'.$random . $i . '.' . $image[$i]->getClientOriginalExtension();
+            $imagePath = $image[$i]->getPathName();
+            
+            $disk = \Storage::disk('gcs');
+            $filePath = '/'.$s3FolderName.'/'. $imageFileName;
+            $disk->put($filePath, file_get_contents($imagePath));
+            
+            $name .= ',' . $imageFileName;
+        }
+        if ($name !== '') {
+            return($name);
         }
     }
-   /*
-    * s3FileDelete() used for delete file from perticular path
-    * return 1 if existed file is delete otherwise return 0
-    */ 
-    public static function s3FileDelete($path) {
+    
+    
+    // google storage
+     public static function s3FileUpload($filepath,$filename, $s3FolderName) {
+        
         S3::s3Configuration();
-        if (\Storage::disk('s3')->exists($path)) {
-            \Storage::disk('s3')->delete($path);
+
+        $name = '';
+        $disk = \Storage::disk('gcs');
+        $s3Path = $s3FolderName.'/'. $filename;
+        $disk->put($s3Path, file_get_contents($filepath));
+        $name = $filename;
+        if ($name !== '') {
+            return($name);
+        }
+    }
+    
+    public static function s3FileUplodForApp($image, $s3FolderName, $cnt) {
+        S3::s3Configuration();
+        //for ($i = 0; $i < $cnt; $i++) {
+        $ext = pathinfo($image['name'], PATHINFO_EXTENSION);
+        $imageFileName = time() . '.' . $ext;
+        $imagePath = $image['tmp_name'];
+        
+        $disk = \Storage::disk('gcs');
+        $filePath = '/'.$s3FolderName.'/'. $imageFileName;
+        $disk->put($filePath, file_get_contents($imagePath));
+        
+        return $imageFileName;
+   }
+
+    public static function s3FileDelete($s3FolderName) {
+      
+        S3::s3Configuration();
+        if (\Storage::disk('gcs')->exists($s3FolderName)) {
+            \Storage::disk('gcs')->delete($s3FolderName);
             return true;
         } else {
             return false;
         }
     }
-
-    /*
-     * 
-     */
-    public static function s3FolderDelete($filepath) {
+    public static function s3FolderDelete($s3FolderName) {
+        
         S3::s3Configuration();
-        $path = '/' . $filepath;
-        if (\Storage::disk('s3')->deleteDirectory($path)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public static function s3FileLists($filename) {
-        S3::s3Configuration();
-        $files = \Storage::disk('s3')->allFiles($filename);
+        $files = \Storage::disk('gcs')->delete($s3FolderName);
         if ($files) {
             $result = ['success' => true, 'files' => $files];
-            return json_encode($result);
         } else {
             $result = ['success' => false, 'message' => 'Something Went Wrong'];
-            return json_encode($result);
         }
+        return json_encode($result);
     }
 
-    public static function s3AllDirectories($path) {
+    public static function s3FileLists($image) {
         S3::s3Configuration();
-        $directories = \Storage::disk('s3')->allDirectories();
-        if ($directories) {
-            $result = ['success' => true, 'directories' => $directories];
-            return json_encode($result);
+        $files = \Storage::disk('gcs')->allFiles($image);
+        if ($files) {
+            $result = ['success' => true, 'files' => $files];
         } else {
             $result = ['success' => false, 'message' => 'Something Went Wrong'];
-            return json_encode($result);
         }
+        return json_encode($result);
     }
-
-    public static function s3CreateDirectory($directory) {
+    public static function s3CreateSubDirectory($newFolder,$mainFolder) {
         S3::s3Configuration();
-        $directories = \Storage::disk('s3')->makeDirectory($directory);
-        //$directories = \Storage::disk('s3')->allDirectories();
-        if ($directories) {
-            $result = ['success' => true, 'directory' => $directories];
-            return json_encode($result);
+        $folder = $newFolder."/".$mainFolder;
+       
+        $files = \Storage::disk('gcs')->makeDirectory($folder);
+        if ($files) {
+            $result = ['success' => true, 'files' => $files];
         } else {
             $result = ['success' => false, 'message' => 'Something Went Wrong'];
-            return json_encode($result);
         }
+        return json_encode($result);
+
     }
-
-    public static function s3DeleteDirectory($directory) {
+    public static function s3CreateDirectory($newFolder) {
         S3::s3Configuration();
-        $directories = \Storage::disk('s3')->deleteDirectory($directory);
-        if ($directories) {
-            $result = ['success' => true, 'directory' => $directories];
-            return json_encode($result);
+        $files = \Storage::disk('gcs')->makeDirectory($newFolder);
+        if ($files) {
+            $result = ['success' => true, 'files' => $files];
         } else {
             $result = ['success' => false, 'message' => 'Something Went Wrong'];
-            return json_encode($result);
         }
-    }
-
-    public static function s3CreateSubDirectory($foldername, $directory) {
-        S3::s3Configuration();
-        $s3 = \Storage::disk('s3');
-        $filePath = '/' . $foldername . '/' . $directory;
-        $directories = $s3->put($directory, $filePath, 'public');
-        if ($directories) {
-            $result = ['success' => true, 'files' => $directories];
-            return json_encode($result);
-        } else {
-            $result = ['success' => false, 'message' => 'Something Went Wrong'];
-            return json_encode($result);
-        }
-    }
-
-    public static function s3DirectoryLists() {
-        S3::s3Configuration();
-        $directories = \Storage::disk('s3')->allDirectories();
-        if ($directories) {
-            $result = ['success' => true, 'directories' => $directories];
-            return json_encode($result);
-        } else {
-            $result = ['success' => false, 'message' => 'Something Went Wrong'];
-            return json_encode($result);
-        }
+        return json_encode($result);
     }
 
 }

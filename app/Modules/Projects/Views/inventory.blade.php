@@ -1,19 +1,20 @@
-<div class="row" ng-controller="wingCtrl">
+<div class="row" >
     <div class="col-lg-12 col-sm-12 col-xs-12">
-        <tabset class="tabs-left" >
-            <tab ng-repeat="wlist in wingList" heading="{{wlist.wing_name}}" class="themeprimary">
+        <div ng-if="notFound">No wings found</div>
+        <tabset class="tabs-left" ng-show="wingList">
+            <tab ng-repeat="wlist in wingList" heading="{{wlist.wing_name}}" ng-click="getInventoryDetails({{wlist.id}})" class="themeprimary">
                 <div class="row">
-                    <form novalidate role="form" name="inventoryInfoForm" ng-submit="saveBasicInfo(inventoryData, projectImages)">
+                    <form role="form" name="inventoryInfoForm" ng-submit="saveInventoryInfo(wlist.id,inventoryData)" novalidate>
+                        <input type="hidden" ng-model="inventoryInfoForm.csrfToken" name="csrftoken" ng-init="inventoryInfoForm.csrfToken = '<?php echo csrf_token(); ?>'" class="form-control">
                         <div class="row">
                             <div class="col-lg-12 col-sm-12 col-xs-12">
                                 <div class="col-sm-3 col-sx-6">
                                     <div class="form-group">
                                         <label for="">Block Type<span class="sp-err">*</span></label>
                                         <span class="input-icon icon-right">
-                                            <input type="hidden" ng-model="inventoryData.wing_id" name="wing_id" value="{{wlist.id}}"/>
-                                            <select ng-model="inventoryData.block_type_id" ng-controller="blockTypeCtrl" name="block_type_id" class="form-control" required>
+                                            <select ng-model="inventoryData.block_type_id" name="block_type_id" class="form-control" required>
                                                 <option value="">Select block type</option>
-                                                <option ng-repeat="t in titles track by $index" value="{{t.id}}" ng-selected="{{ t.id == inventoryData.title_id}}">{{t.title}}</option>
+                                                <option ng-repeat="t in blockList track by $index" value="{{t.get_block_type[0].id}}" ng-selected="{{ t.get_block_type[0].id == inventoryData.block_name}}">{{t.get_block_type[0].block_name}}</option>
                                             </select>
                                             <i class="fa fa-sort-desc"></i> 
                                             <div ng-show="sbtBtn" ng-messages="inventoryInfoForm.block_type_id.$error" class="help-block">
@@ -61,7 +62,7 @@
                                     <div class="form-group">
                                         <label for="">Carpet area in sqft</label>
                                         <span class="input-icon icon-right">
-                                            <input type="text" class="form-control" ng-model="inventoryData.carpet_area_in_sqft" name="carpet_area_in_sqft">
+                                            <input type="text" class="form-control" ng-model="inventoryData.carpet_area_in_sqft" name="carpet_area_in_sqft" oninput="if (/[^\d\.]/g.test(this.value)) this.value = this.value.replace(/[^\d\.]/g,'')">
                                             <i class="fa fa-crosshairs"></i>
                                         </span>
                                     </div>
@@ -170,7 +171,7 @@
                                     <div class="form-group">
                                         <label for="">Other1 label</label>
                                         <span class="input-icon icon-right">
-                                            <input type="text" class="form-control" ng-model="inventoryData.other1_label" name="other1_label">
+                                            <input type="text" class="form-control" ng-model="inventoryData.other1_label" name="other1_label" capitalizeFirst oninput="if (/[^A-Za-z ]/g.test(this.value)) this.value = this.value.replace(/[^A-Za-z ]/g,'')">
                                             <i class="fa fa-crosshairs"></i>
                                         </span>
                                     </div>
@@ -201,7 +202,7 @@
                                     <div class="form-group">
                                         <label for="">Other2 label</label>
                                         <span class="input-icon icon-right">
-                                            <input type="text" class="form-control" ng-model="inventoryData.other2_label" name="other2_label">
+                                            <input type="text" class="form-control" ng-model="inventoryData.other2_label" name="other2_label" capitalizeFirst oninput="if (/[^A-Za-z ]/g.test(this.value)) this.value = this.value.replace(/[^A-Za-z ]/g,'')">
                                             <i class="fa fa-crosshairs"></i>
                                         </span>
                                     </div>
@@ -232,7 +233,7 @@
                                     <div class="form-group">
                                         <label for="">Other3 label</label>
                                         <span class="input-icon icon-right">
-                                            <input type="text" class="form-control" ng-model="inventoryData.other3_label" name="other3_label">
+                                            <input type="text" class="form-control" ng-model="inventoryData.other3_label" name="other3_label" capitalizeFirst oninput="if (/[^A-Za-z ]/g.test(this.value)) this.value = this.value.replace(/[^A-Za-z ]/g,'')">
                                             <i class="fa fa-crosshairs"></i>
                                         </span>
                                     </div>

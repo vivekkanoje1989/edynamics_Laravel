@@ -1,9 +1,10 @@
 <?php
 
-Route::group(array('module' => 'HighestEducation', 'namespace' => 'App\Modules\HighestEducation\Controllers'), function() {
+Route::group(array('module' => 'HighestEducation','middleware' => ['auth:admin'], 'namespace' => 'App\Modules\HighestEducation\Controllers'), function() {
 
      $getUrl = config('global.getUrl');
-    Route::resource($getUrl .'/highest-education', 'HighestEducationController');
-    Route::post($getUrl . '/highest-education/manageHighestEducation','HighestEducationController@manageHighestEducation');
+    Route::get('/highest-education/exportToxls', 'HighestEducationController@exportToxls');
+    Route::resource('/highest-education', 'HighestEducationController');
+    Route::post('/highest-education/manageHighestEducation','HighestEducationController@manageHighestEducation');
 });	
 

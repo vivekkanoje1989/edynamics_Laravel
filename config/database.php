@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | PDO Fetch Style
@@ -64,44 +63,83 @@ return [
             'prefix' => '',
             'strict' => true,
             'engine' => null,
-        ],*/
+        ],*/ 
+        
         'masterdb' => [
             'read' => [
-                'host' => '192.168.0.150',
+                'host' => '192.168.0.104',
             ],
             'write' => [
-                'host' => '192.168.0.150'
+                'host' => '192.168.0.104',
             ],
             'driver' => 'mysql',
             'port' => 3306,
             'database' => 'laravel_developement_master_edynamics',
-            'username' => 'bmsbuilder',
-            'password' => 'bms123',
+            'username' =>  'root',
+            'password' => 'root',
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
             'strict' => false,
             'engine' => null,
         ],
+
+        // 'masterdb' => [
+        //     'read' => [
+        //         'host' => 'localhost',
+        //     ],
+        //     'write' => [
+        //         'host' => 'localhost',
+        //     ],
+        //     'driver' => 'mysql',
+        //     'port' => 3306,
+        //     'database' => 'laravel_developement_master_edynamics',
+        //     'username' =>  'root',
+        //     'password' => '',
+        //     'charset' => 'utf8',
+        //     'collation' => 'utf8_unicode_ci',
+        //     'prefix' => '',
+        //     'strict' => false,
+        //     'engine' => null,
+        // ],
         
         'mysql' => [
             'read' => [
-                'host' => '192.168.0.150',
+                'host' => '192.168.0.104',
             ],
             'write' => [
-                'host' => '192.168.0.150'
+                'host' => '192.168.0.104'
             ],
             'driver' => 'mysql',
             'port' => 3306,
             'database' => 'laravel_developement_edynamics',
-            'username' => 'bmsbuilder',
-            'password' => 'bms123',
+            'username' => 'root',
+            'password' => 'root',
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
             'strict' => false,
             'engine' => null,
         ],
+
+        // 'mysql' => [
+        //     'read' => [
+        //         'host' => 'localhost',
+        //     ],
+        //     'write' => [
+        //         'host' => 'localhost'
+        //     ],
+        //     'driver' => 'mysql',
+        //     'port' => 3306,
+        //     'database' => 'laravel_developement_edynamics',
+        //     'username' => 'root',
+        //     'password' => '',
+        //     'charset' => 'utf8',
+        //     'collation' => 'utf8_unicode_ci',
+        //     'prefix' => '',
+        //     'strict' => false,
+        //     'engine' => null,
+        // ],
 
         'pgsql' => [
             'driver' => 'pgsql',

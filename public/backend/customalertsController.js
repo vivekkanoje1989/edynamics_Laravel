@@ -1,15 +1,21 @@
 'use strict';
-app.controller('customalertsController', ['$rootScope', '$scope', '$state', 'Data', '$filter', 'Upload', '$timeout', function ($rootScope, $scope, $state, Data, $filter, Upload, $timeout) {
-    $scope.pageHeading = 'Create Custome Alert';
+app.controller('customalertsController', ['$rootScope', '$scope', '$state', 'Data', '$filter', 'Upload', '$timeout','toaster', function ($rootScope, $scope, $state, Data, $filter, Upload, $timeout,toaster) {
+    $scope.pageHeading = 'Create Custom Template';
     $scope.buttonLabel = 'Create';
     $scope.customAlertData = {};
     $scope.listcustomAlerts = [];
     $scope.templateEvents = [];
     $scope.isDisabled = false;
     $scope.customAlertData.client_id = 1;
-    $scope.currentPage =  $scope.itemsPerPage = 10; 
+    $scope.currentPage =  $scope.itemsPerPage = 30; 
     $scope.noOfRows = 1;
    
+    $scope.pageNumber = 1;
+    $scope.pageChanged = function (pageNo, functionName,id, type, pageNumber) { 
+        $scope[functionName](id, type, pageNumber, $scope.itemsPerPage);
+        $scope.pageNumber = pageNo;
+    };
+    
     $scope.getTemplatesEvents = function(){
         Data.post('alerts/getTemplatesEvents').then(function (response) {
             if (!response.success) {
@@ -21,20 +27,20 @@ app.controller('customalertsController', ['$rootScope', '$scope', '$state', 'Dat
     };
     $scope.createAlert = function (enteredData, alterId) {
         var customAlertData = {};        
+        $scope.isDisabled = true;
         customAlertData = angular.fromJson(angular.toJson(enteredData));
         if(alterId === 0)
         {          
            Data.post('customalerts/', {
                 customAlertData:customAlertData}).then(function (response) {
-                console.log(response)
+                $scope.isDisabled = false;
                 if (!response.success)
                 {
-                    $scope.errorMsg = response.errormsg;
+                    toaster.pop('error', 'Custom Template', response.message);
                 } else {
-                    $rootScope.alert('success', response.message);
-                    $('.alert-delay').delay(3000).fadeOut("slow");
+                    toaster.pop('success', 'Custom Template', response.message);
                     $timeout(function(){
-                        $state.go(getUrl+'.customalertsIndex');
+                        $state.go('customalertsIndex');
                     }, 1000);
                 }
             }); 
@@ -42,25 +48,25 @@ app.controller('customalertsController', ['$rootScope', '$scope', '$state', 'Dat
         else{
             Data.post('customalerts/updateCustomAlerts', {
                 customAlertData:customAlertData, id: alterId}).then(function (response) {
-                console.log(response)
+                $scope.isDisabled = false;
                 if (!response.success)
                 {
-                    $scope.errorMsg = response.errormsg;
+                    toaster.pop('error', 'Custom Template', response.message);
                 } else {
-                    $rootScope.alert('success', response.message);
-                    $('.alert-delay').delay(3000).fadeOut("slow");
+                    toaster.pop('success', 'Custom Template', response.message);
                     $timeout(function(){
-                        $state.go(getUrl+'.customalertsIndex');
+                        $state.go('customalertsIndex');
                     }, 1000);
                 }
             });
         }
     };
     
-    $scope.manageAlerts = function (id,action) { //edit/index action
+    $scope.manageAlerts = function (id,action, pageNumber= '', itemPerPage = '') { //edit/index action
         $scope.modal = {};
+            $scope.showloader();
         Data.post('customalerts/manageCustomAlerts',{
-            id: id,
+            id: id,pageNumber: pageNumber, itemPerPage: itemPerPage,
         }).then(function (response) {
             if (response.success) {
                 if(action === 'index'){
@@ -69,7 +75,7 @@ app.controller('customalertsController', ['$rootScope', '$scope', '$state', 'Dat
                 }
                 else if(action === 'edit'){
                     if(id !== '0'){
-                        $scope.pageHeading = 'Edit Custome Alert';
+                        $scope.pageHeading = 'Update Custom Template';
                         $scope.buttonLabel = 'Update';
                         $scope.isDisabled =true;
                         $scope.customAlertData = angular.copy(response.records.data[0]);
@@ -78,6 +84,7 @@ app.controller('customalertsController', ['$rootScope', '$scope', '$state', 'Dat
             } else {
                 $scope.errorMsg = response.message;
             }
+            $scope.hideloader();
         });
     };
 
@@ -93,6 +100,7 @@ app.directive('ckEditor', function() {
         link : function($scope, elm, attr, ngModel) {
 
             var ck = CKEDITOR.replace(elm[0]);
+           
 
             ck.on('instanceReady', function() {
                 ck.setData(ngModel.$viewValue);

@@ -10,6 +10,7 @@ Route::group(array('module' => 'CloudTelephony', 'namespace' => 'App\Modules\Clo
     Route::get($getUrl.'/getCtforwardingtypes', 'VirtualNumberController@getCtforwardingtypes');
     Route::post($getUrl.'/virtualnumber/getEmployeelist', 'VirtualNumberController@getEmployeelist');
     Route::post($getUrl.'/virtualnumber/getSubsources', 'VirtualNumberController@getSubsources');
+    Route::post($getUrl.'/virtualnumber/getSources', 'VirtualNumberController@getSources');
     Route::resource($getUrl.'/extensionmenu', 'ExtensionMenuController');
     Route::post($getUrl.'/extensionmenu/manageextLists', 'ExtensionMenuController@manageextLists');
     Route::post($getUrl.'/extensionmenu/manageextUpdate', 'ExtensionMenuController@manageextUpdate');

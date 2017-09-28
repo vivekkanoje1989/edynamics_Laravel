@@ -1,9 +1,11 @@
 <?php
 
-Route::group(array('module' => 'EmailConfig', 'middleware' => ['web'], 'namespace' => 'App\Modules\EmailConfig\Controllers'), function() {
+Route::group(array('module' => 'EmailConfig', 'middleware' => ['auth:admin'], 'namespace' => 'App\Modules\EmailConfig\Controllers'), function() {
     $getUrl = config('global.getUrl');
-    Route::get($getUrl . '/email-config/getDepartments', 'EmailConfigController@getDepartments');
-    Route::resource($getUrl . '/email-config', 'EmailConfigController');
-    Route::post($getUrl . '/email-config/manageEmails', 'EmailConfigController@manageEmails');
-    Route::post($getUrl . '/email-config/testEmail', 'EmailConfigController@testEmail');
+    Route::post('/email-config/getdeptsel', 'EmailConfigController@getdeptsel');   
+    Route::get('/email-config/getDepartments', 'EmailConfigController@getDepartments');   
+    Route::post('/email-config/manageEmails', 'EmailConfigController@manageEmails');
+    Route::post('/email-config/testEmail', 'EmailConfigController@testEmail');
+    Route::get('/email-config/exportToxls', 'EmailConfigController@exportToxls');
+    Route::resource('/email-config', 'EmailConfigController');
 });

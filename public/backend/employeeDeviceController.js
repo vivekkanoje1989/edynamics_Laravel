@@ -1,7 +1,29 @@
 'use strict';
-app.controller('empDeviceController', ['$rootScope', '$scope', '$state', 'Data', '$filter', 'Upload', '$timeout', '$parse', 'toaster', function ($rootScope, $scope, $state, Data, $filter, Upload, $timeout, $parse, toaster) {
-        $scope.currentPage = $scope.itemsPerPage = 4;
+app.controller('empDeviceController', ['$scope', '$state', 'Data', 'toaster', '$parse', function ($scope, $state, Data, toaster, $parse) {
+        $scope.itemsPerPage = 30;
         $scope.noOfRows = 1;
+
+        $scope.pageChangeHandler = function (num) {
+            $scope.noOfRows = num;
+            $scope.currentPage = num * $scope.itemsPerPage;
+        };
+
+        $scope.searchDetails = {};
+        $scope.searchData = {};
+
+        $scope.filterDetails = function (search) {
+//            $scope.searchDetails = {};
+            $scope.searchData = search;
+            $('#showFilterModal').modal('hide');
+        }
+        $scope.removeFilterData = function (keyvalue) {
+            delete $scope.searchData[keyvalue];
+            $scope.filterDetails($scope.searchData);
+        }
+        $scope.closeModal = function () {
+            $scope.searchData = {};
+        }
+
 
         $scope.manageDevice = function (id, action)
         {
@@ -15,14 +37,25 @@ app.controller('empDeviceController', ['$rootScope', '$scope', '$state', 'Data',
                 if (id > 0)
                 {
                     $scope.btnLable = 'Save'
+                    $scope.heading = 'Update Device Information'
                     $scope.deviceData = angular.copy(response.records[0]);
                 }
                 if (id === 0)
                 {
+                    $scope.heading = 'Add Device Information'
                     $scope.btnLable = 'Create';
                 }
             })
         }
+//        $scope.checkemployee = function () {
+//            if ($scope.deviceData.employee_id.length === 0) {
+//                $scope.emptyEmpId = true;
+//                $scope.applyClassEmp = 'ng-active';
+//            } else {
+//                $scope.emptyEmpId = false;
+//                $scope.applyClassEmp = 'ng-inactive';
+//            }
+//        };
 
         $scope.saveDeviceConfig = function (id, data)
         {
@@ -33,11 +66,18 @@ app.controller('empDeviceController', ['$rootScope', '$scope', '$state', 'Data',
                 }).then(function (response) {
                     if (!response.success)
                     {
-                        toaster.pop('error', 'Employee Device', 'Something went wrong.');
+                        var obj = response.message;
+                        var selector = [];
+                        for (var key in obj) {
+                            var model = $parse(key);// Get the model
+                            model.assign($scope, obj[key][0]);// Assigns a value to it
+                            selector.push(key);
+
+                        }
                     } else
                     {
                         toaster.pop('success', 'Employee Device', 'Device Added successfully.');
-                        $state.go(getUrl + '.employeeDeviceIndex');
+                        $state.go('employeeDeviceIndex');
                     }
                 })
             } else
@@ -51,7 +91,7 @@ app.controller('empDeviceController', ['$rootScope', '$scope', '$state', 'Data',
                     } else
                     {
                         toaster.pop('success', 'Employee Device', 'Device updated successfully.');
-                        $state.go(getUrl + '.employeeDeviceIndex');
+                        $state.go('employeeDeviceIndex');
 
                     }
                 })

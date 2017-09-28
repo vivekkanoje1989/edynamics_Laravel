@@ -14,7 +14,6 @@
     <div class="row">
         <div class="col-lg-12 col-sm-12 col-xs-12">
             <h5 class="row-title before-themeprimary"><i class="fa  fa-arrow-circle-o-right themeprimary"></i>{{ pageHeading}}</h5>
-            <!--<button type="button" class="btn btn-primary" ng-disabled="disableCreateButton" ng-click="checkFlash()">click</button>-->
             <div id="WiredWizard" class="wizard wizard-wired" data-target="#WiredWizardsteps">
                 <ul class="steps">
                     <li class="wiredstep1 active"><span class="step">1</span><span class="title">Step 1</span><span class="chevron"></span></li>
@@ -492,7 +491,7 @@
                         </div>
                         <div class="col-sm-3 col-xs-6">
                             <div class="form-group">
-                                <label for=""> Education Details</label>
+                                <label for=""> Education DetailsK</label>
                                 <span class="input-icon icon-right">
                                     <input type="text" ng-model="userData.education_details" name="education_details" class="form-control">
                                     <i class="fa fa-university"></i>
@@ -509,7 +508,7 @@
                                         <div ng-message="required">This field is required.</div>
                                         <i ng-show="userForm.emp_photo_url.$error.maxSize">File too large {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
                                     </div>
-                                </span>                                                   
+                                </span>                                                  
                             </div>
                         </div>
                         <div class="col-sm-3 col-xs-6">

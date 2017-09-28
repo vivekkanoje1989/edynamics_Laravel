@@ -20,9 +20,9 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class MlstBloodGroups extends Eloquent
 {
 	protected $primaryKey = 'blood_group_id';
-	 protected $connection = 'masterdb';
-         public $table = 'mlst_blood_groups';
-         public $incrementing = false;
+	protected $connection = 'masterdb';
+    public $table = 'mlst_blood_groups';
+    public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
@@ -31,12 +31,24 @@ class MlstBloodGroups extends Eloquent
 
 	protected $fillable = [
 		'blood_group',
-                'created_date',
-                'created_at',
-                'created_by',
-                'created_IP',
-                'created_browser',
-                'created_mac_id',
+        'created_date',
+        'created_at',
+        'created_by',
+        'created_IP',
+        'created_browser',
+		'created_mac_id',
+		'updated_date',
+		'updated_at',
+		'updated_by',
+		'updated_IP',
+		'updated_browser',
+		'updated_mac_id',
+		'deleted_status',
+		'deleted_date',
+		'deleted_by',
+		'deleted_IP',
+		'deleted_browser',
+		'deleted_mac_id',
 	];
 
     

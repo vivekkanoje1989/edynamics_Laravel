@@ -1,6 +1,4 @@
-<?php
-
-namespace App\Modules\EnquiryLocations\Models;
+<?php namespace App\Modules\EnquiryLocations\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,4 +26,8 @@ class lstEnquiryLocations extends Model {
         'updated_mac_id',
     ];
 
+    public function getCityName()
+    {
+        return $this->belongsTo('App\Modules\ManageCity\Models\MlstCities','city_id');
+    }
 }

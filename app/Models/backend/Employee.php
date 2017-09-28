@@ -26,7 +26,6 @@ use Illuminate\Hashing\HashServiceProvider;
  * @property int $password_changed
  * @property string $mobile_remember_token
  * @property string $remember_token
- * @property string $usertype
  * @property int $team_lead_id
  * @property string $designation_id
  * @property string $department_id
@@ -148,7 +147,6 @@ class Employee extends Authenticatable {
         'high_security_password',
         'password_changed',
         'remember_token',
-        'usertype',
         'team_lead_id',
         'designation_id',
         'department_id',
@@ -215,22 +213,46 @@ class Employee extends Authenticatable {
         return json_decode($getEmployeeRecords);
     }
 
-    public static function validationMessages() {
+    public static function validationStep1() {
         $messages = array(
-            'username.required' => 'Please enter user name',
-            'username.numeric' => 'Please enter user name numeric',
-            'password.numeric' => 'Please enter password numeric',
-            'password.required' => 'Please enter password',
-            'designation_id.required' => 'Please enter designation_id',
-            'department_id.required' => 'Please enter department',
-//            'reporting_to_id.required' => 'Please enter reporting to',
             'title_id.required' => 'Please enter title_id',
             'first_name.required' => 'Please enter first name',
             'last_name.required' => 'Please enter last name',
-            'date_of_birth.required' => 'Please enter birth date',
             'gender_id.required' => 'Please enter gender_id',
             'marital_status.required' => 'Please enter marital status',
             'physic_status.required' => 'Please enter physic status',
+        );
+        return $messages;
+    }
+
+    public static function validationRulesstep1() {
+        $rules = array(
+            'title_id' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'gender_id' => 'required',
+            'marital_status' => 'required',
+            'physic_status' => 'required',
+        );
+        return $rules;
+    }
+
+    public static function validationStep2() {
+        $messages = array(
+            //  'username.required' => 'Please enter user name',
+            // 'username.numeric' => 'Please enter user name numeric',
+            //'password.numeric' => 'Please enter password numeric',
+            //'password.required' => 'Please enter password',
+            // 'designation_id.required' => 'Please enter designation_id',
+            //    'department_id.required' => 'Please enter department',
+//            'reporting_to_id.required' => 'Please enter reporting to',
+            // 'title_id.required' => 'Please enter title_id',
+            //  'first_name.required' => 'Please enter first name',
+            //  'last_name.required' => 'Please enter last name',
+            // 'date_of_birth.required' => 'Please enter birth date',
+            //  'gender_id.required' => 'Please enter gender_id',
+            //   'marital_status.required' => 'Please enter marital status',
+            //   'physic_status.required' => 'Please enter physic status',
             'personal_mobile1.required' => 'Please enter personal mobile number',
             'office_mobile_no.required' => 'Please enter office mobile number',
             'current_country_id.required' => 'Please enter current country',
@@ -243,8 +265,128 @@ class Employee extends Authenticatable {
             'permenent_city_id' => 'Please enter permenent city',
             'permenent_pin' => 'Please enter permenent pin code',
             'permenent_address' => 'Please enter permenent address',
+                //  'highest_education_id' => 'Please enter highest education',
+                //  'joining_date' => 'Please enter joining date'
+        );
+        return $messages;
+    }
+
+    public static function validationRulesstep2() {
+        $rules = array(
+            // 'username' => 'required|numeric',
+            //'password' => 'required|max:6',
+            // 'designation_id' => 'required',
+            //'department_id' => 'required',
+//            'reporting_to_id' => 'required',
+            // 'title_id' => 'required',
+            // 'first_name' => 'required',
+            //'last_name' => 'required',
+            // 'date_of_birth' => 'required|date',
+            // 'gender_id' => 'required',
+            // 'marital_status' => 'required',
+            // //'blood_group_id' => 'required',
+            // 'physic_status' => 'required',
+            'personal_mobile1' => 'required',
+            //  'office_mobile_no' => 'required',
+            'personal_email1' => 'required|email',
+            'current_country_id' => 'required',
+            'current_state_id' => 'required',
+            'current_city_id' => 'required',
+            'current_pin' => 'required',
+            'current_address' => 'required',
+            'permenent_country_id' => 'required',
+            'permenent_state_id' => 'required',
+            'permenent_city_id' => 'required',
+            'permenent_pin' => 'required',
+            'permenent_address' => 'required',
+                //   'highest_education_id' => 'required',
+                //  'joining_date' => 'required|date',
+        );
+        return $rules;
+    }
+
+    public static function validationStep3() {
+        $messages = array(
             'highest_education_id' => 'Please enter highest education',
+        );
+        return $messages;
+    }
+
+    public static function validationRulesstep3() {
+        $rules = array(
+            'highest_education_id' => 'required',
+        );
+        return $rules;
+    }
+
+    public static function validationStep4() {
+        $messages = array(
+            'designation_id.required' => 'Please enter designation_id',
+            'department_id.required' => 'Please enter department',
             'joining_date' => 'Please enter joining date'
+        );
+        return $messages;
+    }
+
+    public static function validationRulesstep4() {
+        $rules = array(
+            'designation_id' => 'required',
+            'department_id' => 'required',
+            'joining_date' => 'required|date',
+        );
+        return $rules;
+    }
+
+    public static function validationStep5() {
+        $messages = array(
+            'high_security_password_type.required' => 'Please select High security password type',
+            'show_on_homepage.required' => 'Please select Display on website',
+        );
+        return $messages;
+    }
+    
+    public static function validationRulesstep5() {
+        $rules = array(
+            'high_security_password_type' => 'required',
+            'show_on_homepage' => 'required',
+        );
+        return $rules;
+    }
+    
+    
+     public static function validationMessages() {
+        $messages = array(
+            'username.required' => 'Please enter user name',
+            'username.numeric' => 'Please enter user name numeric',
+            'password.numeric' => 'Please enter password numeric',
+//            'password.required' => 'Please enter password',
+            'designation_id.required' => 'Please enter designation_id',
+            'department_id.required' => 'Please enter department',
+            'team_lead_id.required' => 'Please select team lead',
+            'reporting_to_id.required' => 'Please enter reporting to',
+            'title_id.required' => 'Please enter title_id',
+            'first_name.required' => 'Please enter first name',
+            'last_name.required' => 'Please enter last name',
+            'date_of_birth.required' => 'Please enter birth date',
+            'gender_id.required' => 'Please enter gender_id',
+            'blood_group_id.required' => 'Please select blood group.',
+            'marital_status.required' => 'Please select marital status.',
+            'physic_status.required' => 'Please select physic status.',
+            'personal_mobile1.required' => 'Please enter personal mobile number.',
+            'office_mobile_no.required' => 'Please enter office mobile number.',
+            'personal_email1.required' => 'Please enter email.',
+            'current_country_id.required' => 'Please enter current country.',
+            'current_state_id.required' => 'Please enter current state.',
+            'current_city_id.required' => 'Please enter current city.',
+            'current_pin.required' => 'Please enter current pin code.',
+            'current_address.required' => 'Please enter current address.',
+            'permenent_country_id.required' => 'Please enter permenent country.',
+            'permenent_state_id' => 'Please enter permenent state.',
+            'permenent_city_id' => 'Please enter permenent city.',
+            'permenent_pin' => 'Please enter permenent pin code.',
+            'permenent_address' => 'Please enter permenent address.',
+            'highest_education_id' => 'Please enter highest education.',
+            'joining_date' => 'Please enter joining date.'
         );
         return $messages;
     }
@@ -252,10 +394,11 @@ class Employee extends Authenticatable {
     public static function validationRules() {
         $rules = array(
             'username' => 'required|numeric',
-            'password' => 'required|max:6',
+//            'password' => 'required|max:6',
             'designation_id' => 'required',
             'department_id' => 'required',
-//            'reporting_to_id' => 'required',
+            'team_lead_id' => 'required',
+            'reporting_to_id' => 'required',
             'title_id' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
@@ -283,10 +426,48 @@ class Employee extends Authenticatable {
         return $rules;
     }
     
-    public function designationName()
-    {
-        return $this->belongsTo('App\Models\MlstBmsbDesignation', 'id')->where("employees.designation_id", 'id'); //(designation model name, primary of designation model) 
+     public static function validationRulesQuick() {
+        $rules = array(
+            
+            'designation_id' => 'required',
+            'department_id' => 'required',
+            'team_lead_id' => 'required',
+            'reporting_to_id' => 'required',
+            'title_id' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'personal_mobile1' => 'required',
+            'personal_email1' => 'required|email|unique:employees',
+            'joining_date' => 'required|date',
+        );
+        return $rules;
     }
+    
+     public static function validationMessagesQuick() {
+        $messages = array(
+            
+            'designation_id.required' => 'Please enter designation_id',
+            'department_id.required' => 'Please enter department',
+            'team_lead_id.required' => 'Please select team lead',
+            'reporting_to_id.required' => 'Please enter reporting to',
+            'title_id.required' => 'Please enter title_id',
+            'first_name.required' => 'Please enter first name',
+            'last_name.required' => 'Please enter last name',
+            'personal_mobile1.required' => 'Please enter personal mobile number.',
+            'personal_email1.required' => 'Please enter email.',
+            'joining_date' => 'Please enter joining date.'
+        );
+        return $messages;
+    }
+
+      public function designationName() {
+        //return $this->belongsTo('App\Models\MlstLmsaDesignation', 'id'); //(designation model name, primary of designation model) 
+        return $this->belongsTo('App\Models\MlstBmsbDesignation', 'designation_id')->select('id','designation');
+    }
+//    public function designationName()
+//    {
+//        return $this->belongsTo('App\Models\MlstBmsbDesignation', 'id')->where("employees.designation_id", 'id'); //(designation model name, primary of designation model) 
+//    }
     
     public static function doAction($input) {
         if (!empty($input['userData']['departmentid'])) {
@@ -317,28 +498,28 @@ class Employee extends Authenticatable {
         }
         $input['userData']['physic_desc'] = !empty($input['userData']['physic_desc']) ? $input['userData']['physic_desc'] : NULL;
 
-        $personalMobileNo1 = explode("-", $input['userData']['personal_mobile1']);
-        $input['userData']['personal_mobile1_calling_code'] = (int) $personalMobileNo1[0];
-        $input['userData']['personal_mobile1'] = $personalMobileNo1[1];
+//        $personalMobileNo1 = explode("-", $input['userData']['personal_mobile1']);
+//        $input['userData']['personal_mobile1_calling_code'] = (int) $personalMobileNo1[0];
+//        $input['userData']['personal_mobile1'] = $personalMobileNo1[1];
 
-        if (!empty($input['userData']['personal_mobile2'])) {
-            $personalMobileNo2 = explode("-", $input['userData']['personal_mobile2']);
-            $input['userData']['personal_mobile2_calling_code'] = (int) $personalMobileNo2[0];
-            $input['userData']['personal_mobile2'] = !empty($personalMobileNo2[1]) ? $personalMobileNo2[1] : NULL;
-            $input['userData']['personal_mobile2_calling_code'] = !empty($input['userData']['personal_mobile2']) ? $input['userData']['personal_mobile2_calling_code'] : NULL;
-        }
-
-        if (!empty($input['userData']['office_mobile_no'])) {
-            $officeMobileNo = explode("-", $input['userData']['office_mobile_no']);
-            $input['userData']['office_mobile_calling_code'] = (int) $officeMobileNo[0];
-            $input['userData']['office_mobile_no'] = $officeMobileNo[1];
-        }
-
-        if (!empty($input['userData']['personal_landline_no'])) {
-            $landlineNo = explode("-", $input['userData']['personal_landline_no']);
-            $input['userData']['personal_landline_calling_code'] = !empty($landlineNo[1]) ? (int) $landlineNo[0] : NULL;
-            $input['userData']['personal_landline_no'] = (!empty($landlineNo[1])) ? $landlineNo[1] : "";
-        }
+//        if (!empty($input['userData']['personal_mobile2'])) {
+//            $personalMobileNo2 = explode("-", $input['userData']['personal_mobile2']);
+//            $input['userData']['personal_mobile2_calling_code'] = (int) $personalMobileNo2[0];
+//            $input['userData']['personal_mobile2'] = !empty($personalMobileNo2[1]) ? $personalMobileNo2[1] : NULL;
+//            $input['userData']['personal_mobile2_calling_code'] = !empty($input['userData']['personal_mobile2']) ? $input['userData']['personal_mobile2_calling_code'] : NULL;
+//        }
+//
+//        if (!empty($input['userData']['office_mobile_no'])) {
+//            $officeMobileNo = explode("-", $input['userData']['office_mobile_no']);
+//            $input['userData']['office_mobile_calling_code'] = (int) $officeMobileNo[0];
+//            $input['userData']['office_mobile_no'] = $officeMobileNo[1];
+//        }
+//
+//        if (!empty($input['userData']['personal_landline_no'])) {
+//            $landlineNo = explode("-", $input['userData']['personal_landline_no']);
+//            $input['userData']['personal_landline_calling_code'] = !empty($landlineNo[1]) ? (int) $landlineNo[0] : NULL;
+//            $input['userData']['personal_landline_no'] = (!empty($landlineNo[1])) ? $landlineNo[1] : "";
+//        }
         $input['userData']['education_details'] = !empty($input['userData']['education_details']) ? $input['userData']['education_details'] : "";
         $input['userData']['show_on_homepage'] = !empty($input['userData']['show_on_homepage']) ? $input['userData']['show_on_homepage'] : "1";
         $input['userData']['employee_submenus'] = !empty($input['userData']['employee_submenus']) ? $input['userData']['employee_submenus'] : '[]';

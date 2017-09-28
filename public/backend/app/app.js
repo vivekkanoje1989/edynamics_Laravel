@@ -14,8 +14,11 @@ var app = angular.module('app', [
     'oc.lazyLoad',
     'ngMessages',
     'angularUtils.directives.dirPagination',
+    'chart.js',
+    'rzModule',
 ]);
 var getUrl = 'office';
+var getWebsiteUrl = 'website';
 
 /*app.directive('ngRightClick', function() {
     return function(scope, element, attrs) {

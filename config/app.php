@@ -140,6 +140,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+        
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -162,7 +163,11 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        /*
+         gcs drive file upload
+        */
+        Superbalist\LaravelGoogleCloudStorage\GoogleCloudStorageServiceProvider::class,
+        
         /*
          * Package Service Providers...
          */
@@ -179,6 +184,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Reliese\Coders\CodersServiceProvider::class,
         ArtemSchander\L5Modular\ModuleServiceProvider::class,
+
+        //maatwebsite excel
         Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
