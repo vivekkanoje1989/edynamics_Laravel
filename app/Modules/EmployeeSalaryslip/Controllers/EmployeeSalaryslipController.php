@@ -150,6 +150,15 @@ class EmployeeSalaryslipController extends Controller {
 				$message = "There was a problem with the upload. Please try again.";
 			}
 
+			//fetching new directory from unziped salaryslip folder
+			$Newdirectory = File::directories($directory);
+			// dd($Newdirectory);
+			$getDirectory = '';
+			foreach($Newdirectory as $a){				
+				$getDirectory = $a.'/';
+			}
+			// echo $getDirectory;
+			// exit;
 			//show all files inside directory
 			// echo "directory = ". json_encode($directory);
 			$files = File::allFiles($directory);
@@ -159,9 +168,11 @@ class EmployeeSalaryslipController extends Controller {
 			{					
 				// echo (string)$file, "\n";
 				$n = explode("/",(string)$file);
-				$newSlips[$i] = $n[2];				
+				$newSlips[$i] = $n[2];			
+				
 
-				$path = "Salaryslip/salaryslip_27_09_17/";
+				$path = $getDirectory;
+				// dd($path);
 				$s3FolderName = 'Employee-Salaryslips';
 				$salryslipName = $newSlips[$i];
 				S3::s3FileUpload($path, $salryslipName, $s3FolderName);
@@ -245,6 +256,25 @@ class EmployeeSalaryslipController extends Controller {
 			return json_encode($result);
 
 		}
+	}
+
+	//Dashboard MY Salay Slips viveknk
+	public function mysalaryslip() {		
+		return view("EmployeeSalaryslip::mysalaryslip");
+	}
+
+	public function getMySalaryslips(){		
+		$loggedInUserId = Auth::guard('admin')->user()->id;		
+		$getSlips = EmployeeSalaryslip::select('id', 'salaryslip_docName', 'month')->where(['employee_id' => $loggedInUserId])->get();		
+		// $getSlips = EmployeeSalaryslip::select('id', 'employee_id', 'salaryslip_docName', 'month')->get();		
+		// $getSlips = EmployeeSalaryslip::select('id', 'employee_id', 'salaryslip_docName', 'month')->orderBy('month', 'desc')->get();		
+		// echo "<pre>";
+		// print_r($getSlips->toArray());
+		// echo "</pre>";
+		
+		// exit;
+		$result = [ 'records' => $getSlips ];
+		return json_encode($result);
 	}
 
 }

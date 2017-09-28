@@ -126,6 +126,37 @@ app.controller('employeeSalaryslipController', ['$scope', 'Data', 'Upload', 'toa
         // });
     }
 
+    // $scope.myslrslips = '';
+    //get all employee salaryslips
+    $scope.getMySalaryslips = function() {
+        Data.get('/employeeSalaryslip/getMySalaryslips').then(function(response) {
+            $scope.myslrslips = response.records;
+            // console.log("myslrslips=" + JSON.stringify($scope.myslrslips));
+        });
+    }
+
+    $scope.OrderRec = '-id';
+    //dynamic orderby function
+    $scope.OrderFunction = function(sort) {
+        if (sort == 'SalarySlip') {
+            if ($scope.OrderRec == 'salaryslip_docName') {
+                $scope.OrderRec = '-salaryslip_docName';
+            } else if ($scope.OrderRec == '-salaryslip_docName') {
+                $scope.OrderRec = 'salaryslip_docName';
+            } else {
+                $scope.OrderRec = 'salaryslip_docName';
+            }
+        } else if (sort == 'Month') {
+            if ($scope.OrderRec == 'month') {
+                $scope.OrderRec = '-month';
+            } else if ($scope.OrderRec == '-month') {
+                $scope.OrderRec = 'month';
+            } else {
+                $scope.OrderRec = 'month';
+            }
+        }
+    }
+
 }]);
 
 //this directive is defined to catch zip file

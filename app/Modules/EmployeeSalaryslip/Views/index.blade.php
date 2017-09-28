@@ -99,7 +99,7 @@
                                 </div><br><br>
                                 <span class="err">* The zip file should be as Ex: salaryslip_27_09_17.zip (salaryslip_day_month_year.zip)</span><br>
                                 <span class="err">* And the files inside zip file should be as Ex: 41_salaryslip_29_09_2017.pdf (employeeId_salaryslip_day_month_year.pdf)</span><br>
-                                <span class="err">* EmployeeId can be found at HR / Employee List</span>
+                                <span class="err">* EmployeeId can be found at HR / List Employee / Edit Employee / Employee status </span>
                             </div>   
                         </div> 
                         <!--div class="col-xs-12 col-md-12" ng-if="showDiv">

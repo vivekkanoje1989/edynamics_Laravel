@@ -3956,6 +3956,33 @@ angular.module('app')
                     }
                 })
 
+                .state('mySalaryslip', {
+                    url: '/employeeSalaryslip/mysalaryslip',
+                    templateUrl: '/employeeSalaryslip/mysalaryslip',
+                    requiredLogin: true,
+                    ncyBreadcrumb: {
+                        label: 'Dashboard / My Salary Slips',
+                        description: ''
+                    },
+                    resolve: {
+                        deps: [
+                            '$ocLazyLoad',
+                            function($ocLazyLoad) {
+                                return $ocLazyLoad.load('toaster').then(
+                                    function() {
+                                        return $ocLazyLoad.load({
+                                            serie: true,
+                                            files: [
+                                                '/backend/employeeSalaryslipController.js'
+                                            ]
+                                        });
+                                    }
+                                );
+                            }
+                        ]
+                    }
+                })
+
                 .state('documentIndex', {
                     url: '/employee-document/index',
                     templateUrl: '/employee-document/',
