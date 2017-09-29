@@ -119,6 +119,7 @@ class EmployeeSalaryslipController extends Controller {
 			//initialize data
 			// $month = "September2017";
 			$month = json_decode($input['extaData'])->month;
+			$year = Date('Y');
 			$heading_name = "Salary Slip";
 			$type_of_payment = 1; //"monthly"
 			// $remarks = "emloyee salaryslips";
@@ -155,7 +156,8 @@ class EmployeeSalaryslipController extends Controller {
 			// dd($Newdirectory);
 			$getDirectory = '';
 			foreach($Newdirectory as $a){				
-				$getDirectory = $a.'/';
+				// $getDirectory = $a.'/';
+				$getDirectory = $a;
 			}
 			// echo $getDirectory;
 			// exit;
@@ -171,10 +173,31 @@ class EmployeeSalaryslipController extends Controller {
 				$newSlips[$i] = $n[2];			
 				
 
-				$path = $getDirectory;
+				// $path = $getDirectory;
+				$path = $getDirectory.'/'.$newSlips[$i];
+				
+				
+				// if (File::isWritable($file))
+				// {
+				// 	echo "Yes. $file is writable.";
+				// }
+				// if (File::isWritable($path))
+				// {
+				// 	echo "Yes. $path is writable.";
+				// }
+
+				// if (File::isFile($file))
+				// {
+				// 	echo "Yep. It's a file.";
+				// } 10000000 byte = 10MB 
+
+				// $bytes = File::size($file);
+				// echo $bytes;
+
 				// dd($path);
 				$s3FolderName = 'Employee-Salaryslips';
 				$salryslipName = $newSlips[$i];
+				// $salryslipName = $file;
 				S3::s3FileUpload($path, $salryslipName, $s3FolderName);
 
 				$i++;
@@ -199,6 +222,7 @@ class EmployeeSalaryslipController extends Controller {
 				// echo "slip ".$newSlips[$key], "\n";				
 				
 				$salaryslipData['month'] = $month;
+				$salaryslipData['year'] = $year;
 				$salaryslipData['heading_name'] = $heading_name;
 				$salaryslipData['type_of_payment'] = $type_of_payment;
 				$salaryslipData['remarks'] = $remarks;
@@ -263,9 +287,11 @@ class EmployeeSalaryslipController extends Controller {
 		return view("EmployeeSalaryslip::mysalaryslip");
 	}
 
-	public function getMySalaryslips(){		
+	public function getMySalaryslips(){	
+		$currenmnth = date('F');	
+		// echo "curmnth--".$currenmnth;
 		$loggedInUserId = Auth::guard('admin')->user()->id;		
-		$getSlips = EmployeeSalaryslip::select('id', 'salaryslip_docName', 'month')->where(['employee_id' => $loggedInUserId])->get();		
+		$getSlips = EmployeeSalaryslip::select('id', 'salaryslip_docName', 'month', 'year')->where(['employee_id' => $loggedInUserId])->get();		
 		// $getSlips = EmployeeSalaryslip::select('id', 'employee_id', 'salaryslip_docName', 'month')->get();		
 		// $getSlips = EmployeeSalaryslip::select('id', 'employee_id', 'salaryslip_docName', 'month')->orderBy('month', 'desc')->get();		
 		// echo "<pre>";
@@ -273,6 +299,33 @@ class EmployeeSalaryslipController extends Controller {
 		// echo "</pre>";
 		
 		// exit;
+		$result = [ 'records' => $getSlips ];
+		return json_encode($result);
+	}
+
+	//download employee salary slips of selected year
+	public function downloadSalaryslipsZip(){
+		$postdata = file_get_contents("php://input");
+		$input = json_decode($postdata, true);
+		// dd($input);
+		$loggedInUserId = Auth::guard('admin')->user()->id;			
+		$getSlips = EmployeeSalaryslip::select('id', 'salaryslip_docName', 'month', 'year')->where(['employee_id' => $loggedInUserId])->where(['year' => $input['year']])->get();		
+				
+		$salaryslipName = [];
+		$i = 0;
+		foreach ($getSlips as $slips)
+		{
+			$salaryslipName[$i] = $slips['salaryslip_docName'];			
+			$filename = $salaryslipName[$i];
+			$tempImage = 'Salaryslip/slips/'.$filename;
+			$dwfrom = 'https://storage.googleapis.com/edynamicsdevelopment/Employee-Salaryslips/'.$salaryslipName[$i];
+			
+			copy($dwfrom, $tempImage);			
+			response()->download($tempImage, $filename);			
+			$i++;
+		}
+		// dd($salaryslipName);
+
 		$result = [ 'records' => $getSlips ];
 		return json_encode($result);
 	}

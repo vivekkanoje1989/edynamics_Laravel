@@ -49,18 +49,23 @@ class S3 {
     
     
     // google storage
-     public static function s3FileUpload($filepath,$filename, $s3FolderName) {
-        
-        S3::s3Configuration();
+     public static function s3FileUpload($filepath, $filename, $s3FolderName) {
+        //  echo "filepath= ".$filepath." filename=". $filename." s3FolderName". $s3FolderName."<br>";
+
+        S3::s3Configuration();       
 
         $name = '';
         $disk = \Storage::disk('gcs');
         $s3Path = $s3FolderName.'/'. $filename;
+        // dd(file_get_contents($filepath));
         $disk->put($s3Path, file_get_contents($filepath));
         $name = $filename;
         if ($name !== '') {
+            // echo "$name";
             return($name);
         }
+
+        // dd(S3::s3FileLists($filename));
     }
     
     public static function s3FileUplodForApp($image, $s3FolderName, $cnt) {
@@ -101,6 +106,7 @@ class S3 {
 
     public static function s3FileLists($image) {
         S3::s3Configuration();
+        // echo "image==".$image;
         $files = \Storage::disk('gcs')->allFiles($image);
         if ($files) {
             $result = ['success' => true, 'files' => $files];
@@ -131,6 +137,6 @@ class S3 {
             $result = ['success' => false, 'message' => 'Something Went Wrong'];
         }
         return json_encode($result);
-    }
+    }    
 
 }

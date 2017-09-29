@@ -58,7 +58,7 @@
                             <div class="col-lg-12 col-sm-12 col-xs-12">
                                 <input type="hidden" ng-model="id" >
                                 <div class="row">                                                                 
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="">Choose zip file</label>
                                             <span class="input-icon icon-right">
@@ -70,19 +70,28 @@
                                         </div>    
                                     </div>                                  
 
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="">Month</label>
                                             <span class="input-icon icon-right">
                                                 <select class="form-control" ng-model="fileData.month" name="month" >                                                                                                       
-                                                    <option value="{{value}}" ng-repeat="(key, value) in monthdrpdn">{{value}}</option>                                                    
+                                                    <option value="{{value}}" ng-repeat="(key, value) in monthdrpdn" ng-selected="{{$index == crntmnth}}">{{value}}</option>                                                    
                                                 </select>
                                                 <i class="fa fa-caret-down" aria-hidden="true"></i>
                                             </span>
                                         </div>    
                                     </div>
 
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="">Year</label>
+                                            <span class="input-icon icon-right">
+                                               <input type="text" id="year" name="year" ng-model="fileData.year" class="form-control" readonly><br/>
+                                            </span>
+                                        </div>    
+                                    </div>                                  
+
+                                    <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="">Remark</label>
                                             <span class="input-icon icon-right">

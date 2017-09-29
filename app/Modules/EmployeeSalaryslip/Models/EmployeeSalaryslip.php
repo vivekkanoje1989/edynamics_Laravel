@@ -17,6 +17,7 @@ class EmployeeSalaryslip extends Model {
         'salaryslip_docName',
         'amount',
         'month',
+        'year',
 		'type_of_payment',
 		'remarks',
 		'status',

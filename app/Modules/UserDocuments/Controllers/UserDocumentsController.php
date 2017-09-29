@@ -114,7 +114,8 @@ class UserDocumentsController extends Controller {
 
                 $s3FolderName = 'Employee-Documents';
                 $imageName = 'blog_' . rand(pow(10, config('global.randomNoDigits') - 1), pow(10, config('global.randomNoDigits')) - 1) . '.' . $originalExtention;
-                
+                // echo "originalpathName= ".$originalpathName." imageName=". $imageName." s3FolderName". $s3FolderName;
+                // die;
                 S3::s3FileUpload($originalpathName, $imageName, $s3FolderName);
                 $document_url = $imageName;                
             } else {
