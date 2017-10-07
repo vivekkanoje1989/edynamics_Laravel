@@ -98,14 +98,16 @@ class EmployeeSalaryslipController extends Controller {
 		$input = Input::all();
 		// $postdata = file_get_contents('php://input');
 		// $request = json_decode($postdata, true);
-		// dd(json_decode($input['extaData'])->month);
-		// dd($input[0]);
+		// dd(json_decode($input['extaData'])->option);
+		// dd($input);
 		// dd(json_decode($input['fileData']));
 		// dd($request[0]['formdata']);
 		// dd($input[0]->getClientOriginalName());		
 		
 		//dd($originalExt);
-
+		$options = json_decode($input['extaData'])->option;
+		$options = (string)$options;
+		
 		if($input[0]) {
 
 			$originalName = $input[0]->getClientOriginalName();
@@ -126,152 +128,221 @@ class EmployeeSalaryslipController extends Controller {
 			$remarks = json_decode($input['extaData'])->remark;
 			$status = 1;
 
-			$continue = strtolower($extension) == 'zip' ? true : false;
-			if(!$continue) {
-				$message = "The file you are trying to upload is not a .zip file. Please try again.";
-				return json_encode(['message' => $message, 'success' => false]);
-			}
-			
-			// clean directory
-			$directory = "Salaryslip";
-			$cleanFolder = File::cleanDirectory($directory);
-
-			$target_path = "$originalPath".$filename;  // change this to the correct site path
-			if(move_uploaded_file($source, $target_path)) {
-				$zip = new ZipArchive();
-				$x = $zip->open($target_path);
-				if ($x === true) {
-					$zip->extractTo("Salaryslip/"); // change this to the correct site path
-					$zip->close();
-			
-					unlink($target_path);
-				}
-				$message = "Your .zip file was uploaded and unpacked.";
-			} else {	
-				$message = "There was a problem with the upload. Please try again.";
-			}
-
-			//fetching new directory from unziped salaryslip folder
-			$Newdirectory = File::directories($directory);
-			// dd($Newdirectory);
-			$getDirectory = '';
-			foreach($Newdirectory as $a){				
-				// $getDirectory = $a.'/';
-				$getDirectory = $a;
-			}
-			// echo $getDirectory;
-			// exit;
-			//show all files inside directory
-			// echo "directory = ". json_encode($directory);
-			$files = File::allFiles($directory);
-			$newSlips = [];
-			$i = 0;
-			foreach ($files as $file)
-			{					
-				// echo (string)$file, "\n";
-				$n = explode("/",(string)$file);
-				$newSlips[$i] = $n[2];			
-				
-
-				// $path = $getDirectory;
-				$path = $getDirectory.'/'.$newSlips[$i];
-				
-				
-				// if (File::isWritable($file))
-				// {
-				// 	echo "Yes. $file is writable.";
-				// }
-				// if (File::isWritable($path))
-				// {
-				// 	echo "Yes. $path is writable.";
-				// }
-
-				// if (File::isFile($file))
-				// {
-				// 	echo "Yep. It's a file.";
-				// } 10000000 byte = 10MB 
-
-				// $bytes = File::size($file);
-				// echo $bytes;
-
-				// dd($path);
-				$s3FolderName = 'Employee-Salaryslips';
-				$salryslipName = $newSlips[$i];
-				// $salryslipName = $file;
-				S3::s3FileUpload($path, $salryslipName, $s3FolderName);
-
-				$i++;
-			}			
-			// print_r($newSlips);
-			
-			$empID = [];
-			$j = 0;
-			foreach ($newSlips as $newSlip)
-			{
-				$ids = explode("_",(string)$newSlip);
-				$empID[$j] = $ids[0];
-				$j++;
-			}
-			// print_r($empID);
-			$count = 0;
-			$msgText = "";
-			foreach ($empID as $key => $value)
-			{
-				// echo "key".(string)$key, "\n";
-				// echo "value".(string)$value, "\n";
-				// echo "slip ".$newSlips[$key], "\n";				
-				
-				$salaryslipData['month'] = $month;
-				$salaryslipData['year'] = $year;
-				$salaryslipData['heading_name'] = $heading_name;
-				$salaryslipData['type_of_payment'] = $type_of_payment;
-				$salaryslipData['remarks'] = $remarks;
-				$salaryslipData['status'] = $status;
-				$salaryslipData['employee_id'] = $value;	
-				$salaryslipData['salaryslip_docName'] = $newSlips[$key];	
-
-				//check if file already exists
-				
-				$check = EmployeeSalaryslip::where(['employee_id' => $value, 'month' => $month])->get()->count();	
-				if($check > 0){
-					//update data
-
-					// echo "record found of month".$salaryslipData['month']."of employee id". $salaryslipData['employee_id'];
-					$loggedInUserId = Auth::guard('admin')->user()->id;
-					$common = CommonFunctions::updateMainTableRecords($loggedInUserId);
-					$update = array_merge($salaryslipData, $common);
-					$create['client_id'] = 1;//test client should be changed
-					$results = EmployeeSalaryslip::where(['employee_id' => $value, 'month' => $month])->update($update);
-					$msgText = "update";	
+			if($options == "Bulk"){				
+				$continue = strtolower($extension) == 'zip' ? true : false;
+				if(!$continue) {
+					$message = "The file you are trying to upload is not a .zip file. Please try again.";
+					return json_encode(['message' => $message, 'success' => false]);
 				}else{
-					//insert data
+					// clean directory
+					$directory = "Salaryslip";
+					$cleanFolder = File::cleanDirectory($directory);
 
-					// echo "salaryslipData= ";
-					// print_r($salaryslipData);
-					// echo "\n";
-					// dd($salaryslipData);
-					//save salary slip as per employee_id
-					$loggedInUserId = Auth::guard('admin')->user()->id;
-					$common = CommonFunctions::insertMainTableRecords($loggedInUserId);
-					$create = array_merge($salaryslipData, $common);
-					$create['client_id'] = 1;//test client should be changed
-					$results = EmployeeSalaryslip::create($create);	
-					$msgText = "Insert";
-				}								
+					$target_path = "$originalPath".$filename;  // change this to the correct site path
+					if(move_uploaded_file($source, $target_path)) {
+						$zip = new ZipArchive();
+						$x = $zip->open($target_path);
+						if ($x === true) {
+							$zip->extractTo("Salaryslip/"); // change this to the correct site path
+							$zip->close();
+					
+							unlink($target_path);
+						}
+						$message = "Your .zip file was uploaded and unpacked.";
+					} else {	
+						$message = "There was a problem with the upload. Please try again.";
+					}
+
+					//fetching new directory from unziped salaryslip folder
+					$Newdirectory = File::directories($directory);
+					// dd($Newdirectory);
+					$getDirectory = '';
+					foreach($Newdirectory as $a){				
+						// $getDirectory = $a.'/';
+						$getDirectory = $a;
+					}
+					// echo $getDirectory;
+					// exit;
+					//show all files inside directory
+					// echo "directory = ". json_encode($directory);
+					$files = File::allFiles($directory);
+					$newSlips = [];
+					$i = 0;
+					foreach ($files as $file)
+					{					
+						// echo (string)$file, "\n";
+						$n = explode("/",(string)$file);
+						$newSlips[$i] = $n[2];			
+						
+
+						// $path = $getDirectory;
+						$path = $getDirectory.'/'.$newSlips[$i];
+						
+						
+						// if (File::isWritable($file))
+						// {
+						// 	echo "Yes. $file is writable.";
+						// }
+						// if (File::isWritable($path))
+						// {
+						// 	echo "Yes. $path is writable.";
+						// }
+
+						// if (File::isFile($file))
+						// {
+						// 	echo "Yep. It's a file.";
+						// } 10000000 byte = 10MB 
+
+						// $bytes = File::size($file);
+						// echo $bytes;
+
+						// dd($path);
+						$s3FolderName = 'Employee-Salaryslips';
+						$salryslipName = $newSlips[$i];
+						// $salryslipName = $file;
+						S3::s3FileUpload($path, $salryslipName, $s3FolderName);
+
+						$i++;
+					}			
+					// print_r($newSlips);
+					
+					$empID = [];
+					$j = 0;
+					foreach ($newSlips as $newSlip)
+					{
+						$ids = explode("_",(string)$newSlip);
+						$empID[$j] = $ids[0];
+						$j++;
+					}
+					// print_r($empID);
+					$count = 0;
+					$msgText = "";
+					foreach ($empID as $key => $value)
+					{
+						// echo "key".(string)$key, "\n";
+						// echo "value".(string)$value, "\n";
+						// echo "slip ".$newSlips[$key], "\n";				
+						
+						$salaryslipData['month'] = $month;
+						$salaryslipData['year'] = $year;
+						$salaryslipData['heading_name'] = $heading_name;
+						$salaryslipData['type_of_payment'] = $type_of_payment;
+						$salaryslipData['remarks'] = $remarks;
+						$salaryslipData['status'] = $status;
+						$salaryslipData['employee_id'] = $value;	
+						$salaryslipData['salaryslip_docName'] = $newSlips[$key];	
+
+						//check if file already exists
+						
+						$check = EmployeeSalaryslip::where(['employee_id' => $value, 'month' => $month])->get()->count();	
+						if($check > 0){
+							//update data
+
+							// echo "record found of month".$salaryslipData['month']."of employee id". $salaryslipData['employee_id'];
+							$loggedInUserId = Auth::guard('admin')->user()->id;
+							$common = CommonFunctions::updateMainTableRecords($loggedInUserId);
+							$update = array_merge($salaryslipData, $common);
+							$create['client_id'] = 1;//test client should be changed
+							$results = EmployeeSalaryslip::where(['employee_id' => $value, 'month' => $month])->update($update);
+							$msgText = "update";	
+						}else{
+							//insert data
+
+							// echo "salaryslipData= ";
+							// print_r($salaryslipData);
+							// echo "\n";
+							// dd($salaryslipData);
+							//save salary slip as per employee_id
+							$loggedInUserId = Auth::guard('admin')->user()->id;
+							$common = CommonFunctions::insertMainTableRecords($loggedInUserId);
+							$create = array_merge($salaryslipData, $common);
+							$create['client_id'] = 1;//test client should be changed
+							$results = EmployeeSalaryslip::create($create);	
+							$msgText = "Insert";
+						}								
+						
+						if($results){
+							$count = $count + 1;
+						}else{
+							$count = $count;
+						}
+
+					}
+				}//bulk end
+
+			}else if($options == "Individual"){
 				
-				if($results){
-					$count = $count + 1;
+				$continue = strtolower($extension) == 'pdf' ? true : false;
+				if(!$continue) {					
+					$message = "The file you are trying to upload is not a .pdf file. Please try again.";
+					return json_encode(['message' => $message, 'success' => false]);
 				}else{
-					$count = $count;
-				}
+					
+					// dd($path);
+					$s3FolderName = 'Employee-Salaryslips';
+					// $salryslipName = $file;
+					S3::s3FileUpload($originalPath, $filename, $s3FolderName);
 
-			}
+					$ids = explode("_",(string)$filename);
+					$empID = $ids[0];
+					
+					// print_r($empID);
+					$count = 0;
+					$msgText = "";			
+						
+						$salaryslipData['month'] = $month;
+						$salaryslipData['year'] = $year;
+						$salaryslipData['heading_name'] = $heading_name;
+						$salaryslipData['type_of_payment'] = $type_of_payment;
+						$salaryslipData['remarks'] = $remarks;
+						$salaryslipData['status'] = $status;
+						$salaryslipData['employee_id'] = $empID;	
+						$salaryslipData['salaryslip_docName'] = (string)$filename;	
+
+						//check if file already exists
+						
+						$check = EmployeeSalaryslip::where(['employee_id' => $empID, 'month' => $month])->get()->count();	
+						if($check > 0){
+							//update data
+
+							// echo "record found of month".$salaryslipData['month']."of employee id". $salaryslipData['employee_id'];
+							$loggedInUserId = Auth::guard('admin')->user()->id;
+							$common = CommonFunctions::updateMainTableRecords($loggedInUserId);
+							$update = array_merge($salaryslipData, $common);
+							$create['client_id'] = 1;//test client should be changed
+							$results = EmployeeSalaryslip::where(['employee_id' => $empID, 'month' => $month])->update($update);
+							$msgText = "update";	
+						}else{
+							//insert data
+
+							// echo "salaryslipData= ";
+							// print_r($salaryslipData);
+							// echo "\n";
+							// dd($salaryslipData);
+							//save salary slip as per employee_id
+							$loggedInUserId = Auth::guard('admin')->user()->id;
+							$common = CommonFunctions::insertMainTableRecords($loggedInUserId);
+							$create = array_merge($salaryslipData, $common);
+							$create['client_id'] = 1;//test client should be changed
+							$results = EmployeeSalaryslip::create($create);	
+							$msgText = "Insert";
+						}								
+						
+						if($results){
+							$count = $count + 1;
+						}else{
+							$count = $count;
+						}
+
+					
+				}
+			} // Individual end			
 
 			if ($count > 0) {
 				if($msgText == "Insert"){
-					$message = 'Employee Salaryslips uploaded as per respective Employee Id';
+					$message = 'Employee Salaryslip uploaded as per respective Employee Id';
 				}else if($msgText == "update"){
-					$message = 'Employee Salaryslips uploaded as per respective Employee Id and data Updated';					
+					$message = 'Employee Salaryslip uploaded as per respective Employee Id and data Updated';					
 				}
 				$result = ['success' => true, 'message' => $message];
 			} else {

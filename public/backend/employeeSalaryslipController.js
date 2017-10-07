@@ -4,8 +4,7 @@ app.controller('employeeSalaryslipController', ['$scope', 'Data', 'Upload', 'toa
     //check if user wants to upload file
     $scope.salaryslip = 0;
     $scope.showDiv = false; //if value true then shows div
-    $scope.chkfile = false; //if value true zip file is selected
-
+    $scope.extention = false; //to check extenstion of file
 
     //initialise months dropdown
     var date = new Date();
@@ -32,13 +31,13 @@ app.controller('employeeSalaryslipController', ['$scope', 'Data', 'Upload', 'toa
     $scope.fileData.month = $scope.monthdrpdn[$scope.crntmnth];
 
     //close and open div as per permissionzip
-    $scope.permissionzip = function() {
-        if ($scope.showDiv == false) {
-            $scope.showDiv = true;
-        } else if ($scope.showDiv == true) {
-            $scope.showDiv = false;
+    $scope.permissionzip = function(salaryslip) {
+        if (salaryslip == "Individual") {
+            $scope.showDiv = "Individual";
+        } else if (salaryslip == "Bulk") {
+            $scope.showDiv = "Bulk";
         } else {
-            $scope.showDiv = false;
+            $scope.showDiv = "";
         }
     }
 
@@ -46,26 +45,31 @@ app.controller('employeeSalaryslipController', ['$scope', 'Data', 'Upload', 'toa
     var formdata = new FormData();
     $scope.getTheFiles = function($files) {
         angular.forEach($files, function(value, key) {
+            console.log("fileskey showDiv getTheFiles=" + $scope.showDiv);            
             // console.log("filesvalue=" + value.name);
             // console.log("fileskey=" + key);
-
-            if (!value.name) {
-                toaster.pop('warning', 'Employee Salary Slip', 'Please! Choose zip file');
-            } else {
-                $scope.chkfile = true;
-                str = value.name;
-                str.toString();
-                var l = (str.split('.').length) - 1;
-                // console.log("str=" + str.split('.').length);
-                // console.log("str end=" + str.split('.')[l]);
-                var ext = str.split('.')[l];
-
-                if (ext.toString() == 'zip') {} else {
-                    // console.log("str=" + ext);
-                    toaster.pop('warning', 'Employee Salary Slip', 'Please! Choose file with .zip extention');
-                }
-            }
-
+            if($scope.showDiv == "Bulk"){
+                // console.log("fileskey showDiv if=" + $scope.showDiv);                
+                    
+                    str = value.name;
+                    str.toString();
+                    var l = (str.split('.').length) - 1;
+                    // console.log("str=" + str.split('.').length);
+                    // console.log("str end=" + str.split('.')[l]);
+                    var ext = str.split('.')[l];
+                    $scope.extention = ext.toString();                    
+            }else if($scope.showDiv == "Individual"){
+                // console.log("fileskey showDiv else=" + $scope.showDiv);           
+                    
+                    str = value.name;
+                    str.toString();
+                    var l = (str.split('.').length) - 1;
+                    // console.log("str=" + str.split('.').length);
+                    // console.log("str end=" + str.split('.')[l]);
+                    var ext = str.split('.')[l];
+                    $scope.extention = ext.toString();  
+                   
+            }else{}
             formdata.append(key, value);
         });
     };
@@ -75,13 +79,23 @@ app.controller('employeeSalaryslipController', ['$scope', 'Data', 'Upload', 'toa
         console.log("month" + JSON.stringify(mnthData));
         $scope.vloader = true;
 
-        if ($scope.chkfile) {
-            // console.log("chkfile" + $scope.chkfile);
-        } else {
-            toaster.pop('warning', 'Employee Salary Slip', 'Please! Choose zip file');
-            $scope.vloader = false;
-            return false;
-        }
+        if($scope.showDiv == "Bulk"){
+            if ($scope.extention == "zip") {
+                // console.log("chkfile" + $scope.chkfile);
+            } else {
+                toaster.pop('warning', 'Employee Salary Slip', 'Please! Choose zip file');
+                $scope.vloader = false;
+                return false;
+            }
+        }else if($scope.showDiv == "Individual"){
+            if ($scope.extention == "pdf") {
+                // console.log("chkfile" + $scope.chkfile);
+            } else {
+                toaster.pop('warning', 'Employee Salary Slip', 'Please! Choose pdf file');
+                $scope.vloader = false;
+                return false;
+            }
+        }else{}
 
         if (mnthData.month) {
             console.log("month" + JSON.stringify(mnthData.month));
@@ -99,6 +113,7 @@ app.controller('employeeSalaryslipController', ['$scope', 'Data', 'Upload', 'toa
             return false;
         }
 
+        mnthData.option = $scope.showDiv;
         //appent exta form data to file object
         $scope.datamnt = JSON.stringify(mnthData);
         formdata.append('extaData', $scope.datamnt);
@@ -174,7 +189,7 @@ app.controller('employeeSalaryslipController', ['$scope', 'Data', 'Upload', 'toa
             range.push(year + i);
         }
         $scope.modelyears = range;
-        console.log('modelyears=' + $scope.modelyears);
+        // console.log('modelyears=' + $scope.modelyears);
 
         $scope.heading = 'Download Salary Slip ZIP';
         $scope.action = "Submit";

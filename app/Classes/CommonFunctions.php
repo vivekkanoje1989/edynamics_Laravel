@@ -16,8 +16,8 @@ use App\Models\backend\Employee;
 class CommonFunctions {
 
     public static function getMacAddress() {
-        exec('netstat -ie', $result);
-        if (is_array($result)) {
+        exec('netstat -ie', $result);         
+        if (is_array($result) && !empty($result)) {
             $iface = array();
             foreach ($result as $key => $line) {
                 if ($key > 0) {
@@ -29,7 +29,7 @@ class CommonFunctions {
                         }
                     }
                 }
-            }
+            }            
             return $iface[0]['mac'];
         } else {
             // Turn on output buffering  

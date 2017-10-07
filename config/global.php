@@ -40,9 +40,9 @@ return [
     'companyName' => 'Edynamics BMS',
     'rootPath' => base_path(),
     'randomNoDigits' => 4,
-    'themeName' => '',
+    'themeName' => '', //Theme32
     'backendUrl' => 'office.php',
     'recordsPerPage' =>30,
-    'client_id' =>1,
+    'client_id' => 1,
     //'client_info'=>$GLOBALS['client_info'],
 ];

@@ -51,7 +51,7 @@ return [
             'prefix' => '',
         ],
 
-        /*'mysql' => [
+        'mysql' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', 'localhost'),
             'port' => env('DB_PORT', '3306'),
@@ -63,83 +63,83 @@ return [
             'prefix' => '',
             'strict' => true,
             'engine' => null,
-        ],*/ 
-        
-        'masterdb' => [
-            'read' => [
-                'host' => '192.168.0.104',
-            ],
-            'write' => [
-                'host' => '192.168.0.104',
-            ],
-            'driver' => 'mysql',
-            'port' => 3306,
-            'database' => 'laravel_developement_master_edynamics',
-            'username' =>  'root',
-            'password' => 'root',
-            'charset' => 'utf8',
-            'collation' => 'utf8_unicode_ci',
-            'prefix' => '',
-            'strict' => false,
-            'engine' => null,
         ],
-
+        
         // 'masterdb' => [
         //     'read' => [
-        //         'host' => 'localhost',
+        //         'host' => '192.168.0.104',
         //     ],
         //     'write' => [
-        //         'host' => 'localhost',
+        //         'host' => '192.168.0.104',
         //     ],
         //     'driver' => 'mysql',
         //     'port' => 3306,
         //     'database' => 'laravel_developement_master_edynamics',
         //     'username' =>  'root',
-        //     'password' => '',
+        //     'password' => 'root',
         //     'charset' => 'utf8',
         //     'collation' => 'utf8_unicode_ci',
         //     'prefix' => '',
         //     'strict' => false,
         //     'engine' => null,
         // ],
-        
-        'mysql' => [
+
+        'masterdb' => [
             'read' => [
-                'host' => '192.168.0.104',
+                'host' => 'localhost',
             ],
             'write' => [
-                'host' => '192.168.0.104'
+                'host' => 'localhost',
             ],
             'driver' => 'mysql',
             'port' => 3306,
-            'database' => 'laravel_developement_edynamics',
-            'username' => 'root',
-            'password' => 'root',
+            'database' => 'laravel_developement_master_edynamics',
+            'username' =>  'root',
+            'password' => '',
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
             'strict' => false,
             'engine' => null,
         ],
-
+        
         // 'mysql' => [
         //     'read' => [
-        //         'host' => 'localhost',
+        //         'host' => '192.168.0.104',
         //     ],
         //     'write' => [
-        //         'host' => 'localhost'
+        //         'host' => '192.168.0.104'
         //     ],
         //     'driver' => 'mysql',
         //     'port' => 3306,
         //     'database' => 'laravel_developement_edynamics',
         //     'username' => 'root',
-        //     'password' => '',
+        //     'password' => 'root',
         //     'charset' => 'utf8',
         //     'collation' => 'utf8_unicode_ci',
         //     'prefix' => '',
         //     'strict' => false,
         //     'engine' => null,
         // ],
+
+        'mysql' => [
+            'read' => [
+                'host' => 'localhost',
+            ],
+            'write' => [
+                'host' => 'localhost'
+            ],
+            'driver' => 'mysql',
+            'port' => 3306,
+            'database' => 'laravel_developement_edynamics',
+            'username' => 'root',
+            'password' => '',
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+            'strict' => false,
+            'engine' => null,
+        ],
 
         'pgsql' => [
             'driver' => 'pgsql',
