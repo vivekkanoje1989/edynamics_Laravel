@@ -2,6 +2,11 @@
 app.controller('adminController', function($rootScope, $scope, $state, Data, $stateParams) {
     $scope.registration = {};
     $scope.errorMsg = '';
+    $scope.next1 = false;
+    $scope.next2 = false;
+    $scope.loginData = {};
+    // $scope.loginData.mobile = '';
+    // $scope.loginData.password = '';
 
     //viveknk set browser timeZone
     $scope.setBrowserTimezone = function() {
@@ -36,9 +41,11 @@ app.controller('adminController', function($rootScope, $scope, $state, Data, $st
             }
         });
     }
+
     $scope.resetErrorMsg = function() {
         $scope.errorMsg = '';
     }
+
     $scope.login = function(loginData) {
         Data.post('authenticate', {
             username: loginData.mobile,

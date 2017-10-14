@@ -45,31 +45,31 @@ app.controller('employeeSalaryslipController', ['$scope', 'Data', 'Upload', 'toa
     var formdata = new FormData();
     $scope.getTheFiles = function($files) {
         angular.forEach($files, function(value, key) {
-            console.log("fileskey showDiv getTheFiles=" + $scope.showDiv);            
+            console.log("fileskey showDiv getTheFiles=" + $scope.showDiv);
             // console.log("filesvalue=" + value.name);
             // console.log("fileskey=" + key);
-            if($scope.showDiv == "Bulk"){
+            if ($scope.showDiv == "Bulk") {
                 // console.log("fileskey showDiv if=" + $scope.showDiv);                
-                    
-                    str = value.name;
-                    str.toString();
-                    var l = (str.split('.').length) - 1;
-                    // console.log("str=" + str.split('.').length);
-                    // console.log("str end=" + str.split('.')[l]);
-                    var ext = str.split('.')[l];
-                    $scope.extention = ext.toString();                    
-            }else if($scope.showDiv == "Individual"){
+
+                str = value.name;
+                str.toString();
+                var l = (str.split('.').length) - 1;
+                // console.log("str=" + str.split('.').length);
+                // console.log("str end=" + str.split('.')[l]);
+                var ext = str.split('.')[l];
+                $scope.extention = ext.toString();
+            } else if ($scope.showDiv == "Individual") {
                 // console.log("fileskey showDiv else=" + $scope.showDiv);           
-                    
-                    str = value.name;
-                    str.toString();
-                    var l = (str.split('.').length) - 1;
-                    // console.log("str=" + str.split('.').length);
-                    // console.log("str end=" + str.split('.')[l]);
-                    var ext = str.split('.')[l];
-                    $scope.extention = ext.toString();  
-                   
-            }else{}
+
+                str = value.name;
+                str.toString();
+                var l = (str.split('.').length) - 1;
+                // console.log("str=" + str.split('.').length);
+                // console.log("str end=" + str.split('.')[l]);
+                var ext = str.split('.')[l];
+                $scope.extention = ext.toString();
+
+            } else {}
             formdata.append(key, value);
         });
     };
@@ -79,7 +79,7 @@ app.controller('employeeSalaryslipController', ['$scope', 'Data', 'Upload', 'toa
         console.log("month" + JSON.stringify(mnthData));
         $scope.vloader = true;
 
-        if($scope.showDiv == "Bulk"){
+        if ($scope.showDiv == "Bulk") {
             if ($scope.extention == "zip") {
                 // console.log("chkfile" + $scope.chkfile);
             } else {
@@ -87,7 +87,7 @@ app.controller('employeeSalaryslipController', ['$scope', 'Data', 'Upload', 'toa
                 $scope.vloader = false;
                 return false;
             }
-        }else if($scope.showDiv == "Individual"){
+        } else if ($scope.showDiv == "Individual") {
             if ($scope.extention == "pdf") {
                 // console.log("chkfile" + $scope.chkfile);
             } else {
@@ -95,7 +95,7 @@ app.controller('employeeSalaryslipController', ['$scope', 'Data', 'Upload', 'toa
                 $scope.vloader = false;
                 return false;
             }
-        }else{}
+        } else {}
 
         if (mnthData.month) {
             console.log("month" + JSON.stringify(mnthData.month));
@@ -136,7 +136,7 @@ app.controller('employeeSalaryslipController', ['$scope', 'Data', 'Upload', 'toa
                 if (response.success) {
                     $scope.fileData.month = $scope.monthdrpdn[$scope.crntmnth];
                     $scope.fileData.remark = "";
-                    // document.getElementById('file1').value = ''
+                    document.getElementById('file1').value = ''
                     $scope.vloader = false;
                     toaster.pop('success', 'Employee Salary Slip', response.message);
                 } else {
@@ -192,8 +192,9 @@ app.controller('employeeSalaryslipController', ['$scope', 'Data', 'Upload', 'toa
         // console.log('modelyears=' + $scope.modelyears);
 
         $scope.heading = 'Download Salary Slip ZIP';
-        $scope.action = "Submit";
-        $scope.domethod = 'post'
+        $scope.action = "Generate";
+        $scope.domethod = 'post';
+        $scope.downloadfile = false;
     }
 
 
@@ -205,8 +206,11 @@ app.controller('employeeSalaryslipController', ['$scope', 'Data', 'Upload', 'toa
         });
     }
 
+    $scope.downloadfile = false; //hide download zip file button in model
+
     $scope.doSalayslipAction = function() {
-        console.log('doSalayslipAction zipyear=' + $scope.zipyear);
+        $scope.downloadfile = false;
+        // console.log('doSalayslipAction zipyear=' + $scope.zipyear);
 
         // var config = {
         //     headers: {
@@ -227,14 +231,19 @@ app.controller('employeeSalaryslipController', ['$scope', 'Data', 'Upload', 'toa
             }).then(function(response) {
                 // response = json_decode(response);
                 if (response.success) {
-                    $('#salayslipModal').modal('toggle');
                     toaster.pop('success', 'My Salary Slips', response.message);
+                    $scope.downloadfile = true;
                 } else {
                     $scope.errorMsg = response.message;
+                    $scope.downloadfile = false;
                 }
             });
         } else { console.log("domethod"); }
 
+    }
+
+    $scope.dwnzip = function() {
+        $('#salayslipModal').modal('toggle');
     }
 
     $scope.OrderRec = '-id';

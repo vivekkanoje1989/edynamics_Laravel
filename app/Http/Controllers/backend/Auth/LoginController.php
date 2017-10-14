@@ -42,6 +42,7 @@ class LoginController extends Controller {
         $postdata = file_get_contents("php://input");
         $request = json_decode($postdata, true);
         $result = "";
+        // dd($request);
         // $checkEmail = Employee::getRecords(["id","first_name","last_name","password","high_security_password","employee_status","employee_photo_file_name"], ["username" => $request['data']['mobileData']]);//(select attributes, where conditions)
         $checkEmail = Employee::select("id","employee_id","first_name","last_name","password","high_security_password","employee_status","employee_photo_file_name")->where(["username" => $request['data']['mobileData']])->get(); //(select attributes, where conditions)
        
@@ -72,20 +73,20 @@ class LoginController extends Controller {
                 $result = ['success' => false,'message' => 'Mobile does not exist!'];
             }
         }
-        elseif(empty($request['data']['securityPasswordData'])){   
-            if (\Hash::check($request['data']['passwordData'], $checkEmail[0]->password)) {
-                $result = ['success' => true, "message" => ["fullName" => $checkEmail[0]->first_name." ".$checkEmail[0]->last_name],"photo"=>$checkEmail[0]->employee_photo_file_name];                
-            }else {
-                $result = ['success' => false,'message' => 'Wrong Password!'];
-            }
-        }
-        else{      
-            if ($request['data']['securityPasswordData'] == $checkEmail[0]->high_security_password) {
-                $result = ['success' => true, "message" => ["fullName" => $checkEmail[0]->first_name." ".$checkEmail[0]->last_name],"photo"=>$checkEmail[0]->employee_photo_file_name];                
-            }else {
-                $result = ['success' => false,'message' => 'Wrong Password!'];
-            }
-        }
+        // elseif(empty($request['data']['securityPasswordData'])){   
+        //     if (\Hash::check($request['data']['passwordData'], $checkEmail[0]->password)) {
+        //         $result = ['success' => true, "message" => ["fullName" => $checkEmail[0]->first_name." ".$checkEmail[0]->last_name],"photo"=>$checkEmail[0]->employee_photo_file_name];                
+        //     }else {
+        //         $result = ['success' => false,'message' => 'Wrong Password!'];
+        //     }
+        // }
+        // else{      
+        //     if ($request['data']['securityPasswordData'] == $checkEmail[0]->high_security_password) {
+        //         $result = ['success' => true, "message" => ["fullName" => $checkEmail[0]->first_name." ".$checkEmail[0]->last_name],"photo"=>$checkEmail[0]->employee_photo_file_name];                
+        //     }else {
+        //         $result = ['success' => false,'message' => 'Wrong Password!'];
+        //     }
+        // }
         return json_encode($result);
     }
     

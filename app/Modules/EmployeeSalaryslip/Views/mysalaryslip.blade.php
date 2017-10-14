@@ -250,7 +250,8 @@
                     </div>
                     <div class="modal-footer" align="center">
                         <button type="Submit" class="btn btn-sub" ng-click="sbtBtn = true">{{action}}</button>
-                        <button type="button" class="btn btn-sub" ng-click="Cancel()" ng-disabled="vertBtn" ng-if="cancl">Cancel</button>                        
+                        <button type="button" class="btn btn-sub" ng-click="Cancel()" ng-disabled="vertBtn" ng-if="cancl">Cancel</button>
+                        <button type="button" class="btn btn-sub" ng-click="dwnzip()" ng-if="downloadfile"><a href="Salaryslip/39_salaryslip.zip"  tooltip-html-unsafe="Download Salay slip" ng-click="">Download</a></button>                  
                     </div> 
                 </form>           
             </div>

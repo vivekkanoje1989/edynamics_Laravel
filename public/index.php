@@ -2,7 +2,7 @@
 $GLOBALS['server_name'] = "";
 $config = ltrim($_SERVER['HTTP_HOST'], "www.") . '.php';
 $path = '../dbcredentials/' . $config;
-$path = '../dbcredentials/localhost_8000.php';
+
 include ($path);
 
 $GLOBALS['uname'] = $uname;

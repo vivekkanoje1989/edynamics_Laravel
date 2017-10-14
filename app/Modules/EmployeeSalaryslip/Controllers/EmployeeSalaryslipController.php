@@ -128,7 +128,8 @@ class EmployeeSalaryslipController extends Controller {
 			$remarks = json_decode($input['extaData'])->remark;
 			$status = 1;
 
-			if($options == "Bulk"){				
+			if($options == "Bulk"){	
+				// echo $options;			
 				$continue = strtolower($extension) == 'zip' ? true : false;
 				if(!$continue) {
 					$message = "The file you are trying to upload is not a .zip file. Please try again.";
@@ -231,7 +232,7 @@ class EmployeeSalaryslipController extends Controller {
 						$salaryslipData['status'] = $status;
 						$salaryslipData['employee_id'] = $value;	
 						$salaryslipData['salaryslip_docName'] = $newSlips[$key];	
-
+						
 						//check if file already exists
 						
 						$check = EmployeeSalaryslip::where(['employee_id' => $value, 'month' => $month])->get()->count();	
@@ -241,7 +242,7 @@ class EmployeeSalaryslipController extends Controller {
 							// echo "record found of month".$salaryslipData['month']."of employee id". $salaryslipData['employee_id'];
 							$loggedInUserId = Auth::guard('admin')->user()->id;
 							$common = CommonFunctions::updateMainTableRecords($loggedInUserId);
-							$update = array_merge($salaryslipData, $common);
+							$update = array_merge($salaryslipData, $common);							
 							$create['client_id'] = 1;//test client should be changed
 							$results = EmployeeSalaryslip::where(['employee_id' => $value, 'month' => $month])->update($update);
 							$msgText = "update";	
@@ -255,7 +256,7 @@ class EmployeeSalaryslipController extends Controller {
 							//save salary slip as per employee_id
 							$loggedInUserId = Auth::guard('admin')->user()->id;
 							$common = CommonFunctions::insertMainTableRecords($loggedInUserId);
-							$create = array_merge($salaryslipData, $common);
+							$create = array_merge($salaryslipData, $common);							
 							$create['client_id'] = 1;//test client should be changed
 							$results = EmployeeSalaryslip::create($create);	
 							$msgText = "Insert";
@@ -271,6 +272,7 @@ class EmployeeSalaryslipController extends Controller {
 				}//bulk end
 
 			}else if($options == "Individual"){
+				// echo $options;			
 				
 				$continue = strtolower($extension) == 'pdf' ? true : false;
 				if(!$continue) {					
@@ -298,7 +300,7 @@ class EmployeeSalaryslipController extends Controller {
 						$salaryslipData['status'] = $status;
 						$salaryslipData['employee_id'] = $empID;	
 						$salaryslipData['salaryslip_docName'] = (string)$filename;	
-
+						// print_r($salaryslipData);
 						//check if file already exists
 						
 						$check = EmployeeSalaryslip::where(['employee_id' => $empID, 'month' => $month])->get()->count();	
@@ -381,24 +383,57 @@ class EmployeeSalaryslipController extends Controller {
 		// dd($input);
 		$loggedInUserId = Auth::guard('admin')->user()->id;			
 		$getSlips = EmployeeSalaryslip::select('id', 'salaryslip_docName', 'month', 'year')->where(['employee_id' => $loggedInUserId])->where(['year' => $input['year']])->get();		
-				
-		$salaryslipName = [];
-		$i = 0;
-		foreach ($getSlips as $slips)
-		{
-			$salaryslipName[$i] = $slips['salaryslip_docName'];			
-			$filename = $salaryslipName[$i];
-			$tempImage = 'Salaryslip/slips/'.$filename;
-			$dwfrom = 'https://storage.googleapis.com/edynamicsdevelopment/Employee-Salaryslips/'.$salaryslipName[$i];
-			
-			copy($dwfrom, $tempImage);			
-			response()->download($tempImage, $filename);			
-			$i++;
-		}
-		// dd($salaryslipName);
+		
+		if($getSlips){
 
-		$result = [ 'records' => $getSlips ];
-		return json_encode($result);
+			$cln = "Salaryslip/";
+			$cleanFolder = File::cleanDirectory($cln);
+
+			$public_dir= "Salaryslip";
+			
+			$zipFileName = $loggedInUserId.'_salaryslip.zip';
+			// echo $zipFileName;
+			$zip = new ZipArchive;
+
+			if ($zip->open($public_dir . '/' . $zipFileName, ZipArchive::CREATE) === TRUE) {  
+				// echo $zipFileName;
+				
+				$salaryslipName = [];
+				$i = 0;
+				foreach ($getSlips as $slips)
+				{
+					$salaryslipName[$i] = $slips['salaryslip_docName'];			
+					$filename = $salaryslipName[$i];
+					// $temp = 'Salaryslip/slips/'.$filename;
+					// $dwfrom = 'https://storage.googleapis.com/edynamicsdevelopment/Employee-Salaryslips/'.$filename;
+					$dwfrom = '/home/viveknk/Downloads/azip/'.$filename;
+					
+					$zip->addFile($dwfrom, $filename);
+
+					$i++;
+				}
+				// dd($salaryslipName);
+				$zip->close();
+			}
+
+			$headers = array(
+                'Content-Type' => 'application/octet-stream',
+			);
+			
+			$filetopath = $public_dir.'/'.$zipFileName;		
+			
+			if(file_exists($filetopath)){				
+				response()->download($filetopath,$zipFileName,$headers);
+				$result = [ 'success' => true, 'message' => 'File generated.' ];
+				return json_encode($result);
+			}else{				
+				$result = [ 'success' => false, 'message' => 'File does not exist.' ];
+				return json_encode($result);
+			}
+		}else{
+			$result = [ 'success' => false, 'message' => 'Something went wrong.' ];
+			return json_encode($result);
+		}
 	}
 
 }

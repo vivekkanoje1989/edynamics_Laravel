@@ -5005,6 +5005,7 @@ angular.module('app')
                         url: '/login',
                         templateUrl: '/login', //laravel slug
                         requiredLogin: false,
+                        cache: false,
                         ncyBreadcrumb: {
                             label: 'Login'
                         },
@@ -5030,6 +5031,7 @@ angular.module('app')
                     url: '/logout',
                     templateUrl: '/logout',
                     requiredLogin: false,
+                    cache: false,
                     ncyBreadcrumb: {
                         label: 'Logout'
                     }
