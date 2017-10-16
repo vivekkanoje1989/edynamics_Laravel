@@ -44,8 +44,10 @@ class LoginController extends Controller {
         $result = "";
         // dd($request);
         // $checkEmail = Employee::getRecords(["id","first_name","last_name","password","high_security_password","employee_status","employee_photo_file_name"], ["username" => $request['data']['mobileData']]);//(select attributes, where conditions)
-        $checkEmail = Employee::select("id","employee_id","first_name","last_name","password","high_security_password","employee_status","employee_photo_file_name")->where(["username" => $request['data']['mobileData']])->get(); //(select attributes, where conditions)
-       
+        if(isset($request['data']['mobileData'])){
+            $checkEmail = Employee::select("id","employee_id","first_name","last_name","password","high_security_password","employee_status","employee_photo_file_name")->where(["username" => $request['data']['mobileData']])->get(); //(select attributes, where conditions)
+        }else{}
+            
         $userAgent = $_SERVER['HTTP_USER_AGENT'];
         
         if(empty($request['data']['passwordData'])){      

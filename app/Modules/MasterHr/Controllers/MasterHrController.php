@@ -42,7 +42,7 @@ class MasterHrController extends Controller {
         $totalCount = [];
         $department_id = [];
 
-        if (!empty($request['empId']) && $request['empId'] !== "0") { // for edit
+        if (!empty($request['empId']) && $request['empId'] != "0") { // for edit
             $manageUsers = DB::select('CALL proc_manage_users(1,' . $request["empId"] . ')');
         } else if ($request['empId'] == "") { // for index
             $manageData = DB::select('CALL proc_manage_users(0,0)');

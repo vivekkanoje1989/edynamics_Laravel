@@ -3962,6 +3962,9 @@ angular.module('app')
                     requiredLogin: true,
                     ncyBreadcrumb: {
                         label: 'Dashboard / My Salary Slips',
+                        // label: [{ 'a': 'dashboard', 'B': 'http://google.co.in' },
+                        //     { 'a': 'My Salary Slips', 'B': 'http://google.co.in' }
+                        // ],
                         description: ''
                     },
                     resolve: {

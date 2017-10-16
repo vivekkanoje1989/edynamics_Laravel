@@ -106,8 +106,8 @@
                 margin-bottom:1px !important;
             } 
             .usr-img{
-                margin-bottom: 10px;
-                margin-top: 10px;
+                margin-bottom: 20px;
+                margin-top: 70px;
                 width: 60px;
                 height: 60px;
                 box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)!important;
@@ -152,7 +152,7 @@
                             <p class="usr-name ng-scope" ng-if="fullName">Hello, {{fullName}}</p>
 
                         </div>
-                        <div id="login-form" class="w3-animate-right col-xs-12 col-md-12" >
+                        <div id="login-form" class="w3-animate-right col-xs-12 col-md-12" style="margin-top: 25px;">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-mobile fa-fw"></i></span>
                                 <input type="text" name="mobile" class="form-control in-tag ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength" placeholder="Mobile" ng-model="loginData.mobile" check-login-credentials="" minlength="10" maxlength="10" oninput="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" ng-model-options="{allowInvalid: true, debounce: 100}" >
@@ -168,8 +168,8 @@
                                 <button class=" w3-btn w3-hover-white bt-next1" ng-click="next1 = true">Next</button>
                             </div>
                         </div>
-                        <div id="forgot-form" class="w3-animate-right col-xs-12 col-md-12">                            
-                            <div class="input-group">
+                        <div id="forgot-form" class="w3-animate-right col-xs-12 col-md-12" ng-if="next1">                            
+                            <div class="input-group" >
                                 <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
                                 <input class="form-control in-tag ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength" placeholder="Password" type="password" name="password" minlength="6" maxlength="15" ng-model="loginData.password" required="" ng-model-options="{allowInvalid: true, debounce: 100}" >
                             </div>                            
@@ -198,11 +198,14 @@
                         </div> 
                         </form>                      
                     </div>                       
-                <div class="left-logo-div">
-                    <p style=" margin-top: 25px;color:white;"><a href="http://edynamics.co.in/" target="_blank" class="footer-a">
-                            All Rights Reserved © 2017 edynamics Business Services LLP </a></p>
-                    <img src="http://bmsbuilder.in/themes/backend/bms.1.9.14/bms.png" class="bms-logo">     
-                    <img src="http://bmsbuilderdev.in/common/images/edynamicslogo.jpg" class="bms-logo">        
+                <div class="left-logo-div" style="position: fixed; bottom: 30px; right: 4vw;" align="center">                   
+                    <p>
+                        <img src="http://bmsbuilder.in/themes/backend/bms.1.9.14/bms.png" class="bms-logo" >     
+                        <!--img src="http://bmsbuilderdev.in/common/images/edynamicslogo.jpg" class="bms-logo"-->        
+                        <img src="/backend/images/edynamics_logo.png" class="bms-logo" style="height: 50px;">        
+                        <img src="/backend/images/Google-cloud-partner.png" class="bms-logo" style="border-radius: 6px; border-style: outset; height: 41px; margin-left: 8px;">
+                    </p>
+                    <p style="margin-left: 21px;color: white;"><a href="http://edynamics.co.in/" target="_blank" class="footer-a">All Rights Reserved © 2017 edynamics Business Services LLP</a></p>                  
                 </div>
             </div>
         </div>

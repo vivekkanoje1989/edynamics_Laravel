@@ -58,7 +58,7 @@
 						<a class="btn btn-default DTTT_button_print" id="ToolTables_editabledatatable_1" title="View print view" ng-click="ExportToxls()" >
 							<span>Export</span> <!--href="/manageVerticals/exportToxls"-->
 						</a>
-						<a class="btn btn-default DTTT_button_collection" id="ToolTables_editabledatatable_2">
+						<!--a class="btn btn-default DTTT_button_collection" id="ToolTables_editabledatatable_2">
 							<span>Action</span>
 							<a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);"><i class="fa fa-angle-down"></i></a>
 							<ul class="dropdown-menu dropdown-default">
@@ -76,7 +76,7 @@
 									<a href="javascript:void(0);">Separated link</a>
 								</li>
 							</ul>
-						</a>
+						</a-->
 					</div>
 				<div  class="dataTables_filter">
 					<label>
@@ -96,17 +96,12 @@
                         </b>                        
                     </div>
                 </div>
-                <!-- filter data-->
-				<div class="dataTables_length" >
-					<label>
-						<select class="form-control input-sm" ng-model="itemsPerPage" name="itemsPerPage" onchange="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
-							<option value="1">1</option>
-							<option value="5">5</option>
-							<option value="15">15</option>
-							<option value="30">30</option>
-							<option value="100">100</option>
-							<option value="0">All</option>
-						</select>
+                <!-- filter data-->				
+				<div class="dataTables_length" >					
+					<label>                        
+                        <select class="form-control input-sm" ng-model="itemsPerPage" name="itemsPerPage" onchange="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                            <option ng-repeat="val in itemsPerPageModel" >{{val}}</option>                        
+                        </select>
 					</label>
 				</div>
 				<table class="table table-striped table-hover table-bordered dataTable no-footer" at-config="config">

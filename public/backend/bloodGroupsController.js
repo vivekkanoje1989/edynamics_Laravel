@@ -7,6 +7,9 @@ app.controller('bloodsGroupCtrl', ['$scope', 'Data', '$rootScope', '$timeout', '
     $scope.pageNumber = 1;
     $scope.noOfRows = 1;
 
+    //viveknk for itemperpage model dropdown
+    $scope.itemsPerPageModel = [1, 30, 100, 200, 300, 400, 500, 600, 700, 800, 900, 999];
+
     $scope.pageChanged = function(pageNo, functionName, id) {
         $scope.itemsPerPage = parseInt($scope.itemsPerPage);
         pageNo = parseInt(pageNo);

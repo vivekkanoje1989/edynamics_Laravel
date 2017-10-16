@@ -1,7 +1,7 @@
 <div class="row" ng-controller="hrController">
     <div class="widget flat radius-bordered ">
         <div class="col-lg-12 col-sm-12 col-xs-12">
-            <h5 class="row-title before-themeprimary"><i class="fa fa-chevron-left themeprimary" title="Go Back" style="cursor: pointer;" ng-click="backpage()"></i><i class="fa  fa-arrow-circle-o-right themeprimary"></i>Define Role</h5>
+            <h5 class="row-title before-themeprimary"><i class="fa fa-chevron-left themeprimary" title="Go Back" style="cursor: pointer;border-right: 1px solid;padding-right: 11px;" ng-click="backpage()"> Back</i><i class="fa  fa-arrow-circle-o-right themeprimary"></i>Define Role</h5>
         </div>
         <form name="RoleForm" novalidate ng-submit="RoleForm.$valid && createRole(RoleData)">
             <input type="hidden" ng-model="RoleForm.csrfToken" name="csrftoken" id="csrftoken" ng-init="RoleForm.csrfToken = '<?php echo csrf_token(); ?>'" class="form-control">

@@ -17,8 +17,8 @@
     <input type="hidden" name="employeeId" id="employeeId"  value="[[$empId]]" ng-cloak="" >
     
     <div class="col-lg-12 col-sm-12 col-xs-12">    
-        <h5 class="row-title before-themeprimary"><i class="fa fa-chevron-left themeprimary" title="Go Back" style="cursor: pointer;" ng-click="backpage()"></i><i class="fa  fa-arrow-circle-o-right themeprimary"></i>Edit Employee <i class='fa fa-spinner fa-spin'  ng-show="vkloader"></i></h5>
-        <div id="WiredWizard" class="wizard wizard-wired" data-target="#WiredWizardsteps">
+        <h5 class="row-title before-themeprimary"><i class="fa fa-chevron-left themeprimary" title="Go Back" style="cursor: pointer;border-right: 1px solid;padding-right: 11px;" ng-click="backpage()"> Back</i><i class="fa  fa-arrow-circle-o-right themeprimary"></i>Edit Employee <i class='fa fa-spinner fa-spin'  ng-show="vkloader"></i></h5>
+        <div id="WiredWizard" class="wizard wizard-wired" data-target="#WiredWizardsteps" >
             <ul class="steps">
                 <li   ng-click="getStepDiv(1, steps, 1, steps.first_name)" id="step1" ng-class="{'complete':steps.first_name == 1}" class="user_steps wiredstep1"><span class="step">1</span><span class="title">Personal Information</span><span class="chevron"></span></li>
                 <li   ng-click="getStepDiv(2, steps, 1, steps.personal_email1)" id="step2" ng-class="{'complete':steps.personal_email1 == 1}" class="user_steps wiredstep2"><span class="step btn-nxt1">2</span><span class="title">Contact Information</span> <span class="chevron"></span></li>

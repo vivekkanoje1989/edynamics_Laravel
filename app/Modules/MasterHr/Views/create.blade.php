@@ -16,7 +16,7 @@
 <div class="row" >
     <input type="hidden" name="employeeId" id="employeeId"  value="[[$empId]]" >
     <div class="col-lg-12 col-sm-12 col-xs-12" ng-controller="hrController" >
-        <h5 class="row-title before-themeprimary"><i class="fa fa-chevron-left themeprimary" title="Go Back" style="cursor: pointer;" ng-click="backpage()"></i><i class="fa  fa-arrow-circle-o-right themeprimary"></i>New User</h5>
+        <h5 class="row-title before-themeprimary"><i class="fa fa-chevron-left themeprimary" title="Go Back" style="cursor: pointer;border-right: 1px solid;padding-right: 11px;" ng-click="backpage()">  Back</i><i class="fa  fa-arrow-circle-o-right themeprimary"></i> New User</h5>
         <div id="WiredWizard" class="wizard wizard-wired" data-target="#WiredWizardsteps">
             <ul class="steps">
                 <li  class="wiredstep1 active"><span class="step">1</span><span class="title">Personal Information</span><span class="chevron"></span></li>
@@ -456,7 +456,7 @@
                                     <div class="form-group" ng-class="{ 'has-error' : step2 && (userContactForm.permenent_country_id.$invalid)}">
                                         <label for="">Select Country <span class="sp-err">*</span></label>
                                         <span class="input-icon icon-right">
-                                            <select ng-change="onPCountryChange()" ng-model="userContact.permenent_country_id" name="permenent_country_id" class="form-control" required>
+                                            <select ng-change="onPCountryChange()" ng-model="userContact.permenent_country_id" name="permenent_country_id" id="permenent_country_id" class="form-control" required>
                                                 <option value="">Select Country</option>
                                                 <option ng-repeat="country in countryList" value="{{country.id}}" ng-selected="{{ country.id == userContact.permenent_country_id}}">{{country.name}}</option>
                                             </select>

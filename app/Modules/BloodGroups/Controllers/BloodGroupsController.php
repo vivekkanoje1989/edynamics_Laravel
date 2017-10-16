@@ -110,7 +110,7 @@ class BloodGroupsController extends Controller {
         $postdata = file_get_contents('php://input');
         $request = json_decode($postdata, true);
 
-        $getCount = MlstBloodGroups::where(['blood_group' => $request['blood_group']])->where('id', '!=', $id)->get()->count();
+        $getCount = MlstBloodGroups::where(['blood_group' => $request['blood_group']])->where('id', '!=', $id)->where('deleted_status', '=', 0 )->get()->count();
         if ($getCount > 0) {
             $result = ['success' => false, 'errormsg' => 'Blood group already exists'];
             return json_encode($result);

@@ -542,7 +542,8 @@ app.controller('hrController', ['$rootScope', '$scope', '$state', 'Data', 'Uploa
                     $scope.listUsersLength = response.records.total;
 
                 } else if (action == "edit") {
-                    if (id !== 0) {
+                    // console.log("edit=" + JSON.stringify(response));
+                    if (id != 0) {
                         $scope.Total = 1;
                         var blood_group_id = response.records.data[0].blood_group_id == '' ? 0 : 1;
                         var first_name = response.records.data[0].first_name == '' ? 0 : 1;
@@ -554,13 +555,13 @@ app.controller('hrController', ['$rootScope', '$scope', '$state', 'Data', 'Uploa
                         } else {
                             var username = 0;
                         }
-                        if (blood_group_id == 0) {
-                            var first_name = 0;
-                            var personal_email1 = 0;
-                            var highest_education_id = 0;
-                            var department_id = 0;
-                            var username = 0;
-                        }
+                        // if (blood_group_id == 0) { removed by Viveknk as this disables widget selection
+                        //     var first_name = 0;
+                        //     var personal_email1 = 0;
+                        //     var highest_education_id = 0;
+                        //     var department_id = 0;
+                        //     var username = 0;
+                        // }
                         $scope.Total = $scope.Total + first_name + personal_email1 + highest_education_id + department_id + username;
 
                         if ($scope.Total < 6) {
@@ -579,6 +580,7 @@ app.controller('hrController', ['$rootScope', '$scope', '$state', 'Data', 'Uploa
                             deptId: department_id,
                             username: username
                         };
+
                         $scope.getStepDiv(1, $rootScope.steps, 2, 1);
                         if (response.records.data[0].current_address != '') {
                             if (response.records.data[0].current_address == response.records.data[0].permenent_address && response.records.data[0].current_city_id == response.records.data[0].permenent_city_id && response.records.data[0].current_country_id == response.records.data[0].permenent_country_id && response.records.data[0].current_pin == response.records.data[0].permenent_pin && response.records.data[0].current_state_id == response.records.data[0].permenent_state_id) {
@@ -1942,6 +1944,7 @@ app.controller('hrController', ['$rootScope', '$scope', '$state', 'Data', 'Uploa
     //                });
     //            }
     //        }
+
     $scope.getStepDiv = function(stepId, steps, uniqueId, classCheck) {
         if (classCheck == 1) {
             if (uniqueId == 1) {
