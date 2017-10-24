@@ -96,6 +96,7 @@ class BmsConsumptionController extends Controller {
     public function allSmsLogs() {
         $postdata = file_get_contents("php://input");
         $request = json_decode($postdata, true);
+        dd( $request);
         if (!empty($request["employee_id"])) {
             $emp_id = $request["employee_id"];
             if ($request['filterFlag'] == 1) {

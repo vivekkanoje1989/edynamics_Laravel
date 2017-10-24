@@ -4,6 +4,8 @@ app.controller('hrController', ['$rootScope', '$scope', '$state', 'Data', 'Uploa
     $scope.adnBtn = "Add New Employee";
     $scope.adnBtnMngRole = "Add New Role";
 
+    $rootScope.vbreadcumbs = []; //viveknk breadcumb
+
     //viveknk vloader
     $scope.vloader = false;
     $scope.vkloader = false;
@@ -117,6 +119,49 @@ app.controller('hrController', ['$rootScope', '$scope', '$state', 'Data', 'Uploa
     $scope.quickUser = function() {
         $state.go('quickUser');
     };
+
+    //viveknk call to dashboard
+    $scope.goDashboard = function() {
+        $state.go('dashboard');
+    };
+
+    //viveknk call to Listemployee
+    $scope.goListemployee = function() {
+        $state.go('userIndex');
+    };
+
+    //viveknk call to Manage role
+    $scope.goManagerole = function() {
+        $state.go('manageRoles');
+    };
+
+    //viveknk call to AddNewemployee
+    $scope.goAddNewemployee = function() {
+        $state.go('user');
+    };
+
+    //viveknk call to Quickemployee
+    $scope.goQuickemployee = function() {
+        $state.go('quickUser');
+    };
+
+    //viveknk call to PermissionWEmp
+    $scope.goPermissionWEmp = function() {
+        $state.go('showpermissions');
+    };
+
+    //viveknk call to Emppermission
+    $scope.goEmppermission = function() {
+        $state.go('userPermissions');
+    };
+
+    //viveknk call to Emppermission
+    $scope.goDefinerole = function() {
+        $state.go('manageRoles');
+    };
+
+
+
 
     //viveknk call to Create user page
     $scope.userCreate = function() {
@@ -527,7 +572,7 @@ app.controller('hrController', ['$rootScope', '$scope', '$state', 'Data', 'Uploa
 
     $scope.manageUsers = function(id, action) {
         $scope.modal = {};
-        // $scope.showloader();
+
         $scope.userStatus = {};
         $scope.userId = id;
         $scope.employeeId = id;
@@ -538,11 +583,13 @@ app.controller('hrController', ['$rootScope', '$scope', '$state', 'Data', 'Uploa
             if (response.success) {
                 $scope.flagForChange = 0;
                 if (action == "index") {
+                    $scope.showloader();
                     $scope.listUsers = response.records.data;
                     $scope.listUsersLength = response.records.total;
 
                 } else if (action == "edit") {
                     // console.log("edit=" + JSON.stringify(response));
+                    $scope.showloader();
                     if (id != 0) {
                         $scope.Total = 1;
                         var blood_group_id = response.records.data[0].blood_group_id == '' ? 0 : 1;
@@ -884,7 +931,7 @@ app.controller('hrController', ['$rootScope', '$scope', '$state', 'Data', 'Uploa
                     }
                 });
             }
-            // $scope.hideloader();
+            $scope.hideloader();
         });
     };
 
@@ -1292,12 +1339,14 @@ app.controller('hrController', ['$rootScope', '$scope', '$state', 'Data', 'Uploa
         }
         /****************** Roles *********************/
     $scope.manageRoles = function() {
+        $scope.showloader();
         Data.get('master-hr/getRoles').then(function(response) {
             if (response.success) {
                 $scope.roleList = response.list;
             } else {
                 $scope.errorMsg = response.message;
             }
+            $scope.hideloader();
         });
     }
 
@@ -1527,6 +1576,7 @@ app.controller('hrController', ['$rootScope', '$scope', '$state', 'Data', 'Uploa
         /****************** Roles *********************/
         /****************** Organization Chart *********************/
     $scope.showchartdata = function() {
+            $scope.showloader();
             google.charts.load('current', { packages: ["orgchart"] });
             google.charts.setOnLoadCallback(drawChart);
 
@@ -1551,6 +1601,7 @@ app.controller('hrController', ['$rootScope', '$scope', '$state', 'Data', 'Uploa
                     chart.draw(data, { allowHtml: true });
                 });
             }
+            $scope.hideloader();
         }
         /****************** Organization Chart *********************/
 

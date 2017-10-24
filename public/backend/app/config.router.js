@@ -43,7 +43,8 @@ angular.module('app')
                                                 '/backend/lib/jquery/charts/flot/jquery.flot.tooltip.js',
                                                 '/backend/lib/jquery/charts/flot/jquery.flot.orderBars.js',
                                                 '/backend/app/controllers/dashboard.js',
-                                                '/backend/app/directives/realtimechart.js'
+                                                '/backend/app/directives/realtimechart.js',
+                                                '/backend/dashBoardController.js',
                                             ]
                                         });
                                     }
@@ -59,7 +60,7 @@ angular.module('app')
                         controller: 'hrController',
                         requiredLogin: true,
                         ncyBreadcrumb: {
-                            label: 'HR / Employee Management / List Employee / New Employee',
+                            label: 'New Employee',
                             description: ''
                         },
                         resolve: {
@@ -87,7 +88,7 @@ angular.module('app')
                         controller: 'hrController',
                         requiredLogin: true,
                         ncyBreadcrumb: {
-                            label: 'HR / Employee Management / List Employee',
+                            label: 'List Employee',
                             description: ''
                         },
                         resolve: {
@@ -117,7 +118,7 @@ angular.module('app')
                         controller: 'hrController',
                         requiredLogin: true,
                         ncyBreadcrumb: {
-                            label: 'HR / Employee Management / List Employee / Edit Employee',
+                            label: 'Edit Employee',
                             description: ''
                         },
                         resolve: {
@@ -146,7 +147,7 @@ angular.module('app')
                         controller: 'hrController',
                         requiredLogin: true,
                         ncyBreadcrumb: {
-                            label: 'HR / Employee Management / List Employee / Permission Wise Employee',
+                            label: 'Permission Wise Employee',
                             description: ''
                         },
                         resolve: {
@@ -173,7 +174,7 @@ angular.module('app')
                         controller: 'hrController',
                         requiredLogin: true,
                         ncyBreadcrumb: {
-                            label: 'HR / Role Management / Manage Role',
+                            label: 'Manage Role',
                             description: ''
                         },
                         resolve: {
@@ -199,7 +200,7 @@ angular.module('app')
                         requiredLogin: true,
                         ncyBreadcrumb: {
                             // label: 'Create Role Permissions',
-                            label: 'HR / Role Management / Create Role',
+                            label: 'Define Role',
                             description: ''
                         },
                         resolve: {
@@ -229,7 +230,7 @@ angular.module('app')
                         controller: 'hrController',
                         requiredLogin: true,
                         ncyBreadcrumb: {
-                            label: 'HR / Employee Management / List Employee / Employee Permissions',
+                            label: 'Employee Permissions',
                             description: ''
                         },
                         resolve: {
@@ -471,7 +472,7 @@ angular.module('app')
                         templateUrl: '/master-hr/orgchart',
                         requiredLogin: true,
                         ncyBreadcrumb: {
-                            label: 'HR / Employee Management / Organization Chart',
+                            label: 'Organization Chart',
                             description: ''
                         },
                         resolve: {
@@ -1153,7 +1154,7 @@ angular.module('app')
                         templateUrl: '/email-config/',
                         requiredLogin: true,
                         ncyBreadcrumb: {
-                            label: 'Settings / Email Account Configuration'
+                            label: 'Email Account Configuration'
                         },
                         resolve: {
                             deps: [
@@ -2494,7 +2495,7 @@ angular.module('app')
                         templateUrl: '/blood-groups/',
                         requiredLogin: true,
                         ncyBreadcrumb: {
-                            label: 'Settings / List Management / Manage blood groups',
+                            label: 'Manage blood groups',
                             description: ''
                         },
                         resolve: {
@@ -2524,7 +2525,7 @@ angular.module('app')
                     templateUrl: '/manageVerticals/',
                     requiredLogin: true,
                     ncyBreadcrumb: {
-                        label: 'Settings / List Management / Manage Verticals',
+                        label: 'Manage Verticals',
                         description: ''
                     },
                     resolve: {
@@ -2554,7 +2555,7 @@ angular.module('app')
                     templateUrl: '/manageClientRole/',
                     requiredLogin: true,
                     ncyBreadcrumb: {
-                        label: 'Settings / List Management / Manage Client Roles',
+                        label: 'Manage Client Roles',
                         description: ''
                     },
                     resolve: {
@@ -2584,7 +2585,7 @@ angular.module('app')
                     templateUrl: '/manageTitle/',
                     requiredLogin: true,
                     ncyBreadcrumb: {
-                        label: 'Settings / List Management / Manage Titles',
+                        label: 'Manage Titles',
                         description: ''
                     },
                     resolve: {
@@ -2614,7 +2615,7 @@ angular.module('app')
                     templateUrl: '/manageGender/',
                     requiredLogin: true,
                     ncyBreadcrumb: {
-                        label: 'Settings / List Management / Manage Gender',
+                        label: 'Manage Gender',
                         description: ''
                     },
                     resolve: {
@@ -2644,7 +2645,7 @@ angular.module('app')
                     templateUrl: '/manageCompanyTypes/',
                     requiredLogin: true,
                     ncyBreadcrumb: {
-                        label: 'Settings / List Management / Manage Company Types',
+                        label: 'Manage Company Types',
                         description: ''
                     },
                     resolve: {
@@ -2674,7 +2675,7 @@ angular.module('app')
                         templateUrl: '/manage-country/',
                         requiredLogin: true,
                         ncyBreadcrumb: {
-                            label: 'Settings / List Management / Manage Country',
+                            label: 'Manage Country',
                             description: ''
                         },
                         resolve: {
@@ -2700,7 +2701,7 @@ angular.module('app')
                         templateUrl: '/manage-states/',
                         requiredLogin: true,
                         ncyBreadcrumb: {
-                            label: 'Settings / List Management / Manage State',
+                            label: 'Manage State',
                             description: ''
                         },
                         resolve: {
@@ -2726,7 +2727,7 @@ angular.module('app')
                         templateUrl: '/manage-city/',
                         requiredLogin: true,
                         ncyBreadcrumb: {
-                            label: 'Settings / List Management / Manage City',
+                            label: 'Manage City',
                             description: ''
                         },
                         resolve: {
@@ -2779,7 +2780,7 @@ angular.module('app')
                         templateUrl: '/highest-education/',
                         requiredLogin: true,
                         ncyBreadcrumb: {
-                            label: 'Settings / List Management / Manage Highest Education',
+                            label: 'Manage Highest Education',
                             description: ''
                         },
                         resolve: {
@@ -2805,7 +2806,7 @@ angular.module('app')
                         templateUrl: '/manage-department/',
                         requiredLogin: true,
                         ncyBreadcrumb: {
-                            label: 'Settings / List Management / Manage Department',
+                            label: 'Manage Department',
                             description: ''
                         },
                         resolve: {
@@ -2831,7 +2832,7 @@ angular.module('app')
                         templateUrl: '/manage-profession/',
                         requiredLogin: true,
                         ncyBreadcrumb: {
-                            label: 'Settings / List Management / Manage Profession',
+                            label: 'Manage Profession',
                             description: ''
                         },
                         resolve: {
@@ -2883,7 +2884,7 @@ angular.module('app')
                         templateUrl: '/lost-reasons/',
                         requiredLogin: true,
                         ncyBreadcrumb: {
-                            label: 'Settings / List Management / Manage Lost Reasons'
+                            label: 'Manage Lost Reasons'
                         },
                         resolve: {
                             deps: [
@@ -2933,7 +2934,7 @@ angular.module('app')
                         templateUrl: '/enquiry-source/',
                         requiredLogin: true,
                         ncyBreadcrumb: {
-                            label: 'Settings / List Management / Manage enquiry source'
+                            label: 'Manage enquiry source'
                         },
                         resolve: {
                             deps: [
@@ -3008,7 +3009,7 @@ angular.module('app')
                         templateUrl: '/project-types/',
                         requiredLogin: true,
                         ncyBreadcrumb: {
-                            label: 'Settings / List Management / Manage Project Types'
+                            label: 'Manage Project Types'
                         },
                         resolve: {
                             deps: [
@@ -3628,7 +3629,7 @@ angular.module('app')
                         templateUrl: '/manage-designations/',
                         requiredLogin: true,
                         ncyBreadcrumb: {
-                            label: 'Settings / List Management / Manage Designations',
+                            label: 'Manage Designations',
                             description: ''
                         },
                         resolve: {
@@ -3907,7 +3908,7 @@ angular.module('app')
                     templateUrl: '/user-document/',
                     requiredLogin: true,
                     ncyBreadcrumb: {
-                        label: 'HR / Employee Management / Employee Documents',
+                        label: 'Employee Documents',
                         description: ''
                     },
                     resolve: {
@@ -3934,7 +3935,7 @@ angular.module('app')
                     templateUrl: '/employeeSalaryslip',
                     requiredLogin: true,
                     ncyBreadcrumb: {
-                        label: 'HR / Salary Slips',
+                        label: 'Salary Slips',
                         description: ''
                     },
                     resolve: {
@@ -3961,10 +3962,7 @@ angular.module('app')
                     templateUrl: '/employeeSalaryslip/mysalaryslip',
                     requiredLogin: true,
                     ncyBreadcrumb: {
-                        label: 'Dashboard / My Salary Slips',
-                        // label: [{ 'a': 'dashboard', 'B': 'http://google.co.in' },
-                        //     { 'a': 'My Salary Slips', 'B': 'http://google.co.in' }
-                        // ],
+                        label: 'My Salary Slips',
                         description: ''
                     },
                     resolve: {
@@ -3991,7 +3989,7 @@ angular.module('app')
                     templateUrl: '/employee-document/',
                     requiredLogin: true,
                     ncyBreadcrumb: {
-                        label: 'HR / Employee Management / Manage Documents',
+                        label: 'Manage Documents',
                         description: ''
                     },
                     resolve: {
@@ -4608,7 +4606,7 @@ angular.module('app')
                         controller: 'hrController',
                         requiredLogin: true,
                         ncyBreadcrumb: {
-                            label: 'HR / Employee Management / List Employee / Quick Employee',
+                            label: 'Quick Employee',
                             description: ''
                         },
                         resolve: {

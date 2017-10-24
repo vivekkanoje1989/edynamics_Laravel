@@ -1,4 +1,4 @@
-app.controller('employeeDocumentsCtrl', ['$scope', 'Data', '$rootScope', '$timeout', 'toaster', function($scope, Data, $rootScope, $timeout, toaster) {
+app.controller('employeeDocumentsCtrl', ['$scope', '$state', '$stateParams', 'Data', '$rootScope', '$timeout', 'toaster', function($scope, $state, $stateParams, Data, $rootScope, $timeout, toaster) {
     //for OrderFunction
     $scope.OrderRec = 'document_name';
     $scope.adnBtn = "Add New Document";
@@ -86,8 +86,10 @@ app.controller('employeeDocumentsCtrl', ['$scope', 'Data', '$rootScope', '$timeo
 
 
     $scope.manageEmployeeDocuments = function() {
+        $scope.showloader();
         Data.get('employee-document/employeeDocuments').then(function(response) {
             $scope.DocumentsRow = response.records;
+            $scope.hideloader();
         });
     };
 
@@ -160,6 +162,16 @@ app.controller('employeeDocumentsCtrl', ['$scope', 'Data', '$rootScope', '$timeo
         $scope.noOfRows = parseInt(num);
         $scope.itemsPerPage = parseInt($scope.itemsPerPage);
         $scope.currentPage = num * $scope.itemsPerPage;
+    };
+
+    //viveknk call to dashboard
+    $scope.goDashboard = function() {
+        $state.go('dashboard');
+    };
+
+    //viveknk call to dashboard
+    $scope.goManagedocuments = function() {
+        $state.go('documentIndex');
     };
 }]);
 

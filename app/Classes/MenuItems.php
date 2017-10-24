@@ -207,16 +207,20 @@ class MenuItems {
                             2 => array('id' => '040502', 'name' => 'Import Enquiries', 'icon' => '', 'url' => '/sales/importEnquiry', 'slug' => 'importEnquiryIndex', 'uiSrefActive' => 'active', 'total_submenu' => 1),
                         )),
                 )),
-            5 => array('name' => 'Groups', 'icon' => 'proj-img menu-icon-sz', 'ui-sref-active' => '', 'url' => '', 'slug' => '#', 'has_submenu' => true, 'total_submenu' => 1,
-                'submenu_ids' => '0501', 'anchorClass' => 'menu-dropdown', 'submenuClass' => 'submenu', 'liClass' => 'open', 'submenu' => array(
-                    1 => array('id' => '0501', 'name' => 'Clients', 'icon' => '', 'ui-sref-active' => '', 'slug' => 'clientsIndex', 'has_submenu' => true, 'total_submenu' => 0,
+            // 5 => array('name' => 'Groups', 'icon' => 'proj-img menu-icon-sz', 'ui-sref-active' => '', 'url' => '', 'slug' => '#', 'has_submenu' => true, 'total_submenu' => 1,
+            //     'submenu_ids' => '0501', 'anchorClass' => 'menu-dropdown', 'submenuClass' => 'submenu', 'liClass' => 'open', 'submenu' => array(
+            //         1 => array('id' => '0501', 'name' => 'Clients', 'icon' => '', 'url' => '/underconstruction', 'slug' => 'underconstruction', 'uiSrefActive' => 'active', 'total_submenu' => 1),
+            //     )),
+            // 5 => array('name' => 'Groups', 'icon' => 'proj-img menu-icon-sz', 'ui-sref-active' => '', 'url' => '', 'slug' => '#', 'has_submenu' => true, 'total_submenu' => 1,
+            //     'submenu_ids' => '0501', 'anchorClass' => 'menu-dropdown', 'submenuClass' => 'submenu', 'liClass' => 'open', 'submenu' => array(
+            //         1 => array('id' => '0501', 'name' => 'Clients', 'icon' => '', 'ui-sref-active' => '', 'slug' => 'clientsIndex', 'has_submenu' => true, 'total_submenu' => 0,
                         //,0502,0503,0504 'submenu_ids' => '050101,050102,050103,050104', 'anchorClass' => 'menu-dropdown', 'submenuClass' => 'submenu', 'liClass' => 'open', 'submenu' => array(
                         //     1 => array('id' => '050101', 'name' => 'Manage Projects', 'icon' => '', 'url' => '/project/manage', 'slug' => 'manageProjectIndex', 'uiSrefActive' => 'active', 'total_submenu' => 1),
                         //     2 => array('id' => '050102', 'name' => 'New Project', 'icon' => '', 'url' => '/project/create', 'slug' => 'projectCreate', 'uiSrefActive' => 'active', 'total_submenu' => 1),
                         //     3 => array('id' => '050103', 'name' => 'Project Webpage', 'icon' => '', 'url' => '/project/webpage', 'slug' => 'projectWebPage', 'uiSrefActive' => 'active', 'total_submenu' => 1),
                         //     4 => array('id' => '050104', 'name' => 'Project Availability', 'icon' => '', 'url' => '/underconstruction', 'slug' => 'underconstruction', 'uiSrefActive' => 'active', 'total_submenu' => 1),
                         // )
-                    ),
+                    // ),
             //         2 => array('id' => '0502', 'name' => 'Manage Project Stages', 'icon' => '', 'url' => '/underconstruction', 'slug' => 'underconstruction', 'has_submenu' => true, 'uiSrefActive' => 'active', 'total_submenu' => 1,
             //             'submenu_ids' => '050201', 'anchorClass' => 'menu-dropdown', 'submenuClass' => 'submenu', 'liClass' => 'open', 'submenu' => array(
             //                 1 => array('id' => '050201', 'name' => 'Manage', 'icon' => '', 'url' => '/underconstruction', 'slug' => 'underconstruction', 'uiSrefActive' => 'active', 'total_submenu' => 1),
@@ -230,7 +234,7 @@ class MenuItems {
             //                 1 => array('id' => '050401', 'name' => 'Manage Rate\'s', 'icon' => '', 'url' => '/underconstruction', 'slug' => 'underconstruction', 'uiSrefActive' => 'active', 'total_submenu' => 1),
             //                 2 => array('id' => '050402', 'name' => 'Manage Floor Rise', 'icon' => '', 'url' => '/underconstruction', 'slug' => 'underconstruction', 'uiSrefActive' => 'active', 'total_submenu' => 1),
             //             )),
-                )),
+                // )),
             6 => array('name' => 'Response', 'icon' => 'resp-img menu-icon-sz', 'ui-sref-active' => '', 'url' => '', 'slug' => 'response', 'has_submenu' => true, 'total_submenu' => 4,
                 'submenu_ids' => '0601,0602,0603,0604', 'anchorClass' => 'menu-dropdown', 'submenuClass' => 'submenu', 'liClass' => 'open', 'submenu' => array(
                     1 => array('id' => '0601', 'name' => 'Web Enquiries', 'icon' => '', 'ui-sref-active' => '', 'slug' => '#', 'has_submenu' => true, 'total_submenu' => 1,

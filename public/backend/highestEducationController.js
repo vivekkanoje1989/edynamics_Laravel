@@ -1,4 +1,4 @@
-app.controller('highestEducationCtrl', ['$scope', 'Data', 'toaster', function($scope, Data, toaster) {
+app.controller('highestEducationCtrl', ['$scope', '$state', '$stateParams', 'Data', 'toaster', function($scope, $state, $stateParams, Data, toaster) {
     //for OrderFunction
     $scope.OrderRec = 'education';
     $scope.adnBtn = "Add New Highest Education";
@@ -22,9 +22,11 @@ app.controller('highestEducationCtrl', ['$scope', 'Data', 'toaster', function($s
     }
 
     $scope.manageHighestEducation = function() {
+        $scope.showloader();
         Data.post('highest-education/manageHighestEducation').then(function(response) {
             $scope.educationRow = response.records;
             $scope.educationRowCount = response.totalCount;
+            $scope.hideloader();
         });
     };
 
@@ -146,6 +148,11 @@ app.controller('highestEducationCtrl', ['$scope', 'Data', 'toaster', function($s
     $scope.pageChangeHandler = function(num) {
         $scope.noOfRows = num;
         $scope.currentPage = num * $scope.itemsPerPage;
+    };
+
+    //viveknk call to dashboard
+    $scope.goDashboard = function() {
+        $state.go('dashboard');
     };
 
 }]);

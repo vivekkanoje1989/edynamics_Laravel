@@ -96,7 +96,18 @@
 <!--Skin Script: Place this script in head to load scripts for skins and rtl support (maximize minimize close pane)-->
 <!--script src="assets/js/skins.min.js"></script-->
 
-<div class="col-xs-12 col-md-12" ng-controller="employeeSalaryslipController" ng-init="getMySalaryslips()">
+<div class="col-xs-12 col-md-12" ng-controller="employeeSalaryslipController" ng-init="getMySalaryslips(); vbreadcumbs = [
+            {'displayName': 'Home', 'url': 'goDashboard()'},
+            {'displayName': 'Dashboard', 'url': 'goDashboard()'},            
+            {'displayName': 'My Salary slip', 'url': 'goListemployee()'}
+        ];">
+    <div class="page-breadcrumbs {{settings.fixed.breadcrumbs ? 'breadcrumbs-fixed' : ''}}" style="position: fixed; top: 44px;box-shadow: 0 2px 4px 0 rgba(245, 238, 238, 0.15)">
+        <ol class="breadcrumb" >
+            <i class="fa fa-home" aria-hidden="true" style="font-size: 20px;color: gray;">&nbsp;</i>
+            <li ng-repeat="crumb in vbreadcumbs" ng-class="{ active: $last }"><a href="javascript:void(0)" ng-click="{{crumb.url}}" ng-if="!$last">{{ crumb.displayName }}&nbsp;</a><span ng-show="$last">{{ crumb.displayName }}</span>
+            </li>
+        </ol>
+    </div>
 	<div class="widget">
 		<div class="widget-header ">
 			<span class="widget-caption">My Salary Slips</span>
@@ -207,7 +218,7 @@
 
 			<div class="DTTTFooter">
                 <div class="col-sm-6">
-                	<div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite" >Showing page {{noOfRows}} of {{ bloodGrpLength }} entries </div>
+                	<div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite" >Showing page {{noOfRows}} of {{ myslrslips.length }} entries </div>
                 	<!--div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite" >Showing page {{noOfRows}} from {{itemsPerPage*(noOfRows-1)+1}} to {{(itemsPerPage*(noOfRows-1))+ itemsPerPage}} of {{ bloodGrpLength }} entries </div-->
                    <!--div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Page No. {{noOfRows}}</div-->
                 </div>

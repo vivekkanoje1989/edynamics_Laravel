@@ -28,8 +28,19 @@
 
 <!--Skin Script: Place this script in head to load scripts for skins and rtl support (maximize minimize close pane)-->
 <!--script src="assets/js/skins.min.js"></script-->
-
-<div class="col-xs-12 col-md-12" ng-controller="employeeDocumentsCtrl" ng-init="manageEmployeeDocuments()">
+<div class="col-xs-12 col-md-12" ng-controller="employeeDocumentsCtrl" ng-init="manageEmployeeDocuments(); vbreadcumbs = [
+            {'displayName': 'Home', 'url': 'goDashboard()'},
+            {'displayName': 'Hr', 'url': 'goManagedocuments()'},
+            {'displayName': 'Employee Management', 'url': 'goManagedocuments()'},
+            {'displayName': 'Manage Documents', 'url': 'goManagedocuments()'}
+        ]">
+	<div class="page-breadcrumbs {{settings.fixed.breadcrumbs ? 'breadcrumbs-fixed' : ''}}" style=" position: relative; top: -98px;box-shadow: 0 2px 4px 0 rgba(245, 238, 238, 0.15)" >
+		<ol class="breadcrumb" >
+			<i class="fa fa-home" aria-hidden="true" style="font-size: 20px;color: gray;">&nbsp;</i>
+			<li ng-repeat="crumb in vbreadcumbs" ng-class="{ active: $last }"><a href="javascript:void(0)" ng-click="{{crumb.url}}" ng-if="!$last">{{ crumb.displayName }}&nbsp;</a><span ng-show="$last">{{ crumb.displayName }}</span>
+			</li>
+		</ol>
+	</div>
 	<div class="widget">
 		<div class="widget-header ">
 			<span class="widget-caption">Manage Documents</span>

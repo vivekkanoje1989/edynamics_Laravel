@@ -1,4 +1,4 @@
-app.controller('projecttypesController', ['$scope', 'Data', 'toaster', '$rootScope', '$timeout', '$location', function($scope, Data, toaster, $rootScope, $timeout, $location) {
+app.controller('projecttypesController', ['$scope', '$state', '$stateParams', 'Data', 'toaster', '$rootScope', '$timeout', '$location', function($scope, $state, $stateParams, Data, toaster, $rootScope, $timeout, $location) {
     //for OrderFunction
     $scope.OrderRec = 'project_type';
     $scope.adnBtn = "Add New Project Type";
@@ -8,9 +8,11 @@ app.controller('projecttypesController', ['$scope', 'Data', 'toaster', '$rootSco
     $scope.proTypeBtn = false;
 
     $scope.manageProjectTypes = function() {
+        $scope.showloader();
         Data.post('project-types/manageProjectTypes').then(function(response) {
             $scope.ProjectTypesRow = response.records;
             $scope.ProjectTypesRowLength = response.totalCount;
+            $scope.hideloader();
         });
     };
 
@@ -138,5 +140,10 @@ app.controller('projecttypesController', ['$scope', 'Data', 'toaster', '$rootSco
     $scope.pageChangeHandler = function(num) {
         $scope.noOfRows = num;
         $scope.currentPage = num * $scope.itemsPerPage;
+    };
+
+    //viveknk call to dashboard
+    $scope.goDashboard = function() {
+        $state.go('dashboard');
     };
 }]);

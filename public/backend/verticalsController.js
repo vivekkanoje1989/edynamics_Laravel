@@ -1,4 +1,4 @@
-app.controller('verticalCtrl', ['$scope', 'Data', 'toaster', '$rootScope', '$timeout', '$location', function($scope, Data, toaster, $rootScope, $timeout, $location) {
+app.controller('verticalCtrl', ['$scope', '$state', '$stateParams', 'Data', 'toaster', '$rootScope', '$timeout', '$location', function($scope, $state, $stateParams, Data, toaster, $rootScope, $timeout, $location) {
     //for OrderFunction
     $scope.OrderRec = 'name';
     $scope.adnBtn = "Add New Vertical";
@@ -152,5 +152,10 @@ app.controller('verticalCtrl', ['$scope', 'Data', 'toaster', '$rootScope', '$tim
         $scope.noOfRows = parseInt(num);
         $scope.itemsPerPage = parseInt($scope.itemsPerPage);
         $scope.currentPage = num * $scope.itemsPerPage;
+    };
+
+    //viveknk call to dashboard
+    $scope.goDashboard = function() {
+        $state.go('dashboard');
     };
 }]);

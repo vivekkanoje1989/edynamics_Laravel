@@ -1,4 +1,4 @@
-app.controller('emailconfigCtrl', ['$scope', 'Data', '$rootScope', '$timeout', 'toaster', '$state', function($scope, Data, $rootScope, $timeout, toaster, $state) {
+app.controller('emailconfigCtrl', ['$scope', '$state', '$stateParams', 'Data', '$rootScope', '$timeout', 'toaster', '$state', function($scope, $state, $stateParams, Data, $rootScope, $timeout, toaster, $state) {
     //for OrderFunction
     $scope.OrderRec = 'email';
     $scope.adnBtn = "Add New Email Account";
@@ -310,6 +310,11 @@ app.controller('emailconfigCtrl', ['$scope', 'Data', '$rootScope', '$timeout', '
         $scope.noOfRows = parseInt(num);
         $scope.itemsPerPage = parseInt($scope.itemsPerPage);
         $scope.currentPage = num * $scope.itemsPerPage;
+    };
+
+    //viveknk call to dashboard
+    $scope.goDashboard = function() {
+        $state.go('dashboard');
     };
 
 }]);

@@ -1,4 +1,4 @@
-app.controller('manageDepartmentCtrl', ['$scope', 'Data', '$rootScope', '$timeout', 'toaster', '$location', function($scope, Data, $rootScope, $timeout, toaster, $location) {
+app.controller('manageDepartmentCtrl', ['$scope', '$state', '$stateParams', 'Data', '$rootScope', '$timeout', 'toaster', '$location', function($scope, $state, $stateParams, Data, $rootScope, $timeout, toaster, $location) {
     //for OrderFunction
     $scope.OrderRec = 'department_name';
     $scope.adnBtn = "Add New Department";
@@ -9,10 +9,12 @@ app.controller('manageDepartmentCtrl', ['$scope', 'Data', '$rootScope', '$timeou
     $scope.deptBtn = false;
 
     $scope.manageDepartment = function() {
+        $scope.showloader();
         Data.post('manage-department/manageDepartment').then(function(response) {
             $scope.departmentRow = response.records;
             $scope.departmentRowCount = response.totalCount;
             // console.log("departmentRow==>"+ JSON.stringify($scope.departmentRow));
+            $scope.hideloader();
         });
     };
 
@@ -162,5 +164,10 @@ app.controller('manageDepartmentCtrl', ['$scope', 'Data', '$rootScope', '$timeou
     $scope.pageChangeHandler = function(num) {
         $scope.noOfRows = num;
         $scope.currentPage = num * $scope.itemsPerPage;
+    };
+
+    //viveknk call to dashboard
+    $scope.goDashboard = function() {
+        $state.go('dashboard');
     };
 }]);

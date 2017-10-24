@@ -1,4 +1,4 @@
-app.controller('manageProfessionCtrl', ['$scope', 'Data', 'toaster', '$rootScope', '$timeout', '$location', function($scope, Data, toaster, $rootScope, $timeout, $location) {
+app.controller('manageProfessionCtrl', ['$scope', '$state', '$stateParams', 'Data', 'toaster', '$rootScope', '$timeout', '$location', function($scope, $state, $stateParams, Data, toaster, $rootScope, $timeout, $location) {
     //for OrderFunction
     $scope.OrderRec = 'profession';
     $scope.adnBtn = "Add New Profession";
@@ -7,10 +7,11 @@ app.controller('manageProfessionCtrl', ['$scope', 'Data', 'toaster', '$rootScope
     $scope.itemsPerPage = 30;
     $scope.profBtn = false;
     $scope.manageProfession = function() {
+        $scope.showloader();
         Data.post('manage-profession/manageProfession').then(function(response) {
             $scope.professionRow = response.records;
             $scope.professionRowCount = response.totalCount;
-
+            $scope.hideloader();
         });
     };
 
@@ -31,7 +32,7 @@ app.controller('manageProfessionCtrl', ['$scope', 'Data', 'toaster', '$rootScope
     }
 
     $scope.initialModal = function(id, profession, status, index, index1, del) {
-        console.log('id=' + id + 'profession=' + profession + 'status=' + status + 'index=' + index + 'index1=' + index1 + 'del' + del);
+        // console.log('id=' + id + 'profession=' + profession + 'status=' + status + 'index=' + index + 'index1=' + index1 + 'del' + del);
         $scope.sbtBtn = false;
         if (id == 0) {
             $scope.heading = 'Add Profession';
@@ -157,6 +158,11 @@ app.controller('manageProfessionCtrl', ['$scope', 'Data', 'toaster', '$rootScope
     $scope.pageChangeHandler = function(num) {
         $scope.noOfRows = num;
         $scope.currentPage = num * $scope.itemsPerPage;
+    };
+
+    //viveknk call to dashboard
+    $scope.goDashboard = function() {
+        $state.go('dashboard');
     };
 
 }]);

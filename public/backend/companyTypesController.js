@@ -1,4 +1,4 @@
-app.controller('companyTypesController', ['$scope', 'Data', 'toaster', '$rootScope', '$timeout', '$location', function($scope, Data, toaster, $rootScope, $timeout, $location) {
+app.controller('companyTypesController', ['$scope', '$state', '$stateParams', 'Data', 'toaster', '$rootScope', '$timeout', '$location', function($scope, $state, $stateParams, Data, toaster, $rootScope, $timeout, $location) {
     //for OrderFunction
     $scope.OrderRec = 'type_of_company';
     $scope.adnBtn = "Add New Company Type";
@@ -176,5 +176,10 @@ app.controller('companyTypesController', ['$scope', 'Data', 'toaster', '$rootSco
         $scope.noOfRows = parseInt(num);
         $scope.itemsPerPage = parseInt($scope.itemsPerPage);
         $scope.currentPage = num * $scope.itemsPerPage;
+    };
+
+    //viveknk call to dashboard
+    $scope.goDashboard = function() {
+        $state.go('dashboard');
     };
 }]);

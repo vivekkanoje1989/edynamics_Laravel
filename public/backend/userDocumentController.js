@@ -1,6 +1,8 @@
-app.controller('userDocumentController', ['$scope', 'Data', 'Upload', 'toaster', '$timeout', function($scope, Data, Upload, toaster, $timeout) {
+app.controller('userDocumentController', ['$scope', '$state', '$stateParams', 'Data', 'Upload', 'toaster', '$timeout', function($scope, $state, $stateParams, Data, Upload, toaster, $timeout) {
     //for OrderFunction
     $scope.OrderRec = 'document_name';
+    $scope.vloader = false;
+    // $rootScope.vbreadcumbs = []; //viveknk breadcumb
 
     $scope.action = 'Submit';
     $scope.del = '';
@@ -90,8 +92,11 @@ app.controller('userDocumentController', ['$scope', 'Data', 'Upload', 'toaster',
     $scope.createUserDocuments = function(documentUrl, userData) {
         // console.log("createUserDocuments " + " documentUrl =" + JSON.stringify(documentUrl) + " userData = " + JSON.stringify(userData) + "id " + $scope.id);
         // return false;
+        $scope.vloader = true;
+
         if (typeof documentUrl === 'undefined') {
             documentUrl = new File([""], "fileNotSelected", { type: "text/jpg", lastModified: new Date() });
+            $scope.vloader = false;
         }
         $scope.empId = userData.employee_id;
 
@@ -166,11 +171,12 @@ app.controller('userDocumentController', ['$scope', 'Data', 'Upload', 'toaster',
                 $scope.errorMsgg = response.data.errorMsgg;
                 toaster.pop('error', 'Employee Documents', $scope.errorMsgg);
             }
-
+            $scope.vloader = false;
         }, function(response) {
             if (response.success !== 200) {
                 $scope.err_msg = "Please Select image for upload";
                 toaster.pop('error', 'User Documents', $scope.err_msg);
+                $scope.vloader = false;
             }
         });
     }; //createUserDocuments ends
@@ -190,12 +196,25 @@ app.controller('userDocumentController', ['$scope', 'Data', 'Upload', 'toaster',
     }
 
     $scope.manageEmployeeDocuments = function() {
+        $scope.showloader();
         Data.get('user-document/documents').then(function(response) {
             $scope.DocumentsRow = response.records;
+            $scope.hideloader();
         });
     };
 
     $scope.changeErrorMsg = function() {
         $scope.errorMsgg = '';
     }
+
+    //viveknk call to dashboard
+    $scope.goDashboard = function() {
+        $state.go('dashboard');
+    };
+
+    //viveknk call to dashboard
+    $scope.goEmployeedocument = function() {
+        $state.go('userDocument');
+    };
+
 }]);

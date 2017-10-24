@@ -387,35 +387,51 @@ class EmployeeSalaryslipController extends Controller {
 		if($getSlips){
 
 			$cln = "Salaryslip/";
-			$cleanFolder = File::cleanDirectory($cln);
+			$cleanFolder = File::cleanDirectory($cln);//viveknk clean folder to avoid wrong files
 
 			$public_dir= "Salaryslip";
 			
 			$zipFileName = $loggedInUserId.'_salaryslip.zip';
-			// echo $zipFileName;
+
+
+			$salaryslipName = [];
+			$i = 0;
+			$notfoundfile = []; 
+			foreach ($getSlips as $slips)
+			{
+				$salaryslipName[$i] = $slips['salaryslip_docName'];			
+				$filename = $salaryslipName[$i];
+				// $dwfrom = 'https://storage.googleapis.com/edynamicsdevelopment/Employee-Salaryslips/'.$filename;	
+				$dwfrom =  config('global.s3Path').'/Employee-Salaryslips/'.$filename;
+				 
+				$contents = file_get_contents($dwfrom);//store content of remote file to local storage
+				if($contents){
+					$file = 'Salaryslip/'.$filename;
+					File::put($file, $contents);				
+				}else{
+					continue;
+				}
+				$i++;
+			}
+
+			//ziparchive to create zip file of downloaded files
 			$zip = new ZipArchive;
 
 			if ($zip->open($public_dir . '/' . $zipFileName, ZipArchive::CREATE) === TRUE) {  
-				// echo $zipFileName;
-				
-				$salaryslipName = [];
-				$i = 0;
+								
+				$salaryslipName2 = [];
+				$j = 0;
 				foreach ($getSlips as $slips)
 				{
-					$salaryslipName[$i] = $slips['salaryslip_docName'];			
-					$filename = $salaryslipName[$i];
-					// $temp = 'Salaryslip/slips/'.$filename;
-					// $dwfrom = 'https://storage.googleapis.com/edynamicsdevelopment/Employee-Salaryslips/'.$filename;
-					$dwfrom = '/home/viveknk/Downloads/azip/'.$filename;
-					
-					$zip->addFile($dwfrom, $filename);
-
-					$i++;
-				}
-				// dd($salaryslipName);
-				$zip->close();
+					$salaryslipName2[$j] = $slips['salaryslip_docName'];			
+					$filename2 = $salaryslipName2[$j];
+					$pathfrom = 'Salaryslip/'.$filename2;
+					$zip->addFile($pathfrom, $filename2);
+					$j++;
+				}				
+				$zip->close();//closes opened zip file
 			}
-
+			//set header for content-type
 			$headers = array(
                 'Content-Type' => 'application/octet-stream',
 			);

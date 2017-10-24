@@ -1,4 +1,4 @@
-app.controller('countryCtrl', ['$scope', 'Data', 'toaster', function($scope, Data, toaster) {
+app.controller('countryCtrl', ['$scope', '$state', '$stateParams', 'Data', 'toaster', function($scope, $state, $stateParams, Data, toaster) {
     //for OrderFunction
     $scope.OrderRec = 'name';
 
@@ -12,6 +12,7 @@ app.controller('countryCtrl', ['$scope', 'Data', 'toaster', function($scope, Dat
     };
 
     $scope.manageCountry = function(empId, pageNumber, itemPerPage) {
+        $scope.showloader();
         Data.post('manage-country/manageCountry', {
             id: empId,
             pageNumber: pageNumber,
@@ -20,6 +21,7 @@ app.controller('countryCtrl', ['$scope', 'Data', 'toaster', function($scope, Dat
             $scope.countryRow = response.records;
             $scope.countryRowLength = response.totalCount;
             console.log("countryRowLength" + $scope.countryRowLength);
+            $scope.hideloader();
         });
     };
 
@@ -195,6 +197,11 @@ app.controller('countryCtrl', ['$scope', 'Data', 'toaster', function($scope, Dat
         $scope.noOfRows = parseInt(num);
         $scope.itemsPerPage = parseInt($scope.itemsPerPage);
         $scope.currentPage = num * $scope.itemsPerPage;
+    };
+
+    //viveknk call to Manage blood group
+    $scope.goManageBloodgrp = function() {
+        $state.go('bloodGroupsIndex');
     };
 
 }]);

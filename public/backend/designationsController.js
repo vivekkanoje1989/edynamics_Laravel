@@ -1,4 +1,4 @@
-app.controller('designationsCtrl', ['$scope', 'Data', 'toaster', '$rootScope', '$timeout', '$location', function($scope, Data, toaster, $rootScope, $timeout, $location) {
+app.controller('designationsCtrl', ['$scope', '$state', '$stateParams', 'Data', 'toaster', '$rootScope', '$timeout', '$location', function($scope, $state, $stateParams, Data, toaster, $rootScope, $timeout, $location) {
     //for OrderFunction
     $scope.OrderRec = 'designation';
 
@@ -25,9 +25,11 @@ app.controller('designationsCtrl', ['$scope', 'Data', 'toaster', '$rootScope', '
 
 
     $scope.manageDesignations = function() {
+        $scope.showloader();
         Data.post('manage-designations/manageDesignations').then(function(response) {
             $scope.designationsRow = response.records;
             $scope.designationRowLength = response.totalcount;
+            $scope.hideloader();
         });
     };
 
@@ -155,6 +157,11 @@ app.controller('designationsCtrl', ['$scope', 'Data', 'toaster', '$rootScope', '
     $scope.pageChangeHandler = function(num) {
         $scope.noOfRows = num;
         $scope.currentPage = num * $scope.itemsPerPage;
+    };
+
+    //viveknk call to dashboard
+    $scope.goDashboard = function() {
+        $state.go('dashboard');
     };
 
 }]);

@@ -1,4 +1,4 @@
-app.controller('employeeSalaryslipController', ['$scope', 'Data', 'Upload', 'toaster', '$timeout', '$http', function($scope, Data, Upload, toaster, $timeout, $http) {
+app.controller('employeeSalaryslipController', ['$scope', '$state', '$stateParams', 'Data', 'Upload', 'toaster', '$timeout', '$http', function($scope, $state, $stateParams, Data, Upload, toaster, $timeout, $http) {
     //vloader
     $scope.vloader = false;
     //check if user wants to upload file
@@ -273,6 +273,16 @@ app.controller('employeeSalaryslipController', ['$scope', 'Data', 'Upload', 'toa
         $scope.itemsPerPage = parseInt($scope.itemsPerPage);
         $scope.noOfRows = parseInt(num);
         $scope.currentPage = num * $scope.itemsPerPage;
+    };
+
+    //viveknk call to dashboard
+    $scope.goDashboard = function() {
+        $state.go('dashboard');
+    };
+
+    //viveknk call to dashboard
+    $scope.goSalaryslip = function() {
+        $state.go('employeeSalaryslip');
     };
 
 }]);

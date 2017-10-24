@@ -1,5 +1,5 @@
 'use strict';
-app.controller('bloodsGroupCtrl', ['$scope', 'Data', '$rootScope', '$timeout', 'toaster', function($scope, Data, $rootScope, $timeout, toaster) {
+app.controller('bloodsGroupCtrl', ['$scope', '$state', '$stateParams', 'Data', '$rootScope', '$timeout', 'toaster', function($scope, $state, $stateParams, Data, $rootScope, $timeout, toaster) {
     //for OrderFunction
     $scope.OrderRec = 'blood_group';
 
@@ -20,9 +20,9 @@ app.controller('bloodsGroupCtrl', ['$scope', 'Data', '$rootScope', '$timeout', '
     $scope.manageBloodGroup = function(empId, pageNumber, itemPerPage) {
         $scope.showloader();
         Data.post('blood-groups/manageBloodGroup').then(function(response) {
-            $scope.hideloader();
             $scope.bloodGrpRow = response.records;
             $scope.bloodGrpLength = response.totalCount;
+            $scope.hideloader();
         });
     };
 
@@ -165,4 +165,16 @@ app.controller('bloodsGroupCtrl', ['$scope', 'Data', '$rootScope', '$timeout', '
         $scope.noOfRows = parseInt(num);
         $scope.currentPage = num * $scope.itemsPerPage;
     };
+
+    //viveknk call to dashboard
+    $scope.goDashboard = function() {
+        $state.go('dashboard');
+    };
+
+    //viveknk call to Manage blood group
+    $scope.goManageBloodgrp = function() {
+        $state.go('bloodGroupsIndex');
+    };
+
+
 }]);

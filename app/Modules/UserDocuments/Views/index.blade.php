@@ -23,9 +23,21 @@
 <link href="assets/css/dataTables.bootstrap.css" rel="stylesheet" />
 <div class="row">
     <div class="widget flat radius-bordered ">
-        <div class="col-lg-12 col-sm-12 col-xs-12" ng-controller="userDocumentController" ng-init="getEmployees(); manageEmployeeDocuments();" >
-            <h5 class="row-title before-themeprimary"><i class="fa  fa-arrow-circle-o-right themeprimary"></i>Employee Documents</h5>
-            <div class="widget-body bordered-top bordered-themeprimary col-lg-12 col-sm-12 col-xs-12">
+        <div class="col-lg-12 col-sm-12 col-xs-12" ng-controller="userDocumentController" ng-init="getEmployees(); manageEmployeeDocuments(); vbreadcumbs = [
+                {'displayName': 'Home', 'url': 'goDashboard()'},
+                {'displayName': 'Hr', 'url': 'goEmployeedocument()'},
+                {'displayName': 'Employee Management', 'url': 'goEmployeedocument()'},
+                {'displayName': 'Employee Documents', 'url': 'goEmployeedocument()'}
+            ];" >
+            <div class="page-breadcrumbs {{settings.fixed.breadcrumbs ? 'breadcrumbs-fixed' : ''}}" style="position: fixed; top: 44px;box-shadow: 0 2px 4px 0 rgba(245, 238, 238, 0.15)">
+            <ol class="breadcrumb" >
+                <i class="fa fa-home" aria-hidden="true" style="font-size: 20px;color: gray;">&nbsp;</i>
+                <li ng-repeat="crumb in vbreadcumbs" ng-class="{ active: $last }"><a href="javascript:void(0)" ng-click="{{crumb.url}}" ng-if="!$last">{{ crumb.displayName }}&nbsp;</a><span ng-show="$last">{{ crumb.displayName }}</span>
+                </li>
+            </ol>
+        </div>
+            <h5 class="row-title before-themeprimary"><i class="fa  fa-arrow-circle-o-right themeprimary"></i>Employee Documents  <i class="fa fa-spinner fa-pulse fa-3x fa-fw ng-hide" style="font-size: 19px;" ng-show="vloader"></i></h5>
+            <div class="widget-body bordered-top bordered-themeprimary col-lg-12 col-sm-12 col-xs-12">            
                 <div id="user-form">
                     <form role="form" name="userForm" method="post"  ng-submit="userForm.$valid && createUserDocuments(userData.documentUrl, userData)"   novalidate enctype="multipart/form-data">
                         <input type="hidden" ng-model="userData.csrfToken" name="csrftoken" id="csrftoken" ng-init="userData.csrfToken = '[[ csrf_token() ]]'">
@@ -103,7 +115,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12 col-xs-12 col-md-12" align="left">
-                                        <button type="submit" class="btn btn-primary" id="fncbtn" title="Submit"  ng-click="sbtBtn = true">{{action}}</button>
+                                        <button type="submit" class="btn btn-primary" id="fncbtn" title="Submit"  ng-click="sbtBtn = true">{{action}} </button>
+                                        
                                     </div>
                                 </div><br>
                             </div>   

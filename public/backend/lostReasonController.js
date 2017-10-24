@@ -1,4 +1,4 @@
-app.controller('lostReasonsController', ['$scope', 'Data', 'toaster', function($scope, Data, toaster) {
+app.controller('lostReasonsController', ['$scope', '$state', '$stateParams', 'Data', 'toaster', function($scope, $state, $stateParams, Data, toaster) {
     //for OrderFunction
     $scope.OrderRec = 'reason';
     $scope.adnBtn = "Add New Lost Reason";
@@ -8,9 +8,11 @@ app.controller('lostReasonsController', ['$scope', 'Data', 'toaster', function($
     $scope.itemsPerPage = 30;
     $scope.manageLostReasons = function() {
         $scope.modal = {};
+        $scope.showloader();
         Data.post('lost-reasons/manageLostReason').then(function(response) {
             $scope.LostReasonsRow = response.records;
             $scope.LostReasonsRowCount = response.totalCount;
+            $scope.hideloader();
         });
     };
     $scope.searchDetails = {};
@@ -153,5 +155,10 @@ app.controller('lostReasonsController', ['$scope', 'Data', 'toaster', function($
     $scope.pageChangeHandler = function(num) {
         $scope.noOfRows = num;
         $scope.currentPage = num * $scope.itemsPerPage;
+    };
+
+    //viveknk call to dashboard
+    $scope.goDashboard = function() {
+        $state.go('dashboard');
     };
 }]);

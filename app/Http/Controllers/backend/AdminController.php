@@ -95,7 +95,7 @@ class AdminController extends Controller {
 //        echo "<pre>";print_r(Auth::guard('admin')->user());exit;
         $fullName = Auth::guard('admin')->user()->first_name . " " . Auth::guard('admin')->user()->last_name;
         return view('layouts.backend.dashboard')->with('id', $fullName);
-    }
+    }    
 
     public function sessiontimeout() {
         return view('backend.sessiontimeout');

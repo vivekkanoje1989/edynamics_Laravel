@@ -1,4 +1,4 @@
-app.controller('citiesCtrl', ['$scope', 'Data', 'toaster', function($scope, Data, toaster) {
+app.controller('citiesCtrl', ['$scope', '$state', '$stateParams', 'Data', 'toaster', function($scope, $state, $stateParams, Data, toaster) {
     //for OrderFunction
     $scope.OrderRec = 'name';
 
@@ -23,10 +23,12 @@ app.controller('citiesCtrl', ['$scope', 'Data', 'toaster', function($scope, Data
 
 
     $scope.manageCities = function() {
+        $scope.showloader();
         Data.get('manage-city/manageCity').then(function(response) {
             $scope.a = JSON.parse(JSON.stringify(response));
             $scope.citiesRow = $scope.a.records;
             $scope.citiesRowLength = $scope.a.totalCount
+            $scope.hideloader();
         });
     };
     $scope.manageStates = function($id, country_id) {
@@ -182,5 +184,10 @@ app.controller('citiesCtrl', ['$scope', 'Data', 'toaster', function($scope, Data
     $scope.pageChangeHandler = function(num) {
         $scope.noOfRows = num;
         $scope.currentPage = num * $scope.itemsPerPage;
+    };
+
+    //viveknk call to dashboard
+    $scope.goDashboard = function() {
+        $state.go('dashboard');
     };
 }]);

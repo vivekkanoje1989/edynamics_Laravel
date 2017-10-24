@@ -15,9 +15,9 @@ app.controller('adminController', function($rootScope, $scope, $state, Data, $st
         // alert('setBrowserTimezone' + $scope.tmz);
         Data.post('/checkUserCredentials/setTimezone', { tmz: $scope.tmz }).then(function(response) {
             if (!response.success) {
-                console.log("Not set");
+                // console.log("Not set");
             } else {
-                console.log("set" + "bfr = " + response.bfr + "affr = " + response.aftr);
+                // console.log("set" + "bfr = " + response.bfr + "affr = " + response.aftr);
             }
         });
     }
@@ -387,7 +387,7 @@ app.controller('currentCountryListCtrl', function($scope, Data) {
     };
 });
 app.controller('permanentCountryListCtrl', function($scope, $timeout, Data) {
-
+    $("#permenent_country_id").val("101");
     Data.get('getCountries').then(function(response) {
         if (!response.success) {
             $scope.errorMsg = response.message;

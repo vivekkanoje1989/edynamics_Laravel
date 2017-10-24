@@ -1,4 +1,4 @@
-app.controller('statesCtrl', ['$scope', 'Data', 'toaster', '$rootScope', '$timeout', '$location', function($scope, Data, toaster, $rootScope, $timeout, $location) {
+app.controller('statesCtrl', ['$scope', '$state', '$stateParams', 'Data', 'toaster', '$rootScope', '$timeout', '$location', function($scope, $state, $stateParams, Data, toaster, $rootScope, $timeout, $location) {
     //for OrderFunction
     $scope.OrderRec = 'name';
 
@@ -42,10 +42,12 @@ app.controller('statesCtrl', ['$scope', 'Data', 'toaster', '$rootScope', '$timeo
     //        }
 
     $scope.manageStates = function(empId, pageNumber, itemPerPage) {
+        $scope.showloader();
         Data.post('manage-states/manageStates').then(function(response) {
             $scope.statesRow = response.records;
             $scope.statesRowLength = response.totalCount;
             $scope.flagForChange = 0;
+            $scope.hideloader();
         });
     };
 
@@ -242,5 +244,10 @@ app.controller('statesCtrl', ['$scope', 'Data', 'toaster', '$rootScope', '$timeo
     $scope.pageChangeHandler = function(num) {
         $scope.noOfRows = num;
         $scope.currentPage = num * $scope.itemsPerPage;
+    };
+
+    //viveknk call to dashboard
+    $scope.goDashboard = function() {
+        $state.go('dashboard');
     };
 }]);

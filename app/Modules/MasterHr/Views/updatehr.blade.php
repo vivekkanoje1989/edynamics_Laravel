@@ -14,6 +14,19 @@
 <input type="hidden" ng-model="userForm.csrfToken" name="csrftoken" id="csrftoken" ng-init="userForm.csrfToken = '<?php echo csrf_token(); ?>'" class="form-control">
 <input type="hidden" ng-model="userData.id" name="id" id="empId" ng-init="userForm.id = '[[ $empId ]]'" value="[[ $empId ]]" class="form-control">
 <div class="row"  ng-controller="hrController"   >
+    <div class="page-breadcrumbs {{settings.fixed.breadcrumbs ? 'breadcrumbs-fixed' : ''}}" style="position: relative; top: -98px;box-shadow: 0 2px 4px 0 rgba(245, 238, 238, 0.15)" ng-init="vbreadcumbs = [
+            {'displayName': 'Home', 'url': 'goDashboard()'},
+            {'displayName': 'Hr', 'url': 'goListemployee()'},
+            {'displayName': 'Employee Management', 'url': 'goListemployee()'},
+            {'displayName': 'List Employee', 'url': 'goListemployee()'},
+            {'displayName': 'Edit Employee', 'url': ''}
+        ]">
+        <ol class="breadcrumb" >
+            <i class="fa fa-home" aria-hidden="true" style="font-size: 20px;color: gray;">&nbsp;</i>
+            <li ng-repeat="crumb in vbreadcumbs" ng-class="{ active: $last }"><a href="javascript:void(0)" ng-click="{{crumb.url}}" ng-if="!$last">{{ crumb.displayName }}&nbsp;</a><span ng-show="$last">{{ crumb.displayName }}</span>
+            </li>
+        </ol>
+    </div>
     <input type="hidden" name="employeeId" id="employeeId"  value="[[$empId]]" ng-cloak="" >
     
     <div class="col-lg-12 col-sm-12 col-xs-12">    
