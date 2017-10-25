@@ -4977,6 +4977,109 @@ angular.module('app')
                     }
                 })
 
+                /**********************Product Management********************************/
+
+                .state('productsIndex', {
+                    url: '/Product_management',
+                    templateUrl: '/Product_management',
+                    requiredLogin: true,
+                    ncyBreadcrumb: {
+                        label: 'Products'
+                    },
+                    resolve: {
+                        deps: [
+                            '$ocLazyLoad',
+                            function($ocLazyLoad) {
+                                return $ocLazyLoad.load(['ui.select', 'toaster', 'textAngular']).then(
+                                    function() {
+                                        return $ocLazyLoad.load({
+                                            serie: true,
+                                            files: [
+                                                '/backend/productManagementController.js',
+                                            ]
+                                        });
+                                    });
+                            }
+                        ]
+                    }
+                })
+
+                .state('subProducts', {
+                    url: '/sub_products',
+                    templateUrl: '/sub_products',
+                    requiredLogin: true,
+                    ncyBreadcrumb: {
+                        label: 'Sub Products'
+                    },
+                    resolve: {
+                        deps: [
+                            '$ocLazyLoad',
+                            function($ocLazyLoad) {
+                                return $ocLazyLoad.load(['ui.select', 'toaster', 'textAngular']).then(
+                                    function() {
+                                        return $ocLazyLoad.load({
+                                            serie: true,
+                                            files: [
+                                                '/backend/productManagementController.js',
+                                            ]
+                                        });
+                                    });
+                            }
+                        ]
+                    }
+                })
+
+                .state('module', {
+                    url: '/showmodule',
+                    templateUrl: '/showmodule',
+                    requiredLogin: true,
+                    ncyBreadcrumb: {
+                        label: 'Modules'
+                    },
+                    resolve: {
+                        deps: [
+                            '$ocLazyLoad',
+                            function($ocLazyLoad) {
+                                return $ocLazyLoad.load(['ui.select', 'toaster', 'textAngular']).then(
+                                    function() {
+                                        return $ocLazyLoad.load({
+                                            serie: true,
+                                            files: [
+                                                '/backend/productManagementController.js',
+                                            ]
+                                        });
+                                    });
+                            }
+                        ]
+                    }
+                })
+
+                .state('submodule', {
+                    url: '/submodule',
+                    templateUrl: '/sub_module',
+                    requiredLogin: true,
+                    ncyBreadcrumb: {
+                        label: 'sub Modules'
+                    },
+                    resolve: {
+                        deps: [
+                            '$ocLazyLoad',
+                            function($ocLazyLoad) {
+                                return $ocLazyLoad.load(['ui.select', 'toaster', 'textAngular']).then(
+                                    function() {
+                                        return $ocLazyLoad.load({
+                                            serie: true,
+                                            files: [
+                                                '/backend/productManagementController.js',
+                                            ]
+                                        });
+                                    });
+                            }
+                        ]
+                    }
+                })
+
+
                 /****************************Rohit*********************************/
                 .state('underconstruction', { //Viveknk new page
                         url: '/underconstruction',

@@ -2,6 +2,10 @@
 app.controller('empDeviceController', ['$scope', '$state', '$stateParams', 'Data', 'toaster', '$parse', function($scope, $state, $stateParams, Data, toaster, $parse) {
     $scope.itemsPerPage = 30;
     $scope.noOfRows = 1;
+    $scope.adnBtn = "Add Device";
+
+    //viveknk for itemperpage model dropdown
+    $scope.itemsPerPageModel = [30, 100, 200, 300, 400, 500, 600, 700, 800, 900, 999];
 
     $scope.pageChangeHandler = function(num) {
         $scope.noOfRows = num;
@@ -22,6 +26,43 @@ app.controller('empDeviceController', ['$scope', '$state', '$stateParams', 'Data
     }
     $scope.closeModal = function() {
         $scope.searchData = {};
+    }
+
+    $scope.initialModal = function(id, email, password, deptName, projectId, status, index, index1, del) {
+        console.log('id=' + id + 'email=' + email + 'password=' + password + 'deptName=' + deptName + 'projectId=' + projectId + 'status=' + status + 'index=' + index + 'index1=' + index1 + 'del=' + del);
+        $scope.sbtBtn = false;
+        $scope.Add = false;
+        $scope.Edit = false;
+        $scope.delete = false;
+        $scope.id = '';
+
+        // $scope.clntrlBtn = true;        
+
+        if (id == 0) {
+            $scope.heading = 'Add Device';
+            $scope.action = "Submit";
+            $scope.cancl = false;
+            $scope.Add = true;
+            $scope.domethod = 'post';
+        } else if (del == "del") {
+            $scope.heading = 'Delete Device';
+            $scope.action = "Confirm";
+            $scope.cancl = true;
+            $scope.domethod = 'delete';
+            $scope.delete = true;
+        } else {
+            $scope.heading = 'Edit Device';
+            $scope.action = "Update";
+            $scope.cancl = true;
+            $scope.Edit = true;
+            $scope.domethod = 'put';
+        }
+        $scope.id = id;
+
+        $scope.index = index * ($scope.noOfRows - 1) + (index1);
+        $scope.index1 = parseInt(index1);
+
+
     }
 
 

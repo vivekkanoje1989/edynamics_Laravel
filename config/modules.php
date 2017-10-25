@@ -63,5 +63,6 @@ return [
         "Events",
         "Reports",
         "BmsConsumption",
+        "ProductManagement",
     ),
 ];

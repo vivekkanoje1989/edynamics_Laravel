@@ -207,6 +207,15 @@ class MenuItems {
                             2 => array('id' => '040502', 'name' => 'Import Enquiries', 'icon' => '', 'url' => '/sales/importEnquiry', 'slug' => 'importEnquiryIndex', 'uiSrefActive' => 'active', 'total_submenu' => 1),
                         )),
                 )),
+            
+            5 => array('name' => 'Products Management', 'icon' => 'stor-img menu-icon-sz', 'uiSrefActive' => '', 'url' => '', 'slug' => 'my-storage', 'has_submenu' => true, 'total_submenu' => 3,
+                'submenu_ids' => '0501,0502,0503,0504', 'anchorClass' => 'menu-dropdown', 'submenuClass' => 'submenu', 'liClass' => 'open', 'submenu' => array(
+                    1 => array('id' => '0501', 'name' => 'Products', 'icon' => '', 'url' => '/Product_management', 'slug' => 'productsIndex', 'uiSrefActive' => 'active', 'total_submenu' => 1),
+                    2 => array('id' => '0502', 'name' => 'Sub Products', 'icon' => '', 'url' => '/sub_products', 'slug' => 'subProducts', 'uiSrefActive' => 'active', 'total_submenu' => 1),
+                    3 => array('id' => '0503', 'name' => 'Module', 'icon' => '', 'url' => '/showmodule', 'slug' => 'module', 'uiSrefActive' => 'active', 'total_submenu' => 1),
+                    4 => array('id' => '0504', 'name' => 'Sub Module', 'icon' => '', 'url' => '/sub_module', 'slug' => 'submodule', 'uiSrefActive' => 'active', 'total_submenu' => 1),
+                )),
+
             // 5 => array('name' => 'Groups', 'icon' => 'proj-img menu-icon-sz', 'ui-sref-active' => '', 'url' => '', 'slug' => '#', 'has_submenu' => true, 'total_submenu' => 1,
             //     'submenu_ids' => '0501', 'anchorClass' => 'menu-dropdown', 'submenuClass' => 'submenu', 'liClass' => 'open', 'submenu' => array(
             //         1 => array('id' => '0501', 'name' => 'Clients', 'icon' => '', 'url' => '/underconstruction', 'slug' => 'underconstruction', 'uiSrefActive' => 'active', 'total_submenu' => 1),
