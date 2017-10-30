@@ -361,6 +361,7 @@ app.controller('hrController', ['$rootScope', '$scope', '$state', 'Data', 'Uploa
             }
         }
     };
+
     $scope.checkDepartmentId = function(id) {
         if ($scope.searchDetails.departmentName.length === 0) {
             $scope.emptyDepartmentId = true;

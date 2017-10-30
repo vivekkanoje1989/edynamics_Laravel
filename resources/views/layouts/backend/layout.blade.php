@@ -1,6 +1,6 @@
 <script> 
     //dissable rightclick viveknk
-    document.addEventListener('contextmenu', event => event.preventDefault()); 
+    //document.addEventListener('contextmenu', event => event.preventDefault()); 
 </script>
 <div ng-if="authenticated == false" ui-view></div>
 <!-- Loading Container -->

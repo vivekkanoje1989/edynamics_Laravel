@@ -30,10 +30,10 @@
 <!--Skin Script: Place this script in head to load scripts for skins and rtl support (maximize minimize close pane)-->
 <!--script src="assets/js/skins.min.js"></script-->
 
-<div class="col-xs-12 col-md-12" ng-controller="productManagementCtrl" ng-init="getProducts(); vbreadcumbs = [
+<div class="col-xs-12 col-md-12" ng-controller="productManagementCtrl" ng-init="getProducts(); getsubProducts(); vbreadcumbs = [
 				{'displayName': 'Home', 'url': 'goDashboard()'},
 				{'displayName': 'Products Management', 'url': ''},
-				{'displayName': 'Products', 'url': ''}
+				{'displayName': 'Sub Products', 'url': ''}
 			]">
 	<div class="page-breadcrumbs {{settings.fixed.breadcrumbs ? 'breadcrumbs-fixed' : ''}}" style=" position: relative; top: -98px;box-shadow: 0 2px 4px 0 rgba(245, 238, 238, 0.15)" ng-init="">
 		<ol class="breadcrumb" >
@@ -44,7 +44,7 @@
 	</div>
 	<div class="widget">
 		<div class="widget-header ">
-			<span class="widget-caption">Products</span>
+			<span class="widget-caption">Sub Products</span>
 			<!---div class="widget-buttons">
 				<a href="#" data-toggle="maximize">
 					<i class="fa fa-expand"></i>
@@ -59,7 +59,7 @@
 		</div>
 		<div class="widget-body">
 			<div class="table-toolbar">
-				<a id="editabledatatable_new" href="" class="btn btn-default" data-toggle="modal" data-target="#productModal" ng-click="initialModal(0, '', '', '', '')">Add Sub Product</a>
+				<a id="editabledatatable_new" href="" class="btn btn-default" data-toggle="modal" data-target="#productModal" ng-click="initialSbPModal(0, '', '', '', '', '')">Add Sub Product</a>
 				<div class="btn-group pull-right">
 					<a class="btn btn-default toggleForm" href=""><i class="btn-label fa fa-filter"></i>Show Filter</a>
 				</div>
@@ -125,13 +125,13 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr  role="row" dir-paginate="list in subproductRow.concat(productRow) | itemsPerPage:itemsPerPage | filter:search | filter:searchData  | orderBy: OrderRec " >
+						<tr  role="row" dir-paginate="list in subproductRow | itemsPerPage:itemsPerPage | filter:search | filter:searchData  | orderBy: OrderRec " >
 							<td>{{ itemsPerPage * (noOfRows - 1) + $index + 1}}</td>							
                             <td>{{list.product_name}}</td>							
                             <td>{{list.sub_product_name}}</td>							
 							<td >
-								<a href="#" class="btn btn-info btn-xs edit" tooltip-html-unsafe="Edit Product" data-toggle="modal" data-target="#productModal" ng-click='initialModal("{{ list.id}}","{{list.product_name}}","{{ itemsPerPage}}","{{$index}}"," ")'><i class="fa fa-edit"></i> Edit</a>
-								<a href="#" class="btn btn-danger btn-xs delete" tooltip-html-unsafe="Delete Product"  data-toggle="modal" data-target="#productModal" ng-click='initialModal("{{ list.id}}","{{list.product_name}}","{{ itemsPerPage}}","{{$index}}","del")'><i class="fa fa-trash-o"></i> Delete</a>
+								<a href="#" class="btn btn-info btn-xs edit" tooltip-html-unsafe="Edit Sub Product" data-toggle="modal" data-target="#productModal" ng-click='initialSbPModal("{{ list.id}}","{{list.product_id}}", "{{list.sub_product_name}}","{{ itemsPerPage}}","{{$index}}"," ")'><i class="fa fa-edit"></i> Edit</a>
+								<a href="#" class="btn btn-danger btn-xs delete" tooltip-html-unsafe="Delete Sub Product"  data-toggle="modal" data-target="#productModal" ng-click='initialSbPModal("{{ list.id}}","{{list.product_id}}", "{{list.sub_product_name}}","{{ itemsPerPage}}","{{$index}}","del")'><i class="fa fa-trash-o"></i> Delete</a>
 							</td>
 						</tr>					
 				</tbody>			
@@ -162,31 +162,31 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title" align="center">{{heading}}</h4>
                 </div>
-                <form novalidate ng-submit="productForm.$valid && doProductAction()" name="productForm">
+                <form novalidate ng-submit="productForm.$valid && dosubProductAction()" name="productForm">
                     <input type="hidden" ng-model="csrfToken" name="csrftoken" id="csrftoken" ng-init="csrfToken = '<?php echo csrf_token(); ?>'" class="form-control">
                     <div class="modal-body">
-                        <div class="form-group" ng-class="{ 'has-error' : sbtBtn && (!productForm.product_name.$dirty && productForm.product_name.$invalid)}">
+                        <div class="form-group" ng-class="{ 'has-error' : sbtBtn && (!productForm.sub_product_name.$dirty && productForm.sub_product_name.$invalid)}">
                             <input type="hidden" class="form-control" ng-model="id" name="id">
                             <label>Sub Product<span class="sp-err">*</span></label> 
                             <span class="input-icon icon-right">
-                                <input type="text" class="form-control" ng-model="product_name" name="product_name" ng-change="errorMsg = null" required>
-                                <div class="help-block" ng-show="sbtBtn" ng-messages="productForm.product_name.$error">
+                                <input type="text" class="form-control" ng-model="sub_product_name" name="sub_product_name" ng-change="errorMsg = null" required>
+                                <div class="help-block" ng-show="sbtBtn" ng-messages="productForm.sub_product_name.$error">
                                     <div ng-message="required">This field is required</div>
                                     <div ng-if="errorMsg" class="err">{{errorMsg}}</div>
                                 </div>
                             </span>
                         </div>
 
-                        <div class="form-group" ng-class="{ 'has-error' : sbtBtn && (!productForm.product.$dirty && productForm.product.$invalid)}">
+                        <div class="form-group" ng-class="{ 'has-error' : sbtBtn && (!productForm.product_id.$dirty && productForm.product_id.$invalid)}">
 
                             <label>Product<span class="sp-err">*</span></label>
                             <span class="input-icon icon-right">
-                                <select name="product" ng-model="sbproduct" class="form-control" required>
+                                <select name="product_id" ng-model="product_id" class="form-control" required>
                                     <option value="">Select Product</option>
                                     <option value="{{prod.id}}" ng-repeat="prod in productRow">{{prod.product_name}}</option>
                                 </select>
                                 <i class="fa fa-sort-desc"></i>
-                                <div class="help-block" ng-show="sbtBtn" ng-messages="productForm.product.$error">
+                                <div class="help-block" ng-show="sbtBtn" ng-messages="productForm.product_id.$error">
                                     <div ng-message="required" class="sp-err">Status is required</div>
                                 </div>
                             </span>

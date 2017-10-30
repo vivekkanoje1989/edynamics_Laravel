@@ -5046,6 +5046,9 @@ angular.module('app')
                                             serie: true,
                                             files: [
                                                 '/backend/productManagementController.js',
+                                                '/js/intlTelInput.js',
+                                                '/backend/app/controllers/datepicker.js',
+                                                '/backend/app/controllers/select.js',
                                             ]
                                         });
                                     });
@@ -5071,6 +5074,9 @@ angular.module('app')
                                             serie: true,
                                             files: [
                                                 '/backend/productManagementController.js',
+                                                '/js/intlTelInput.js',
+                                                '/backend/app/controllers/datepicker.js',
+                                                '/backend/app/controllers/select.js',
                                             ]
                                         });
                                     });
