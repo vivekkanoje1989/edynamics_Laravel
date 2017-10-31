@@ -4,6 +4,11 @@ Route::group(array('module' => 'ProductManagement', 'middleware' => ['auth:admin
     
     $getUrl = config('global.getUrl');
 
+    Route::get('/Product_management/exportToxlsProduct', 'ProductManagementController@exportToxlsProduct');
+    Route::get('/Product_management/exportToxlsSbproduct', 'ProductManagementController@exportToxlsSbproduct');
+    Route::get('/Product_management/exportToxlsModule', 'ProductManagementController@exportToxlsModule');
+    Route::get('/Product_management/exportToxlsSbmodule', 'ProductManagementController@exportToxlsSbmodule');
+
     Route::get('sub_products', 'ProductManagementController@showsub_products');
     Route::get('showmodule', 'ProductManagementController@showmodule');
     Route::get('sub_module', 'ProductManagementController@showsub_module');

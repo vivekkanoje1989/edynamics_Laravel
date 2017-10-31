@@ -469,6 +469,8 @@ class ComposerStaticInita4a83323fa74f9ee3390af915b46a8f0
         'CreateManageProfessionsTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_17_125910_create_manage_professions_table.php',
         'CreateManageProjectTypesTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_17_142356_create_manage_project_types_table.php',
         'CreateManageStatesTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_16_155907_create_manage_states_table.php',
+        'CreateManageTaskPrioritiesTable' => __DIR__ . '/../..' . '/database/migrations/2017_10_31_122923_create_manage_task_priorities_table.php',
+        'CreateManageTaskStatusesTable' => __DIR__ . '/../..' . '/database/migrations/2017_10_31_121324_create_manage_task_statuses_table.php',
         'CreateManageTitlesTable' => __DIR__ . '/../..' . '/database/migrations/2017_09_07_143837_create_manage_titles_table.php',
         'CreateManageVerticalsTable' => __DIR__ . '/../..' . '/database/migrations/2017_08_28_151436_create_manage_verticals_table.php',
         'CreateMasterHrsTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_23_125704_create_master-hrs_table.php',

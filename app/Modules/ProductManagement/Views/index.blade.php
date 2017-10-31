@@ -66,17 +66,17 @@
 				</div>
 				<div role="grid" id="editabledatatable_wrapper" class="dataTables_wrapper form-inline no-footer">
 					<div class="DTTT btn-group">
-						<a class="btn btn-default DTTT_button_print" id="ToolTables_editabledatatable_1" title="View print view" ng-click="ExportToxls()" >
-							<span>Export</span> <!--href="/manageVerticals/exportToxls"-->
-						</a>
-						<!--a class="btn btn-default DTTT_button_collection" id="ToolTables_editabledatatable_2">
+						<!--a class="btn btn-default DTTT_button_print" id="ToolTables_editabledatatable_1" title="View print view" ng-click="ExportToxls('module')" >
+							<span>Export</span>
+						</a-->
+						<a class="btn btn-default DTTT_button_collection" id="ToolTables_editabledatatable_2">
 							<span>Action</span>
 							<a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);"><i class="fa fa-angle-down"></i></a>
 							<ul class="dropdown-menu dropdown-default">
 								<li>
-									<a href="javascript:void(0);">Action</a>
+									<a href="javascript:void(0);" title="View print view" ng-click="ExportToxls('module')">Export</a>
 								</li>
-								<li>
+								<!--li>
 									<a href="javascript:void(0);">Another action</a>
 								</li>
 								<li>
@@ -85,9 +85,9 @@
 								<li class="divider"></li>
 								<li>
 									<a href="javascript:void(0);">Separated link</a>
-								</li>
+								</li-->
 							</ul>
-						</a-->
+						</a>
 					</div>
 				<div  class="dataTables_filter">
 					<label>

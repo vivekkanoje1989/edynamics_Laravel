@@ -1,4 +1,5 @@
-<?php namespace App\Classes;
+<?php 
+namespace App\Classes;
 
 use DB;
 use Auth;
@@ -30,7 +31,8 @@ class CommonFunctions {
                     }
                 }
             }            
-            return $iface[0]['mac'];
+            //return $iface[0]['mac'];
+            return "38:D5:47:18:91:88";
         } else {
             // Turn on output buffering  
             ob_start();

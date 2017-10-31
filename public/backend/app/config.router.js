@@ -5085,6 +5085,57 @@ angular.module('app')
                     }
                 })
 
+                /***************Task Manager******************/
+                .state('task_statusIndex', {
+                    url: '/ManageTaskStatus',
+                    templateUrl: '/ManageTaskStatus',
+                    requiredLogin: true,
+                    ncyBreadcrumb: {
+                        label: 'Task Status'
+                    },
+                    resolve: {
+                        deps: [
+                            '$ocLazyLoad',
+                            function($ocLazyLoad) {
+                                return $ocLazyLoad.load(['ui.select', 'toaster', 'textAngular']).then(
+                                    function() {
+                                        return $ocLazyLoad.load({
+                                            serie: true,
+                                            files: [
+                                                '/backend/taskStatusController.js',
+                                            ]
+                                        });
+                                    });
+                            }
+                        ]
+                    }
+                })
+
+                .state('task_priorityIndex', {
+                    url: '/ManageTaskPriority',
+                    templateUrl: '/ManageTaskPriority',
+                    requiredLogin: true,
+                    ncyBreadcrumb: {
+                        label: 'Task Priority'
+                    },
+                    resolve: {
+                        deps: [
+                            '$ocLazyLoad',
+                            function($ocLazyLoad) {
+                                return $ocLazyLoad.load(['ui.select', 'toaster', 'textAngular']).then(
+                                    function() {
+                                        return $ocLazyLoad.load({
+                                            serie: true,
+                                            files: [
+                                                '/backend/taskPriorityController.js',
+                                            ]
+                                        });
+                                    });
+                            }
+                        ]
+                    }
+                })
+
 
                 /****************************Rohit*********************************/
                 .state('underconstruction', { //Viveknk new page

@@ -1,5 +1,5 @@
 <div ng-controller="dashboardCtrl">
-    <div class="page-breadcrumbs {{settings.fixed.breadcrumbs ? 'breadcrumbs-fixed' : ''}}" style="position: fixed; top: 44px;box-shadow: 0 2px 4px 0 rgba(245, 238, 238, 0.15)" ng-init="vbreadcumbs = [
+    <div class="page-breadcrumbs {{settings.fixed.breadcrumbs ? 'breadcrumbs-fixed' : ''}}" style="position: relative; top: -98px;box-shadow: 0 2px 4px 0 rgba(245, 238, 238, 0.15)" ng-init="vbreadcumbs = [
                 {'displayName': 'Home', 'url': 'goDashboard()'},
                 {'displayName': 'Dashboard', 'url': 'goDashboard()'}
             ]">

@@ -43,6 +43,8 @@ return array(
     'CreateManageProfessionsTable' => $baseDir . '/database/migrations/2017_03_17_125910_create_manage_professions_table.php',
     'CreateManageProjectTypesTable' => $baseDir . '/database/migrations/2017_03_17_142356_create_manage_project_types_table.php',
     'CreateManageStatesTable' => $baseDir . '/database/migrations/2017_03_16_155907_create_manage_states_table.php',
+    'CreateManageTaskPrioritiesTable' => $baseDir . '/database/migrations/2017_10_31_122923_create_manage_task_priorities_table.php',
+    'CreateManageTaskStatusesTable' => $baseDir . '/database/migrations/2017_10_31_121324_create_manage_task_statuses_table.php',
     'CreateManageTitlesTable' => $baseDir . '/database/migrations/2017_09_07_143837_create_manage_titles_table.php',
     'CreateManageVerticalsTable' => $baseDir . '/database/migrations/2017_08_28_151436_create_manage_verticals_table.php',
     'CreateMasterHrsTable' => $baseDir . '/database/migrations/2017_01_23_125704_create_master-hrs_table.php',

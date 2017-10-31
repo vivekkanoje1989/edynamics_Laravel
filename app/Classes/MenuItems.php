@@ -39,8 +39,8 @@ class MenuItems {
                                     2 => array('id' => '02020102', 'name' => 'Default Templates', 'icon' => '', 'micon' => 'img/template.png', 'url' => '/defaultalerts/index', 'slug' => 'defaultalertsIndex', 'uiSrefActive' => 'active', 'total_submenu' => 1),
                                     3 => array('id' => '02020103', 'name' => 'Custom Templates', 'icon' => '', 'micon' => 'img/template.png', 'url' => '/customalerts/index', 'slug' => 'customalertsIndex', 'uiSrefActive' => 'active', 'total_submenu' => 1),
                                 )),
-                            2 => array('id' => '020202', 'name' => 'Lists Management', 'icon' => 'menu-icon glyphicon glyphicon-home', 'ui-sref-active' => '', 'slug' => '#', 'has_submenu' => true, 'total_submenu' => 18,
-                                'submenu_ids' => '02020201,02020202,02020203,02020204,02020205,02020206,02020207,02020208,02020209,02020210,02020211,02020212,02020213,02020214,02020215,02020216,02020217,02020218',
+                            2 => array('id' => '020202', 'name' => 'Lists Management', 'icon' => 'menu-icon glyphicon glyphicon-home', 'ui-sref-active' => '', 'slug' => '#', 'has_submenu' => true, 'total_submenu' => 20,
+                                'submenu_ids' => '02020201,02020202,02020203,02020204,02020205,02020206,02020207,02020208,02020209,02020210,02020211,02020212,02020213,02020214,02020215,02020216,02020217,02020218,02020219,02020220',
                                 'anchorClass' => 'menu-dropdown', 'submenuClass' => 'submenu', 'liClass' => 'open', 'submenu' => array(
                                     1 => array('id' => '02020201', 'name' => 'Manage Blood Groups', 'icon' => '', 'url' => '/bloodgroups/index', 'slug' => 'bloodGroupsIndex', 'uiSrefActive' => 'active', 'total_submenu' => 1),
                                     2 => array('id' => '02020202', 'name' => 'Manage Highest Education', 'icon' => '', 'url' => '/highesteducation/index', 'slug' => 'highesteducationIndex', 'uiSrefActive' => 'active', 'total_submenu' => 1),
@@ -66,6 +66,8 @@ class MenuItems {
                                     // 17 => array('id' => '02020217', 'name' => 'Manage Enquiry Location', 'icon' => '', 'url' => '/enquirylocation/index', 'slug' => 'enquirylocationIndex', 'uiSrefActive' => 'active', 'total_submenu' => 1),
                                     17 => array('id' => '02020217', 'name' => 'Manage Genders', 'icon' => '', 'url' => '/manageGender', 'slug' => 'manageGenderIndex', 'uiSrefActive' => 'active', 'total_submenu' => 1),
                                     18 => array('id' => '02020218', 'name' => 'Manage Designations', 'icon' => '', 'url' => '/designations/index', 'slug' => 'designationsIndex', 'uiSrefActive' => 'active', 'total_submenu' => 1),
+                                    19 => array('id' => '02020219', 'name' => 'Manage Task Status', 'icon' => '', 'url' => '/ManageTaskStatus', 'slug' => 'task_statusIndex', 'uiSrefActive' => 'active', 'total_submenu' => 1),
+                                    20 => array('id' => '02020220', 'name' => 'Manage Task Priority', 'icon' => '', 'url' => '/ManageTaskPriority', 'slug' => 'task_priorityIndex', 'uiSrefActive' => 'active', 'total_submenu' => 1),
                                 )),
                             // 3 => array('id' => '020203', 'name' => 'Auto Assign Web Enquires', 'icon' => 'menu-icon glyphicon glyphicon-home', 'ui-sref-active' => '', 'slug' => '#', 'has_submenu' => true, 'total_submenu' => 1,
                             //     'submenu_ids' => '02020301', 'anchorClass' => 'menu-dropdown', 'submenuClass' => 'submenu', 'liClass' => 'open', 'submenu' => array(

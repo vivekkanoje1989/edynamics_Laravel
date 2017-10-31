@@ -998,7 +998,6 @@ class ProductManagementController extends Controller {
             $loggedInUserId = Auth::guard('admin')->user()->id;
             $delete = CommonFunctions::deleteMainTableRecords($loggedInUserId);
             $input['productsData'] = $delete;
-
 			$result = ProductManagement::where('id', $id)->update($input['productsData']);
 			
 			$records = ProductManagement::where(['deleted_status' => 0])->get();
@@ -1081,5 +1080,51 @@ class ProductManagementController extends Controller {
 			$result = ['success' => false, 'message' => 'Something went wrong.'];
 			return json_encode($result);
 		}
+	}
+
+	public function exportToxlsProduct(){
+		echo "exportToxlsProduct";
+		$record = self::getproducts();
+		$record = json_encode(json_decode($record)->records);
+		
+		//export to excel
+		Excel::create('Product Info', function($excel) use($record){
+			$excel->sheet('Products', function($sheet) use($record){
+				$sheet->fromArray($record);
+			});
+		})->export('xlsx');	
+	}
+
+	public function exportToxlsSbproduct(){
+		echo "exportToxlsSbproduct";
+		$record = self::getsubproducts();		
+		//export to excel
+		Excel::create('Sub Product Info', function($excel) use($record){
+			$excel->sheet('Sub Product', function($sheet) use($record){
+				$sheet->fromArray($record);
+			});
+		})->export('xlsx');	
+	}
+
+	public function exportToxlsModule(){
+		echo "exportToxlsModule";
+		$record = self::getpmodules();
+		//export to excel
+		Excel::create('Module Info', function($excel) use($record){
+			$excel->sheet('Modules', function($sheet) use($record){
+				$sheet->fromArray($record);
+			});
+		})->export('xlsx');	
+	}
+
+	public function exportToxlsSbmodule(){
+		echo "exportToxlsSbmodule";
+		$record = self::getsubmodules();
+		//export to excel
+		Excel::create('Sub Module Info', function($excel) use($record){
+			$excel->sheet('Sub Module', function($sheet) use($record){
+				$sheet->fromArray($record);
+			});
+		})->export('xlsx');	
 	}
 }

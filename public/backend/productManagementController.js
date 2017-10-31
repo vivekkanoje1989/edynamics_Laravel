@@ -153,14 +153,36 @@ app.controller('productManagementCtrl', ['$scope', '$state', '$stateParams', 'Da
 
 
     //vivek Export to xlsx
-    $scope.ExportToxls = function() {
-
-        $scope.getexcel = window.location = "/Product_management/exportToxls";
-        if ($scope.getexcel) {
-            toaster.pop('info', '', 'Exporting....');
-        } else {
-            toaster.pop('error', '', 'Exporting fails....');
-        }
+    $scope.ExportToxls = function(toEport) {
+        if (toEport == 'product') {
+            $scope.getexcel = window.location = "/Product_management/exportToxlsProduct";
+            if ($scope.getexcel) {
+                toaster.pop('info', '', 'Exporting....');
+            } else {
+                toaster.pop('error', '', 'Exporting fails....');
+            }
+        } else if (toEport == 'sub_product') {
+            $scope.getexcel = window.location = "/Product_management/exportToxlsSbproduct";
+            if ($scope.getexcel) {
+                toaster.pop('info', '', 'Exporting....');
+            } else {
+                toaster.pop('error', '', 'Exporting fails....');
+            }
+        } else if (toEport == 'module') {
+            $scope.getexcel = window.location = "/Product_management/exportToxlsModule";
+            if ($scope.getexcel) {
+                toaster.pop('info', '', 'Exporting....');
+            } else {
+                toaster.pop('error', '', 'Exporting fails....');
+            }
+        } else if (toEport == 'sub_module') {
+            $scope.getexcel = window.location = "/Product_management/exportToxlsSbmodule";
+            if ($scope.getexcel) {
+                toaster.pop('info', '', 'Exporting....');
+            } else {
+                toaster.pop('error', '', 'Exporting fails....');
+            }
+        } else {}
     };
 
     $scope.pageChangeHandler = function(num) {
