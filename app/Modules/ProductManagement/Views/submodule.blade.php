@@ -59,6 +59,8 @@
 	<div class="widget">
 		<div class="widget-header ">
 			<span class="widget-caption">Sub Modules</span>
+            <span class="widget-caption pull-right "><a class="themeprimary" data-toggle="modal" title="Help Info" data-target="#help"><i class="fa fa-question-circle" aria-hidden="true" style="font-size: 25px;margin-right: 15px; margin-top: 6px;"></i></a></span>
+
 			<!---div class="widget-buttons">
 				<a href="#" data-toggle="maximize">
 					<i class="fa fa-expand"></i>
@@ -115,7 +117,10 @@
                             <div class="col-sm-2" data-toggle="tooltip" title="{{  key.substring(0, key.indexOf('_'))}}"> 
                                 <div class="label graded fade in" style="margin-left: -15px;padding: 10px; margin-bottom: 10px; border: 1px solid #5db2ff; background-color: white;color:black;">
                                     <button class="close" style="padding-left:8px;margin-top: -5px;color:black;" ng-click="removeFilterData('{{ key}}');" data-dismiss="alert"> ×</button>
-                                    <strong ng-if="key === 'product_name'" data-toggle="tooltip" title="Product Name"><strong> Product Name : </strong> {{ value}}</strong>
+                                    <strong ng-if="key === 'module_name'" data-toggle="tooltip" title="Module"><strong> Module : </strong> {{ value}}</strong>
+                                    <strong ng-if="key === 'sub_module_name'" data-toggle="tooltip" title="Sub Module Name"><strong> Sub Module : </strong> {{ value}}</strong>                                    
+                                    <strong ng-if="key === 'developer_listNm'" data-toggle="tooltip" title="Developer"><strong> Developer : </strong> {{ value}}</strong>
+                                    <strong ng-if="key === 'tester_listNm'" data-toggle="tooltip" title="Tester"><strong> Tester : </strong> {{ value}}</strong>
                                 </div>
                             </div>
                         </b>                        
@@ -180,7 +185,7 @@
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header widget-header bordered-bottom bordered-themeprimary">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title" align="center">{{heading}}</h4>
                 </div>
@@ -207,7 +212,7 @@
                                 <input type="hidden" class="form-control" ng-model="id" name="id">
                                 <label>Sub Module<span class="sp-err">*</span></label> 
                                 <span class="input-icon icon-right">
-                                    <input type="text" class="form-control" ng-model="mdata.sub_module_name" name="module_name" ng-change="errorMsg = null" required>
+                                    <input type="text" class="form-control" ng-model="mdata.sub_module_name" name="sub_module_name" ng-change="errorMsg = null" required>
                                     <div class="help-block" ng-show="sbtBtn" ng-messages="productForm.sub_module_name.$error">
                                         <div class="sp-err" ng-message="required">This field is required</div>
                                         <div ng-if="errorMsg" class="err">{{errorMsg}}</div>
@@ -252,6 +257,7 @@
                                 </ui-select>
                                 <div class="help-block" ng-show="sbtBtn" ng-messages="mdata.developer_list.$error">
                                     <div ng-message="required">This field is required</div>
+                                    <div ng-show="requireddevs" class="err">This field is required</div>
                                     <div ng-if="errorMsg" class="err">{{errorMsg}}</div>
                                 </div>
                             </div>
@@ -259,7 +265,7 @@
 
                         <div class="row">
                             <div class="form-group col-sm-12 multi-sel-div" ng-class="{ 'has-error' : (sbtBtn && (!productForm.tester_list.$dirty && productForm.tester_list.$invalid))}" >
-                                <label for="">Select Developers <span class="sp-err">*</span></label>	
+                                <label for="">Select Testers <span class="sp-err">*</span></label>	
                                 <ui-select multiple ng-model="mdata.tester_list" name="tester_list" theme="select2" ng-disabled="disabled" ng-required="true"  style="width: 568px !important;">
                                     <ui-select-match>{{$item.dispay_name}}</ui-select-match>
                                     <ui-select-choices repeat="list in testerList | filter:$select.search" style="width: auto !important;">
@@ -268,16 +274,47 @@
                                 </ui-select>
                                 <div class="help-block" ng-show="sbtBtn" ng-messages="mdata.tester_list.$error">
                                     <div ng-message="required">This field is required</div>
+                                    <div ng-show="requiredtstrs" class="err">This field is required</div>
                                     <div ng-if="errorMsg" class="err">{{errorMsg}}</div>
                                 </div>
                             </div>
                         </div>                       
                     </div>
                     <div class="modal-footer" align="center">
-                        <button type="Submit" class="btn btn-sub" ng-click="sbtBtn = true">{{action}}</button>
+                        <button type="Submit" class="btn btn-sub" ng-click="sbtBtn = true; checksbm(mdata);">{{action}}</button>
                         <button type="button" class="btn btn-sub" ng-click="Cancel()" ng-disabled="vertBtn" ng-if="cancl">Cancel</button>                        
                     </div> 
                 </form>           
+            </div>
+        </div>
+    </div>
+
+    <!--model Help-->
+	<div class="modal fade" id="help" role="dialog" tabindex="-1" >    
+        <div class="modal-dialog">           
+            <div class="modal-content" style="border: 3px solid azure;border-radius: 30px;height: 489px; background: #0e0e0e38;overflow: auto;">
+                <div class="modal-header widget-header bordered-bottom bordered-themeprimary" style="border-radius: 27px; margin-top: 25px; width: 90%;margin-left: 20px;margin-right: 20px;">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title" align="center">Product Management Help Info</h4>
+                </div>                
+                <div class="modal-body" style="">
+                    <div class="form-group ">
+						<div class="form-group col-sm-3">
+							<label style="font-family: serif;font-size: 17px;">Sub Module <span class="sp-err"> : </span></label>
+						</div>
+						<div class="form-group col-sm-9">
+							<p style="font-family: serif;font-size: 17px;">The Product Sub Module is defined here and this is being use in various forms.<p>
+                        </div>				
+                    </div> 
+					<div class="form-group ">
+						<div class="form-group col-sm-3">
+							<label style="font-family: serif;font-size: 17px;">Sub Module <span class="sp-err"> : </span></label>
+						</div>
+						<div class="form-group col-sm-9">
+							<p style="font-family: serif;font-size: 17px;">The Product Sub Module is defined here and this is being use in various forms.<p>
+                        </div>				
+                    </div> 					                           
+                </div>                       
             </div>
         </div>
     </div>
@@ -293,13 +330,47 @@
             <div class="row">
                 <div class="col-sm-12 col-xs-12">
                     <div class="form-group">
-                        <label for="">Product Name</label>
+                        <label for="">Module Name</label>
                         <span class="input-icon icon-right">
-                            <input type="text" ng-model="searchDetails.product_name" name="product_name" class="form-control">
+                            <input type="text" ng-model="searchDetails.module_name" name="module_name" class="form-control">
                         </span>
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="">Sub Module Name</label>
+                        <span class="input-icon icon-right">
+                            <input type="text" ng-model="searchDetails.sub_module_name" name="sub_module_name" class="form-control">
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="">Developer Name</label>
+                        <span class="input-icon icon-right">
+                            <input type="text" ng-model="searchDetails.developer_listNm" name="developer_listNm" class="form-control">
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="">Tester Name</label>
+                        <span class="input-icon icon-right">
+                            <input type="text" ng-model="searchDetails.tester_listNm" name="tester_listNm" class="form-control">
+                        </span>
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12" >
                     <div class="form-group">

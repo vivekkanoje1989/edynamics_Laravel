@@ -49,6 +49,8 @@
 	<div class="widget">
 		<div class="widget-header ">
 			<span class="widget-caption">List Employee</span>
+            <span class="widget-caption pull-right "><a class="themeprimary" data-toggle="modal" title="Help Info" data-target="#help"><i class="fa fa-question-circle" aria-hidden="true" style="font-size: 25px;margin-right: 15px; margin-top: 6px;"></i></a></span>
+
 			<!--div class="widget-buttons">
 				<a href="#" data-toggle="maximize">
 					<i class="fa fa-expand"></i>
@@ -243,6 +245,37 @@
             </div>
         </div>
     </div><!-- Model ends-->
+
+    <!--model Help-->
+	<div class="modal fade" id="help" role="dialog" tabindex="-1" >    
+        <div class="modal-dialog">           
+            <div class="modal-content" style="border: 3px solid azure;border-radius: 30px;height: 489px; background: #0e0e0e38;overflow: auto;">
+                <div class="modal-header modal-header widget-header bordered-bottom bordered-themeprimary" style="border-radius: 27px; margin-top: 25px; width: 90%;margin-left: 20px;margin-right: 20px;">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title" align="center">List Employee Help Info</h4>
+                </div>                
+                <div class="modal-body" style="">
+                    <div class="form-group ">
+						<div class="form-group col-sm-3">
+							<label style="font-family: serif;font-size: 17px;">Employee <span class="sp-err"> : </span></label>
+						</div>
+						<div class="form-group col-sm-9">
+							<p style="font-family: serif;font-size: 17px;">The Employee create, update etc.functions are done here.<p>
+                        </div>				
+                    </div> 
+					<div class="form-group ">
+						<div class="form-group col-sm-3">
+							<label style="font-family: serif;font-size: 17px;">Employee <span class="sp-err"> : </span></label>
+						</div>
+						<div class="form-group col-sm-9">
+							<p style="font-family: serif;font-size: 17px;">The Employee create, update etc.functions are done here.<p>
+                        </div>				
+                    </div> 					                           
+                </div>                       
+            </div>
+        </div>
+    </div>
+
 
  <!-- Filter Form Start-->
     <div class="wrap-filter-form show-widget" id="slideout">

@@ -509,12 +509,33 @@ app.controller('productManagementCtrl', ['$scope', '$state', '$stateParams', 'Da
         });
     };
 
+    $scope.check = function(mdata) {
 
+        if (!mdata.developer_list) {
+            $scope.requireddev = true;
+
+        } else {
+            $scope.requireddev = false;
+        }
+
+        if (!mdata.tester_list) {
+            $scope.requiredtstr = true;
+        } else {
+            $scope.requiredtstr = false;
+        }
+
+        if ($scope.requireddev || $scope.requiredtstr) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     //viveknk Module Action
     $scope.doModulesAction = function(mdata) {
+
         // console.log("productForm ===" + JSON.stringify(productForm));
-        // return false;
+
         mdata['id'] = $scope.id;
         $scope.moduleprod = JSON.stringify(mdata);
         // console.log("doModulesAction moduleprod=" + $scope.moduleprod);
@@ -724,6 +745,26 @@ app.controller('productManagementCtrl', ['$scope', '$state', '$stateParams', 'Da
         $scope.index = index * ($scope.noOfRows - 1) + (index1);
     }
 
+    $scope.checksbm = function(mdata) {
+        if (!mdata.developer_list) {
+            $scope.requireddevs = true;
+
+        } else {
+            $scope.requireddevs = false;
+        }
+
+        if (!mdata.tester_list) {
+            $scope.requiredtstrs = true;
+        } else {
+            $scope.requiredtstrs = false;
+        }
+
+        if ($scope.requireddev || $scope.requiredtstr) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     //viveknk Sub Module Action
     $scope.dosubModulesAction = function(mdata) {

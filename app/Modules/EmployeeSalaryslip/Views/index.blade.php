@@ -38,6 +38,8 @@
         </div>
             <h5 class="row-title before-themeprimary"><i class="fa  fa-arrow-circle-o-right themeprimary"></i>Employee Salary Slip</h5>
             <div class="widget-body bordered-top bordered-themeprimary col-lg-12 col-sm-12 col-xs-12">
+                <span class="widget-caption pull-right "><a class="themeprimary" data-toggle="modal" title="Help Info" data-target="#help"><i class="fa fa-question-circle" aria-hidden="true" style="font-size: 25px;margin-right: 15px; margin-top: 6px;"></i></a></span>
+
                 <div id="user-form">
                     <!--form role="form" name="salryslipForm" method="post"  ng-submit="salryslipForm.$valid && uploadSalaryslip(fileData)"   novalidate enctype="multipart/form-data" -->
                     <form role="form" name="salryslipForm" method="post" enctype="multipart/form-data" ng-submit="uploadFiles(fileData)"> <!--action="http://localhost:8000/employeeSalaryslip/uploadzip"-->
@@ -224,3 +226,33 @@
         </div>
     </div>    
 </div>
+
+<!--model Help-->
+	<div class="modal fade" id="help" role="dialog" tabindex="-1" >    
+        <div class="modal-dialog">           
+            <div class="modal-content" style="border: 3px solid azure;border-radius: 30px;height: 489px; background: #0e0e0e38;overflow: auto;">
+                <div class="modal-header modal-header widget-header bordered-bottom bordered-themeprimary" style="border-radius: 27px; margin-top: 25px; width: 90%;margin-left: 20px;margin-right: 20px;">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title" align="center">Salary Slip Help Info</h4>
+                </div>                
+                <div class="modal-body" style="">
+                    <div class="form-group ">
+						<div class="form-group col-sm-3">
+							<label style="font-family: serif;font-size: 17px;">Salary Slip <span class="sp-err"> : </span></label>
+						</div>
+						<div class="form-group col-sm-9">
+							<p style="font-family: serif;font-size: 17px;">The Salary Slip cab be upload here.<p>
+                        </div>				
+                    </div> 
+					<div class="form-group ">
+						<div class="form-group col-sm-3">
+							<label style="font-family: serif;font-size: 17px;">Salary Slip <span class="sp-err"> : </span></label>
+						</div>
+						<div class="form-group col-sm-9">
+							<p style="font-family: serif;font-size: 17px;">The Salary Slip cab be upload here.<p>
+                        </div>				
+                    </div> 					                           
+                </div>                       
+            </div>
+        </div>
+    </div>

@@ -7,7 +7,7 @@ class MenuItems {
     public static function getMenuItems() {
         $getUrl = config('global.getUrl');
         $menulist = array(
-            1 => array('name' => 'Dashborad', 'icon' => 'dash-img menu-icon-sz', 'micon' => 'img/dashboard.png', 'uiSrefActive' => '', 'url' => '', 'slug' => 'dashboard', 'has_submenu' => true, 'total_submenu' => 7,
+            1 => array('id' => 'Dashborad', 'name' => 'Dashborad', 'icon' => 'dash-img menu-icon-sz', 'micon' => 'img/dashboard.png', 'uiSrefActive' => '', 'url' => '', 'slug' => 'dashboard', 'has_submenu' => true, 'total_submenu' => 7,
                 'submenu_ids' => '0101,0102,0103,0104,0105,0106,0107', 'anchorClass' => 'menu-dropdown', 'submenuClass' => 'submenu', 'liClass' => 'open', 'submenu' => array(
                     1 => array('id' => '0101', 'name' => 'My Salary Slips', 'micon' => 'img/salorySlip.png', 'icon' => '', 'url' => '/employeeSalaryslip', 'slug' => 'mySalaryslip', 'uiSrefActive' => 'active', 'total_submenu' => 1),
                     2 => array('id' => '0102', 'name' => 'Request Leave', 'micon' => 'img/requestLeave.png', 'icon' => '', 'url' => '/requestLeave/index', 'slug' => 'requestLeaveIndex', 'uiSrefActive' => 'active', 'total_submenu' => 1),
