@@ -28,10 +28,6 @@ class DashBoardController extends Controller {
         return view("DashBoard::myrequest");
     }
 
-    public function mysalaryslip() {
-        echo "mysalaryslip";
-    }
-
     public function store() {
         $postdata = file_get_contents('php://input');
         $request = json_decode($postdata, true);

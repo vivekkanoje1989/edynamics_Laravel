@@ -1,5 +1,5 @@
 @extends('frontendApp')
-<?php echo "vivek"; ?>
+
 @section('content')
 <div class="container">
     <div class="row">

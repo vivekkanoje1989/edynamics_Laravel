@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Modules\EmployeeDocuments\Models\MlstEmployeeDocuments;
 use Illuminate\Http\Request;
 use Auth;
-use Excel;
 use App\Classes\CommonFunctions;
 
 class EmployeeDocumentsController extends Controller {
@@ -17,7 +16,7 @@ class EmployeeDocumentsController extends Controller {
     }
 
     public function employeeDocuments() {
-        $result = MlstEmployeeDocuments::where('deleted_status', '=', 0)->get();
+        $result = MlstEmployeeDocuments::all();
         if (!empty($result)) {
             $result = ['success' => true, 'records' => $result];
             return json_encode($result);
@@ -65,42 +64,5 @@ class EmployeeDocumentsController extends Controller {
             return json_encode($result);
         }
     }
-
-    public function destroy($id) {
-
-        $getDocuments = MlstEmployeeDocuments::where('id', '=', $id)->get();
-        $getCount = $getDocuments->count();
-
-        if ($getCount < 1) {
-            $result = ['success' => false, 'errorMsg' => 'Document can not be deleted.'];
-            return json_encode($result);
-        } else {
-            $loggedInUserId = Auth::guard('admin')->user()->id;
-            $delete = CommonFunctions::deleteMainTableRecords($loggedInUserId);
-            $input['documentData'] = $delete;
-            $result = MlstEmployeeDocuments::where('id', $id)->update($input['documentData']);
-            $getDocuments = MlstEmployeeDocuments::where('deleted_status', '=', 0)->get();        
-            $result = ['success' => true, 'result' => $result, 'records' => $getDocuments ];
-            return json_encode($result);
-        }
-    }
-
-    //function to export data to xls
-	public function exportToxls(){
-        //echo "exportToxls";exit;
-        $getdocuments = MlstEmployeeDocuments::select('id as Sr.No.','document_name as Document')->where(['deleted_status' => 0])->get();
-        $getCount = $getdocuments->count();
-
-        if ($getCount < 1) {          
-			 return false;			 
-        } else {
-			//export to excel
-			Excel::create('Employee Document', function($excel) use($getdocuments){
-				$excel->sheet('Documents', function($sheet) use($getdocuments){
-					$sheet->fromArray($getdocuments);
-				});
-			})->export('xlsx');				
-		}				
-	}
 
 }

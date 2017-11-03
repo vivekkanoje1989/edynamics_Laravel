@@ -13,37 +13,24 @@
 </style>
 <input type="hidden" ng-model="userForm.csrfToken" name="csrftoken" id="csrftoken" ng-init="userForm.csrfToken = '<?php echo csrf_token(); ?>'" class="form-control">
 <input type="hidden" ng-model="userData.id" name="id" id="empId" ng-init="userForm.id = '[[ $empId ]]'" value="[[ $empId ]]" class="form-control">
-<div class="row"  ng-controller="hrController"   >
-    <div class="page-breadcrumbs {{settings.fixed.breadcrumbs ? 'breadcrumbs-fixed' : ''}}" style="position: relative; top: -98px;box-shadow: 0 2px 4px 0 rgba(245, 238, 238, 0.15)" ng-init="vbreadcumbs = [
-            {'displayName': 'Home', 'url': 'goDashboard()'},
-            {'displayName': 'Hr', 'url': 'goListemployee()'},
-            {'displayName': 'Employee Management', 'url': 'goListemployee()'},
-            {'displayName': 'List Employee', 'url': 'goListemployee()'},
-            {'displayName': 'Edit Employee', 'url': ''}
-        ]">
-        <ol class="breadcrumb" >
-            <i class="fa fa-home" aria-hidden="true" style="font-size: 20px;color: gray;">&nbsp;</i>
-            <li ng-repeat="crumb in vbreadcumbs" ng-class="{ active: $last }"><a href="javascript:void(0)" ng-click="{{crumb.url}}" ng-if="!$last">{{ crumb.displayName }}&nbsp;</a><span ng-show="$last">{{ crumb.displayName }}</span>
-            </li>
-        </ol>
-    </div>
+<div class="row" >
     <input type="hidden" name="employeeId" id="employeeId"  value="[[$empId]]" ng-cloak="" >
-    
-    <div class="col-lg-12 col-sm-12 col-xs-12">    
-        <h5 class="row-title before-themeprimary"><i class="fa fa-chevron-left themeprimary" title="Go Back" style="cursor: pointer;border-right: 1px solid;padding-right: 11px;" ng-click="backpage()"> Back</i><i class="fa  fa-arrow-circle-o-right themeprimary"></i>Edit Employee <i class='fa fa-spinner fa-spin'  ng-show="vkloader"></i></h5>
-        <div id="WiredWizard" class="wizard wizard-wired" data-target="#WiredWizardsteps" >
+    <div class="col-lg-12 col-sm-12 col-xs-12" ng-controller="hrController"  >
+
+        <h5 class="row-title before-themeprimary"><i class="fa  fa-arrow-circle-o-right themeprimary"></i>Edit User</h5>
+        <div id="WiredWizard" class="wizard wizard-wired" data-target="#WiredWizardsteps">
             <ul class="steps">
                 <li   ng-click="getStepDiv(1, steps, 1, steps.first_name)" id="step1" ng-class="{'complete':steps.first_name == 1}" class="user_steps wiredstep1"><span class="step">1</span><span class="title">Personal Information</span><span class="chevron"></span></li>
                 <li   ng-click="getStepDiv(2, steps, 1, steps.personal_email1)" id="step2" ng-class="{'complete':steps.personal_email1 == 1}" class="user_steps wiredstep2"><span class="step btn-nxt1">2</span><span class="title">Contact Information</span> <span class="chevron"></span></li>
                 <li   ng-click="getStepDiv(3, steps, 1, steps.highest_education_id)" id="step3" ng-class="{'complete':steps.highest_education_id == 1}" class="user_steps wiredstep3"><span class="step btn-nxt2">3</span></span><span class="title">Educational & Other Details</span> <span class="chevron"></span></li>
                 <li   ng-click="getStepDiv(4, steps, 1, steps.deptId)" ng-class="{'complete':steps.deptId == 1}" id="step4" class="user_steps wiredstep4"><span class="step btn-nxt3">4</span><span class="title">Job Offer Details</span> <span class="chevron"></span></li>
-                <li   ng-click="getStepDiv(5, steps, 1, steps.username);" ng-class="{'complete':steps.username == 1}" id="step5" class="user_steps step5 wiredstep5"><span class="step btn-nxt4">5</span><span class="title">Employee status</span> <span class="chevron"></span></li>
+                <li   ng-click="getStepDiv(5, steps, 1, steps.username);" ng-class="{'complete':steps.username == 1}" id="step5" class="user_steps step5 wiredstep5"><span class="step btn-nxt4">5</span><span class="title">User status</span> <span class="chevron"></span></li>
             </ul>
         </div>
         <div class="step-content" id="WiredWizardsteps">
             <div class="step-pane active" id="wiredstep1" ng-show="stepId == 1" >
                 <form name="userForm" novalidate ng-submit="userForm.$valid && createUser(userPersonalData, [[ $empId ]]);"  ng-init="manageUsers([[ !empty($empId) ?  $empId : '0' ]], 'edit');"  >
-                    <input type="hidden" ng-model="userData.id" name="id" id="empId" ng-init="userForm.id = '[[ $empId ]]'" value="[[ $empId ]]" class="form-control">
+                            <input type="hidden" ng-model="userData.id" name="id" id="empId" ng-init="userForm.id = '[[ $empId ]]'" value="[[ $empId ]]" class="form-control">
                     <input type="hidden" name="employeeId" ng-model="employeeId" value="{{employeeId}}" >
                     <div class="form-title">Personal Information of {{fullName}}</div>
                     <div class="row">
@@ -146,6 +133,7 @@
                                 <label for="">physic  Description</label>
                                 <span class="input-icon icon-right">
                                     <textarea ng-model="userPersonalData.physic_desc" name="physic_desc"  class="form-control" maxlength="50" ></textarea>
+
                                 </span>
                             </div>
                         </div>                        
@@ -160,6 +148,7 @@
                                         <option ng-repeat="bloodGroup in bloodGroups track by $index" value="{{bloodGroup.id}}" ng-selected="{{ bloodGroup.id == userPersonalData.blood_group_id}}">{{bloodGroup.blood_group}}</option>
                                     </select>
                                     <i class="fa fa-sort-desc"></i>
+
                                 </span>
                             </div>
                         </div>
@@ -581,7 +570,7 @@
                                     <div ng-if="invalidImage">{{invalidImage}}</div>
                                 </div>
                                 <img ng-src="{{image_source}}" class="thumb photoPreview"> 
-                                <div ng-if="imgUrl" > <img ng-if="employee_photo_file_name_preview.length != 1"  ng-src="[[ Config('global.s3Path') ]]/employee-photos/{{ imgUrl}}"  alt="{{ altName}}"  class="thumb photoPreview"/></div>
+                                <div ng-if="imgUrl" > <img ng-if="employee_photo_file_name_preview.length != 1"  ng-src="<?php echo config('global.s3Path'); ?>/employee-photos/{{ imgUrl}}"  alt="{{ altName}}"  class="thumb photoPreview"/></div>
 
                             </span> 
                             <div class="img-div2" data-title="name" ng-repeat="list in employee_photo_file_name_preview">    
@@ -694,7 +683,7 @@
             <div class="step-pane" id="wiredstep5" ng-show="stepId == 5">
                 <form name="userStatusForm" novalidate ng-submit="userStatusForm.$valid && createStatusForm(userStatus, [[ $empId ]])"  >
                     <div class="form-title">                                           
-                        status  of {{fullName}}
+                        User status  of {{fullName}}
                     </div>
                     <div class="row">
                         <div  class="col-sm-3 col-xs-6" ng-if="userId != '0'">
@@ -710,12 +699,6 @@
                                     <label>
                                         <input name="form-field-radio" type="radio" ng-model="userStatus.employee_status" value="2" class="colored-danger">
                                         <span class="text">  Temporary Suspended </span>
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input name="form-field-radio" type="radio" ng-model="userStatus.employee_status" id="emppsusp" value="3"  ng-click="getEnqCount([[ $empId ]]);" class="colored-danger">
-                                        <span class="text">  Permanent Suspended </span>
                                     </label>
                                 </div>
                             </div>
@@ -736,7 +719,7 @@
                                 </span>
                             </div>
                         </div> 
-                        <!--div class="col-sm-3 col-xs-6">
+                        <div class="col-sm-3 col-xs-6">
                             <div class="form-group" ng-class="{ 'has-error' : step5 && (!userStatusForm.high_security_password_type.$dirty && userStatusForm.high_security_password_type.$invalid)}">
                                 <label>High security password type <span  class="sp-err">*</span></label>
                                 <span class="input-icon icon-right" >
@@ -751,8 +734,8 @@
                                     </div>
                                 </span>
                             </div>
-                        </div-->
-                        <!--div class="col-sm-3 col-xs-6" ng-if="userStatus.high_security_password_type == 1">
+                        </div>
+                        <div class="col-sm-3 col-xs-6" ng-if="userStatus.high_security_password_type == 1">
                             <div class="form-group" ng-class="{ 'has-error' : step5 && (!userStatusForm.high_security_password.$dirty && userStatusForm.high_security_password.$invalid)}">
                                 <label>High security password <span class="sp-err">*</span></label>
                                 <span class="input-icon icon-right">
@@ -763,9 +746,10 @@
                                     </div>
                                 </span>
                             </div>
-                        </div-->
-                    <!--/div>
-                    <div class="row"-->
+                        </div>
+                    </div>
+
+                    <div class="row">
                         <div class="col-sm-3 col-xs-6">
                             <div class="form-group" ng-class="{ 'has-error' : step5 && (!userStatusForm.employee_id.$dirty && userStatusForm.employee_id.$invalid)}">
                                 <label>Employee Id</label>
@@ -802,70 +786,8 @@
             </div>
         </div>
     </div>
+</div>
 </form>
-<div class="modal fade" id="BulkModal" role="dialog" tabindex='-1'>
-    <div class="modal-dialog modal-md" >
-        <!-- Modal content-->
-        <div class="modal-content" >
-            <div class="modal-header navbar-inner">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title" align="center"> Reassign Enquiries</h4>
-            </div>
-            <form name="bulkForm"   ng-submit="bulkForm.$valid && bulkreasignemployee(bulkData, [[ $empId ]])" novalidate >
-                <div class="modal-body">
-                    <div  ng-if="totsalesEnquiries > '0'">
-                        <div class="row">
-                            <div class="col-sm-4 col-sx-12">
-                                <label for="">Sales Enquiries Reassign To</label>
-                            </div>
-                            <div class="col-sm-5 col-sx-12">
-                                <div class="form-group" >
-                                    <select class="form-control"  ng-model="bulkData.sales_employee_id" name="sales_employee_id" id="sales_employee_id" ng-init="getsalesEmployees([[ $empId ]])" required>
-                                        <option value="">Select Employee</option>
-                                        <option ng-repeat="item in salesemployeeList" value="{{item.id}}"  >{{item.first_name}} {{item.last_name}} ({{item.designation_name.designation}})</option>
-                                    </select>
-                                    <div ng-show="sbtBtn" ng-messages="bulkForm.sales_employee_id.$error" class="help-block errMsg">
-                                        <div style="sp-err" ng-message="required">Please Select Employee</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3"></div>
-                        </div>
-                        <div class="">
-                            <span><strong>Total Enquires found : {{totsalesEnquiries}}</strong></span>
-                        </div>
-                        <div class="">
-                            <span><strong>Total Deals : </strong></span>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row" ng-if="totpresalesEnquiries > 0">
-                        <div class="col-sm-5 col-sx-12">
-                            <label for="">Customer Care Enquiries Reassign To</label>  <br> 
-                            <span>(<strong>Total Enquires found : {{totpresalesEnquiries}}</strong>)</span>
-                        </div>
-                        <div class="col-sm-6 col-sx-12">
-                            <div class="form-group" >
-                                <label for="">Select Employee <span class="sp-err">*</span></label>   
-                                <select class="form-control"  ng-model="bulkData.cc_presales_employee_id" name="cc_presales_employee_id" id="cc_presales_employee_id" ng-init="getpresalesEmployees([[ $empId ]])" required>
-                                    <option value="">Select Employee</option>
-                                    <option ng-repeat="item in presalesemployeeList" value="{{item.id}}"  >{{item.first_name}} {{item.last_name}} ({{item.designation_name.designation}})</option>
-                                </select>
-                                <div ng-show="sbtBtn" ng-messages="bulkForm.cc_presales_employee_id.$error" class="help-block errMsg">
-                                    <div style="sp-err" ng-message="required">Please Select Employee</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer" align="center">
-                    <button  type="submit" ng-click="sbtBtn = true" class="btn btn-primary pull-right">Reassign To</button></center>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-</div>
 <script>
     /* $(document).ready(function(){
      $(".btn-nxt1").mouseup(function(e){

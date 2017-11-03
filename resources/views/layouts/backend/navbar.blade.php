@@ -13,11 +13,11 @@
         <!-- Sidebar Collapse -->
         <div class="sidebar-collapse"></div>
         <!-- /Sidebar Collapse -->
-        <!-- Account Area and Settings -->
+        <!-- Account Area and Settings --->
         <div class="navbar-header pull-right">
             <div class="navbar-account">
                 <ul class="account-area">
-                    <!--<li>
+<!--                    <li>
                         <a class=" dropdown-toggle" data-toggle="dropdown" title="Help" href="#">
                             <i class="icon fa fa-warning"></i>
                         </a>
@@ -286,7 +286,7 @@
                     no space must be between these elements-->
                     <!-- Settings -->
                 </ul>
-            <!--<div class="setting">
+<!--                <div class="setting">
                 </div>-->
                 <div class="setting-container">
                     <label>

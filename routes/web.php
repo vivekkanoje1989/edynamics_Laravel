@@ -22,7 +22,6 @@ Route::get('/error500', function () {
 Route::get('/undercConstruction', function () {
     return view('layouts.backend.pageUnderConstruction');
 });
-Route::post('/checkUserCredentials/setTimezone', 'backend\Auth\LoginController@setTimezone');
 Route::post('/checkUserCredentials', 'backend\Auth\LoginController@checkUserCredentials');
 Route::post('/getforgotpassword', 'backend\Auth\LoginController@getforgotpassword');
 Route::get('/layout', function () {
@@ -134,7 +133,7 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/getMenuItems', 'backend\AdminController@getMenuItems');
     Route::get('/getTitle', 'backend\AdminController@getTitle');
     Route::get('/getGender', 'backend\AdminController@getGender');
-    Route::get('/getBloodGroup', 'backend\AdminController@getBloodGroup');
+    Route::get('/getBloodGroup', 'backend\AdminController@getBloodGroup'); //vivek blood grp
     Route::get('/getDepartments', 'backend\AdminController@getDepartments');
     Route::get('/getEducationList', 'backend\AdminController@getEducationList');
     Route::get('/getProfessionList', 'backend\AdminController@getProfessionList');

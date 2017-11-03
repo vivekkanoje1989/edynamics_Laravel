@@ -1,16 +1,4 @@
 <div class="row" ng-controller="hrController" ng-init="showchartdata()">
-<div class="page-breadcrumbs {{settings.fixed.breadcrumbs ? 'breadcrumbs-fixed' : ''}}" style="position: fixed; top: 44px;box-shadow: 0 2px 4px 0 rgba(245, 238, 238, 0.15)" ng-init="vbreadcumbs = [
-            {'displayName': 'Home', 'url': 'goDashboard()'},
-            {'displayName': 'Hr', 'url': ''},
-            {'displayName': 'Employee Management', 'url': ''},
-            {'displayName': 'Organisation Chart', 'url': 'goListemployee()'}
-        ]">
-    <ol class="breadcrumb" >
-        <i class="fa fa-home" aria-hidden="true" style="font-size: 20px;color: gray;">&nbsp;</i>
-        <li ng-repeat="crumb in vbreadcumbs" ng-class="{ active: $last }"><a href="javascript:void(0)" ng-click="{{crumb.url}}" ng-if="!$last">{{ crumb.displayName }}&nbsp;</a><span ng-show="$last">{{ crumb.displayName }}</span>
-        </li>
-    </ol>
-</div>
 <style>
     .google-visualization-orgchart-node{
             background: #ddd !important;

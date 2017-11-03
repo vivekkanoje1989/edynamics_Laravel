@@ -2,19 +2,7 @@
     .toggleClassActive {font-size:40px !important;cursor:pointer;color: #5cb85c !important;vertical-align: middle;margin-left: 15px;}
     .toggleClassInactive {font-size:40px !important;cursor:pointer;color: #d9534f !important;vertical-align: middle;margin-left: 15px;}
 </style>
-<div class="row" ng-controller="customalertsController" ng-init="manageAlerts('','index',1, [[config('global.recordsPerPage')]]);vbreadcumbs = [
-				{'displayName': 'Home', 'url': 'goDashboard()'},
-				{'displayName': 'Settings', 'url': ''},
-				{'displayName': 'Sms & Email Settings', 'url': ''},
-				{'displayName': 'Custom Templates', 'url': ''}
-			]">
-    <div class="page-breadcrumbs {{settings.fixed.breadcrumbs ? 'breadcrumbs-fixed' : ''}}" style=" position: relative; top: -98px;box-shadow: 0 2px 4px 0 rgba(245, 238, 238, 0.15)" ng-init="">
-		<ol class="breadcrumb" >
-			<i class="fa fa-home" aria-hidden="true" style="font-size: 20px;color: gray;">&nbsp;</i>
-			<li ng-repeat="crumb in vbreadcumbs" ng-class="{ active: $last }"><a href="javascript:void(0)" ng-click="{{crumb.url}}" ng-if="!$last">{{ crumb.displayName }}&nbsp;</a><span ng-show="$last">{{ crumb.displayName }}</span>
-			</li>
-		</ol>
-	</div>
+<div class="row" ng-controller="customalertsController" ng-init="manageAlerts('','index',1, [[config('global.recordsPerPage')]])">
     <div class="col-xs-12 col-md-12">
         <div class="widget">
             <div class="widget-header ">

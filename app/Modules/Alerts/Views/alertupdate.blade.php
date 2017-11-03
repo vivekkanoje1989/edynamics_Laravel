@@ -28,7 +28,7 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="">Template ForV</label>
+                                            <label for="">Template For</label>
                                             <span class="input-icon icon-right">
                                                 <select ng-model="alertData.templates_event_id" ng-init="getTemplatesEvents()" name="templates_event_id" class="form-control" required disabled>
                                                     <option value="">Select Event</option>

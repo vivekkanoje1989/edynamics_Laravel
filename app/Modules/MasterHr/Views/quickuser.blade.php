@@ -1,29 +1,17 @@
-<div class="page-breadcrumbs {{settings.fixed.breadcrumbs ? 'breadcrumbs-fixed' : ''}}" style="position: relative; top: -98px;box-shadow: 0 2px 4px 0 rgba(245, 238, 238, 0.15)" ng-init="vbreadcumbs = [
-            {'displayName': 'Home', 'url': 'goDashboard()'},
-            {'displayName': 'Hr', 'url': 'goListemployee()'},
-            {'displayName': 'Employee Management', 'url': 'goListemployee()'},
-            {'displayName': 'List Employee', 'url': 'goListemployee()'},
-            {'displayName': 'Quick Employee', 'url': 'goQuickemployee()'}
-        ]">
-    <ol class="breadcrumb" >
-        <i class="fa fa-home" aria-hidden="true" style="font-size: 20px;color: gray;">&nbsp;</i>
-        <li ng-repeat="crumb in vbreadcumbs" ng-class="{ active: $last }"><a href="javascript:void(0)" ng-click="{{crumb.url}}" ng-if="!$last">{{ crumb.displayName }}&nbsp;</a><span ng-show="$last">{{ crumb.displayName }}</span>
-        </li>
-    </ol>
-</div>
+
 <form name="frmQuickEmp" novalidate ng-submit="frmQuickEmp.$valid && userData.department_id != '' && userData.department_id != undefined && quickEmployee(userData);" ng-controller="hrController" >
     <input type="hidden" ng-model="frmQuikEmployee.csrfToken" name="csrftoken" id="csrftoken" ng-init="frmQuikEmployee.csrfToken = '<?php echo csrf_token(); ?>'" class="form-control">
 
     <div class="row" ng-init=" manageQuickUsers();">
         <div class="col-lg-12 col-sm-12 col-xs-12">
-            <h5 class="row-title before-themeprimary"><i class="fa fa-chevron-left themeprimary" title="Go Back" style="cursor: pointer;border-right: 1px solid;padding-right: 11px;" ng-click="backpage()"> Back</i><i class="fa  fa-arrow-circle-o-right themeprimary"></i>Quick Employee</h5>
-           
+            <h5 class="row-title before-themeprimary"><i class="fa  fa-arrow-circle-o-right themeprimary"></i>Quick User</h5>
+
             <div class="step-content" id="WiredWizardsteps">
+
                 <div class="step-pane active" id="wiredstep2">	
-                    <!--div class="form-title">
+                    <div class="form-title">
                         &nbsp;
-                    </div-->
-                    <div class="form-title">Add Information</div>
+                    </div>
                     <div class="row">
                         <div class="col-sm-12 col-xs-12">
                             <div class="row">

@@ -163,11 +163,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        /*
-         gcs drive file upload
-        */
-        Superbalist\LaravelGoogleCloudStorage\GoogleCloudStorageServiceProvider::class,
-        
+
         /*
          * Package Service Providers...
          */
@@ -184,8 +180,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         Reliese\Coders\CodersServiceProvider::class,
         ArtemSchander\L5Modular\ModuleServiceProvider::class,
-
-        //maatwebsite excel
         Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 

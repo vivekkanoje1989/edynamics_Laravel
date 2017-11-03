@@ -19,25 +19,11 @@
         padding: 10px;
     }
 </style>
-<!--Page Related styles-->
-<link href="assets/css/dataTables.bootstrap.css" rel="stylesheet" />
 <div class="row">
     <div class="widget flat radius-bordered ">
-        <div class="col-lg-12 col-sm-12 col-xs-12" ng-controller="userDocumentController" ng-init="getEmployees(); manageEmployeeDocuments(); vbreadcumbs = [
-                {'displayName': 'Home', 'url': 'goDashboard()'},
-                {'displayName': 'Hr', 'url': 'goEmployeedocument()'},
-                {'displayName': 'Employee Management', 'url': 'goEmployeedocument()'},
-                {'displayName': 'Employee Documents', 'url': 'goEmployeedocument()'}
-            ];" >
-            <div class="page-breadcrumbs {{settings.fixed.breadcrumbs ? 'breadcrumbs-fixed' : ''}}" style="position: fixed; top: 44px;box-shadow: 0 2px 4px 0 rgba(245, 238, 238, 0.15)">
-            <ol class="breadcrumb" >
-                <i class="fa fa-home" aria-hidden="true" style="font-size: 20px;color: gray;">&nbsp;</i>
-                <li ng-repeat="crumb in vbreadcumbs" ng-class="{ active: $last }"><a href="javascript:void(0)" ng-click="{{crumb.url}}" ng-if="!$last">{{ crumb.displayName }}&nbsp;</a><span ng-show="$last">{{ crumb.displayName }}</span>
-                </li>
-            </ol>
-        </div>
-            <h5 class="row-title before-themeprimary"><i class="fa  fa-arrow-circle-o-right themeprimary"></i>Employee Documents  <i class="fa fa-spinner fa-pulse fa-3x fa-fw ng-hide" style="font-size: 19px;" ng-show="vloader"></i></h5>
-            <div class="widget-body bordered-top bordered-themeprimary col-lg-12 col-sm-12 col-xs-12">            
+        <div class="col-lg-12 col-sm-12 col-xs-12" ng-controller="userDocumentController" ng-init="getEmployees(); manageEmployeeDocuments();" >
+            <h5 class="row-title before-themeprimary"><i class="fa  fa-arrow-circle-o-right themeprimary"></i>User Documents</h5>
+            <div class="widget-body bordered-top bordered-themeprimary col-lg-12 col-sm-12 col-xs-12">
                 <div id="user-form">
                     <form role="form" name="userForm" method="post"  ng-submit="userForm.$valid && createUserDocuments(userData.documentUrl, userData)"   novalidate enctype="multipart/form-data">
                         <input type="hidden" ng-model="userData.csrfToken" name="csrftoken" id="csrftoken" ng-init="userData.csrfToken = '[[ csrf_token() ]]'">
@@ -47,10 +33,10 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="">Employee List</label>
+                                            <label for="">User List</label>
                                             <span class="input-icon icon-right">                                    
                                                 <select class="form-control" ng-model="userData.employee_id" name="employee_id"  required ng-change="getUserDocumentsLists(userData.employee_id)">
-                                                    <option value="">Please Select Employee</option>
+                                                    <option value="">Please Select User</option>
                                                     <option  ng-repeat="itemone in employeeRow"  value="{{itemone.id}}">{{itemone.first_name + " " + itemone.last_name + " " + "(" + itemone.designation + ")"}}</option>
                                                 </select>
                                                 <i class="fa fa-sort-desc"></i>
@@ -103,20 +89,18 @@
                                             <span class="input-icon icon-right">
                                                 <input type="file" ngf-select ng-model="userData.documentUrl" name="documentUrl" id="documentUrl" accept="image/*" ngf-max-size="2MB" class="form-control imageFile"  ngf-model-invalid="errorFile" ><br/>
                                             </span>
-                                        </div>                                       
+                                        </div>
                                         <div  ng-show="document_url" style="margin-top:18px;">
                                             <div  class="img-div2" data-title="name">   
                                                 <i class="fa fa-times rem-icon" ng-if="document_url" ng-click="removeImg('{{document_url}}',{{id}})"></i>
-                                                <!--img ng-if="document_url" ng-src="[[ Session::get('s3Path') ]]/Employee-Documents/{{document_url}}" style="width: 60px;height: 60px;"-->
-                                                <img ng-if="document_url" ng-src="[[ Config('global.s3Path') ]]/Employee-Documents/{{document_url}}" style="width: 60px;height: 60px;"> 
+                                                <img ng-if="document_url" ng-src="[[ Session::get('s3Path') ]]/Employee-Documents/{{document_url}}" style="width: 60px;height: 60px;">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12 col-xs-12 col-md-12" align="left">
-                                        <button type="submit" class="btn btn-primary" id="fncbtn" title="Submit"  ng-click="sbtBtn = true">{{action}} </button>
-                                        
+                                        <button type="submit" class="btn btn-primary"  ng-click="sbtBtn = true">{{action}}</button>
                                     </div>
                                 </div><br>
                             </div>   
@@ -127,36 +111,32 @@
                                     <span class="widget-caption" style="font-size: 15px;font-weight: 600 !important;">Document List <span id="errContactDetails" class="errMsg"></span></span>
                                 </div>
                                 <div class="widget-body table-responsive">
-                                    <table class="table table-striped table-hover table-bordered dataTable no-footer" at-config="config">
-                                        <thead >
-                                            <tr role="row" style=" background-color: #eee; background-image: -moz-linear-gradient(top,#f2f2f2 0,#fafafa 100%); background-image: -o-linear-gradient(top,#f2f2f2 0,#fafafa 100%); background-image: linear-gradient(to bottom,#f2f2f2 0,#fafafa 100%); font-size: 12px;">							
+                                    <table class="table table-hover table-striped table-bordered" at-config="config">
+                                        <thead class="bord-bot">
+                                            <tr>
                                                 <th>Sr. No. </th>
-                                                <th class="sorting" ng-click="OrderFunction('Document')">Document name</th>
-                                                <th class="sorting" ng-click="OrderFunction('Number')">Number</th>
+                                                <th>Document name</th>
+                                                <th>Number</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="list in documentRow | orderBy: OrderRec">
+                                            <tr ng-repeat="list in documentRow">
                                                 <td>{{$index + 1}}</td>
-                                                <!--td>{{list.user_documents.document_name}}</td-->
-                                                <td>{{list.document_name}}</td>
+                                                <td>{{list.user_documents.document_name}}</td>
                                                 <td>{{list.document_number}}</td>
                                                 <td class="fa-div">
-                                                    <!--div class="fa-hover" tooltip-html-unsafe="Edit Document" style="display: block;"><a href="javascript:void(0);" ng-click="updateDocument({{list}},{{$index}})"><i class="fa fa-pencil"></i></a></div-->
-                                                    <a href="javascript:void(0);" class="btn btn-info btn-xs edit" tooltip-html-unsafe="Edit Document" ng-click="updateDocument({{list}},{{$index}})"><i class="fa fa-edit" style="color: white !important;"></i> Edit</a>
-                                                    <a href="javascript:void(0);" class="btn btn-danger btn-xs delete" tooltip-html-unsafe="Delete Document" ng-click="deleteDocument({{list}},{{$index}})"><i class="fa fa-trash-o" style="color: white !important;"></i> Delete</a>	
+                                                    <div class="fa-hover" tooltip-html-unsafe="Edit Document" style="display: block;"><a href="javascript:void(0);" ng-click="updateDocument({{list}},{{$index}})"><i class="fa fa-pencil"></i></a></div>
                                                 </td>
                                             </tr>                                            
                                         </tbody>
                                     </table>
                                 </div>
-                                <!--pre>{{documentRow | json}}</pre-->
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
 </div>

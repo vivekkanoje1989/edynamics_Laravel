@@ -11,32 +11,19 @@
         resize: none;
     }
 </style>
-<div class="page-breadcrumbs {{settings.fixed.breadcrumbs ? 'breadcrumbs-fixed' : ''}}" style="position: relative; top: -98px;box-shadow: 0 2px 4px 0 rgba(245, 238, 238, 0.15)" ng-init="vbreadcumbs = [
-            {'displayName': 'Home', 'url': 'goDashboard()'},
-            {'displayName': 'Hr', 'url': 'goListemployee()'},
-            {'displayName': 'Employee Management', 'url': 'goListemployee()'},
-            {'displayName': 'List Employee', 'url': 'goListemployee()'},
-            {'displayName': 'New Employee', 'url': 'goAddNewemployee()'}
-        ]">
-    <ol class="breadcrumb" >
-        <i class="fa fa-home" aria-hidden="true" style="font-size: 20px;color: gray;">&nbsp;</i>
-        <li ng-repeat="crumb in vbreadcumbs" ng-class="{ active: $last }"><a href="javascript:void(0)" ng-click="{{crumb.url}}" ng-if="!$last">{{ crumb.displayName }}&nbsp;</a><span ng-show="$last">{{ crumb.displayName }}</span>
-        </li>
-    </ol>
-</div>
 <input type="hidden" ng-model="userForm.csrfToken" name="csrftoken" id="csrftoken" ng-init="userForm.csrfToken = '<?php echo csrf_token(); ?>'"  class="form-control">
 <input type="hidden" ng-model="userData.id" name="id" id="empId" ng-init="userForm.id = '[[ $empId ]]'" value="[[ $empId ]]" class="form-control">
 <div class="row" >
     <input type="hidden" name="employeeId" id="employeeId"  value="[[$empId]]" >
     <div class="col-lg-12 col-sm-12 col-xs-12" ng-controller="hrController" >
-        <h5 class="row-title before-themeprimary"><i class="fa fa-chevron-left themeprimary" title="Go Back" style="cursor: pointer;border-right: 1px solid;padding-right: 11px;" ng-click="backpage()">  Back</i><i class="fa  fa-arrow-circle-o-right themeprimary"></i> New Employee</h5>
+        <h5 class="row-title before-themeprimary"><i class="fa  fa-arrow-circle-o-right themeprimary"></i>New User</h5>
         <div id="WiredWizard" class="wizard wizard-wired" data-target="#WiredWizardsteps">
             <ul class="steps">
                 <li  class="wiredstep1 active"><span class="step">1</span><span class="title">Personal Information</span><span class="chevron"></span></li>
                 <li  class="wiredstep2"><span class="step btn-nxt1">2</span><span class="title">Contact Information</span> <span class="chevron"></span></li>
                 <li  class="wiredstep3"><span class="step btn-nxt2">3</span><span class="title">Educational & Other Details</span> <span class="chevron"></span></li>
                 <li  class="wiredstep4"><span class="step btn-nxt3">4</span><span class="title">Job Offer Details</span> <span class="chevron"></span></li>
-                <li  class="wiredstep5"><span class="step btn-nxt4">5</span><span class="title">Employee status</span> <span class="chevron"></span></li>
+                <li  class="wiredstep5"><span class="step btn-nxt4">5</span><span class="title">User status</span> <span class="chevron"></span></li>
             </ul>
         </div>
         <div class="step-content" id="WiredWizardsteps"  >
@@ -314,7 +301,7 @@
                                         <span class="input-icon icon-right">
                                             <input type="email" ng-model="userContact.personal_email1" check-unique-emails name="personal_email1" ng-change="uniqueEmail" class="form-control" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required ng-model-options="{ allowInvalid: true, debounce: 300 }">
                                             <i class="fa fa-envelope"></i>
-                                            <!-- check-unique-email -->
+                                            <!--                                            check-unique-email -->
                                             <div ng-show="step2" ng-messages="userContactForm.personal_email1.$error" class="help-block step2">
                                                 <div ng-message="required">This field is required.</div>
                                                 <div ng-message="email">Invalid email address.</div>
@@ -469,7 +456,7 @@
                                     <div class="form-group" ng-class="{ 'has-error' : step2 && (userContactForm.permenent_country_id.$invalid)}">
                                         <label for="">Select Country <span class="sp-err">*</span></label>
                                         <span class="input-icon icon-right">
-                                            <select ng-change="onPCountryChange()" ng-model="userContact.permenent_country_id" name="permenent_country_id" id="permenent_country_id" class="form-control" required>
+                                            <select ng-change="onPCountryChange()" ng-model="userContact.permenent_country_id" name="permenent_country_id" class="form-control" required>
                                                 <option value="">Select Country</option>
                                                 <option ng-repeat="country in countryList" value="{{country.id}}" ng-selected="{{ country.id == userContact.permenent_country_id}}">{{country.name}}</option>
                                             </select>
@@ -713,7 +700,7 @@
                             </div>
                         </div>
 
-                        <!--div class="col-sm-3 col-xs-6">
+                        <div class="col-sm-3 col-xs-6">
                             <div class="form-group" ng-class="{ 'has-error' : step5 && (!userStatusForm.high_security_password_type.$dirty && userStatusForm.high_security_password_type.$invalid)}">
                                 <label>High security password type <span  class="sp-err">*</span></label>
                                 <span class="input-icon icon-right" >
@@ -740,7 +727,7 @@
                                     </div>
                                 </span>
                             </div>
-                        </div-->
+                        </div>
 
 
                         <div class="col-sm-3 col-xs-6">
@@ -752,8 +739,8 @@
                                 </span>
                             </div>
                         </div> 
-                    <!--/div>
-                    <div class="row"-->
+                    </div>
+                    <div class="row">
                         <div class="col-sm-3 col-xs-6">
                             <div class="form-group" ng-class="{ 'has-error' : step5 && (!userStatusForm.employee_id.$dirty && userStatusForm.employee_id.$invalid)}">
                                 <label>Employee Id</label>

@@ -26,7 +26,7 @@ class EmployeeDeviceController extends Controller {
             foreach ($data as $deviceData) {
                 $name = '';
                 $arr = explode(',', $deviceData['employee_id']);
-                $empnames = Employee::whereIn('employee_id', $arr)->select('first_name', 'last_name')->get();
+                $empnames = Employee::whereIn('id', $arr)->select('first_name', 'last_name')->get();
                 foreach ($empnames as $empname) {
                     $name .= ',' . $empname['first_name'] . ' ' . $empname['last_name'];
                 }

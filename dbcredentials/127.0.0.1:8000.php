@@ -1,7 +1,6 @@
 <?php
-$server_name = '192.168.0.104';
+$server_name = '127.0.0.1';
 $uname = 'root';
-$password ='root';
-// $dbname = "laravel_developement_builder_client";
-$dbname = "laravel_developement_edynamics";
+$password ='';
+$dbname = "laravel_developement_builder_client";
 ?>

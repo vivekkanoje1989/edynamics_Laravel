@@ -1,20 +1,20 @@
 <!-- Page Sidebar Header-->
-<!--div class="sidebar-header-wrapper">
+<div class="sidebar-header-wrapper">
     <input type="text" class="searchinput" />
     <i class="searchicon fa fa-search"></i>
     <div class="searchhelper">Search Reports, Charts, Emails or Notifications</div>
-</div-->
+</div>
 <!-- /Page Sidebar Header -->
 <!-- Sidebar Menu -->
 
 <ul class="nav sidebar-menu" ng-controller="adminController" id="cstmenu">
-    <li id="{{parent.id}}" ng-repeat="parent in getMenu.mainMenu" ui-sref-active="{{ parent.uiSrefActive }}" class="{{ parent.liclass }}">
+    <li ng-repeat="parent in getMenu.mainMenu" ui-sref-active="{{ parent.uiSrefActive }}" class="{{ parent.liclass }}">
         <a ng-if='!parent.has_submenu' ui-sref="{{ parent.slug }}" class="{{ parent.anchorClass }}" ng-Click="checkPermission('{{ parent.slug }}')">
             <p class="{{ parent.icon }}"></p>
             <span class="menu-text"> {{ parent.name }} </span>
             <i class="menu-expand"></i>
-        </a> 
-        <a ng-if='parent.has_submenu' href="#" class="{{ parent.anchorClass }}" style="display: block;">
+        </a>
+        <a ng-if='parent.has_submenu' href="#" class="{{ parent.anchorClass }}" >
             <p class="{{ parent.icon }}"></p>
             <span class="menu-text"> {{ parent.name }} </span>
             <i class="menu-expand"></i>

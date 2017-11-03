@@ -3,7 +3,6 @@
 Route::group(array('module' => 'BloodGroups','middleware' => ['auth:admin'],'namespace' => 'App\Modules\BloodGroups\Controllers'), function() {
 
     $getUrl = config('global.getUrl');
-    Route::get('/blood-groups/exportToxls', 'BloodGroupsController@exportToxls');
     Route::resource('/blood-groups', 'BloodGroupsController');
     Route::post('/blood-groups/manageBloodGroup','BloodGroupsController@manageBloodGroups');
     Route::post('/blood-groups/filteredData', 'BloodGroupsController@filteredData');

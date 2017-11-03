@@ -2,7 +2,6 @@
 $GLOBALS['server_name'] = "";
 $config = ltrim($_SERVER['HTTP_HOST'], "www.") . '.php';
 $path = '../dbcredentials/' . $config;
-
 include ($path);
 
 $GLOBALS['uname'] = $uname;
@@ -11,7 +10,7 @@ $GLOBALS['dbname'] = $dbname;
 $GLOBALS['server'] = $server_name;
 session_start();
 $domain = ltrim($_SERVER['HTTP_HOST'], "www.");
-// print_r($domain['client_info']);exit;
+//print_r($domain['client_info']);exit;
 if (empty($_SESSION[$domain]['client_info']) || empty($_SESSION[$domain]['aws_bucket_id'])) {
     $connetion = mysqli_connect("$server_name", "$uname", "$password");
     if (!$connetion) {
@@ -38,8 +37,6 @@ if (empty($_SESSION[$domain]['client_info']) || empty($_SESSION[$domain]['aws_bu
         $system_row = mysqli_fetch_assoc($system_result);
         $GLOBALS['aws_bucket_id'] = $system_row['aws_bucket_id'];
         $_SESSION[$domain]['aws_bucket_id'] = $system_row['aws_bucket_id'];
-
-        // print_r($GLOBALS);exit;
     }
 }
 else

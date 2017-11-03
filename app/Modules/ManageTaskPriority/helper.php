@@ -1,4 +1,0 @@
-<?php
- /**
- *	ManageTaskPriority Helper  
- */

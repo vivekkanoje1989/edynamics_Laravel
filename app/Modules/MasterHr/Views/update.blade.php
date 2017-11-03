@@ -491,7 +491,7 @@
                         </div>
                         <div class="col-sm-3 col-xs-6">
                             <div class="form-group">
-                                <label for=""> Education DetailsK</label>
+                                <label for=""> Education Details</label>
                                 <span class="input-icon icon-right">
                                     <input type="text" ng-model="userData.education_details" name="education_details" class="form-control">
                                     <i class="fa fa-university"></i>
@@ -508,7 +508,7 @@
                                         <div ng-message="required">This field is required.</div>
                                         <i ng-show="userForm.emp_photo_url.$error.maxSize">File too large {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
                                     </div>
-                                </span>                                                  
+                                </span>                                                   
                             </div>
                         </div>
                         <div class="col-sm-3 col-xs-6">

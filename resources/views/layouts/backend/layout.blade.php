@@ -1,7 +1,3 @@
-<script> 
-    //dissable rightclick viveknk
-    //document.addEventListener('contextmenu', event => event.preventDefault()); 
-</script>
 <div ng-if="authenticated == false" ui-view></div>
 <!-- Loading Container -->
 <div ng-if="authenticated == true" class="loading-container" data-ng-include=" '/loading'"></div>
@@ -27,7 +23,6 @@
             <!-- Page Breadcrumb -->
             <div class="page-breadcrumbs {{settings.fixed.breadcrumbs ? 'breadcrumbs-fixed' : ''}}" data-ng-include=" '/breadcrumbs'">
             </div>
-            
             <!-- /Page Breadcrumb -->
             <!-- Page Header -->
             <div class="page-header position-relative {{settings.fixed.header ? 'page-header-fixed' : ''}}" data-ng-include=" '/header'">
