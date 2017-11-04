@@ -9,6 +9,7 @@ use App\Modules\BloodGroups\Models\MlstBloodGroups;
 use App\Classes\CommonFunctions;
 use Auth;
 use DB;
+use Excel;
 
 class BloodGroupsController extends Controller {
 
@@ -17,7 +18,8 @@ class BloodGroupsController extends Controller {
     }
 
     public function manageBloodGroups() {
-        $getBloodGroups = MlstBloodGroups::all();
+        // $getBloodGroups = MlstBloodGroups::all();
+        $getBloodGroups = MlstBloodGroups::where(['deleted_status' => 0])->get();
 
         $bloodGrps = array();
         for ($i = 0; $i < count($getBloodGroups); $i++) {
@@ -87,7 +89,7 @@ class BloodGroupsController extends Controller {
         $postdata = file_get_contents('php://input');
         $request = json_decode($postdata, true);
 
-        $cnt = MlstBloodGroups::where(['blood_group' => $request['blood_group']])->get()->count();
+        $cnt = MlstBloodGroups::where(['blood_group' => $request['blood_group']])->where('deleted_status', '!=', 1 )->get()->count();
         if ($cnt > 0) {  //exists blood group
             $result = ['success' => false, 'errormsg' => 'Blood group already exists'];
             return json_encode($result);
@@ -97,7 +99,9 @@ class BloodGroupsController extends Controller {
             $input['bloodGroupData'] = array_merge($request, $create);
             $bloodgroup = MlstBloodGroups::create($input['bloodGroupData']);
             $last3 = MlstBloodGroups::latest('id')->first();
-            $result = ['success' => true, 'result' => $bloodgroup, 'lastinsertid' => $last3->id];
+            $bloodgroup = MlstBloodGroups::where(['deleted_status' => 0])->get();
+            // $result = ['success' => true, 'result' => $bloodgroup, 'lastinsertid' => $last3->id];
+            $result = ['success' => true, 'records' => $bloodgroup, 'totalCount' => count($bloodgroup)];
             return json_encode($result);
         }
     }
@@ -106,7 +110,7 @@ class BloodGroupsController extends Controller {
         $postdata = file_get_contents('php://input');
         $request = json_decode($postdata, true);
 
-        $getCount = MlstBloodGroups::where(['blood_group' => $request['blood_group']])->where('id', '!=', $id)->get()->count();
+        $getCount = MlstBloodGroups::where(['blood_group' => $request['blood_group']])->where('id', '!=', $id)->where('deleted_status', '=', 0 )->get()->count();
         if ($getCount > 0) {
             $result = ['success' => false, 'errormsg' => 'Blood group already exists'];
             return json_encode($result);
@@ -115,10 +119,58 @@ class BloodGroupsController extends Controller {
             $update = CommonFunctions::updateMainTableRecords($loggedInUserId);
             $input['bloodData'] = array_merge($request, $update);
             $result = MlstBloodGroups::where('id', $id)->update($input['bloodData']);
-            $result = ['success' => true, 'result' => $result];
 
+            // $result = ['success' => true, 'result' => $result];
+
+            $bloodgroup = MlstBloodGroups::where(['deleted_status' => 0])->get();
+            $result = ['success' => true, 'records' => $bloodgroup, 'totalCount' => count($bloodgroup)];
             return json_encode($result);
         }
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $getCount = MlstBloodGroups::where('id', '=', $id)->get()->count();
+        if ($getCount < 1) {
+            $result = ['success' => false, 'errormsg' => 'Blood group does not exists'];
+            return json_encode($result);
+        } else {
+            $loggedInUserId = Auth::guard('admin')->user()->id;
+            $delete = CommonFunctions::deleteMainTableRecords($loggedInUserId);
+            $input['bloodData'] = $delete;
+
+            $result = MlstBloodGroups::where('id', $id)->update($input['bloodData']);
+            
+            // $getBloodGroups = MlstBloodGroups::where(['deleted_status' => 0])->get();
+            // $result = ['success' => true, 'result' => $getBloodGroups];
+            $bloodgroup = MlstBloodGroups::where(['deleted_status' => 0])->get();
+            $result = ['success' => true, 'records' => $bloodgroup, 'totalCount' => count($bloodgroup)];
+            return json_encode($result);
+        }
+    }
+
+    //function to export data to xls
+	public function exportToxls(){
+		//echo "exportToxls";exit;
+		$getCount = MlstBloodGroups::where('deleted_status', '=', 0)->get()->count(); 
+		$getVertical = MlstBloodGroups::select('id as Sr.No.', 'blood_group')->where('deleted_status', '=', 0)->get(); 		
+
+        if ($getCount < 1) {          
+			 return false;			 
+        } else {
+			//export to excel
+			Excel::create('Export Data', function($excel) use($getVertical){
+				$excel->sheet('blood groups', function($sheet) use($getVertical){
+					$sheet->fromArray($getVertical);
+				});
+			})->export('xlsx');				
+		}				
+	}
 
 }

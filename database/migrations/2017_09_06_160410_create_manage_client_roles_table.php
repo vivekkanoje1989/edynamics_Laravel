@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateViveksTable extends Migration
+class CreateManageClientRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateViveksTable extends Migration
      */
     public function up()
     {
-        Schema::create('viveks', function (Blueprint $table) {
+        Schema::create('manage_client_roles', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateViveksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('viveks');
+        Schema::dropIfExists('manage_client_roles');
     }
 }

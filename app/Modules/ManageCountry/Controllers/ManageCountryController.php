@@ -18,7 +18,8 @@ class ManageCountryController extends Controller {
     }
 
     public function manageCountry() {
-        $getCountry = MlstCountries::all();
+        // $getCountry = MlstCountries::all();
+        $getCountry = MlstCountries::where('deleted_status', '=', 0)->get();
 
         $countryDetails = array();
         for ($i = 0; $i < count($getCountry); $i++) {
@@ -100,7 +101,7 @@ class ManageCountryController extends Controller {
         $postdata = file_get_contents('php://input');
         $request = json_decode($postdata, true);
 
-        $cnt = MlstCountries::where(['name' => $request['name']])->get()->count();
+        $cnt = MlstCountries::where(['name' => $request['name']])->where('deleted_status', '!=', 1)->get()->count();
         if ($cnt > 0) {
             $result = ['success' => false, 'errormsg' => 'State already exists'];
             return json_encode($result);
@@ -109,9 +110,13 @@ class ManageCountryController extends Controller {
             $create = CommonFunctions::insertMainTableRecords($loggedInUserId);
             $input['countryData'] = array_merge($request, $create);
             $result = MlstCountries::create($input['countryData']);
-            $last3 = MlstCountries::latest('id')->first();
-            $input['countryData']['main_record_id'] = $last3->id;
-            $result = ['success' => true, 'result' => $result, 'lastinsertid' => $last3->id];
+            
+            // $last3 = MlstCountries::latest('id')->first();
+            // $input['countryData']['main_record_id'] = $last3->id;
+            // $result = ['success' => true, 'result' => $result, 'lastinsertid' => $last3->id];
+            // return json_encode($result);
+            $countryDetails = MlstCountries::where('deleted_status', '=', 0)->get();
+            $result = ['success' => true, 'records' => $countryDetails, 'totalCount' => count($countryDetails)];
             return json_encode($result);
         }
     }
@@ -122,7 +127,7 @@ class ManageCountryController extends Controller {
 
         $getCount = MlstCountries::where(['name' => $request['name']])
                         ->where('id', '!=', $id)->get()->count();
-        if ($getCount > 0) {
+        if ($getCount < 0) {
             $result = ['success' => false, 'errormsg' => 'Country already exists'];
             return json_encode($result);
         } else {
@@ -131,7 +136,37 @@ class ManageCountryController extends Controller {
             $create = CommonFunctions::updateMainTableRecords($loggedInUserId);
             $input['countryData'] = array_merge($request, $create);
             $result = MlstCountries::where('id', $request['id'])->update($input['countryData']);
-            $result = ['success' => true, 'result' => $result];
+            // $result = ['success' => true, 'result' => $result];
+            // return json_encode($result);
+            $countryDetails = MlstCountries::where('deleted_status', '=', 0)->get();
+            $result = ['success' => true, 'records' => $countryDetails, 'totalCount' => count($countryDetails)];
+            return json_encode($result);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $getCount = MlstCountries::where('id', '=', $id)->get()->count();
+        if ($getCount < 1) {
+             $result = ['success' => false, 'errormsg' => 'Blood group does not exists'];
+             return json_encode($result);
+        } else {
+             $loggedInUserId = Auth::guard('admin')->user()->id;
+             $delete = CommonFunctions::deleteMainTableRecords($loggedInUserId);
+             $input['countryData'] = $delete;
+ 
+             $result = MlstCountries::where('id', $id)->update($input['countryData']);
+            //  $result = MlstCountries::where(['deleted_status' => 0])->get();
+            //  $result = ['success' => true, 'result' => $result]; 
+            //  return json_encode($result);
+            $countryDetails = MlstCountries::where('deleted_status', '=', 0)->get();
+            $result = ['success' => true, 'records' => $countryDetails, 'totalCount' => count($countryDetails)];
             return json_encode($result);
         }
     }

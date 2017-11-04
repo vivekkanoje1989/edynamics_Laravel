@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7ec38070ea7f44922e67116dec9fd9e7",
+    "content-hash": "2b3aa098ef862f1737720fcebede5825",
     "packages": [
         {
             "name": "artem-schander/l5-modular",
@@ -695,6 +695,52 @@
             "time": "2014-09-09T13:34:57+00:00"
         },
         {
+            "name": "firebase/php-jwt",
+            "version": "v5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/firebase/php-jwt.git",
+                "reference": "9984a4d3a32ae7673d6971ea00bae9d0a1abba0e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/9984a4d3a32ae7673d6971ea00bae9d0a1abba0e",
+                "reference": "9984a4d3a32ae7673d6971ea00bae9d0a1abba0e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": " 4.8.35"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Firebase\\JWT\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Neuman Vong",
+                    "email": "neuman+pear@twilio.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Anant Narayanan",
+                    "email": "anant@php.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
+            "homepage": "https://github.com/firebase/php-jwt",
+            "time": "2017-06-27T22:17:23+00:00"
+        },
+        {
             "name": "geoip2/geoip2",
             "version": "v2.3.3",
             "source": {
@@ -743,6 +789,173 @@
                 "maxmind"
             ],
             "time": "2015-09-24T17:29:28+00:00"
+        },
+        {
+            "name": "google/auth",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/google/google-auth-library-php.git",
+                "reference": "db8e3022a308cb0e988026d38e67b91a42b41622"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/google/google-auth-library-php/zipball/db8e3022a308cb0e988026d38e67b91a42b41622",
+                "reference": "db8e3022a308cb0e988026d38e67b91a42b41622",
+                "shasum": ""
+            },
+            "require": {
+                "firebase/php-jwt": "~2.0|~3.0|~4.0|~5.0",
+                "guzzlehttp/guzzle": "~5.3.1|~6.0",
+                "guzzlehttp/psr7": "~1.2",
+                "php": ">=5.4",
+                "psr/cache": "^1.0",
+                "psr/http-message": "^1.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^1.11",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ],
+                "psr-4": {
+                    "Google\\Auth\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Google Auth Library for PHP",
+            "homepage": "http://github.com/google/google-auth-library-php",
+            "keywords": [
+                "Authentication",
+                "google",
+                "oauth2"
+            ],
+            "time": "2017-07-31T16:34:40+00:00"
+        },
+        {
+            "name": "google/cloud",
+            "version": "v0.35.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/GoogleCloudPlatform/google-cloud-php.git",
+                "reference": "1422f39c99941fd7f8396af8156c09650294b543"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/GoogleCloudPlatform/google-cloud-php/zipball/1422f39c99941fd7f8396af8156c09650294b543",
+                "reference": "1422f39c99941fd7f8396af8156c09650294b543",
+                "shasum": ""
+            },
+            "require": {
+                "google/auth": "~0.9|^1.0",
+                "guzzlehttp/guzzle": "^5.3|^6.0",
+                "guzzlehttp/psr7": "^1.2",
+                "monolog/monolog": "~1",
+                "php": ">=5.5",
+                "psr/http-message": "1.0.*",
+                "ramsey/uuid": "~3",
+                "rize/uri-template": "~0.3"
+            },
+            "replace": {
+                "google/cloud-bigquery": "0.2.1",
+                "google/cloud-core": "1.7.0",
+                "google/cloud-datastore": "1.0.0",
+                "google/cloud-error-reporting": "0.4.1",
+                "google/cloud-language": "0.4.0",
+                "google/cloud-logging": "1.3.1",
+                "google/cloud-monitoring": "0.4.1",
+                "google/cloud-pubsub": "0.6.1",
+                "google/cloud-spanner": "0.4.0",
+                "google/cloud-speech": "0.6.0",
+                "google/cloud-storage": "1.1.3",
+                "google/cloud-trace": "0.3.1",
+                "google/cloud-translate": "1.0.0",
+                "google/cloud-videointelligence": "0.3.1",
+                "google/cloud-vision": "0.4.0"
+            },
+            "require-dev": {
+                "erusev/parsedown": "^1.6",
+                "google/gax": "^0.21.0",
+                "google/proto-client": "^0.21.0",
+                "league/json-guard": "^0.3",
+                "phpdocumentor/reflection": "^3.0",
+                "phpseclib/phpseclib": "^2",
+                "phpunit/phpunit": "4.8.*",
+                "squizlabs/php_codesniffer": "2.*",
+                "symfony/console": "^3.0",
+                "symfony/lock": "3.3.x-dev#1ba6ac9",
+                "vierbergenlars/php-semver": "^3.0"
+            },
+            "suggest": {
+                "google/gax": "Required to support gRPC",
+                "google/proto-client": "Required to support gRPC",
+                "phpseclib/phpseclib": "May be used in place of OpenSSL for creating signed Cloud Storage URLs. Please require version ^2."
+            },
+            "bin": [
+                "src/Core/bin/google-cloud-batch"
+            ],
+            "type": "library",
+            "extra": {
+                "component": {
+                    "id": "google-cloud",
+                    "target": "git@github.com:jdpedrie-gcp/google-cloud-php.git",
+                    "path": "src",
+                    "entry": "ServiceBuilder.php"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Google\\Cloud\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "John Pedrie",
+                    "email": "john@pedrie.com"
+                },
+                {
+                    "name": "Dave Supplee",
+                    "email": "dwsupplee@gmail.com"
+                }
+            ],
+            "description": "Google Cloud Client Library",
+            "homepage": "http://github.com/GoogleCloudPlatform/google-cloud-php",
+            "keywords": [
+                "big query",
+                "bigquery",
+                "cloud",
+                "datastore",
+                "gcs",
+                "google",
+                "google api",
+                "google api client",
+                "google apis",
+                "google apis client",
+                "google cloud",
+                "google cloud platform",
+                "language",
+                "natural language",
+                "pub sub",
+                "pubsub",
+                "spanner",
+                "speech",
+                "stackdriver logging",
+                "storage",
+                "translate",
+                "translation",
+                "vision"
+            ],
+            "time": "2017-07-18T00:02:56+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -1327,23 +1540,23 @@
         },
         {
             "name": "maatwebsite/excel",
-            "version": "2.1.17",
+            "version": "2.1.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Maatwebsite/Laravel-Excel.git",
-                "reference": "14d5abf8e20563c80dd074fd7c8cf1c05bf51f1d"
+                "reference": "bb7b3d9a72f56ddab974e6a629e4f5e51cd945a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/14d5abf8e20563c80dd074fd7c8cf1c05bf51f1d",
-                "reference": "14d5abf8e20563c80dd074fd7c8cf1c05bf51f1d",
+                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/bb7b3d9a72f56ddab974e6a629e4f5e51cd945a2",
+                "reference": "bb7b3d9a72f56ddab974e6a629e4f5e51cd945a2",
                 "shasum": ""
             },
             "require": {
-                "illuminate/cache": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*",
-                "illuminate/config": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*",
-                "illuminate/filesystem": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*",
-                "illuminate/support": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*",
+                "illuminate/cache": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+                "illuminate/config": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+                "illuminate/filesystem": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+                "illuminate/support": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
                 "jeremeamia/superclosure": "^2.3",
                 "nesbot/carbon": "~1.0",
                 "php": ">=5.5",
@@ -1352,17 +1565,27 @@
             },
             "require-dev": {
                 "mockery/mockery": "~0.9",
-                "orchestra/testbench": "3.1.*",
+                "orchestra/testbench": "3.1.*|3.2.*|3.3.*|3.4.*|3.5.*",
                 "phpseclib/phpseclib": "~1.0",
                 "phpunit/phpunit": "~4.0"
             },
             "suggest": {
-                "illuminate/http": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*",
-                "illuminate/queue": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*",
-                "illuminate/routing": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*",
-                "illuminate/view": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*"
+                "illuminate/http": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+                "illuminate/queue": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+                "illuminate/routing": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+                "illuminate/view": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*"
             },
             "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Maatwebsite\\Excel\\ExcelServiceProvider"
+                    ],
+                    "aliases": {
+                        "Excel": "Maatwebsite\\Excel\\Facades\\Excel"
+                    }
+                }
+            },
             "autoload": {
                 "classmap": [
                     "src/Maatwebsite/Excel"
@@ -1391,7 +1614,7 @@
                 "import",
                 "laravel"
             ],
-            "time": "2017-04-04T18:28:12+00:00"
+            "time": "2017-08-31T14:52:24+00:00"
         },
         {
             "name": "maxmind-db/reader",
@@ -1877,6 +2100,52 @@
             "time": "2015-05-01T07:00:55+00:00"
         },
         {
+            "name": "psr/cache",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/cache.git",
+                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/cache/zipball/d11b50ad223250cf17b86e38383413f5a6764bf8",
+                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Cache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for caching libraries",
+            "keywords": [
+                "cache",
+                "psr",
+                "psr-6"
+            ],
+            "time": "2016-08-06T20:24:11+00:00"
+        },
+        {
             "name": "psr/http-message",
             "version": "1.0.1",
             "source": {
@@ -2181,6 +2450,50 @@
             "time": "2017-01-09T03:25:37+00:00"
         },
         {
+            "name": "rize/uri-template",
+            "version": "0.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rize/UriTemplate.git",
+                "reference": "9e5fdd5c47147aa5adf7f760002ee591ed37b9ca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rize/UriTemplate/zipball/9e5fdd5c47147aa5adf7f760002ee591ed37b9ca",
+                "reference": "9e5fdd5c47147aa5adf7f760002ee591ed37b9ca",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Rize\\UriTemplate": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marut K",
+                    "homepage": "http://twitter.com/rezigned"
+                }
+            ],
+            "description": "PHP URI Template (RFC 6570) supports both expansion & extraction",
+            "keywords": [
+                "RFC 6570",
+                "template",
+                "uri"
+            ],
+            "time": "2017-06-14T03:57:53+00:00"
+        },
+        {
             "name": "stevebauman/location",
             "version": "v2.0.1",
             "source": {
@@ -2230,6 +2543,100 @@
                 "php"
             ],
             "time": "2017-01-26T14:46:46+00:00"
+        },
+        {
+            "name": "superbalist/flysystem-google-storage",
+            "version": "5.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Superbalist/flysystem-google-cloud-storage.git",
+                "reference": "dcce953d2324bb10a12f9448f5a552c166f8c257"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Superbalist/flysystem-google-cloud-storage/zipball/dcce953d2324bb10a12f9448f5a552c166f8c257",
+                "reference": "dcce953d2324bb10a12f9448f5a552c166f8c257",
+                "shasum": ""
+            },
+            "require": {
+                "google/cloud": "^0.10.2|^0.11.0|^0.12.0|^0.13.0|^0.21.0|^0.22.0|^0.23.0|^0.24.0|^0.25.0|^0.26.0|^0.27.0|^0.28.0|^0.29.0|^0.30.0|^0.31.0|^0.32.0|^0.33.0|^0.34.0|^0.35.0",
+                "league/flysystem": "~1.0",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Superbalist\\Flysystem\\GoogleStorage\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Superbalist.com a division of Takealot Online (Pty) Ltd",
+                    "email": "info@superbalist.com"
+                }
+            ],
+            "description": "Flysystem adapter for Google Cloud Storage",
+            "time": "2017-07-18T14:56:52+00:00"
+        },
+        {
+            "name": "superbalist/laravel-google-cloud-storage",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Superbalist/laravel-google-cloud-storage.git",
+                "reference": "cf56153be54e97bc30dc1c5bb055f1696d7e4cd7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Superbalist/laravel-google-cloud-storage/zipball/cf56153be54e97bc30dc1c5bb055f1696d7e4cd7",
+                "reference": "cf56153be54e97bc30dc1c5bb055f1696d7e4cd7",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/filesystem": "^5.1|^5.2|^5.3",
+                "illuminate/support": "^5.1|^5.2|^5.3",
+                "php": ">=5.5.9",
+                "superbalist/flysystem-google-storage": "^3.0|^4.0|^5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=4.8"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Superbalist\\LaravelGoogleCloudStorage\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Superbalist.com a division of Takealot Online (Pty) Ltd",
+                    "email": "info@superbalist.com"
+                }
+            ],
+            "description": "A Google Cloud Storage filesystem for Laravel",
+            "time": "2017-05-19T13:28:58+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

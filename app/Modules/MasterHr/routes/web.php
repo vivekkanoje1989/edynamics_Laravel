@@ -32,6 +32,7 @@ Route::group(array('module' => 'MasterHr', 'middleware' => ['auth:admin'], 'name
     Route::get('/master-hr/rolePermissions/{id}', ['middleware'=>'check-permission:030101', 'uses' => 'MasterHrController@rolePermissions']); //show user permission page
     
     Route::get('/master-hr/createrole', 'MasterHrController@createRole');
+    Route::post('/master-hr/deleteUserRole', 'MasterHrController@deleteUserRole');// delete user role
     Route::post('/master-hr/createUserRole', 'MasterHrController@createUserRole'); //create user role
     Route::post('/master-hr/updateUserRole', 'MasterHrController@updateUserRole'); //update user role
     
@@ -51,6 +52,7 @@ Route::group(array('module' => 'MasterHr', 'middleware' => ['auth:admin'], 'name
     Route::post('/master-hr/manageJobForm', 'MasterHrController@manageJobForm');
     Route::post('/master-hr/manageStatusForm', 'MasterHrController@manageStatusForm');
     Route::post('/master-hr/update', 'MasterHrController@updateEmployee');
+    Route::get('/master-hr/exportToxls', 'MasterHrController@exportToxls');//viveknk add for export user xls
 
     Route::post('/master-hr/customerDataPermission', 'MasterHrController@customerDataPermission');
     Route::post('/master-hr/storeEmployeeData', 'MasterHrController@storeEmployeeData');
@@ -60,4 +62,8 @@ Route::group(array('module' => 'MasterHr', 'middleware' => ['auth:admin'], 'name
     Route::get('/MasterHr/showFilter', function () {
         return View::make('MasterHr::showFilter');
     });
+
+    Route::post('/master-hr/resetPassword', 'MasterHrController@resetPassword');//viveknk add reset user password
+    Route::resource('/master-hr', 'MasterHrController');//viveknk add for delete user
+    
 });

@@ -1,5 +1,20 @@
 <div class="row" ng-controller="hrController">
+    <div class="page-breadcrumbs {{settings.fixed.breadcrumbs ? 'breadcrumbs-fixed' : ''}}" style="position: fixed; top: 44px;box-shadow: 0 2px 4px 0 rgba(245, 238, 238, 0.15)" ng-init="vbreadcumbs = [
+            {'displayName': 'Home', 'url': 'goDashboard()'},{'displayName': 'Hr', 'url': 'goManagerole()'},
+            {'displayName': 'Role Management', 'url': 'goManagerole()'},
+            {'displayName': 'Manage Role', 'url': 'goManagerole()'},
+            {'displayName': 'Define Role', 'url': 'goDefinerole()'}
+        ]">
+        <ol class="breadcrumb" >
+            <i class="fa fa-home" aria-hidden="true" style="font-size: 20px;color: gray;">&nbsp;</i>
+            <li ng-repeat="crumb in vbreadcumbs" ng-class="{ active: $last }"><a href="javascript:void(0)" ng-click="{{crumb.url}}" ng-if="!$last">{{ crumb.displayName }}&nbsp;</a><span ng-show="$last">{{ crumb.displayName }}</span>
+            </li>
+        </ol>
+    </div>
     <div class="widget flat radius-bordered ">
+        <div class="col-lg-12 col-sm-12 col-xs-12">
+            <h5 class="row-title before-themeprimary"><i class="fa fa-chevron-left themeprimary" title="Go Back" style="cursor: pointer;border-right: 1px solid;padding-right: 11px;" ng-click="backpage()"> Back</i><i class="fa  fa-arrow-circle-o-right themeprimary"></i>Define Role</h5>
+        </div>
         <form name="RoleForm" novalidate ng-submit="RoleForm.$valid && createRole(RoleData)">
             <input type="hidden" ng-model="RoleForm.csrfToken" name="csrftoken" id="csrftoken" ng-init="RoleForm.csrfToken = '<?php echo csrf_token(); ?>'" class="form-control">
             <input type="hidden" name="id" id="id" ng-model="RoleData.id">
@@ -8,7 +23,7 @@
                 <div class="">
                     <div class="col-sm-4 col-md-2 col-xs-12">
                         <div class="form-group">
-                            <label for=""> Define  Role Name <span class="sp-err">*</span></label>
+                            <label for=""> Define Role Name <span class="sp-err">*</span></label>
                             <span class="input-icon icon-right">
                                 <input type="text" ng-model="RoleData.role_name" name="role_name"  maxlength="20" oninput="if (/[^A-Za-z ]/g.test(this.value)) this.value = this.value.replace(/[^A-Za-z ]/g,'')" class="form-control" required>
                                 <div ng-show="sbt" ng-messages="RoleForm.role_name.$error" class="help-block">
@@ -97,7 +112,7 @@
                     </div>
                 </div>
                 <div class="col-md-12 col-xs-12" style="margin-bottom: 50px;">
-                    <button type="submit" class="btn btn-primary" ng-click="sbt = true">Submit</button>
+                    <button type="submit" class="btn btn-primary" ng-click="sbt = true">Submit</button>                    
                 </div>
             </div>
         </form>

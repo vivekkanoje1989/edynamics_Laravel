@@ -1,4 +1,5 @@
-<?php namespace App\Classes;
+<?php 
+namespace App\Classes;
 
 use DB;
 use Auth;
@@ -16,8 +17,8 @@ use App\Models\backend\Employee;
 class CommonFunctions {
 
     public static function getMacAddress() {
-        exec('netstat -ie', $result);
-        if (is_array($result)) {
+        exec('netstat -ie', $result);         
+        if (is_array($result) && !empty($result)) {
             $iface = array();
             foreach ($result as $key => $line) {
                 if ($key > 0) {
@@ -29,8 +30,9 @@ class CommonFunctions {
                         }
                     }
                 }
-            }
-            return $iface[0]['mac'];
+            }            
+            //return $iface[0]['mac'];
+            return "38:D5:47:18:91:88";
         } else {
             // Turn on output buffering  
             ob_start();
@@ -70,13 +72,15 @@ class CommonFunctions {
 
     public static function updateMainTableRecords($loggedInUserId) {
         $getMacAddress = CommonFunctions::getMacAddress();
+        // $create = ['updated_date' => date('Y-m-d'), 'updated_by' => $loggedInUserId, 'updated_IP' => $_SERVER['REMOTE_ADDR'], 'updated_browser' => $_SERVER['HTTP_USER_AGENT'], 'updated_mac_id' => $getMacAddress];
         $create = ['updated_date' => date('Y-m-d'), 'updated_by' => $loggedInUserId, 'updated_IP' => $_SERVER['REMOTE_ADDR'], 'updated_browser' => $_SERVER['HTTP_USER_AGENT'], 'updated_mac_id' => $getMacAddress];
         return $create;
     }
     
     public static function deleteMainTableRecords($loggedInUserId) {
         $getMacAddress = CommonFunctions::getMacAddress();
-        $create = ['deleted_status'=> '1','deleted_date' => date('Y-m-d'), 'deleted_by' => $loggedInUserId, 'deleted_IP' => $_SERVER['REMOTE_ADDR'], 'deleted_browser' => $_SERVER['HTTP_USER_AGENT'], 'deleted_mac_id' => $getMacAddress];
+        // $create = ['deleted_status'=> '1','deleted_date' => date('Y-m-d'), 'deleted_by' => $loggedInUserId, 'deleted_IP' => $_SERVER['REMOTE_ADDR'], 'deleted_browser' => $_SERVER['HTTP_USER_AGENT'], 'deleted_mac_id' => $getMacAddress];
+        $create = ['deleted_status'=> '1', 'deleted_by' => $loggedInUserId, 'deleted_IP' => $_SERVER['REMOTE_ADDR'], 'deleted_browser' => $_SERVER['HTTP_USER_AGENT'], 'deleted_mac_id' => $getMacAddress];
         return $create;
     }
 
@@ -89,13 +93,20 @@ class CommonFunctions {
     }
 
     public static function sendMail($userName, $password, $data) {
+        
         try {
+        
             config(['mail.username' => $userName, 'mail.password' => $password]);
-            $isSent = Mail::send('layouts.backend.email_template', $data, function ($message) use ($data) {
-                        $message->from($data['fromEmail'], $data['fromName']);
-                        $message->subject($data['subject']);
-                        $message->to($data['to'])->cc($data['cc']);
-                    });
+            
+            Mail::send('layouts.backend.email_template', $data, function ($message) use ($data) {
+
+                $tomail = '"$data[to]"';
+                $ccmail = '"$data[cc]"';
+                
+                $message->from($data['fromEmail'], $data['fromName']);
+                $message->subject($data['subject']);
+                $message->to('vivekkanoje1989@gmail.com')->cc('vivekn@nextedgegroup.co.in');
+            });
             if (count(Mail::failures()) <= 0) {
                 return true;
             } else {
@@ -107,12 +118,14 @@ class CommonFunctions {
     }
 
     public static function templateData($alertdata) {
+       
         $customer_id = $alertdata['customer_id'];
         $employee_id = $alertdata['employee_id'];
         $client_id = $alertdata['client_id'];
         $arrExtra = $alertdata['arrExtra'];
         $eventid_customer = !empty($alertdata['event_id_customer']) ? $alertdata['event_id_customer'] : "0";
         $eventid_employee = !empty($alertdata['event_id_employee']) ? $alertdata['event_id_employee'] : "0";
+        $template_setting_employee = $alertdata['template_setting_employee'];
 		if(!empty($alertdata['cust_attached_file']))
 			$cust_attachedfile = $alertdata['cust_attached_file'];
 	   else
@@ -139,12 +152,17 @@ class CommonFunctions {
         
         //employee  
         if (!empty($employee_id > 0)) {
-            $template_settings_employee = TemplatesSetting::where(['client_id' => $client_id, 'templates_event_id' => $eventid_employee, 'template_for' => 0])->first();
-             
+            $template_settings_employee = TemplatesSetting::where(['id' => $template_setting_employee])->first();
+
             if (!empty($template_settings_employee)) {
-                $template_employee = MlstBmsbTemplatesDefaults::where(['templates_event_id' => $eventid_employee, 'template_for' => 0])->first();
+                if ($template_settings_employee->template_type == 0) {
+                    $template_employee = MlstBmsbTemplatesDefaults::where(['id' => $template_settings_employee->default_template_id])->first();
+                } else {
+                    $template_employee = TemplatesCustom::where(['id' => $template_settings_employee->custom_template_id])->first();
+                }
             }
         }
+
        
         $email_from_id = "";
         if (!empty($template_employee)) {
@@ -257,6 +275,7 @@ class CommonFunctions {
 
         $userName = "bmstracking@edynamics.co.in"; //$emailConfig->email;
         $password = "bmstrack@2016#"; //$emailConfig->password;
+        
         $companyName = $client->marketing_name;
         
         if (!empty($customer_id > 0)) {            
@@ -266,7 +285,7 @@ class CommonFunctions {
                     $subject = $template_customer->email_subject;
                     $data = ['mailBody' => $cust_emailTemplate, "fromEmail" => $userName, "fromName" => $companyName, "subject" => $subject, "to" => $customer_contact->email_id, "cc" => $template_customer->email_cc_ids,"attachment"=>$cust_attachedfile];
                     $sentSuccessfully = CommonFunctions::sendMail($userName, $password, $data);
-                    echo"send".$sentSuccessfully;exit;return false;
+                    // echo"send".$sentSuccessfully;exit;return false;
                 }
                 if ($template_settings_customer->sms_status == 1) {
                     $mobile = $customer_contact->mobile_number;
@@ -279,6 +298,7 @@ class CommonFunctions {
         
 
         if (!empty($employee_id > 0)) {
+           
             if (!empty($template_settings_employee)) {
                 if ($template_settings_employee->email_status == 1) {
 
@@ -290,8 +310,8 @@ class CommonFunctions {
                 if ($template_settings_employee->sms_status == 1) {
                     $mobile = $employee->username;
                     $customer = "No";
-                    $customerId = 0;
-                    $result = Gupshup::sendSMS($emp_smsTemplate, $mobile, $employee_id, $customer, $customerId, $isInternational, $sendingType, $smsType);
+                    $customerId = 0;                    
+                    $result = Gupshup::sendSMS($emp_smsTemplate, $mobile, $employee_id, $customer, $customerId, $isInternational, $sendingType, $smsType);                   
                 }
             }
         }        

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Input;
 use DB;
 use Illuminate\Hashing\HashServiceProvider;
 use Auth;
+use Excel;
 use App\Classes\CommonFunctions;
 use App\Classes\MenuItems;
 use App\Classes\S3;
@@ -19,6 +20,8 @@ use App\Models\MlstBmsbDesignation;
 use App\Models\MlstBmsbDepartment;
 use Session;
 use App\Models\MlstTitle;
+
+use App\Modules\EmailConfig\Models\EmailConfiguration;//for admin mail fetch
 
 class MasterHrController extends Controller {
 
@@ -39,8 +42,8 @@ class MasterHrController extends Controller {
         $totalCount = [];
         $department_id = [];
 
-        if (!empty($request['empId']) && $request['empId'] !== "0") { // for edit
-            $manageUsers = DB::select('CALL proc_manage_users(1,' . $request["empId"] .')');
+        if (!empty($request['empId']) && $request['empId'] != "0") { // for edit
+            $manageUsers = DB::select('CALL proc_manage_users(1,' . $request["empId"] . ')');
         } else if ($request['empId'] == "") { // for index
             $manageData = DB::select('CALL proc_manage_users(0,0)');
             $cnt = DB::select('select FOUND_ROWS() totalCount');
@@ -51,8 +54,10 @@ class MasterHrController extends Controller {
                 $manageUser[$i]['department_id'] = explode(',', $manage['department_id']);
                 $i++;
             }
+           
             for ($i = 0; $i < count($manageUser); $i++) {
                 $blogData['id'] = $manageUser[$i]['id'];
+                $blogData['employee_id'] = $manageUser[$i]['id'];
                 $blogData['first_name'] = $manageUser[$i]['first_name'];
                 $blogData['last_name'] = $manageUser[$i]['last_name'];
                 $blogData['joining_date'] = $manageUser[$i]['joining_date'];
@@ -64,15 +69,55 @@ class MasterHrController extends Controller {
                 $blogData['reporting_to_fname'] = $manageUser[$i]['reporting_to_fname'];
                 $blogData['reporting_to_lname'] = $manageUser[$i]['reporting_to_lname'];
                 $blogData['login_date_time'] = $manageUser[$i]['login_date_time'];
-                $blogData['firstName'] = $blogData['first_name'].' '.$blogData['last_name'];
-                $blogData['team_lead_name'] = $blogData['team_lead_fname'].' '.$blogData['team_lead_lname'];
-                $blogData['reporting_to_name'] = $blogData['reporting_to_fname'].' '.$blogData['reporting_to_lname'];
+                $blogData['firstName'] = $blogData['first_name'] . ' ' . $blogData['last_name'];
+                $blogData['team_lead_name'] = $blogData['team_lead_fname'] . ' ' . $blogData['team_lead_lname'];
+                $blogData['reporting_to_name'] = $blogData['reporting_to_fname'] . ' ' . $blogData['reporting_to_lname'];
+                $blogData['title_id'] = $manageUser[$i]['title_id'];
+                $blogData['date_of_birth'] = $manageUser[$i]['date_of_birth'];
+                $blogData['marital_status'] = $manageUser[$i]['marital_status'];
+                $blogData['marriage_date'] = $manageUser[$i]['marriage_date'];
+                $blogData['blood_group_id'] = $manageUser[$i]['blood_group_id'];
+                $blogData['physic_status'] = $manageUser[$i]['physic_status'];
+                $blogData['physic_desc'] = $manageUser[$i]['physic_desc'];
+                $blogData['personal_mobile1_calling_code'] = $manageUser[$i]['personal_mobile1_calling_code'];
+                $blogData['personal_mobile1'] = $manageUser[$i]['personal_mobile1'];
+                $blogData['personal_mobile2_calling_code'] = $manageUser[$i]['personal_mobile2_calling_code'];
+                $blogData['personal_mobile2'] = $manageUser[$i]['personal_mobile2'];
+                $blogData['personal_landline_calling_code'] = $manageUser[$i]['personal_landline_calling_code'];
+                $blogData['personal_landline_no'] = $manageUser[$i]['personal_landline_no'];
+                $blogData['personal_email1'] = $manageUser[$i]['personal_email1'];
+                $blogData['personal_email2'] = $manageUser[$i]['personal_email2'];
+                $blogData['office_mobile_calling_code'] = $manageUser[$i]['office_mobile_calling_code'];
+                $blogData['office_mobile_no'] = $manageUser[$i]['office_mobile_no'];
+                $blogData['office_email_id'] = $manageUser[$i]['office_email_id'];
+                $blogData['current_country_id'] = $manageUser[$i]['current_country_id'];
+                $blogData['current_state_id'] = $manageUser[$i]['current_state_id'];
+                $blogData['current_city_id'] = $manageUser[$i]['current_city_id'];
+                $blogData['current_address'] = $manageUser[$i]['current_address'];
+                $blogData['current_pin'] = $manageUser[$i]['current_pin'];
+                $blogData['permenent_country_id'] = $manageUser[$i]['permenent_country_id'];
+                $blogData['permenent_state_id'] = $manageUser[$i]['permenent_state_id'];
+                $blogData['permenent_city_id'] = $manageUser[$i]['permenent_city_id'];
+                $blogData['permenent_pin'] = $manageUser[$i]['permenent_pin'];
+                $blogData['permenent_address'] = $manageUser[$i]['permenent_address'];
+                $blogData['highest_education_id'] = $manageUser[$i]['highest_education_id'];
+                $blogData['education_details'] = $manageUser[$i]['education_details'];
+                $blogData['employee_photo_file_name'] = $manageUser[$i]['employee_photo_file_name'];
+                $blogData['employee_photo_file_name'] = $manageUser[$i]['employee_photo_file_name'];
+                $blogData['show_on_homepage'] = $manageUser[$i]['show_on_homepage'];
+                $blogData['username'] = $manageUser[$i]['username'];
+                $blogData['high_security_password_type'] = $manageUser[$i]['high_security_password_type'];
+                $blogData['high_security_password'] = $manageUser[$i]['high_security_password'];
+                $blogData['team_lead_id'] = $manageUser[$i]['team_lead_id'];
+                $blogData['reporting_to_id'] = $manageUser[$i]['reporting_to_id'];
+                $blogData['designation_id'] = $manageUser[$i]['designation_id'];
+                $blogData['gender_id'] = $manageUser[$i]['gender_id'];
+                $blogData['department_id'] = $manageUser[$i]['department_id'];
 
                 $manageUsers[] = $blogData;
             }
-            
         }
-      
+
         if ($manageUsers) {
             $result = ['success' => true, "records" => ["data" => $manageUsers, "total" => count($manageUsers), 'per_page' => count($manageUsers), "current_page" => 1, "last_page" => 1, "next_page_url" => null, "prev_page_url" => null, "from" => 1, "to" => count($manageUsers)]];
             return json_encode($result);
@@ -156,7 +201,7 @@ class MasterHrController extends Controller {
     }
 
     public function getRoles() {
-        $roles = EmployeeRole::orderBy('role_name', 'ASC')->get();
+        $roles = EmployeeRole::where('deleted_status', '=', 0)->orderBy('role_name', 'ASC')->get();
         if (!empty($roles)) {
             $result = ['success' => true, "list" => $roles];
             echo json_encode($result);
@@ -166,14 +211,87 @@ class MasterHrController extends Controller {
         }
     }
 
+    public function resetPassword(){
+        $postdata = file_get_contents("php://input");
+        $request = json_decode($postdata, true);
+        $loggedInUserId = Auth::guard('admin')->user()->id;
+        $sendmailpass = '';
+       
+        if (!empty($request['data']['empId'])) {
+            $password = substr(rand(10000000, 99999999), 0, 8);
+            $sendmailpass = $password;
+            $empFn = $request['data']['firstName'];
+            $empLn = $request['data']['lastName'];
+            $empUr = $request['data']['userName'];
+            $input['resetdata']['password'] = \Hash::make($password);
+            $input['resetdata']['remember_token'] = str_random(10);
+            $update = CommonFunctions::updateMainTableRecords($loggedInUserId);
+            $input['resetdata'] = array_merge($input['resetdata'], $update);
+            $employeeReset = Employee::where('id', $request['data']['empId'])->update($input['resetdata']);
+             //get user details to send password
+            $employeeMail = Employee::where('id', '=', $request['data']['empId'])->get();   
+            // dd($employeeMail[0]['username']);     
+            $empSndMailPrId = $employeeMail[0]['personal_email1'];          
+            $username = $employeeMail[0]['username'];
+            if($employeeMail[0]['office_email_id']){
+                $empSndMailPrId = $employeeMail[0]['office_email_id'];
+            }else{
+                $empSndMailPrId = $empSndMailPrId;
+            }
+
+
+            $templatedata['employee_id'] = $request['data']['empId'];
+            $templatedata['client_id'] = config('global.client_id');
+            $templatedata['template_setting_customer'] = 0;
+            $templatedata['template_setting_employee'] = 23;
+            $templatedata['customer_id'] = 0;
+            $templatedata['model_id'] = 0;
+            $templatedata['arrExtra'][0] = array(
+                '[#username#]',
+                '[#password#]',
+                '[#companyMktName#]'
+            );
+            $templatedata['arrExtra'][1] = array(
+                $username,
+                $sendmailpass,
+                'Edynamics'
+            );
+
+            $sentSuccessfully = CommonFunctions::templateData($templatedata);
+            
+
+            //get admin mail credentials
+            // $adminMail = EmailConfiguration::where('id', '=', 1)->get();
+        
+            // $userName = $adminMail[0]['email'];
+            // $password = $adminMail[0]['password'];
+            // $companyName = config('global.companyName');
+        
+            // $mailBody = "Dear ".$empFn." ".$empLn.",<br><br> Your username is <span style='font-size: 20px'>".$empUr."</span> and Password is<span style='font-size: 20px'> ".$sendmailpass."</span> <br> <span style='color :red'>Use this credentials to login and change your password immediately from your profile</span><br><br>Thank You!<br><br> With Regards,<br>Admin @".$companyName;        
+            // $subject = "Login Credentials Reset";
+            // $data = ['mailBody' => $mailBody, "fromEmail" => $userName, "fromName" => $companyName, "subject" => $subject, "to" => $empSndMailPrId, "cc" => $userName];
+            // $sentSuccessfully = CommonFunctions::sendMail($userName, $password, $data);
+
+                if ($sentSuccessfully) {
+                    $result = ['success' => true, 'message' => 'Employee password resetted and Mail Sent.'];
+                    return json_encode($result);
+                } else {
+                    $result = ['success' => false, 'message' => 'Something went wrong.'];
+                    return json_encode($result);
+                }            
+        }else{
+
+        }
+    }
+
     public function changePassword() {
         $postdata = file_get_contents("php://input");
         $request = json_decode($postdata, true);
-
+        
         if (!empty($request['data']['empId'])) {
             $checkEmp = Employee::where('id', $request['data']['empId'])->first();
             if (empty($request['data']['password'])) {
-                $password = str_random(8);
+                $password = str_random(8);                
             } else {
                 $old_password = $request['data']['old_password'];
 
@@ -187,7 +305,6 @@ class MasterHrController extends Controller {
             }
             //print_r($password);exit;
             $changedPassword = \Hash::make($password);
-
             DB::table('employees')
                     ->where('id', $request['data']['empId'])
                     ->update(['password' => $changedPassword]);
@@ -213,7 +330,7 @@ class MasterHrController extends Controller {
             );
             $result = CommonFunctions::templateData($templatedata);
 
-            $result = ['success' => true, "message" => "Password changed and email and SMS sent to selected user."];
+            $result = ['success' => true, "message" => "Password changed. Email and SMS sent to selected user."];
             echo json_encode($result);
         } else {
             $result = ['success' => false, 'message' => 'Something went wrong. Please check internet connection or try again'];
@@ -513,8 +630,12 @@ class MasterHrController extends Controller {
         $postdata = file_get_contents("php://input");
         $input = json_decode($postdata, true);
         $loggedInUserId = Auth::guard('admin')->user()->id;
+        $sendmailpass = '';
+        $sentSuccessfully = '';
+        $message = '';
         if ($input['createStatus'] == 0) {
             $password = substr(rand(10000000, 99999999), 0, 8);
+            $sendmailpass = $password;
             $username = $input['userStatus']['username'];
             $input['userStatus']['password'] = \Hash::make($password);
             $input['userStatus']['remember_token'] = str_random(10);
@@ -527,45 +648,109 @@ class MasterHrController extends Controller {
             $templatedata['model_id'] = 0;
             $templatedata['arrExtra'][0] = array(
                 '[#username#]',
-                '[#password#]'
+                '[#password#]',
+                '[#lmsAuto#]',
+                '[#companyMarketingName#]'
             );
             $templatedata['arrExtra'][1] = array(
                 $username,
-                $password
+                $password,
+                'Edynamics',
+                'Edynamics'
             );
+
+            $sentSuccessfully = CommonFunctions::templateData($templatedata);
+            if ($sentSuccessfully) {
+                $message = 'Employee Registered and Mail Sent.';
+                $result = [ 'message' => $message];                
+            } else {
+                $message = 'Mail could not be send.';
+                $result = [ 'message' => $message];                
+            }
+        }else{
+            $sentSuccessfully = true;
+            $message = 'Employee details updated.';            
         }
 
-        if ($input['userStatus']['high_security_password_type'] == '0') {
-            $highsecuritypassword = substr(rand(100000, 999999), 0, 4);
-        } else {
-            $highsecuritypassword = $input['userStatus']['high_security_password'];
-        }
+        // if ($input['userStatus']['high_security_password_type'] == '0') {
+        //     $highsecuritypassword = substr(rand(100000, 999999), 0, 4);
+            
+        // } else {
+        //     $highsecuritypassword = $input['userStatus']['high_security_password'];
+        // }
         if (!empty($input['userStatus']['loggedInUserId'])) {
             $loggedInUserId = $input['userStatus']['loggedInUserId'];
         }
+
         $create = CommonFunctions::insertMainTableRecords($loggedInUserId);
         $input['userStatus'] = array_merge($input['userStatus'], $create);
         $input['userStatus']['client_id'] = config('global.client_id');
         $input['userStatus']['employee_permissions'] = '["0101","0102","0103","0104","0105","0106","0107"]';
         $employee = Employee::where('id', '=', $input['employeeId'])->update($input['userStatus']);
-        $result = ['success' => true, 'message' => 'Employee registered successfully'];
-        return json_encode($result);
+
+        //get user details to send password
+        // $employeeMail = Employee::where('id', '=', $input['employeeId'])->get();   
+        // // dd($employeeMail[0]['username']);     
+        // $empSndMailPrId = $employeeMail[0]['personal_email1'];
+        // $empFn = $employeeMail[0]['first_name'];
+        // $empLn = $employeeMail[0]['last_name'];
+        // $empUr = $employeeMail[0]['username'];
+
+        // if($employeeMail[0]['office_email_id']){
+        //     $empSndMailPrId = $employeeMail[0]['office_email_id'];
+        // }else{
+        //     $empSndMailPrId = $empSndMailPrId;
+        // }
+        
+        // //get admin mail credentials
+        // $adminMail = EmailConfiguration::where('id', '=', 1)->get();
+
+        // $userName = $adminMail[0]['email'];
+        // $password = $adminMail[0]['password'];
+        // $companyName = config('global.companyName');
+
+        // if ($input['createStatus'] == 0) {
+        //     $mailBody = "Dear ".$empFn." ".$empLn.",<br><br> Your username is <span style='font-size: 20px'>".$empUr."</span> and Password is<span style='font-size: 20px'>".$sendmailpass."</span> <br> <span style='color :red'>Use this credentials to login and change your password immediately from your profile</span><br><br>Thank You!<br><br> With Regards,<br>Admin @".$companyName;        
+        // }else{
+        //     $mailBody = "Dear ".$empFn." ".$empLn.",<br><br> Your username is <span style='font-size: 20px'>".$empUr."</span><br> Your data is updated at ".date('d-m-Y h:i:sa'). "<br>Thank You!<br><br> With Regards,<br>Admin @".$companyName;            
+        // }
+        //     $subject = "Login Credentials";
+        // $data = ['mailBody' => $mailBody, "fromEmail" => $userName, "fromName" => $companyName, "subject" => $subject, "to" => $empSndMailPrId, "cc" => $userName];
+        
+        if ($sentSuccessfully) {
+           $result = ['success' => true, 'message' => $message];
+           return json_encode($result);
+        } else {
+           $result = ['success' => false, 'message' => $message];
+           return json_encode($result);
+        }
+
+        // $result = ['success' => true, 'message' => 'Employee registered successfully'];
+        // return json_encode($result);
     }
 
     public function createEducationForm() {
         $validationMessages = Employee::validationStep3();
         $validationRules = Employee::validationRulesstep3();
         $input = Input::all();
-        $originalName = $input['employee_photo_file_name']->getClientOriginalName();
-
+        $originalName = ($input['employee_photo_file_name'])->getClientOriginalName();
+        $originalNameExt = ($input['employee_photo_file_name'])->getClientOriginalExtension();
+       
         if ($originalName != "fileNotSelected") {
             if (!empty($input['employee_photo_file_name'])) {
 
                 $folderName = 'employee-photos';
+                $image =  $input['employee_photo_file_name']->getPathName();
+
+                $imageName = time() . "." .$originalNameExt ;
+                $tempPath = ($input['employee_photo_file_name'])->getPathName();
+                $name = S3::s3FileUpload($tempPath, $imageName, $folderName);
+
                 $image = ['0' => $input['employee_photo_file_name']];
-                $imageName = S3::s3FileUpload($image, $folderName, 1);
+                $imageName = S3::s3FileUplod($image, $folderName, 1);
                 $imageName = trim($imageName, ',');
                 $input['userEducation']['employee_photo_file_name'] = $imageName;
+                
             }
         } else {
             unset($input['userEducation']['employee_photo_file_name']);
@@ -671,6 +856,9 @@ class MasterHrController extends Controller {
             unset($input['userData']['login_date_time']);
             unset($input['userData']['departmentid']);
             unset($input['userData']['loggedInUserId']);
+            unset($input['userData']['firstName']);
+            unset($input['userData']['team_lead_name']);
+            unset($input['userData']['reporting_to_name']);
             $imageName = $input['employee_photo_file_name'];
             $input['employee_photo_file_name'] = "";
             $input['userData']['employee_photo_file_name'] = '';
@@ -734,9 +922,111 @@ class MasterHrController extends Controller {
         return json_encode($result);
     }
 
+    //viveknk suspend employee permanently
     public function destroy($id) {
-        //
+        // echo "destroy =";dd($id);
+        $userRecord = Employee::where('id', '=', $id)->where('deleted_status', '=', 0)->get();
+        $userRecordCount =  $userRecord->count();
+        if($userRecordCount > 0){
+            $results = Employee::where('id', $id)->update(['employee_status' => 3 ]);        
+            $result = ['success' => true, 'result' => $results, 'message' => 'Employee suspended successfully'];
+            return json_encode($result);
+        }else{
+            $result = ['success' => false, 'message' => 'User can not be suspended'];
+            return json_encode($result);
+        }
+
     }
+
+     //function to export data to xls
+	public function exportToxls(){
+        $manageUsers = [];
+        $totalCount = [];
+        $department_id = [];
+
+        $manageData = DB::select('CALL proc_manage_users(0,0)');
+        $cnt = DB::select('select FOUND_ROWS() totalCount');
+        $totalCount = $cnt[0]->totalCount;
+        $manageUser = json_decode(json_encode($manageData), true);
+
+        $i = 0;
+        foreach ($manageUser as $manage) {
+            $manageUser[$i]['department_id'] = explode(',', $manage['department_id']);
+            $i++;
+        }
+       
+        for ($i = 0; $i < count($manageUser); $i++) {
+            $blogData['id'] = $manageUser[$i]['id'];
+            $blogData['employee_id'] = $manageUser[$i]['id'];
+            $blogData['first_name'] = $manageUser[$i]['first_name'];
+            $blogData['last_name'] = $manageUser[$i]['last_name'];
+            $blogData['joining_date'] = $manageUser[$i]['joining_date'];
+            $blogData['employee_status'] = $manageUser[$i]['employee_status'];
+            $blogData['departmentName'] = $manageUser[$i]['departmentName'];
+            $blogData['designation'] = $manageUser[$i]['designation'];
+            $blogData['team_lead_fname'] = $manageUser[$i]['team_lead_fname'];
+            $blogData['team_lead_lname'] = $manageUser[$i]['team_lead_lname'];
+            $blogData['reporting_to_fname'] = $manageUser[$i]['reporting_to_fname'];
+            $blogData['reporting_to_lname'] = $manageUser[$i]['reporting_to_lname'];
+            $blogData['login_date_time'] = $manageUser[$i]['login_date_time'];
+            $blogData['firstName'] = $blogData['first_name'] . ' ' . $blogData['last_name'];
+            $blogData['team_lead_name'] = $blogData['team_lead_fname'] . ' ' . $blogData['team_lead_lname'];
+            $blogData['reporting_to_name'] = $blogData['reporting_to_fname'] . ' ' . $blogData['reporting_to_lname'];
+            // $blogData['title_id'] = $manageUser[$i]['title_id'];
+            $blogData['date_of_birth'] = $manageUser[$i]['date_of_birth'];
+            // $blogData['marital_status'] = $manageUser[$i]['marital_status'];
+            $blogData['marriage_date'] = $manageUser[$i]['marriage_date'];
+            // $blogData['blood_group_id'] = $manageUser[$i]['blood_group_id'];
+            // $blogData['physic_status'] = $manageUser[$i]['physic_status'];
+            $blogData['physic_desc'] = $manageUser[$i]['physic_desc'];
+            // $blogData['personal_mobile1_calling_code'] = $manageUser[$i]['personal_mobile1_calling_code'];
+            $blogData['personal_mobile1'] = $manageUser[$i]['personal_mobile1'];
+            // $blogData['personal_mobile2_calling_code'] = $manageUser[$i]['personal_mobile2_calling_code'];
+            $blogData['personal_mobile2'] = $manageUser[$i]['personal_mobile2'];
+            // $blogData['personal_landline_calling_code'] = $manageUser[$i]['personal_landline_calling_code'];
+            $blogData['personal_landline_no'] = $manageUser[$i]['personal_landline_no'];
+            $blogData['personal_email1'] = $manageUser[$i]['personal_email1'];
+            $blogData['personal_email2'] = $manageUser[$i]['personal_email2'];
+            // $blogData['office_mobile_calling_code'] = $manageUser[$i]['office_mobile_calling_code'];
+            $blogData['office_mobile_no'] = $manageUser[$i]['office_mobile_no'];
+            $blogData['office_email_id'] = $manageUser[$i]['office_email_id'];
+            // $blogData['current_country_id'] = $manageUser[$i]['current_country_id'];
+            // $blogData['current_state_id'] = $manageUser[$i]['current_state_id'];
+            // $blogData['current_city_id'] = $manageUser[$i]['current_city_id'];
+            $blogData['current_address'] = $manageUser[$i]['current_address'];
+            // $blogData['current_pin'] = $manageUser[$i]['current_pin'];
+            // $blogData['permenent_country_id'] = $manageUser[$i]['permenent_country_id'];
+            // $blogData['permenent_state_id'] = $manageUser[$i]['permenent_state_id'];
+            // $blogData['permenent_city_id'] = $manageUser[$i]['permenent_city_id'];
+            // $blogData['permenent_pin'] = $manageUser[$i]['permenent_pin'];
+            $blogData['permenent_address'] = $manageUser[$i]['permenent_address'];
+            // $blogData['highest_education_id'] = $manageUser[$i]['highest_education_id'];
+            $blogData['education_details'] = $manageUser[$i]['education_details'];
+            $blogData['employee_photo_file_name'] = $manageUser[$i]['employee_photo_file_name'];
+            // $blogData['show_on_homepage'] = $manageUser[$i]['show_on_homepage'];
+            $blogData['username'] = $manageUser[$i]['username'];
+            // $blogData['high_security_password_type'] = $manageUser[$i]['high_security_password_type'];
+            // $blogData['high_security_password'] = $manageUser[$i]['high_security_password'];
+            // $blogData['team_lead_id'] = $manageUser[$i]['team_lead_id'];
+            // $blogData['reporting_to_id'] = $manageUser[$i]['reporting_to_id'];
+            // $blogData['designation_id'] = $manageUser[$i]['designation_id'];
+            // $blogData['gender_id'] = $manageUser[$i]['gender_id'];
+            // $blogData['department_id'] = $manageUser[$i]['department_id'];
+
+            $manageUsers[] = $blogData;
+        } 
+        
+        if ($manageUsers < 1) {          
+			 return false;			 
+        } else {
+			//export to excel
+			Excel::create('User Info', function($excel) use($manageUsers){
+				$excel->sheet('users', function($sheet) use($manageUsers){
+					$sheet->fromArray($manageUsers);
+				});
+			})->export('xlsx');				
+		}				
+	}//exportToxls end
 
     public function showpermissions() {
         return view("MasterHr::showpermissions");
@@ -1767,8 +2057,13 @@ class MasterHrController extends Controller {
         $employee->client_id = config('global.client_id');
 
         $employee->client_role_id = 1;
-        $employee->high_security_password_type = 1;
-        $employee->high_security_password = 1234;
+
+        $password = substr(rand(10000000, 99999999), 0, 8);
+        $sendmailpass = $password;
+        $employee->password = \Hash::make($password);
+        $employee->remember_token = str_random(10);
+        // $employee->high_security_password_type = 1;
+        // $employee->high_security_password = 1234;
         $employee->created_date = $create['created_date'];
         $employee->created_by = $create['created_by'];
         $employee->created_IP = $create['created_IP'];
@@ -1809,8 +2104,37 @@ class MasterHrController extends Controller {
                 $return_val
             );
             $result = CommonFunctions::templateData($templatedata);
-            $res = ['success' => true, 'message' => 'Employee registered successfully', "empId" => $employee->id];
-            return json_encode($res);
+
+            //get admin mail credentials
+            $adminMail = EmailConfiguration::where('id', '=', 1)->get();
+
+            $empSndMailPrId = '';
+            if (!empty($request['data']['office_email_id'])){
+                $empSndMailPrId = $request['data']['office_email_id'];
+            }else{
+                $empSndMailPrId = $request['data']['personal_email1'];
+            }
+
+            $userName = $adminMail[0]['email'];
+            $password = $adminMail[0]['password'];
+            $empUr = $request['data']['personal_mobile1'];
+            $empFn = $request['data']['first_name'];
+            $empLn = $request['data']['last_name'];
+
+            $companyName = config('global.companyName');
+            $mailBody = "Dear ".$empFn." ".$empLn.",<br><br> Your username is <span style='font-size: 20px'>".$empUr."</span> and Password is<span style='font-size: 20px'> ".$sendmailpass."</span> <br> <span style='color :red'>Use this credentials to login and change your password immediately from your profile</span><br><br>Thank You!<br><br> With Regards,<br>Admin @".$companyName;
+            $subject = "Login Credentials for Quick Employee";
+            $data = ['mailBody' => $mailBody, "fromEmail" => $userName, "fromName" => $companyName, "subject" => $subject, "to" => $empSndMailPrId, "cc" => $userName];
+            $sentSuccessfully = CommonFunctions::sendMail($userName, $password, $data);
+                if ($sentSuccessfully) {
+                    $result = ['success' => true, 'message' => 'Employee registered successfully and Mail Sent.'];
+                    return json_encode($result);
+                } else {
+                    $result = ['success' => false, 'message' => 'Mail can not be send.'];
+                    return json_encode($result);
+                }
+            // $res = ['success' => true, 'message' => 'Employee registered successfully', "empId" => $employee->id];
+            // return json_encode($res);
         } else {
             $result = ['success' => false, 'message' => 'something went wrong. try again later'];
             return json_encode($result);
@@ -1935,6 +2259,29 @@ class MasterHrController extends Controller {
             $result = ['success' => false, 'message' => 'Something went wrong. try again later'];
         }
         return \Response()->json($result);
+    }
+
+    public function deleteUserRole(){
+        $postdata = file_get_contents("php://input");
+        $input = json_decode($postdata, true);
+        $count = EmployeeRole::where("id", $input['data']['id'])->get()->count();
+        if ($count > 0 ) {
+
+            if (empty($input['data']['loggedInUserId'])) {
+                $loggedInUserId = Auth::guard('admin')->user()->id;
+            } else {
+                $loggedInUserId = $input['data']['loggedInUserId'];
+            }
+            $delete = CommonFunctions::deleteMainTableRecords($loggedInUserId);            
+
+            $employeedelete = EmployeeRole::where('id', $input['data']['id'])->update($delete);
+            $record = EmployeeRole::where('deleted_status', '=', 0)->get();        
+
+            $result = ['success' => true, 'record'=> $record, 'message' => 'Role deleted successfully'];
+        } else {
+            $result = ['success' => false, 'message' => 'Something went wrong. try again later'];
+        }
+        return json_encode($result);
     }
 
 }

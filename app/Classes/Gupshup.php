@@ -15,6 +15,7 @@ use Maatwebsite\Excel\Facades\Excel;
 class Gupshup {
 
     public static function sendSMS($smsBody, $mobileNo, $loggedInUserId, $customer, $customerId, $isInternational = 0, $sendingType = 1, $smsType) {
+        echo "<br>Inside sendSMS<br>";
         try {
             if (!empty(trim($mobileNo))) {
                 $fromDate = date("Y-m-d 00:00:00", strtotime("first day of this month"));

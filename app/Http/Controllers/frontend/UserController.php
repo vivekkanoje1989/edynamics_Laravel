@@ -54,7 +54,7 @@ class UserController extends Controller {
     public function index() {
         $testimonials = WebTestimonials::where(['web_status' => '1', 'approve_status' => '1'])->get();
         $employees = DB::table('laravel_developement_master_edynamics.mlst_bmsb_designations as db1')
-                        ->Join('laravel_developement_builder_client.employees as db2', 'db1.id', '=', 'db2.designation_id')
+                        ->Join('laravel_developement_edynamics.employees as db2', 'db1.id', '=', 'db2.designation_id')
                         ->select(["db2.first_name", "db2.personal_email1", "db2.last_name", "db2.id", "db1.designation"])
                         ->orderByRaw("RAND()")->get();
         $images = WebPage::where('page_name', 'index')->select('banner_images')->first();
@@ -206,7 +206,7 @@ class UserController extends Controller {
     public function getEmployees() {
 
         $employees = DB::table('laravel_developement_master_edynamics.mlst_bmsb_designations as db1')
-                        ->Join('laravel_developement_builder_client.employees as db2', 'db1.id', '=', 'db2.designation_id')
+                        ->Join('laravel_developement_edynamics.employees as db2', 'db1.id', '=', 'db2.designation_id')
                         ->select(["db2.first_name", "db2.employee_photo_file_name", "db2.personal_email1", "db2.last_name", "db2.id", "db1.designation"])
                         ->orderByRaw("RAND()")->get();
 

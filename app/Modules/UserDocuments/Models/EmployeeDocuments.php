@@ -31,7 +31,7 @@ class EmployeeDocuments extends Model {
         'updated_mac_id',
     ];
     
-     public function userDocuments() {
+    public function userDocuments() {
         return $this->belongsTo('App\Modules\UserDocuments\Models\MlstEmployeeDocuments', 'document_id','id')->select("id", "document_name");
     }
 
