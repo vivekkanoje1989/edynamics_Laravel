@@ -150,8 +150,8 @@ class TaskManagementController extends Controller {
 
 			if ($input['screenshot']) {
 
-				$originalName = ($input['screenshot'])->getClientOriginalName();
-				$originalNameExt = ($input['screenshot'])->getClientOriginalExtension();
+				$originalName = $input['screenshot']->getClientOriginalName();
+				$originalNameExt = $input['screenshot']->getClientOriginalExtension();
 			
 				if ($originalName != "fileNotSelected") {
 					if (!empty($input['screenshot'])) {
@@ -160,7 +160,7 @@ class TaskManagementController extends Controller {
 						$image =  $input['screenshot']->getPathName();
 
 						$imageName = time() . "." .$originalNameExt ;
-						$tempPath = ($input['screenshot'])->getPathName();
+						$tempPath = $input['screenshot']->getPathName();
 						$name = S3::s3FileUpload($tempPath, $imageName, $folderName);
 
 						$image = ['0' => $input['screenshot']];

@@ -295,7 +295,7 @@ class MenuItems {
                             2 => array('id' => '070302', 'name' => 'Create landing page', 'icon' => '', 'url' => '/underconstruction', 'slug' => 'underconstruction', 'uiSrefActive' => 'active', 'total_submenu' => 1),
                             3 => array('id' => '070303', 'name' => 'Short Code Campaign', 'icon' => '', 'url' => '/underconstruction', 'slug' => 'underconstruction', 'uiSrefActive' => 'active', 'total_submenu' => 1),
                         )),
-                )),
+                ))  ,
             8 => array('name' => 'Accounts', 'icon' => 'acc-img menu-icon-sz', 'ui-sref-active' => '', 'url' => '', 'slug' => 'accounts', 'has_submenu' => true, 'total_submenu' => 4,
                 'submenu_ids' => '0801,0802,0803,0804', 'anchorClass' => 'menu-dropdown', 'submenuClass' => 'submenu', 'liClass' => 'open', 'submenu' => array(
                     1 => array('id' => '0801', 'name' => 'Clients', 'icon' => '', 'ui-sref-active' => '', 'slug' => '#', 'has_submenu' => true, 'total_submenu' => 1,
@@ -379,6 +379,13 @@ class MenuItems {
                     1 => array('id' => '01201', 'name' => 'Storage List', 'icon' => '', 'url' => '/storagelist/index', 'slug' => 'storageListIndex', 'uiSrefActive' => 'active', 'total_submenu' => 1),
                     2 => array('id' => '01202', 'name' => 'Shared With Me', 'icon' => '', 'url' => '/storagelist/index', 'slug' => 'sharedWithMe', 'uiSrefActive' => 'active', 'total_submenu' => 1),
                     3 => array('id' => '01203', 'name' => 'Recycle Bin', 'icon' => '', 'url' => '/recyclebin/index', 'slug' => 'recycleBin', 'uiSrefActive' => 'active', 'total_submenu' => 1),
+                )),
+            13 => array('name' => 'Client Info', 'icon' => 'fa fa-users thm-color circular', 'micon' => 'img/client.0.png', 'ui-sref-active' => '', 'url' => '', 'slug' => 'client', 'has_submenu' => true, 'total_submenu' => 3,
+                'submenu_ids' => '01501,01502,01503', 'anchorClass' => 'menu-dropdown', 'submenuClass' => 'submenu', 'liClass' => 'open', 'submenu' => array(
+                    1 => array('id' => '01501', 'name' => 'Manage Group', 'icon' => '', 'micon' => 'img/clientgroup.png', 'url' => '/clientgroups/index', 'slug' => 'clientgroupsIndex', 'uiSrefActive' => 'active', 'total_submenu' => 1),
+                    2 => array('id' => '01502', 'name' => 'Create Client', 'icon' => '', 'micon' => 'img/clientinfo.png', 'url' => '/clients/create', 'slug' => 'createClient', 'uiSrefActive' => 'active', 'total_submenu' => 1),
+                    3 => array('id' => '01503', 'name' => 'Client List', 'icon' => '', 'micon' => 'img/clientlist.png', 'url' => '/clients/index', 'slug' => 'clientsIndex', 'uiSrefActive' => 'active', 'total_submenu' => 1),
+                    
                 )),
         );
         return $menulist;

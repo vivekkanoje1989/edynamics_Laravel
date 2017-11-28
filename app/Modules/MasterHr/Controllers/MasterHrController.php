@@ -733,8 +733,10 @@ class MasterHrController extends Controller {
         $validationMessages = Employee::validationStep3();
         $validationRules = Employee::validationRulesstep3();
         $input = Input::all();
-        $originalName = ($input['employee_photo_file_name'])->getClientOriginalName();
-        $originalNameExt = ($input['employee_photo_file_name'])->getClientOriginalExtension();
+        
+        $originalName = $input['employee_photo_file_name']->getClientOriginalName();
+        
+        $originalNameExt = $input['employee_photo_file_name']->getClientOriginalExtension();
        
         if ($originalName != "fileNotSelected") {
             if (!empty($input['employee_photo_file_name'])) {
@@ -743,7 +745,7 @@ class MasterHrController extends Controller {
                 $image =  $input['employee_photo_file_name']->getPathName();
 
                 $imageName = time() . "." .$originalNameExt ;
-                $tempPath = ($input['employee_photo_file_name'])->getPathName();
+                $tempPath = $input['employee_photo_file_name']->getPathName();
                 $name = S3::s3FileUpload($tempPath, $imageName, $folderName);
 
                 $image = ['0' => $input['employee_photo_file_name']];

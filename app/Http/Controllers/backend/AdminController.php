@@ -168,6 +168,76 @@ class AdminController extends Controller {
         return json_encode($mergedMmenu);
     }
 
+     public function getClientGroups() {
+        $modelClientGroups = new \App\Models\ClientGroup();
+        return $modelClientGroups->getlist();
+    }
+
+    public function getCompanyTypeList() {
+        $modelCompanyType = new \App\Modules\ManageCompanyTypes\Models\MlstCompanyTypes();
+        return $modelCompanyType->getCompanyTypeList();
+    }
+    
+     public function getAccountType() {
+        $getAccountType = \App\Models\MlstAccountType::select('id','account_type')->get();
+        if (!empty($getAccountType)) {
+                $result = ['success' => true, 'records' => $getAccountType];
+                return json_encode($result);
+        } else {
+            $result = ['success' => false, 'message' => 'Something went wrong'];
+            return json_encode($result);
+        }
+    }
+    
+    public function getctnumbersstatus() {
+        $getNumberStatus = \App\Models\MlstCtNumbersStatus::select('id','status_name')->get();
+        if (!empty($getNumberStatus)) {
+                $result = ['success' => true, 'records' => $getNumberStatus];
+                return json_encode($result);
+        } else {
+            $result = ['success' => false, 'message' => 'Something went wrong'];
+            return json_encode($result);
+        }
+    }
+    public function getSystemType() {
+        $getSystemType =  \App\Models\MlstSystemType::select('id','system_type')->get();
+        $getSystemSubType = \App\Models\MlstSystemSubType::select('id','system_sub_type')->get();
+        
+        if (!empty($getSystemType)) {
+                $result = ['success' => true, 'systemTypes' => $getSystemType,'systemsubTypes'=>$getSystemSubType];
+                return json_encode($result);
+        } else {
+            $result = ['success' => false, 'message' => 'Something went wrong'];
+            return json_encode($result);
+        }
+    }
+    public function getServicesList() {
+        
+        $getServicesList =  \App\Models\MlstValueAddedService::select('id','service_name')->get();
+        if (!empty($getServicesList)) {
+                $result = ['success' => true, 'records' => $getServicesList];
+                return json_encode($result);
+        } else {
+            $result = ['success' => false, 'message' => 'Something went wrong'];
+            return json_encode($result);
+        }
+       
+    }
+    public function getDiscountList() {
+         $postdata = file_get_contents("php://input");
+        $input = json_decode($postdata, true);
+        $serviceID = $input['serviceid'];
+        $getDiscountList = \App\Models\MlstDiscount::select('id','discount_name')->where('value_added_services_id',$serviceID)->get();
+        if (!empty($getDiscountList)) {
+                $result = ['success' => true, 'records' => $getDiscountList];
+                return json_encode($result);
+        } else {
+            $result = ['success' => false, 'message' => 'Something went wrong'];
+            return json_encode($result);
+        }
+       
+    }
+    
     public function getTitle() {
         $getTitle = MlstTitle::where("status", 1)->where('deleted_status', '=', 0)->get();
         if (!empty($getTitle)) {

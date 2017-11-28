@@ -2,6 +2,7 @@
 
 return [
     'enable' => array(
+        "Clients",
         "MasterHr",
         "MasterSales",
         "CloudTelephony",

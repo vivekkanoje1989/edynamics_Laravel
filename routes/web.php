@@ -170,6 +170,15 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::post('/checkOldPassword', 'backend\AdminController@checkOldPassword');
     Route::post('/checkUniqueEmployeeId', 'backend\AdminController@checkUniqueEmployeeId');
     Route::get('/getSalesSource', 'backend\AdminController@getSalesSource');
+    /*     * *********************************Balaji*********************************** */
+    Route::get('/getServicesList', 'backend\AdminController@getServicesList');
+    Route::get('/getClientGroupsList', 'backend\AdminController@getClientGroups');
+    Route::get('/getCompanyTypeList', 'backend\AdminController@getCompanyTypeList');
+     Route::post('/getDiscountList', 'backend\AdminController@getDiscountList');
+    
+    Route::get('/getAccountType', 'backend\AdminController@getAccountType');
+    Route::get('/getSystemType', 'backend\AdminController@getSystemType');
+    Route::get('/getctnumbersstatus', 'backend\AdminController@getctnumbersstatus');
     Route::get('/dirPagination', function () {
         return View::make('backend.dirPagination');
     });
