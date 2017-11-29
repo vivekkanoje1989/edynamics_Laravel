@@ -75,6 +75,15 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/password/reset/{token}/{checkState?}', 'backend\Auth\ResetPasswordController@showResetForm');
     Route::post('/password/reset', 'backend\Auth\ResetPasswordController@reset');
 
+      $frontActions = ["/index", "/about", "/careers", "/blogs", "/contact", "/testimonials", "/projects", "/project-details/{projectId}", "/blog-details/{blogId}",
+        "/news", "/news-details/{newsId}", "/press-release", "/events", "/scheduleTestDrive", "/sendwebEnquiry", "/sendwebContact", "/insurance",
+        "/sendJobpost", "/sendcontact", "/addAppointment", "/getservicelocation", "getfCities", "getfCountries", "/sendInsurance", "/customerform/{id}", "/scheduletestdriveform/{id}", "getfGender", "getfProfession", '/getemployeedetails/{id}', '/registration/{id}', '/getfBloodGroup', '/getfEducationList', '/thanking-you', '/compassdetails',
+        '/getnextfollowupTime', "/index/{id}", '/about/{id}'];
+
+    if (in_array(\Request::server('REQUEST_URI'), $frontActions)) {
+        Route::get('/{param}', 'frontend\UserController@onPageReload');
+    }
+    
     //Website frontend
     $getWebsiteUrl = config('global.getWebsiteUrl');
     Route::get($getWebsiteUrl . '/index', 'frontend\UserController@index');

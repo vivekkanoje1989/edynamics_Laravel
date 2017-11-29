@@ -8,7 +8,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="shortcut icon" href="/backend/assets/img/favicon.png" type="image/x-icon">
-
         <?php if($_SERVER['REQUEST_URI'] == "/office.php"){ ?>
         <title page-title></title>       
         <!--Basic Styles-->
@@ -16,7 +15,6 @@
         <link ng-if="settings.rtl" ng-href="/backend/assets/css/bootstrap-rtl.min.css" rel="stylesheet" />
         <link href="/backend/assets/css/font-awesome.min.css" rel="stylesheet" />
         <link href="/backend/assets/css/weather-icons.min.css" rel="stylesheet" />
-
         <!--Fonts-->
         <style>
             @@font-face {
@@ -31,7 +29,6 @@
         <link href="/backend/assets/css/css.css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300" rel="stylesheet" type="text/css">
 <!--        <link href="http://fonts.googleapis.com/earlyaccess/droidarabickufi.css" rel="stylesheet" type="text/css" />
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300" rel="stylesheet" type="text/css">-->
-
         <!--Beyond styles-->
         <link ng-if="!settings.rtl" href="/backend/assets/css/beyond.min.css" rel="stylesheet" />
         <link ng-if="settings.rtl" href="/backend/assets/css/beyond-rtl.min.css" rel="stylesheet" />
@@ -42,8 +39,7 @@
         <link ng-href="{{settings.skin}}" rel="stylesheet" type="text/css" />
         <link href="/backend/assets/css/loader.css" rel="stylesheet" />
         <link href="/css/filterSlider.css" rel="stylesheet" />
-        
-        <?php }else{ $getThemeName = config('global.themeName');?>
+        <?php }else{ $getThemeName = config('global.themeName'); ?>
         <title page-title>Edynamics BMS</title>  
         <script src="/frontend/angular.min.js"></script>
         <script src="/frontend/angular-route.min.js"></script>
