@@ -8,6 +8,8 @@
 namespace App\Models;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
+use Illuminate\Support\Facades\Auth;
+use App\Classes\CommonFunctions;
 
 /**
  * Class ClientGroup

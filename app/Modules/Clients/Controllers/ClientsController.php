@@ -502,7 +502,7 @@ class ClientsController extends Controller {
 
             if (!empty($data['gmail'])) {
 
-                $available_services = SubscribedService::leftjoin('lmsauto_master_final.mlst_value_added_services as mvas', 'subscribed_services.service_id', '=', 'mvas.id')->where(['client_id' => $client_id, 'status' => 1, 'service_id' => $gmail_service_id])->first();
+                $available_services = SubscribedService::leftjoin('laravel_developement_master_edynamics.mlst_value_added_services as mvas', 'subscribed_services.service_id', '=', 'mvas.id')->where(['client_id' => $client_id, 'status' => 1, 'service_id' => $gmail_service_id])->first();
 
                 if (!empty($available_services)) {
                     $gmail_quantity = $available_services->unit;
@@ -510,7 +510,7 @@ class ClientsController extends Controller {
 
                     $amount = round($gmail_quantity * $available_services->price);
 
-                    $discount_charges = Discount::leftjoin('lmsauto_master_final.mlst_discount as dis', 'discount.discount_for_id', '=', 'dis.id')->leftjoin('lmsauto_master_final.mlst_value_added_services as mvas', 'dis.value_added_services_id', '=', 'mvas.id')->where(['applicable_month' => $month, 'subscribed_service_id' => $available_services->id, 'client_id' => $client_id, 'status' => 1])->first();
+                    $discount_charges = Discount::leftjoin('laravel_developement_master_edynamics.mlst_discount as dis', 'discount.discount_for_id', '=', 'dis.id')->leftjoin('laravel_developement_master_edynamics.mlst_value_added_services as mvas', 'dis.value_added_services_id', '=', 'mvas.id')->where(['applicable_month' => $month, 'subscribed_service_id' => $available_services->id, 'client_id' => $client_id, 'status' => 1])->first();
 
                     if (empty($discount_charges)) {
                         $last_amount = $amount;
@@ -569,7 +569,7 @@ class ClientsController extends Controller {
             
             if (!empty($data['sms'])) {
 
-                $available_services = SubscribedService::leftjoin('lmsauto_master_final.mlst_value_added_services as mvas', 'subscribed_services.service_id', '=', 'mvas.id')->where(['client_id' => $client_id, 'status' => 1, 'service_id' => $sms_service_id])->first();
+                $available_services = SubscribedService::leftjoin('laravel_developement_master_edynamics.mlst_value_added_services as mvas', 'subscribed_services.service_id', '=', 'mvas.id')->where(['client_id' => $client_id, 'status' => 1, 'service_id' => $sms_service_id])->first();
 
               
                 $client_info = \App\Models\ClientInfo::where('id', $client_id)->first();
@@ -589,7 +589,7 @@ class ClientsController extends Controller {
                     $main_amount = round($sms_quantity * $available_services->price);
 
 
-                    $discount_chargessms = Discount::leftjoin('lmsauto_master_final.mlst_discount as dis', 'discount.discount_for_id', '=', 'dis.id')->leftjoin('lmsauto_master_final.mlst_value_added_services as mvas', 'dis.value_added_services_id', '=', 'mvas.id')->where(['applicable_month' => $month, 'subscribed_service_id' => $available_services->id, 'client_id' => $client_id, 'status' => 1])->first();
+                    $discount_chargessms = Discount::leftjoin('laravel_developement_master_edynamics.mlst_discount as dis', 'discount.discount_for_id', '=', 'dis.id')->leftjoin('laravel_developement_master_edynamics.mlst_value_added_services as mvas', 'dis.value_added_services_id', '=', 'mvas.id')->where(['applicable_month' => $month, 'subscribed_service_id' => $available_services->id, 'client_id' => $client_id, 'status' => 1])->first();
 
                     if (empty($discount_chargessms)) {
                         $last_amountsms = $main_amount;
@@ -730,7 +730,7 @@ class ClientsController extends Controller {
             curl_close($ch);
             $clients = json_decode($result);
         } else {
-            $clients = \App\Models\ClientInfo::select('states.name as state_name', 'city.name as city_name', 'client_infos.*')->leftjoin('lmsauto_master_final.mlst_states as states', 'states.id', '=', 'client_infos.state_id')->leftjoin('lmsauto_master_final.mlst_cities as city', 'city.id', '=', 'client_infos.city_id')->where(['client_infos.id' => $client_id])->first();
+            $clients = \App\Models\ClientInfo::select('states.name as state_name', 'city.name as city_name', 'client_infos.*')->leftjoin('laravel_developement_master_edynamics.mlst_states as states', 'states.id', '=', 'client_infos.state_id')->leftjoin('laravel_developement_master_edynamics.mlst_cities as city', 'city.id', '=', 'client_infos.city_id')->where(['client_infos.id' => $client_id])->first();
         }
 
 
@@ -978,7 +978,7 @@ class ClientsController extends Controller {
         $hsn = MlstValueAddedService::select('hsn_sac')->where('id',3)->first();
         $HSN = $hsn->hsn_sac;
         //check discount
-        $discountDetails = Discount::leftjoin('lmsauto_master_final.mlst_discount as dis', 'discount.discount_for_id', '=', 'dis.id')->leftjoin('lmsauto_master_final.mlst_value_added_services as mvas', 'dis.value_added_services_id', '=', 'mvas.id')->where(['applicable_month' => $month, 'subscribed_service_id' => $prilines->service_id, 'client_id' => $clientId, 'status' => 1])->get();
+        $discountDetails = Discount::leftjoin('laravel_developement_master_edynamics.mlst_discount as dis', 'discount.discount_for_id', '=', 'dis.id')->leftjoin('laravel_developement_master_edynamics.mlst_value_added_services as mvas', 'dis.value_added_services_id', '=', 'mvas.id')->where(['applicable_month' => $month, 'subscribed_service_id' => $prilines->service_id, 'client_id' => $clientId, 'status' => 1])->get();
         foreach ($discountDetails as $discount) {
             if (!empty($discount)) {
                 $discountamt = $discount->discount_amt;
@@ -1067,7 +1067,7 @@ class ClientsController extends Controller {
             curl_close($ch);
             $clients = json_decode($result);
         } else {
-            $clients = \App\Models\ClientInfo::select('states.name as state_name', 'city.name as city_name', 'client_infos.*')->leftjoin('lmsauto_master_final.mlst_states as states', 'states.id', '=', 'client_infos.state_id')->leftjoin('lmsauto_master_final.mlst_cities as city', 'city.id', '=', 'client_infos.city_id')->where(['client_infos.id' => $clientId])->first();
+            $clients = \App\Models\ClientInfo::select('states.name as state_name', 'city.name as city_name', 'client_infos.*')->leftjoin('laravel_developement_master_edynamics.mlst_states as states', 'states.id', '=', 'client_infos.state_id')->leftjoin('laravel_developement_master_edynamics.mlst_cities as city', 'city.id', '=', 'client_infos.city_id')->where(['client_infos.id' => $clientId])->first();
             
         }
         

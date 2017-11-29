@@ -187,6 +187,8 @@ return [
 
         //maatwebsite excel
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        //pdf
+        niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
     ],
 
     /*
@@ -236,6 +238,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Location' => Stevebauman\Location\Facades\Location::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class
     ],
 
 ];
