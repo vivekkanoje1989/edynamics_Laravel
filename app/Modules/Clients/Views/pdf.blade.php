@@ -1,5 +1,7 @@
 <?php
-$uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATOR;
+echo $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATOR;
+exit;
+
 ?>
 <html>
 <head>
@@ -29,7 +31,7 @@ table{ border-collapse:collapse;} table td{ border-collapse:collapse;}
                     <!-- title -->
                     
                     <tr>
-                      <td  style="font-family: Helvetica,arial,sans-serif;font-size: 19px;color:rgb(0, 0, 0);text-align: center;line-height: 15px;font-weight: 800;"><h4 style="margin: 0;">Business Apps</h4></td>
+                      <td  style="font-family: Helvetica,arial,sans-serif;font-size: 19px;color:rgb(0, 0, 0);text-align: center;line-height: 15px;font-weight: 800;"><h4 style="margin: 0;">edynamics</h4></td>
                     </tr>
                     <tr>
                       <td width="100%" height="10">&nbsp;</td>

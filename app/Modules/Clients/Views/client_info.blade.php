@@ -305,14 +305,14 @@
                         <div class="row">
                             
                             <p style="float: right">
-                                <a href="#/invoices/index/{{clientData.id}}"  target="_blank"  ng-click="initialServiceModal(0, '', 0, '')" class="btn btn-primary btn-info">View Invoice</a>&nbsp;&nbsp;&nbsp;
+                                <a href="[[ config('global.backendUrl') ]]#/invoices/index/{{clientData.id}}"  target="_blank"  ng-click="initialServiceModal(0, '', 0, '')" class="btn btn-primary btn-info">View Invoice</a>&nbsp;&nbsp;&nbsp;
                             </p>
                             <p style="float: right">
-                                <a href="#/ctbillsettings/index/{{clientData.id}}"  target="_blank"   class="btn btn-primary btn-info">Manage Cloud Telephony Numbers</a>&nbsp;&nbsp;&nbsp;
+                                <a href="[[ config('global.backendUrl') ]]#/ctbillsettings/index/{{clientData.id}}"  target="_blank"   class="btn btn-primary btn-info">Manage Cloud Telephony Numbers</a>&nbsp;&nbsp;&nbsp;
                             </p>
                             
                             <p style="float: right">
-                                <a href="#/clients/addservice/{{clientData.id}}/0" target="_blank"  class="btn btn-primary btn-info">Add New Service</a>&nbsp;&nbsp;&nbsp;
+                                <a href="[[ config('global.backendUrl') ]]#/clients/addservice/{{clientData.id}}/0" target="_blank"  class="btn btn-primary btn-info">Add New Service</a>&nbsp;&nbsp;&nbsp;
                             </p>
                             <p style="float: right">
                                 <a href="" data-toggle="modal" data-target="#generateInvoiceModal" ng-if="serviceselected" ng-click="initialGenerateInvoiceModal(servicesID,clientData.id)" class="btn btn-primary btn-info">Generate Invoice</a>&nbsp;&nbsp;&nbsp;
