@@ -250,8 +250,13 @@ class ClientsController extends Controller {
             $result = curl_exec($ch);
             curl_close($ch);
             
+            
+            if(is_numeric($result))
             $_POST['company_id'] = !empty($result) ? $result : 0;
-          
+            else
+              $_POST['company_id'] = 0;  
+            
+       
             //$_POST['company_id'] = !empty($request['generateData']['company_id']) ? $request['generateData']['company_id'] : 0;
 
            
@@ -715,7 +720,8 @@ class ClientsController extends Controller {
     }
 
     public function generatePDF($modelEmail, $modelSMS, $client_id, $company_id, $invoiceno, $invoice_date, $count = 0, $final_invoice_ammount) {
-        $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATOR;
+       $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATOR;
+      
         $clients = \App\Models\ClientInfo::where(['id' => $client_id])->first();
         if (!empty($company_id)) {
             // curl to get firm and partners detail from client database
@@ -733,25 +739,33 @@ class ClientsController extends Controller {
             $clients = \App\Models\ClientInfo::select('states.name as state_name', 'city.name as city_name', 'client_infos.*')->leftjoin('laravel_developement_master_edynamics.mlst_states as states', 'states.id', '=', 'client_infos.state_id')->leftjoin('laravel_developement_master_edynamics.mlst_cities as city', 'city.id', '=', 'client_infos.city_id')->where(['client_infos.id' => $client_id])->first();
         }
 
-
-        $owndetails = \App\Models\ClientInfo::where(['id' => 2])->first();
+        
+        $owndetails = \App\Models\ClientInfo::where(['id' => 1])->first();
 
         if (!empty($modelEmail) || !empty($modelSMS)) {
+           
             if ($count > 0)
                 $current_datetime = date('y-m-d H-i-s') . '-' . $count;
             else
                 $current_datetime = date('y-m-d H-i-s');
 
             $marketing_name = $clients->marketing_name;
-
+            
+            echo 'her';
             $mPDF1 = new \mPDF('', '', 0, '', 8, 8, 8, 8, 8, 8, 'A4');
+            
             $mPDF1->SetDisplayMode('fullpage');
+            
             $view = \View::make('Clients::pdf', ['modelEmail' => $modelEmail, 'modelSMS' => $modelSMS, 'client' => $clients, 'owndetails' => $owndetails, 'invoiceno' => $invoiceno, 'invoice_date' => $invoice_date, 'final_invoice_ammount' => $final_invoice_ammount]);
+            
             $contents = (string) $view;
+           
             $contents = $view->render();
+            
             $mPDF1->WriteHTML($contents);
-
-            $file_name = "Invoicefor-$marketing_name-on-$current_datetime" . ".pdf";
+ 
+           $file_name = "Invoicefor-$marketing_name-on-$current_datetime" . ".pdf";
+           
 
             $file_name = str_replace(' ', '_', $file_name);
 
