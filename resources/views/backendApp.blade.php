@@ -40,7 +40,8 @@
         <link href="/backend/assets/css/loader.css" rel="stylesheet" />
         <link href="/css/filterSlider.css" rel="stylesheet" />
         <?php }else{ $getThemeName = config('global.themeName'); ?>
-        <title page-title>Edynamics BMS</title>  
+        <title page-title>Edynamics BMS</title>
+          <script src="frontend/jquery.min.js"></script>
         <script src="/frontend/angular.min.js"></script>
         <script src="/frontend/angular-route.min.js"></script>
         <script src="/frontend/angular-animate.min.js"></script>

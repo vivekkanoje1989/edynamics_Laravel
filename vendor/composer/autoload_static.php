@@ -514,14 +514,11 @@ class ComposerStaticInita4a83323fa74f9ee3390af915b46a8f0
         'App\\Models\\CcPresalesSubcategory' => __DIR__ . '/../..' . '/app/Models/CcPresalesSubcategory.php',
         'App\\Models\\CcPresalesSubstatus' => __DIR__ . '/../..' . '/app/Models/CcPresalesSubstatus.php',
         'App\\Models\\ClientContactPerson' => __DIR__ . '/../..' . '/app/Models/ClientContactPerson.php',
-<<<<<<< HEAD
         'App\\Models\\ClientGroup' => __DIR__ . '/../..' . '/app/Models/ClientGroup_old.php',
         'App\\Models\\ClientInfo' => __DIR__ . '/../..' . '/app/Models/ClientInfo_old.php',
-=======
         'App\\Models\\ClientGroup' => __DIR__ . '/../..' . '/app/Models/ClientGroup.php',
         'App\\Models\\ClientGroupsLog' => __DIR__ . '/../..' . '/app/Models/ClientGroupsLog.php',
         'App\\Models\\ClientInfo' => __DIR__ . '/../..' . '/app/Models/ClientInfo.php',
->>>>>>> a005eab8a63776e755428c8084208604975af3d3
         'App\\Models\\ClientInfosLog' => __DIR__ . '/../..' . '/app/Models/ClientInfosLog.php',
         'App\\Models\\ClientLocation' => __DIR__ . '/../..' . '/app/Models/ClientLocation.php',
         'App\\Models\\ClientLocationsLog' => __DIR__ . '/../..' . '/app/Models/ClientLocationsLog.php',
@@ -762,7 +759,6 @@ class ComposerStaticInita4a83323fa74f9ee3390af915b46a8f0
         'App\\Modules\\MasterHr\\Models\\MasterHr' => __DIR__ . '/../..' . '/app/Modules/MasterHr/Models/MasterHr.php',
         'App\\Modules\\MasterSales\\Controllers\\MasterCustomersController' => __DIR__ . '/../..' . '/app/Modules/MasterSales/Controllers/MasterCustomersController.php',
         'App\\Modules\\MasterSales\\Controllers\\MasterSalesController' => __DIR__ . '/../..' . '/app/Modules/MasterSales/Controllers/MasterSalesController.php',
-<<<<<<< HEAD
         'App\\Modules\\MasterSales\\Models\\Customer' => __DIR__ . '/../..' . '/app/Modules/Reports/Models/Customer.php',
         'App\\Modules\\MasterSales\\Models\\CustomersContact' => __DIR__ . '/../..' . '/app/Modules/Reports/Models/CustomersContact_2.php',
         'App\\Modules\\MasterSales\\Models\\CustomersContactsLog' => __DIR__ . '/../..' . '/app/Modules/Reports/Models/CustomersContactsLog.php',
@@ -807,7 +803,6 @@ class ComposerStaticInita4a83323fa74f9ee3390af915b46a8f0
         'App\\Modules\\PropertyPortals\\Models\\LstPropertyPortalsConfig' => __DIR__ . '/../..' . '/app/Modules/PropertyPortals/Models/LstPropertyPortalsConfig.php',
         'App\\Modules\\PropertyPortals\\Models\\LstPropertyPortalsProjectConfig' => __DIR__ . '/../..' . '/app/Modules/PropertyPortals/Models/LstPropertyPortalsProjectConfig.php',
         'App\\Modules\\PropertyPortals\\Models\\MlstBmsbPropertyPortal' => __DIR__ . '/../..' . '/app/Modules/PropertyPortals/Models/MlstBmsbPropertyPortal.php',
-=======
         'App\\Modules\\MasterSales\\Models\\Customer' => __DIR__ . '/../..' . '/app/Modules/MasterSales/Models/Customer.php',
         'App\\Modules\\MasterSales\\Models\\CustomersContact' => __DIR__ . '/../..' . '/app/Modules/MasterSales/Models/CustomersContact.php',
         'App\\Modules\\MasterSales\\Models\\CustomersContactsLog' => __DIR__ . '/../..' . '/app/Modules/MasterSales/Models/CustomersContactsLog.php',
@@ -836,7 +831,6 @@ class ComposerStaticInita4a83323fa74f9ee3390af915b46a8f0
         'App\\Modules\\Masterlist\\Controllers\\GenderController' => __DIR__ . '/../..' . '/app/Modules/Masterlist/Controllers/GenderController.php',
         'App\\Modules\\Masterlist\\Controllers\\MasterlistController' => __DIR__ . '/../..' . '/app/Modules/Masterlist/Controllers/MasterlistController.php',
         'App\\Modules\\Masterlist\\Controllers\\TitleController' => __DIR__ . '/../..' . '/app/Modules/Masterlist/Controllers/TitleController.php',
->>>>>>> a005eab8a63776e755428c8084208604975af3d3
         'App\\Modules\\Reports\\Controllers\\ReportsController' => __DIR__ . '/../..' . '/app/Modules/Reports/Controllers/ReportsController.php',
         'App\\Modules\\VehiclePricing\\Controllers\\VehiclePricingController' => __DIR__ . '/../..' . '/app/Modules/VehiclePricing/Controllers/VehiclePricingController.php',
         'App\\Modules\\VehiclePricing\\Models\\VehiclePricing' => __DIR__ . '/../..' . '/app/Modules/VehiclePricing/Models/VehiclePricing.php',

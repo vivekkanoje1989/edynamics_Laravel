@@ -1,12 +1,7 @@
 @extends('layouts/frontend/Edynamics/main')
 @section('content') 
 <section>
-    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="padding-top:50px;" >
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" >
         <div class="carousel-inner" role="listbox">
             <div class="item active">
                 <img src="/frontend/Edynamics/img/BA-banner.jpg" alt="Image">  
@@ -27,35 +22,12 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-    <!--<div id="main-slide" class="carousel slide default "   data-ride="carousel">
-        <div class="carousel-inner ">
-            <div class="overlay"></div>
-            <div class="item active">
-                <img class="img-responsive" src="/frontend/Edynamics/img/BA-banner.jpg" alt="slider"/>
-                <div class="carousel-caption">
-                    <div class="text  wow animated fadeInLeft" >  Reduce Dead Investment, Invest analytically.</div>
-                </div>
-            </div>
-            <div class="item"> <img class="img-responsive" src="/frontend/Edynamics/img/BA-banner1.jpg" alt="slider"> 
-                <div class="carousel-caption">
-                    <div class="text wow animated slideInUp" >BMS on Google cloud Platform Secure, Quick and Easy to implement.</div>
-                </div>
-            </div>
-            <div class="item"> 
-                <img class="img-responsive" src="/frontend/Edynamics/img/BA-banner3.jpg" alt="slider">
-                <div class="carousel-caption">  
-                    <div class="text  wow animated fadeInRight" > BMS allows your team to respond faster & increase productivity.</div>
-                </div>
-            </div>
-        </div>
-        <a class="left carousel-control" ng-non-bindable data-slide="prev"> <span><i class="fa fa-angle-left"></i></span> </a> <a class="right carousel-control" ng-non-bindable data-slide="next"> <span><i class="fa fa-angle-right"></i></span> </a>
-    </div>-->
 </section>
 <div class="skewed-bg">
     <div class="content">
         <h1 class="title wow fadeInUp"  data-wow-delay="0.2s">Welcome to edynamics</h1>
         <p ><h2 class="text white-text wow fadeInUp"  data-wow-delay="0.4s">We are dedicated to simplify your business!</h2></p>
-        <button class="btn btn-white  btn-default bold font-bold mr-5" > Read More </button>    <button class="btn btn-default btn-white font-bold" > Join Us Now </button>
+        <a class="btn btn-white    btn-default bold font-bold mr-5" href="[[ URL::to('/') ]]/about" > Read More </a>    <a class="btn btn-default btn-white font-bold" href="[[ URL::to('/') ]]/contact"> Join Us Now </a>
     </div>
 </div>
 
@@ -83,11 +55,11 @@
                     </div>
                     <div class="card-content">
                         <h5>Who Are We ?</h5>
-                        <p>edynamics serves clients to earn maximum profit using minimum resources by providing a unique network and services that put data efficiently for smarter and better use. </p>
+                      <p><b>edynamics</b> serves clients to earn maximum profit using minimum resources by providing a unique network and services that put data efficiently for smarter and better use. We are a <b>Google partner</b> company, making business ideas easier and better informed. We are here to save your time, money and simplify your business.</p>    
                     </div>
                     <!--Buttons-->
                     <div class="card-btn text-center">
-                        <a href="#" class="btn btn-default btn-md waves-effect waves-light">Read more</a>
+                        <a href="[[ URL::to('/') ]]/about" class="btn btn-default btn-md waves-effect waves-light">Learn more</a>
 
                     </div>
                     <!--/.Buttons-->
@@ -108,11 +80,11 @@
                     <div class="card-content">
                         <h5>Our Products</h5>
                         <p>
-                            Let us make your job easier. We have a team of engineers and expertise to provide you a system for the systematic and effective solution to simplify your day-to-day activities</p>
+Let us make your job easier. We have a team of engineers and expertise to provide you a system for the systematic and effective solution to simplify your day-to-day activities and sales process. Our<a class="index-a" href="/index.php/builder-crm-software-products"> Business Management System </a>helps our clients to have a better control on their business and operational activities through e-governance. </p>    
                     </div>
                     <!--Buttons-->
                     <div class="card-btn text-center">
-                        <a href="#" class="btn btn-default btn-md waves-effect waves-light">Read more</a>
+                        <a href="[[ URL::to('/') ]]/products" class="btn btn-default btn-md waves-effect waves-light">Learn more</a>
 
                     </div>
                     <!--/.Buttons-->
@@ -132,11 +104,11 @@
                     </div>
                     <div class="card-content">
                         <h5>Work With Us !</h5>
-                        <p>We are the inventors and developers of <b>BMS system</b>. We are a fast growing, leading company specializing in providing Business Management Systems to real estate industry. </p>
+                        <p>We are the inventors and developers of <b>BMS system</b>. We are a fast growing, leading company specializing in providing Business Management Systems to real estate industry. We are a team of self-driven, energetic and disciplined people. If you have the same passion with experience in sales, marketing, programming and designing then join us to grow together as a unit to simplify the business.</p>   
                     </div>
                     <!--Buttons-->
                     <div class="card-btn text-center">
-                        <a href="#" class="btn btn-default btn-md waves-effect waves-light">Read more</a>
+                        <a href="[[ URL::to('/') ]]/partnership" class="btn btn-default btn-md waves-effect waves-light">Learn more</a>
 
                     </div>
                 </div>
@@ -247,11 +219,15 @@
                     <div class="testimonial-card z-depth-1">
                         <div class="card-up tstmonialsbg-transform default-color-dark">
                         </div>
-                        <div class="avatar"><img src="https://mdbootstrap.com/wp-content/uploads/2015/10/avatar-2.jpg" class="img-circle img-responsive">
+                        <div class="avatar"><img src="/frontend/Edynamics/client/sameer.jpg" class="img-circle img-responsive">
                         </div>
                         <div class="card-content">
-                            <h5>Anna Maria</h5>
-                            <p><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, adipisci, voluptatum placeat ducimus vero commodi provident culpa accusamus nostrum dolor, labore ratione eius.</p>
+                            <h5>Sameer Gholve </h5>
+                            <small>Managing Director</small>
+                            <h6><b>Primary Housing Corporation</b></h6>
+                            <p><i class="fa fa-quote-left"></i>Technology is supposed to make the job easy but if not designed well
+                                it can be the biggest source of inconvenience.  edynamics product is not just technically strong but also extremely user-friendly.
+                                It is designed/developed keeping the user at the center.</p>
                         </div>
                     </div>
 
@@ -263,11 +239,13 @@
                     <div class="testimonial-card z-depth-1">
                         <div class="card-up tstmonialsbg-transform default-color-dark">
                         </div>
-                        <div class="avatar"><img src="https://mdbootstrap.com/wp-content/uploads/2015/10/avatar-2.jpg" class="img-circle img-responsive">
+                        <div class="avatar"><img src="/frontend/Edynamics/client/vitthal.jpg" class="img-circle img-responsive">
                         </div>
                         <div class="card-content">
-                            <h5>Anna Maria</h5>
-                            <p><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, adipisci, voluptatum placeat ducimus vero commodi provident culpa accusamus nostrum dolor, labore ratione eius.</p>
+                            <h5>Vitthal Ranawade </h5>
+                            <small>Managing Director</small>
+                            <h6><b>SR group</b></h6>
+                            <p><i class="fa fa-quote-left"></i>Just to say we are really impressed with the ways you sorted the things for us. We are appreciated that the things are explained from you is clear and easy to understand.</p>
                         </div>
                     </div>
                 </div>
@@ -278,11 +256,14 @@
                     <div class="testimonial-card z-depth-1">
                         <div class="card-up tstmonialsbg-transform default-color-dark">
                         </div>
-                        <div class="avatar"><img src="https://mdbootstrap.com/wp-content/uploads/2015/10/avatar-2.jpg" class="img-circle img-responsive">
+                        <div class="avatar"><img src="/frontend/Edynamics/client/kunal.jpg" class="img-circle img-responsive">
                         </div>
                         <div class="card-content">
-                            <h5>Anna Maria</h5>
-                            <p><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, adipisci, voluptatum placeat ducimus vero commodi provident culpa accusamus nostrum dolor, labore ratione eius.</p>
+                            <h5>Kunal Prasad </h5>
+                            <small>Marketing Head</small>
+                            <h6><b>PropZapper</b></h6>
+                            <p><i class="fa fa-quote-left"></i> BMS is a very useful & smart tool. After using it for more than a year now, 
+                                we can’t even think of managing our CRM & Lead Administration without it.</p>
                         </div>
                     </div>
                 </div>
@@ -293,11 +274,15 @@
                     <div class="testimonial-card z-depth-1">
                         <div class="card-up tstmonialsbg-transform default-color-dark">
                         </div>
-                        <div class="avatar"><img src="https://mdbootstrap.com/wp-content/uploads/2015/10/avatar-2.jpg" class="img-circle img-responsive">
+                        <div class="avatar"><img src="/frontend/Edynamics/client/vipul.jpg" class="img-circle img-responsive">
                         </div>
                         <div class="card-content">
-                            <h5>Anna Maria</h5>
-                            <p><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, adipisci, voluptatum placeat ducimus vero commodi provident culpa accusamus nostrum dolor, labore ratione eius.</p>
+                            <h5>Vipul Bhavani</h5>
+                            <small>Managing Director</small>
+                            <h6><b>Vision Creative Group</b></h6>
+                            <p><i class="fa fa-quote-left"></i> 
+                                I don't demand any reports to my staff now, BMS does it for me automatically.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -308,15 +293,56 @@
                     <div class="testimonial-card z-depth-1">
                         <div class="card-up tstmonialsbg-transform default-color-dark">
                         </div>
-                        <div class="avatar"><img src="https://mdbootstrap.com/wp-content/uploads/2015/10/avatar-2.jpg" class="img-circle img-responsive">
+                        <div class="avatar"><img src="/frontend/Edynamics/client/rajshah.png" class="img-circle img-responsive">
                         </div>
                         <div class="card-content">
-                            <h5>Anna Maria</h5>
-                            <p><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, adipisci, voluptatum placeat ducimus vero commodi provident culpa accusamus nostrum dolor, labore ratione eius.</p>
+                            <h5>Raj Shah</h5>
+                            <small>Director Sales & Marketing</small>
+                            <h6><b>Namrata Group</b></h6>
+                            <p><i class="fa fa-quote-left"></i> BMS delivers very good results & helping us managing our day to day tasks very well.
+                                It also gives confidence to our employees so that they can focus on there core tasks. 
+                                Automatic upgrades and getting new tools every month is again great experience we are enjoying.			
+                            </p>
                         </div>
                     </div>
                 </div>
 
+            </div>
+            <div class="item   wow  slideInLeft delay-18s">
+                <div class="col-lg-12 col-md-12">
+                    <div class="testimonial-card z-depth-1">
+                        <div class="card-up tstmonialsbg-transform default-color-dark">
+                        </div>
+                        <div class="avatar"><img src="/frontend/Edynamics/client/kiran.jpg" class="img-circle img-responsive">
+                        </div>
+                        <div class="card-content">
+                            <h5>Kiran Nighot </h5>
+                            <small>General Manager</small>
+                            <h6><b>Aarohi Developers</b></h6>
+                            <p><i class="fa fa-quote-left"></i> 
+                                We would like to thank and appreciate edynamics effort's in providing various good tool's which help us connecting with our clients properly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item   wow  slideInLeft delay-18s">
+                <div class="col-lg-12 col-md-12">
+                    <div class="testimonial-card z-depth-1">
+                        <div class="card-up tstmonialsbg-transform default-color-dark">
+                        </div>
+                        <div class="avatar"><img src="/frontend/Edynamics/client/sambhaji.jpg" class="img-circle img-responsive">
+                        </div>
+                        <div class="card-content">
+                            <h5>Sambhaji Magar</h5>
+                            <small>Managing Director</small>
+                            <h6><b>Poona Properties</b></h6>
+                            <p><i class="fa fa-quote-left"></i> 
+                                Business is excellent now a days, felt the difference of doing business with help of technology.
+                                BMS is delivering excellent for us every day.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -326,28 +352,50 @@
 
 <div class="footertopred">
 </div>     
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 @endsection()
+
 <script>
-    $(document).ready(function () {
-        $('.carousel-control.left').click(function () {
-            alert("fdfd")
-            $('#myCarousel').carousel('prev');
-        });
-        $('#left').click(function () {
-            alert("fdfd")
-            $('#myCarousel').carousel('prev');
-        });
 
-
-        $('.carousel-control.right').click(function () {
-            $('#myCarousel').carousel('next');
-        });
-
+    $('.carousel-control.left').click(function () {
+        $('#myCarousel').carousel('prev');
     });
+    $('#left').click(function () {
+        $('#myCarousel').carousel('prev');
+    });
+
+
+    $('.carousel-control.right').click(function () {
+        $('#myCarousel').carousel('next');
+    });
+
+
     $(document).ready(function () {
         setTimeout(function () {
             $('#myCarousel').carousel('next');
         }, 5000);
     });
+    
+</script>
+<script>
+$("#recentItem").click(function(){
+$(".recentItem").animate({
+right: '0'	 
+});
+$(".overlay").addClass("show");
+
+});
+
+$(".closX").click(function(){
+$(".recentItem").animate({
+right: '-300px'	
+}); 
+$(".overlay").removeClass("show");
+});
+
+$(".overlay").click(function(){
+$(".recentItem").animate({
+right: '-300px'	
+}); 
+$(".overlay").removeClass("show");
+});
 </script>

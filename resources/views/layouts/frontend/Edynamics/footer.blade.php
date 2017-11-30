@@ -89,9 +89,76 @@
 
 <script type="text/javascript">
    new WOW().init();
-   
-
- </script> 
-
+</script> 
+ <div id="recentItem"  class="request-demo"><img src="/frontend/Edynamics/img/request-demo.png" alt="request demo"></div>
+        <div class="recentItem  bg-gray"> <a  class="cf closX"><i class="fa fa-times floatR"></i> </a>
+            <div class="box-innery">
+                <h4 class="demo-enquiry-h1">Request Demo</h4>
+                <div class="mt-mb35">
+                    <div class=" partner-form " ng->
+                        <form name="requestDemo" novalidate ng-submit="requestDemo.$valid && requestDemos(request)" >
+                            <div class="md-form"> <i class="fa fa-user prefix"></i>
+                                <input type="text" name="fname" ng-model="request.fname" id="fname" required  class="form-control">
+                                <label for="name" class="">Your name</label>
+                                <div ng-show="sbtBtn1" ng-messages="requestDemo.fname.$error">
+                                    <span ng-show="requestDemo.fname.$error.required" ng-message="required" class="sp-error">This field is required</span>
+                                </div>
+                            </div>
+                            <div class="md-form"> <i class="fa  fa-building prefix"></i>
+                                <input type="text" name="company_name" ng-model="request.company_name" required class="form-control">
+                                <label for="company_name" class="">Company</label>
+                                <div ng-show="sbtBtn1" ng-messages="requestDemo.company_name.$error">
+                                    <span  ng-show="requestDemo.company_name.$error.required"  ng-message="required" class="sp-error">This field is required</span>
+                                </div>
+                            </div>
+                            <div class="md-form"> <i class="fa fa-envelope prefix"></i>
+                                <input type="email" ng-model="request.email_id" name="email_id" required class="form-control validate">
+                                <label for="email"  class="">Your email</label>
+                                <div ng-show="sbtBtn1" ng-messages="requestDemo.email_id.$error">
+                                    <span  ng-show="requestDemo.email_id.$error.required"  ng-message="required" class="sp-error">This field is required</span>
+                                </div>
+                            </div>
+                            <div class="md-form"> <i class="fa fa-mobile-phone prefix"></i>
+                                <input type="number" name="mobile_number" ng-model="request.mobile_number" required maxlength="10" class="form-control validate">
+                                <label for="mobile-no" data-error="wrong" class="">Your Mobile Number</label>
+                                <div ng-show="sbtBtn1" ng-messages="requestDemo.mobile_number.$error">
+                                    <span ng-show="requestDemo.mobile_number.$error.required" ng-message="required" class="sp-error">This field is required</span>
+                                </div>
+                            </div>
+                            <div class="md-form sform-select">
+                                <select class="browser-default form-control" name="request_client" ng-model="request.request_client" required>
+                                    <option value="" disabled selected>You are</option>
+                                    <option value="Builders & Developers">Builders & Developers</option>
+                                    <option value="Property Consultants">Property Consultants</option>
+                                </select>
+                                <i class="fa fa-angle-double-down prefix"></i> 
+                                <div ng-show="sbtBtn1" ng-messages="requestDemo.request_client.$error">
+                                    <span ng-show="requestDemo.request_client.$error.required" ng-message="required" class="sp-error">This field is required</span>
+                                </div>
+                            </div>
+                            <div class="md-form"> <i class="fa fa-map-marker prefix"></i>
+                                <input type="text" name="request_city" ng-model="request.request_city" id="request_city" class="form-control" required>
+                                <label for="location" class="">Your Location</label>
+                                <div ng-show="sbtBtn1" ng-messages="requestDemo.request_city.$error">
+                                    <span ng-show="requestDemo.request_city.$error.required" ng-message="required" class="sp-error">This field is required</span>
+                                </div>
+                            </div>
+                            <div class="alert alert-success" ng-if="requestMssg">
+                                <strong>Thank you for request</strong>
+                            </div>
+                            <div class="text-xs-center text-center">
+                                <button type="submit" class="btn btn-default mb-2 waves-effect waves-light" ng-disabled="requestBtn" ng-click="sbtBtn1 = true">Send <i class="fa fa-send ml-1"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+ 
+ 
+ 
+ 
+ <script>
+ </script>
 </body>
 </html>

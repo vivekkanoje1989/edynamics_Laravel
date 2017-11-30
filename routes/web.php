@@ -78,7 +78,7 @@ Route::group(['middleware' => ['web']], function () {
       $frontActions = ["/index", "/about", "/careers", "/blogs", "/contact", "/testimonials", "/projects", "/project-details/{projectId}", "/blog-details/{blogId}",
         "/news", "/news-details/{newsId}", "/press-release", "/events", "/scheduleTestDrive", "/sendwebEnquiry", "/sendwebContact", "/insurance",
         "/sendJobpost", "/sendcontact", "/addAppointment", "/getservicelocation", "getfCities", "getfCountries", "/sendInsurance", "/customerform/{id}", "/scheduletestdriveform/{id}", "getfGender", "getfProfession", '/getemployeedetails/{id}', '/registration/{id}', '/getfBloodGroup', '/getfEducationList', '/thanking-you', '/compassdetails',
-        '/getnextfollowupTime', "/index/{id}", '/about/{id}'];
+        '/getnextfollowupTime', "/index/{id}", '/about/{id}','/products','/bmsnetwork','/clients','/partnership'];
 
     if (in_array(\Request::server('REQUEST_URI'), $frontActions)) {
         Route::get('/{param}', 'frontend\UserController@onPageReload');
@@ -89,6 +89,11 @@ Route::group(['middleware' => ['web']], function () {
     Route::get($getWebsiteUrl . '/index', 'frontend\UserController@index');
     Route::get($getWebsiteUrl . '/about', 'frontend\UserController@about');
     Route::get($getWebsiteUrl . '/career', 'frontend\UserController@career');
+    Route::get($getWebsiteUrl . '/products', 'frontend\UserController@products');
+    Route::get($getWebsiteUrl . '/bmsnetwork', 'frontend\UserController@bmsnetwork');
+    Route::get($getWebsiteUrl . '/clients', 'frontend\UserController@clients');
+    Route::post($getWebsiteUrl . '/doContactAction', 'frontend\UserController@doContactAction');
+    Route::get($getWebsiteUrl . '/partnership', 'frontend\UserController@partnership');
     Route::post($getWebsiteUrl . '/register_applicant', 'frontend\UserController@register_applicant');
     Route::get($getWebsiteUrl . '/jobPost', 'frontend\UserController@jobPost');
     Route::get($getWebsiteUrl . '/background', 'frontend\UserController@getBackGroundImages');

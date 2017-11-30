@@ -19,14 +19,14 @@
                             <div class="col-md-2 text-center   col-sm-2 col-xs-5">
                                 <div id="logo"> 
                                     <div class="logo_normal">
-                                        <a href="index.html">
+                                        <a href="[[ URL::to('/') ]]/index">
                                             <img src="http://edynamics.co.in/themes/edynamics/images/logo.png" width="100" height="auto" alt="edynamics" data-retina="true" ></a>
-                                        <a href="index.html">
+                                        <a href="[[ URL::to('/') ]]/index">
                                             <img src="http://edynamics.co.in/themes/edynamics/images/newslider/google-partner.png" width="100" height="auto" alt="googleparner" data-retina="true" ></a>
                                     </div>
                                     <div class="logo_sticky ">
-                                        <a href="index.html"> <img src="/frontend/Edynamics/img/eDynamicslogo-blacktext.png" width="100" height="auto" alt="edynamics" data-retina="true" ></a>
-                                        <a href="index.html"> <img src="http://edynamics.co.in/themes/edynamics/images/newslider/google-partner.png" width="100" height="auto" alt="googleparner" data-retina="true" ></a>
+                                        <a href="[[ URL::to('/') ]]/index"> <img src="/frontend/Edynamics/img/eDynamicslogo-blacktext.png" width="100" height="auto" alt="edynamics" data-retina="true" ></a>
+                                        <a href="[[ URL::to('/') ]]/index"> <img src="http://edynamics.co.in/themes/edynamics/images/newslider/google-partner.png" width="100" height="auto" alt="googleparner" data-retina="true" ></a>
                                         <br>
                                     </div>
 
@@ -35,21 +35,21 @@
                                 <div class="main-menu mt10">
                                     <div id="header_menu">
 
-                                        <a href="index.html"> <img src="/frontend/Edynamics/img/eDynamicslogo-blacktext.png" width="100" height="auto" alt="edynamics" data-retina="true" ></a>
-                                        <a href="index.html"> <img src="/frontend/Edynamics/img/googlr-cloud-logo-black.png" width="auto" height="auto" alt="googleparner" data-retina="true" ></a>
+                                        <a href="[[ URL::to('/') ]]/index"> <img src="/frontend/Edynamics/img/eDynamicslogo-blacktext.png" width="100" height="auto" alt="edynamics" data-retina="true" ></a>
+                                        <a href="[[ URL::to('/') ]]/index"> <img src="/frontend/Edynamics/img/googlr-cloud-logo-black.png" width="auto" height="auto" alt="googleparner" data-retina="true" ></a>
 
 
                                     </div>
                                     <a class="open_close" id="close_in"><i class="fa fa-times"></i></a>
                                     <ul>
-                                        <li class="active"><a href="[[ URL::to('/') ]]/[[config('global.getWebsiteUrl')]]/index">HOME </a></li>
+                                        <li class="active"><a href="[[ URL::to('/') ]]/index">HOME </a></li>
                                         <li><a href="[[ URL::to('/') ]]/about">ABOUT US </a> </li>
                                         <li><a href="[[ URL::to('/') ]]/products">PRODUCTS </a></li>
-                                        <li><a href="[[ URL::to('/') ]]/bms-network"> BMS NETWORK</a> </li>
+                                        <li><a href="[[ URL::to('/') ]]/bmsnetwork"> BMS NETWORK</a> </li>
                                         <li><a href="[[ URL::to('/') ]]/clients">CLIENTS</a> </li>
                                         <li><a href="[[ URL::to('/') ]]/partnership">PARTNERSHIP </a></li>
-                                        <li><a href="[[ URL::to('/') ]]/careers">CAREERS</a></li>
-                                        <li><a href="[[ URL::to('/') ]]/newsroom"> NEWS ROOMS</a></li>
+                                        <li><a href="[[ URL::to('/') ]]/career">CAREERS</a></li>
+                                        <li><a href="[[ URL::to('/') ]]/news"> NEWS ROOMS</a></li>
                                         <li><a href="[[ URL::to('/') ]]/contact"> CONTACT US</a></li>
                                     </ul>
                                 </div>
@@ -63,4 +63,3 @@
                     </div>
             </header>
         </div>
-        <!-- Start Home Page Slider -->

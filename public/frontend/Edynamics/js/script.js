@@ -1443,6 +1443,29 @@ $('.collapse#collapseFilters').addClass('in');
 
   $(document).ready(function () {
     $('.dropdown-button').dropdown();
+    
+    $("#recentItem").click(function(){
+$(".recentItem").animate({
+right: '0'	  
+});
+$(".overlay").addClass("show");
+
+});
+
+$(".closX").click(function(){
+$(".recentItem").animate({
+right: '-300px'			
+}); 
+$(".overlay").removeClass("show");
+});
+
+$(".overlay").click(function(){
+$(".recentItem").animate({
+right: '-300px'			
+}); 
+$(".overlay").removeClass("show");
+});
+
   });
 })(jQuery);
 

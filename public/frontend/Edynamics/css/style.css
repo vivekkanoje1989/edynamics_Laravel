@@ -84,7 +84,7 @@ ul.post-list li{ display:block; font-size:15px; padding:10px; border:1px solid #
   -webkit-box-orient: vertical;
   overflow: hidden!important;  height:164px;
   text-overflow: ellipsis;}
-.partner-form .md-form i{ color:#666; font-size:18px;}
+.partner-form .md-form i{ color:#666; font-size:18px; text-align: center;}
   .single-member {
     border: 1px solid #eee;
     background: #fff; 
@@ -5622,6 +5622,63 @@ ul.red-list li.pricing-feature:nth-child(odd) {background: #FFF}
 	*/
 	#no-more-tables td:before { content: attr(data-title); }
 	
+}
 	
-	
-	
+
+
+.demo-enquiry-h1{
+       background: #d6202e;
+    padding: 10px;
+    color: #fff;
+    margin: -10px;
+    text-align: center;
+    font-size: 1.2em;
+}
+	.enq-btn{  position: fixed;
+    right: 0px;
+    z-index: 999;
+    top: 64%;}
+.floatR{ float:right;}.request-demo{ position:fixed; right:0;top:30%; z-index:999999;}
+.recentItem{ position:fixed; right:-300px;  background:#fff; top:30%; z-index:999999; width:300px; padding:10px; overflow:auto; height:auto; border-top-left-radius: 1em;border-bottom-left-radius:1em;}
+.recentItemTxt{ padding:25px 0 0 0px; font-size:1.5em; font-weight:300;}
+.ctntItem{ background:#FFF; padding:10px; border-bottom:1px solid #aaa;}
+.ctntItem img{ margin-right:8px; display:inline; float:left;}
+.ctntItem h3{ font-size:0.95em; font-weight: normal; padding:0 0 7px 0;}
+.ctntItem h3 a{ text-decoration:none;}
+.propDfn{ display:inline; font-size:0.785em; line-height:19px;}
+.cntLoc{ vertical-align:middle; margin:2px 5px 0 0;}
+.recentItem a > i{     color: #FFF;
+    font-size: 12px;
+    padding: 3px 5px;
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    right: 4px;
+    /* z-index: 99999; */
+    display: block;}
+.recentItem a:hover > i{ color:#29abe3;}
+.ctntItem:hover{ box-shadow:0 0 10px #999;}
+.sform-select i {
+      color: #666!important;
+    float: righ!importantt;
+    position: absolute!important;
+    font-size: 18px!important;
+    text-align:left!important;
+    /* height: 18px; */
+    right: 2px!important;
+    width: 18px!important;
+    background: #ffffff!important;
+    top: 1px!important;
+}
+
+.sform-select select.browser-default {
+       display: block;
+    width: 94%;
+    border: 1px solid #ccc;
+    margin-left: 19px;
+}
+
+.sp-error{
+    color: red;
+    margin-left: 48px;
+}
