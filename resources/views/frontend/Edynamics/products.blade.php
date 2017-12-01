@@ -66,7 +66,7 @@
           <img src="/frontend/Edynamics/img/for-builders.jpg" alt="Avatar" class="left-img-block">
           <div class="left-img-overlay">
             <div class="img-text">
-              <button class="btn btn-white  btn-default bold font-bold mr-5 waves-effect waves-light"> Read More </button>
+                <a class="btn btn-white  btn-default bold font-bold mr-5 waves-effect waves-light" href="[[ URL::to('/') ]]/Bms_builder_and_Developer" > Read More </a>
             </div>
           </div>
         </div>
@@ -77,7 +77,7 @@
           <img src="/frontend/Edynamics/img/consultants.jpg" alt="Avatar" class="img-block">
           <div class="img-overlay">
             <div class="img-text">
-              <button class="btn btn-white  btn-default bold font-bold mr-5 waves-effect waves-light"> Read More </button>
+              <a class="btn btn-white  btn-default bold font-bold mr-5 waves-effect waves-light" href="[[ URL::to('/') ]]/BMS_for_Property_Consultants"> Read More </a>
             </div>
           </div>
         </div>

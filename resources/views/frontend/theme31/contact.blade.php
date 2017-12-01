@@ -15,15 +15,13 @@
             </h2>
             <div class="row">
                 <div class="col-md-6 wow fadeInLeft" data-wow-offset="200" data-wow-delay="200ms">
-
                     <form name="contactForm" ng-submit="contactForm.$valid && doContactAction(contact)"  novalidate >
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="outer required">
                                     <div class="form-group af-inner has-icon">
                                         <label class="sr-only" for="name">Name</label>
-                                        <input
-                                            type="text" name="name" id="name" ng-model="name" placeholder="Name" value="" size="30"
+                                        <input type="text" name="name" id="name" ng-model="name" placeholder="Name" value="" size="30"
                                             data-toggle="tooltip" title="Name is required"
                                             class="form-control placeholder" required/>
                                         <span class="form-control-icon"><i class="fa fa-user" style="margin-top: 10%;"></i></span>
@@ -62,7 +60,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-group af-inner has-icon">
                             <label class="sr-only" for="input-message">Message</label>
                             <textarea
@@ -71,26 +68,14 @@
                                 class="form-control placeholder"></textarea>
                             <span class="form-control-icon"><i class="fa fa-bars" style="margin-top: 10%;"></i></span>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-
-                                <div class="g-recaptcha" data-sitekey="6LezFyAUAAAAAM1fRUDpyRXLSjHPiYFQkIQWYK2d"></div>
-                                <div class="help-block"  >
-                                    <div class="err" ng-if="recaptcha" style="float: left;">{{recaptcha}}</div>
-                                </div>
-
-                            </div>
-                        </div>
                         <div class="outer required">
                             <div class="form-group af-inner">
                                 <input type="submit" ng-click="sbtBtn = true"  name="submit" class="form-button form-button-submit btn btn-block btn-theme ripple-effect btn-theme-dark" id="submit_btn" value="Send message" />
                             </div>
                         </div>
-
                     </form>
                 </div>
                 <div class="col-md-6 wow fadeInRight" data-wow-offset="200" data-wow-delay="200ms" style="color: #fff;" ng-init="getContactDetails()">
-
                     <ul class="media-list contact-list" ng-repeat="contact in contacts track by $index">
                         <li class="media">
                             <div class="media-left"><i class="fa fa-home"></i></div>

@@ -5515,10 +5515,8 @@ button.close {
 }
 .modal-backdrop {
   position: absolute;
-  top: 0;
   right: 0;
   left: 0;
-  background-color: #000;
 }
 .modal-backdrop.fade {
   filter: alpha(opacity=0);

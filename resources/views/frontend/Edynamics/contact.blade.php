@@ -91,6 +91,13 @@
                                 <span ng-message="required" class="sp-error">This field is required</span>
                             </div>
                         </div>
+                        <div class="form-item">
+                            <div class="g-recaptcha" data-sitekey="6LdhNTsUAAAAACHfPY-OoLOjD3dp_0NRUqrUNmEy"></div>
+                            <div class="help-block"  >
+                                <div class="err"  style="float: left;">{{recaptcha}}</div>
+                            </div>
+                        </div>
+                        <!--ng-if="recaptcha"-->
                         <div class="text-xs-center text-center">
                             <button class="btn btn-default mb-2 waves-effect waves-light" ng-disabled="contactBtndisabled" ng-click="sbtBtn = true;">Send <i class="fa fa-send ml-1"></i></button>
                         </div>

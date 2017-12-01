@@ -1,4 +1,4 @@
-
+<section class="red-section">
 <footer class="light-blue pt-5  footer-skw  center-on-small-only" > 
   <!--Footer Links-->
   <div class="container">
@@ -62,7 +62,7 @@
  </footer>
   
   <div class="footer-copyright text-right">
-    <div class="container-fluid white-text">
+      <div class="container-fluid" >
       <a href="http://edynamics.co.in/" target="new" class="logo"> 
                    
                        <img  class="edynamic-logo" src="/frontend/Edynamics/img/footer-white-logo-eD.png" width="26">            All Rights Reserved © 2017				
@@ -70,7 +70,7 @@
                                 <span> edynamics</span>&nbsp;/&nbsp;  </a>
                                 
                                 
-                                <a style="color: #fff;" href="/index.php/site/privacy">Privacy Policy</a>
+                                <a style="color: #fff;" href="[[ URL::to('/') ]]/privacy_policy">Privacy Policy</a>
                        </div>
   </div>
   
@@ -86,7 +86,7 @@
 <script src="/frontend/Edynamics/js/jquery.fitvids.js"  type="text/javascript"></script> 
 <script src="/frontend/Edynamics/js/mdb.js"  type="text/javascript"></script> 
 <script src="/frontend/Edynamics/js/script.js" type="text/javascript"></script> 
-
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <script type="text/javascript">
    new WOW().init();
 </script> 
