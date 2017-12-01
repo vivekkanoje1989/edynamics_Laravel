@@ -358,7 +358,7 @@
                                                     </td>
                                                     <td class="fa-div">
                                                         <div class="fa-hover" tooltip-html-unsafe="Edit" style="display: block;" >
-                                                            <a href="#/clients/addservice/{{clientData.id}}/{{list.service_id}}"  ><i class="fa fa-pencil"></i></a>
+                                                            <a href="[[ config('global.backendUrl') ]]#/clients/addservice/{{clientData.id}}/{{list.service_id}}"  ><i class="fa fa-pencil"></i></a>
                                                         </div>
                                                     </td>
                                                 </tr>

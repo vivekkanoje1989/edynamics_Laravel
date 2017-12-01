@@ -22,7 +22,7 @@ class S3 {
         Config::set('filesystems.disks.gcs.bucket', $data[0]->aws_bucket_id);
         //  Config::set('filesystems.disks.gcs.bucket', 'bkt_bms_laravel');
         // Config::set('filesystems.disks.gcs.bucket', 'edynamicsdevelopment');
-        // Config::set('filesystems.disks.gcs.project_id','756686641793');
+         Config::set('filesystems.disks.gcs.project_id','756686641793');
         Config::set('filesystems.disks.gcs.driver', 'gcs');
         
     }
