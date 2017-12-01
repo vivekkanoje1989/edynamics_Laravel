@@ -1,7 +1,5 @@
 <?php
-echo $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATOR;
-exit;
-
+$uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATOR;
 ?>
 <html>
 <head>
@@ -28,15 +26,15 @@ table{ border-collapse:collapse;} table td{ border-collapse:collapse;}
             <tr>
               <td width="800"><table width="800" align="center" cellspacing="0" cellpadding="0" border="0" >
                   <tbody>
-                    <!-- title -->
+                     title 
                     
                     <tr>
-                      <td  style="font-family: Helvetica,arial,sans-serif;font-size: 19px;color:rgb(0, 0, 0);text-align: center;line-height: 15px;font-weight: 800;"><h4 style="margin: 0;">edynamics</h4></td>
+                      <td  style="font-family: Helvetica,arial,sans-serif;font-size: 19px;color:rgb(0, 0, 0);text-align: center;line-height: 15px;font-weight: 800;"><h4 style="margin: 0;">Edynamics Business Services LLP</h4></td>
                     </tr>
                     <tr>
                       <td width="100%" height="10">&nbsp;</td>
                     </tr>
-                    <!-- end of title -->
+                     end of title 
                   </tbody>
                 </table></td>
             </tr>
@@ -53,7 +51,7 @@ table{ border-collapse:collapse;} table td{ border-collapse:collapse;}
               <td width="800"><table width="800"  cellspacing="0" cellpadding="0" border="0" >
                   <tbody>
                     <tr>
-                      <td align="left" width="150"><img src="<?php echo $uploads_dir;?>logo.png" style="height: 65px;width: auto;"/></td>
+                      <td align="left" width="150"><img src="<?php echo $uploads_dir;?>logo.jpg" style="height: 65px;width: auto;"/></td>
                       <td align="center" width="500"><table width="500" cellpadding="0" cellspacing="0" border="0">
                           <tbody>
                            
@@ -93,7 +91,10 @@ table{ border-collapse:collapse;} table td{ border-collapse:collapse;}
                             </tr>
                           </tbody>
                         </table></td>
-                      <td align="right" width="150"><img src="<?php echo $uploads_dir;?>lms.png"  style="width: 120px;height: auto;"/><br><img src="<?php echo $uploads_dir;?>Nextedge.png"  style="width: 120px;height: auto;"/></td>
+                      <td align="right" width="150">
+                          <img src="<?php echo $uploads_dir;?>bms.png"  style="width: 120px;height: auto;"/><br>
+                          <!--<img src="<?php echo $uploads_dir;?>Nextedge.png"  style="width: 120px;height: auto;"/>-->
+                      </td>
                     </tr>
                     
                    
@@ -113,7 +114,7 @@ table{ border-collapse:collapse;} table td{ border-collapse:collapse;}
               <td width="800">
               <table width="800" align="center" cellspacing="0" cellpadding="0" border="0" >
                   <tbody>
-                    <!-- title -->
+                     title 
                      <tr>
                       <td style="width: 325px;text-align: right;color: #000;padding-top: 5px;" valign="top">
                  ____________________________________________________________
@@ -127,7 +128,7 @@ table{ border-collapse:collapse;} table td{ border-collapse:collapse;}
               <td width="800">
               <table width="800" align="center" cellspacing="0" cellpadding="0" border="0">
                   <tbody>
-                    <!-- title -->
+                     title 
                   
                     <tr>
                       <td style="width: 200px;"><b>To&nbsp;,&nbsp;</b>
@@ -167,7 +168,7 @@ table{ border-collapse:collapse;} table td{ border-collapse:collapse;}
                                               <td style="width: 200px;"><b>PAN No.&nbsp;:&nbsp;<?php echo ucwords($owndetails->pan_number);?></b>
                                           </td>  </tr>
                     
-                    <!-- end of title -->
+                     end of title 
                   </tbody>
                 </table></td>
             </tr>
@@ -275,7 +276,7 @@ table{ border-collapse:collapse;} table td{ border-collapse:collapse;}
                                     <td width="800">
                                         <table width="800" style="font-size:14px;" align="center" cellspacing="0" cellpadding="3" border="0" >
                                             <tbody>
-                                                <!-- start 1 table -->
+                                                 start 1 table 
 
                                                 <tr style="background: #ececec; height: 35px;"  width="800">
                                                     
@@ -497,11 +498,10 @@ table{ border-collapse:collapse;} table td{ border-collapse:collapse;}
                                                     </td>
 
                                                     <td style="border: 1px solid #000; border-collapse: collapse;text-align:right;font-size: 12px;">
-                                                        &nbsp;&nbsp; <b><?php echo round($grand_total);?></b>
+                                                        &nbsp;&nbsp; <b><?php  echo round($grand_total);?></b>
                                                     </td>
                                                 </tr>
                                                
-                                                <!-- end 2 table -->
                                             </tbody>
                                         </table>
                                     </td>
@@ -728,11 +728,11 @@ table{ border-collapse:collapse;} table td{ border-collapse:collapse;}
                                                 <tr>
                                                     <td  style="font-size:8px;width: 800px;">
                                                         <ul>
-                                                            <li> Training's & Technical backup would be provided online, telephonic or personally as per needed by the sole direction of Business Apps.</li>
+                                                            <li> Training's & Technical backup would be provided online, telephonic or personally as per needed by the sole direction of Edynamics Business Services LLP.</li>
                                                             <li> Data security will be applicable as per cloud services policy.</li>
                                                             <li> All above amounts are inclusive of Taxes.</li>
-                                                            <li> Purchase Order and all Payments should be made in the name of "Business Apps".</li>
-                                                            <li> Terms & conditions * of the services are applicable as mentioned on www.businessapps.co.in.</li>
+                                                            <li> Purchase Order and all Payments should be made in the name of "Edynamics Business Services LLP".</li>
+                                                            <li> Terms & conditions * of the services are applicable as mentioned on www.edynamics.co.in.</li>
                                                         </ul>	
                                                     </td>
                                                 </tr>
@@ -752,7 +752,7 @@ table{ border-collapse:collapse;} table td{ border-collapse:collapse;}
                                                 <tr>
                                                      <td style="width:299px;" style="border-right:1px solid #000">
                                                         <ul>
-                                                            Kindly pay by cheque / DD in favor of <b> Business Apps. </b> payable at<br>
+                                                            Kindly pay by cheque / DD in favor of <b> Edynamics Business Services LLP. </b> payable at<br>
                                                             <b>PUNE</b> immediately on receipt of this invoice<br>
                                                             <b>Bank Name</b>&nbsp;:&nbsp;<?php echo ucwords($owndetails->bank_name);?>,&nbsp;&nbsp;<b>Branch Name</b>&nbsp;:&nbsp;<?php echo ucwords($owndetails->branch_name);?> <br>
                                                             <b>Account Type</b>&nbsp;:&nbsp;<?php echo ucwords($owndetails->accountlist->account_type);?>,&nbsp;&nbsp;<b>Account No.</b>&nbsp;:&nbsp;<?php echo ucwords($owndetails->account_no);?> <br>
@@ -767,13 +767,11 @@ table{ border-collapse:collapse;} table td{ border-collapse:collapse;}
                                     <td width="200">
                                         <table width="100%" align="right" cellspacing="0" cellpadding="0" border="0" >
                                             <tbody>
-                                                <tr><td style="width: 200px;" align="center">For Business Apps</td></tr>
+                                                <tr><td style="width: 200px;" align="center">For Edynamics Business Services LLP</td></tr>
                                                 <tr>
                                                     
                                                     <td style="width:200px;" align="center">
-                                                        <!--<span style="width: 130px;text-align: center;">For Business Apps</span>-->
                                                         <img src="<?php echo $uploads_dir;?>stamp.png" style="width:100px;height:auto;margin-bottom: 12px;">
-                                                         <!--<span style="width: 130px;padding-top: 5px;margin-top: 5px;text-align: center;">Authorised Signatory</span>-->
                                                     </td>												
                                                 </tr>	
                                                  <tr><td style="width: 200px;" align="center">Authorised Signatory</td></tr>

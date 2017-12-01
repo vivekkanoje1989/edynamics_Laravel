@@ -580,9 +580,8 @@ class ClientsController extends Controller {
                 $client_info = \App\Models\ClientInfo::where('id', $client_id)->first();
                 if (!empty($available_services)) {
                     $array = array("start_date" => $from_date, "end_date" => $to_date);
-                    $array = json_encode($array);
                     $client_url = $client_info->website;
-                    $url = $client_url . "/api/promotionalsms/getSmsQty";
+                    $url = $client_url . "/office.php/SmsLog/getquantitywithdate";
                     $ch = curl_init($url);
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                     curl_setopt($ch, CURLOPT_POSTFIELDS, $array);
@@ -751,7 +750,7 @@ class ClientsController extends Controller {
 
             $marketing_name = $clients->marketing_name;
             
-            echo 'her';
+          
             $mPDF1 = new \mPDF('', '', 0, '', 8, 8, 8, 8, 8, 8, 'A4');
             
             $mPDF1->SetDisplayMode('fullpage');
@@ -813,9 +812,9 @@ class ClientsController extends Controller {
             );
 
 
-            $array = json_encode($array);
+            //$array = json_encode($array);
             $client_url = $clients->website;
-            $url = $client_url . "/api/bills/sendInvoiceToClient";
+            $url = $client_url . "/office.php/Bills/setBill'";
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $array);
