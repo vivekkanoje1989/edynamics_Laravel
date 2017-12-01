@@ -4,62 +4,84 @@
  * and open the template in the editor.
  */
 'use strict';
-var app = angular.module('app', ['ngRoute','ngFileUpload']);
-angular.module('app').config(['$routeProvider','$locationProvider', function($routeProvider,$locationProvider) {
+var app = angular.module('app', ['ngRoute', 'ngFileUpload']);
+angular.module('app').config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
-    $routeProvider.
-    when('/', {
-        templateUrl: 'website/index',
-        controller: 'AppCtrl'
-    }).when('/about', {
-        templateUrl: 'website/about',
-        controller: 'AppCtrl'
-    })
-    .when('/testimonial', {
-        templateUrl: 'website/testimonial',
-        controller: 'AppCtrl'
-    })
-    .when('/testimonials', {
-        templateUrl: 'website/testimonials',
-        controller: 'AppCtrl'
-    })
-    .when('/testimonial', {
-        templateUrl: 'website/testimonial',
-        controller: 'AppCtrl'
-    })
-    .when('/contact', {
-        templateUrl: 'website/contact',
-        controller: 'AppCtrl'
-    })
-    .when('/career', {
-        templateUrl: 'website/career',
-        controller: 'AppCtrl'
-    })
-    .when('/blog', {
-        templateUrl: 'website/blog',
-        controller: 'AppCtrl'
-    })
-    .when('/news', {
-        templateUrl: 'website/news',
-        controller: 'AppCtrl'
-    })
-    .when('/press-release', {
-        templateUrl: 'website/press-release',
-        controller: 'AppCtrl'
-    })
-    .when('/events', {
-        templateUrl: 'website/events',
-        controller: 'AppCtrl'
-    })
-    .when('/projects', {
-        templateUrl: 'website/projects',
-        controller: 'AppCtrl'
-    })
-    .otherwise({
-        redirectTo: '/'
-    });
-    $locationProvider.html5Mode({ enabled: true, requireBase: true });
-}]);
+        $routeProvider.
+                when('/', {
+                    templateUrl: 'website/index',
+                    controller: 'AppCtrl'
+                }).when('/about', {
+            templateUrl: 'website/about',
+            controller: 'AppCtrl'
+        })
+                .when('/testimonial', {
+                    templateUrl: 'website/testimonial',
+                    controller: 'AppCtrl'
+                })
+                .when('/testimonials', {
+                    templateUrl: 'website/testimonials',
+                    controller: 'AppCtrl'
+                })
+                .when('/testimonial', {
+                    templateUrl: 'website/testimonial',
+                    controller: 'AppCtrl'
+                })
+                .when('/contact', {
+                    templateUrl: 'website/contact',
+                    controller: 'AppCtrl'
+                })
+                .when('/career', {
+                    templateUrl: 'website/career',
+                    controller: 'AppCtrl'
+                })
+                .when('/blog', {
+                    templateUrl: 'website/blog',
+                    controller: 'AppCtrl'
+                })
+                .when('/news', {
+                    templateUrl: 'website/news',
+                    controller: 'AppCtrl'
+                })
+                 .when('/news-details/:newsId', {
+                    templateUrl: function (urlattr) {
+                        return 'website/news-details/' + urlattr.newsId;
+                    },
+                    controller: 'AppCtrl'
+                })
+                .when('/press-release', {
+                    templateUrl: 'website/press-release',
+                    controller: 'AppCtrl'
+                })
+                .when('/events', {
+                    templateUrl: 'website/events',
+                    controller: 'AppCtrl'
+                })
+                .when('/projects', {
+                    templateUrl: 'website/projects',
+                    controller: 'AppCtrl'
+                })
+                .when('/products', {
+                    templateUrl: 'website/products',
+                    controller: 'AppCtrl'
+                })
+                .when('/bmsnetwork', {
+                    templateUrl: 'website/bmsnetwork',
+                    controller: 'AppCtrl'
+                })
+                .when('/clients', {
+                    templateUrl: 'website/clients',
+                    controller: 'AppCtrl'
+                })
+                .when('/partnership', {
+                    templateUrl: 'website/partnership',
+                    controller: 'AppCtrl'
+                })
+                .otherwise({
+                    redirectTo: '/'
+                });
+        $locationProvider.html5Mode({enabled: true, requireBase: true});
+    }]);
 app.controller('AppCtrl', ['$scope', 'Upload', '$timeout', '$http', '$location', '$rootScope', function ($scope, Upload, $timeout, $http, $location, $rootScope) {
 
         $scope.submitted = false;
@@ -70,6 +92,8 @@ app.controller('AppCtrl', ['$scope', 'Upload', '$timeout', '$http', '$location',
                 $scope.jobPostRow = response.data.result;
             });
         };
+        
+        
         $scope.random = function () {
             return 0.5 - Math.random();
         }
@@ -263,7 +287,7 @@ app.controller('AppCtrl', ['$scope', 'Upload', '$timeout', '$http', '$location',
 
             });
         }
-        
+
         $scope.getEvents = function ()
         {
             $http.get(baseUrl + 'getEvents').then(function (response) {
@@ -305,16 +329,36 @@ app.controller('AppCtrl', ['$scope', 'Upload', '$timeout', '$http', '$location',
 
 
         $scope.doContactAction = function (contact) {
+            $scope.contactBtndisabled = true;
+            $http.post(baseUrl + 'doContactAction', {contact: contact}).then(function (response) {
+                if (response.status) {
+                    $timeout(function () {
+                        $scope.contact = '';
+                        $scope.sbtBtn = false;
+                        $scope.successMssg = true;
+                    }, 1000);
+                    $timeout(function () {
+                        $scope.contactBtndisabled = false;
+                        $scope.successMssg = false;
+                    }, 2500);
+                }
 
-            var v = grecaptcha.getResponse();
-            if (v.length != '0') {
-                $scope.recaptcha = '';
-                $scope.sbtBtn = false;
-                $scope.submitted = true;
-            } else {
-                $scope.recaptcha = "Please revalidate captcha";
-            }
+            });
         }
+
+        $scope.requestDemos = function (request) {
+          $scope.requestBtn = true;
+            $timeout(function () {
+                $scope.request = '';
+                $scope.sbtBtn1 = false;
+                $scope.requestMssg = true;
+            }, 1000);
+            $timeout(function () {
+                $scope.requestBtn = false;
+                $scope.requestMssg = false;
+            }, 2500);
+        }
+
         $scope.doApplicantAction = function (career, resumeFileName, photoUrl)
         {
             var v = grecaptcha.getResponse();

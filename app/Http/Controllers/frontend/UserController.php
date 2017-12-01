@@ -27,28 +27,46 @@ use App\Modules\Events\Models\WebEvents;
 use Config;
 use DB;
 use App\Modules\ContactUs\Models\WebContactus;
-
+use App\Models\Contactus;
 class UserController extends Controller {
 
     public $themeName;
 
     public function __construct() {
-        try{
+        try {
             $result = WebThemes::where('status', '1')->select(['id', 'theme_name'])->first();
             Config::set('global.themeName', $result['theme_name']);
             $this->themeName = Config::get('global.themeName');
             $getWebsiteUrl = config('global.getWebsiteUrl');
-        } catch (\Exception $ex){
+        } catch (\Exception $ex) {
             return View::make('layouts.backend.error500')->withSuccess('Page not found');
         }
     }
 
-    public function load(){
+    public function load() {
         return view('website');
     }
+
     public function getMenus() {
         $getProjects = WebPage::with(['menuList'])->where('status', '=', '1')->where('page_type', '=', '0')->orderBy('parent_page_position')->get();
         return json_encode(['result' => $getProjects, 'status' => true]);
+    }
+
+    public function onPageReload($param) {
+        return \Redirect::to("http://" . $_SERVER["HTTP_HOST"] . "/#/" . $param);
+    }
+
+    public function doContactAction() {
+        $postdata = file_get_contents('php://input');
+        $request = json_decode($postdata, true);
+       
+        $result = Contactus::create($request['contact']);
+        if (!empty($result)) {
+            return json_encode(['result' => $result, 'status' => true]);
+        } else {
+            return json_encode(['records' => "Failed to add record", 'status' => false]);
+        }
+        
     }
 
     public function index() {
@@ -73,9 +91,22 @@ class UserController extends Controller {
         return view('frontend.' . $this->themeName . '.index')->with(["testimonials" => $testimonials, 'employee' => $employees, 'background' => $images, 'current' => $currentResult]);
     }
 
-    public function geeta() {echo "hhh";
-        return view('frontend.Theme32.geeta');
+    public function products() {
+        return view('frontend.' . $this->themeName . '.products');
     }
+
+    public function bmsnetwork() {
+        return view('frontend.' . $this->themeName . '.bms-network');
+    }
+
+    public function clients() {
+        return view('frontend.' . $this->themeName . '.clients');
+    }
+
+    public function partnership() {
+        return view('frontend.' . $this->themeName . '.partnership');
+    }
+
     public function career() {
         $result = WebCareers::all();
         return view('frontend.' . $this->themeName . '.career')->with("carrier", $result);
@@ -258,8 +289,8 @@ class UserController extends Controller {
 
     public function projectdetails($projectId) {
 
-        $bannerImg = DB::table('project_web_pages')->select('project_banner_images')->where('project_id','=',$projectId)->first();
-        return view('frontend.' . $this->themeName . '.projectdetails')->with(["projectId"=>$projectId,"bannerImg"=>$bannerImg->project_banner_images]);
+        $bannerImg = DB::table('project_web_pages')->select('project_banner_images')->where('project_id', '=', $projectId)->first();
+        return view('frontend.' . $this->themeName . '.projectdetails')->with(["projectId" => $projectId, "bannerImg" => $bannerImg->project_banner_images]);
     }
 
     public function getProjectDetails() {
@@ -320,7 +351,8 @@ class UserController extends Controller {
     }
 
     public function news() {
-        return view('frontend.' . $this->themeName . '.news');
+        $result = WebNews::where('deleted_status', '=', 0)->get();
+        return view('frontend.' . $this->themeName . '.news')->with('news',$result);
     }
 
     public function getNews() {
@@ -392,10 +424,8 @@ class UserController extends Controller {
         }
         return json_encode(['current' => $currentResult, 'status' => true]);
     }
-    
-    
-    public function enquiry()
-    {
+
+    public function enquiry() {
         return view('frontend.' . $this->themeName . '.enquiry');
     }
 
