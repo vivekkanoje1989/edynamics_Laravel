@@ -82,7 +82,7 @@ ul.post-list li{ display:block; font-size:15px; padding:10px; border:1px solid #
   line-height: 1.4;
   -webkit-line-clamp: 7; text-align:justify;
   -webkit-box-orient: vertical;
-  overflow: hidden!important;  height:164px;
+  overflow: hidden!important;  
   text-overflow: ellipsis;}
 .partner-form .md-form i{ color:#666; font-size:18px; text-align:center; }
   .single-member {
@@ -5710,3 +5710,8 @@ ul.red-list li.pricing-feature:nth-child(odd) {background: #FFF}
 }
 
 .sform-select select::after{ font-family:fontawesome ; content:"\f103"; font-size:15px; right:10px;}
+
+.sp-error{
+    color: red;
+    margin-left: 48px;
+}

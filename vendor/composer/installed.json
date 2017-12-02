@@ -5408,8 +5408,7 @@
         "name": "firebase/php-jwt",
         "version": "v5.0.0",
         "version_normalized": "5.0.0.0",
-<<<<<<< HEAD
-=======
+
         "source": {
             "type": "git",
             "url": "https://github.com/firebase/php-jwt.git",
@@ -5458,7 +5457,7 @@
         "name": "google/auth",
         "version": "v1.0.1",
         "version_normalized": "1.0.1.0",
->>>>>>> a005eab8a63776e755428c8084208604975af3d3
+
         "source": {
             "type": "git",
             "url": "https://github.com/firebase/php-jwt.git",
@@ -5768,7 +5767,7 @@
             }
         ],
         "description": "A Google Cloud Storage filesystem for Laravel"
-<<<<<<< HEAD
+
     },
     {
         "name": "setasign/fpdi",
@@ -5911,7 +5910,6 @@
             "mpdf",
             "pdf"
         ]
-=======
->>>>>>> a005eab8a63776e755428c8084208604975af3d3
+
     }
 ]

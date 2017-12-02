@@ -45,6 +45,7 @@ angular.module('app').config(['$routeProvider', '$locationProvider', function ($
                 })
                 .when('/news-details/:newsId', {
                     templateUrl: function (urlattr) {
+           
                         return 'website/news-details/' + urlattr.newsId;
                     },
                     controller: 'AppCtrl'
@@ -99,6 +100,7 @@ app.controller('AppCtrl', ['$scope', 'Upload', '$timeout', '$http', '$location',
         $scope.submitted = false;
         $scope.empl = true;
         var baseUrl = 'website/';
+     
         $scope.getPostsDropdown = function () {
             $http.get(baseUrl + 'jobPost').then(function (response) {
                 $scope.jobPostRow = response.data.result;
@@ -383,39 +385,45 @@ app.controller('AppCtrl', ['$scope', 'Upload', '$timeout', '$http', '$location',
             }
         }
 
-          
-        $scope.openModal = function(){
-            $('#login-box').modal('show');
-        }
 
-        $scope.doApplicantAction = function (career, resumeFileName, photoUrl)
+        $scope.openModal = function (career_id) {
+            $('#login-box').modal('show');
+            $scope.career = {};
+            $scope.career.career_id = career_id;
+        }
+        
+       
+
+        $scope.doApplicantAction = function (career, resumeFileName)
         {
-            var v = grecaptcha.getResponse();
-            if (v.length != '0') {
-                var url = baseUrl + 'register_applicant';
-                var data = {'career': career, 'resumeFileName': resumeFileName, 'photoUrl': photoUrl};
-                resumeFileName.upload = Upload.upload({
-                    url: url,
-                    headers: {enctype: 'multipart/form-data'},
-                    data: data
+//            var v = grecaptcha.getResponse();
+//            if (v.length != '0') {
+          
+             console.log(resumeFileName);
+            var url = baseUrl + 'register_applicant';
+            var data = {'career': career, 'resumeFileName': resumeFileName};
+            resumeFileName.upload = Upload.upload({
+                url: url,
+                headers: {enctype: 'multipart/form-data'},
+                data: data
+            });
+            resumeFileName.upload.then(function (response) {
+                $timeout(function () {
+                    $scope.career = {};
+                    $scope.careerForm.$setPristine();
+                    $scope.submitted = true;
+//                    grecaptcha.reset();
+                    $scope.sbtBtn = false;
+                    $scope.recaptcha = '';
                 });
-                resumeFileName.upload.then(function (response) {
-                    $timeout(function () {
-                        $scope.career = {};
-                        $scope.careerForm.$setPristine();
-                        $scope.submitted = true;
-                        grecaptcha.reset();
-                        $scope.sbtBtn = false;
-                        $scope.recaptcha = '';
-                    });
-                }, function (response) {
-                    if (response.status !== 200) {
-                        $scope.err_msg = "Please Select image for upload";
-                    }
-                });
-            } else {
-                $scope.recaptcha = "Please revalidate captcha";
-            }
+            }, function (response) {
+                if (response.status !== 200) {
+                    $scope.err_msg = "Please Select image for upload";
+                }
+            });
+//            } else {
+//                $scope.recaptcha = "Please revalidate captcha";
+//            }
         }
         $scope.checkImageExtension = function (employeePhoto) {
 
@@ -452,5 +460,36 @@ app.directive('validFile', function () {
 app.filter('htmlToPlaintext', function () {
     return function (text) {
         return  text ? String(text).replace(/<[^>]+>/gm, '') : '';
+    };
+});
+
+app.directive('validFile', function () {
+    return {
+        require: 'ngModel',
+        link: function (scope, el, attrs, ngModel) {
+            el.bind('change', function () {
+                scope.$apply(function () {
+                    ngModel.$setViewValue(el.val());
+                    ngModel.$render();
+                });
+            });
+        }
+    }
+});
+
+
+
+app.directive('fileUpload', function () {
+    return {
+        scope: true,        //create a new scope
+        link: function (scope, el, attrs) {
+            el.bind('change', function (event) {
+                var files = event.target.files;
+                for (var i = 0;i<files.length;i++) {
+                    console.log(files[i])
+                    scope.$emit("fileSelected", { file: files[i] });
+                }                                       
+            });
+        }
     };
 });

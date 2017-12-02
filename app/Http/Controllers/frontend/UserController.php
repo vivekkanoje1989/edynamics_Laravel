@@ -28,6 +28,7 @@ use Config;
 use DB;
 use App\Modules\ContactUs\Models\WebContactus;
 use App\Models\Contactus;
+
 class UserController extends Controller {
 
     public $themeName;
@@ -59,14 +60,13 @@ class UserController extends Controller {
     public function doContactAction() {
         $postdata = file_get_contents('php://input');
         $request = json_decode($postdata, true);
-       
+
         $result = Contactus::create($request['contact']);
         if (!empty($result)) {
             return json_encode(['result' => $result, 'status' => true]);
         } else {
             return json_encode(['records' => "Failed to add record", 'status' => false]);
         }
-        
     }
 
     public function index() {
@@ -171,6 +171,7 @@ class UserController extends Controller {
 
     public function register_applicant() {
         $input = Input::all();
+        
         if (!empty($input['resumeFileName'])) {
             $originalName = $input['resumeFileName']->getClientOriginalName();
             if ($originalName !== 'fileNotSelected') {
@@ -184,29 +185,15 @@ class UserController extends Controller {
                 $resume_file_name = '';
             }
         }
-        if (!empty($input['photoUrl'])) {
-
-            $originalName = $input['photoUrl']->getClientOriginalName();
-            if ($originalName !== 'fileNotSelected') {
-
-                $s3FolderName = "career/applicants";
-                $imageName = 'applicant_' . rand(pow(10, config('global.randomNoDigits') - 1), pow(10, config('global.randomNoDigits')) - 1) . '.' . $input['photoUrl']->getClientOriginalExtension();
-                S3::s3FileUpload($input['photoUrl']->getPathName(), $imageName, $s3FolderName);
-                $photo_url = $imageName;
-                unset($input['photoUrl']);
-            }
-        } else {
-            unset($input['photoUrl']);
-            $photo_url = '';
-        }
         $post = ['first_name' => $input['career']['first_name'],
             'last_name' => $input['career']['last_name'],
             'mobile_number' => $input['career']['mobile_number'],
             'email_id' => $input['career']['email_id'],
             'career_id' => $input['career']['career_id'],
-            'resume_file_name' => $resume_file_name,
-            'photo_url' => $photo_url,
+            'resume_file_name' => $resume_file_name
         ];
+        print_r($post);
+        exit;
         $result = WebCareersApplications::create($post);
         if (!empty($result)) {
             return json_encode(['result' => $result, 'status' => true]);
@@ -334,13 +321,15 @@ class UserController extends Controller {
     public function blog() {
         return view('frontend.' . $this->themeName . '.blog');
     }
-    
+
     public function privacy_policy() {
         return view('frontend.' . $this->themeName . '.privacy_policy');
     }
+
     public function Bms_builder_and_Developer() {
         return view('frontend.' . $this->themeName . '.Bms-builder-and-Developer');
     }
+
     public function BMS_for_Property_Consultants() {
         return view('frontend.' . $this->themeName . '.BMS-for-Property-Consultants');
     }
@@ -362,16 +351,18 @@ class UserController extends Controller {
 
     public function news() {
         $result = WebNews::where('deleted_status', '=', 0)->get();
-        return view('frontend.' . $this->themeName . '.news')->with('news',$result);
+        return view('frontend.' . $this->themeName . '.news')->with('news', $result);
     }
 
     public function getNews() {
-        $result = WebNews::all();
+        $result = WebNews::where('deleted_status', '=', 0)->get();
         return json_encode(['result' => $result, 'status' => true]);
     }
 
     public function newsdetails($news_id) {
-        return view('frontend.' . $this->themeName . '.news-details')->with('news_id', $news_id);
+        $result = WebNews::where('id', '=', $news_id)->where('deleted_status', '=', '0')->first();
+        $news = WebNews::where('deleted_status', '=', 0)->get();
+        return view('frontend.' . $this->themeName . '.news-details')->with(['newsdetail' => $result, 'news' => $news]);
     }
 
     public function getNewsDetails() {

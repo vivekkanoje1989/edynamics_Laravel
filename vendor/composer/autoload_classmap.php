@@ -50,14 +50,11 @@ return array(
     'App\\Models\\CcPresalesSubcategory' => $baseDir . '/app/Models/CcPresalesSubcategory.php',
     'App\\Models\\CcPresalesSubstatus' => $baseDir . '/app/Models/CcPresalesSubstatus.php',
     'App\\Models\\ClientContactPerson' => $baseDir . '/app/Models/ClientContactPerson.php',
-<<<<<<< HEAD
-    'App\\Models\\ClientGroup' => $baseDir . '/app/Models/ClientGroup_old.php',
-    'App\\Models\\ClientInfo' => $baseDir . '/app/Models/ClientInfo_old.php',
-=======
+
     'App\\Models\\ClientGroup' => $baseDir . '/app/Models/ClientGroup.php',
     'App\\Models\\ClientGroupsLog' => $baseDir . '/app/Models/ClientGroupsLog.php',
     'App\\Models\\ClientInfo' => $baseDir . '/app/Models/ClientInfo.php',
->>>>>>> a005eab8a63776e755428c8084208604975af3d3
+
     'App\\Models\\ClientInfosLog' => $baseDir . '/app/Models/ClientInfosLog.php',
     'App\\Models\\ClientLocation' => $baseDir . '/app/Models/ClientLocation.php',
     'App\\Models\\ClientLocationsLog' => $baseDir . '/app/Models/ClientLocationsLog.php',
@@ -298,7 +295,7 @@ return array(
     'App\\Modules\\MasterHr\\Models\\MasterHr' => $baseDir . '/app/Modules/MasterHr/Models/MasterHr.php',
     'App\\Modules\\MasterSales\\Controllers\\MasterCustomersController' => $baseDir . '/app/Modules/MasterSales/Controllers/MasterCustomersController.php',
     'App\\Modules\\MasterSales\\Controllers\\MasterSalesController' => $baseDir . '/app/Modules/MasterSales/Controllers/MasterSalesController.php',
-<<<<<<< HEAD
+
     'App\\Modules\\MasterSales\\Models\\Customer' => $baseDir . '/app/Modules/Reports/Models/Customer.php',
     'App\\Modules\\MasterSales\\Models\\CustomersContact' => $baseDir . '/app/Modules/Reports/Models/CustomersContact_2.php',
     'App\\Modules\\MasterSales\\Models\\CustomersContactsLog' => $baseDir . '/app/Modules/Reports/Models/CustomersContactsLog.php',
@@ -343,7 +340,7 @@ return array(
     'App\\Modules\\PropertyPortals\\Models\\LstPropertyPortalsConfig' => $baseDir . '/app/Modules/PropertyPortals/Models/LstPropertyPortalsConfig.php',
     'App\\Modules\\PropertyPortals\\Models\\LstPropertyPortalsProjectConfig' => $baseDir . '/app/Modules/PropertyPortals/Models/LstPropertyPortalsProjectConfig.php',
     'App\\Modules\\PropertyPortals\\Models\\MlstBmsbPropertyPortal' => $baseDir . '/app/Modules/PropertyPortals/Models/MlstBmsbPropertyPortal.php',
-=======
+
     'App\\Modules\\MasterSales\\Models\\Customer' => $baseDir . '/app/Modules/MasterSales/Models/Customer.php',
     'App\\Modules\\MasterSales\\Models\\CustomersContact' => $baseDir . '/app/Modules/MasterSales/Models/CustomersContact.php',
     'App\\Modules\\MasterSales\\Models\\CustomersContactsLog' => $baseDir . '/app/Modules/MasterSales/Models/CustomersContactsLog.php',
@@ -372,7 +369,7 @@ return array(
     'App\\Modules\\Masterlist\\Controllers\\GenderController' => $baseDir . '/app/Modules/Masterlist/Controllers/GenderController.php',
     'App\\Modules\\Masterlist\\Controllers\\MasterlistController' => $baseDir . '/app/Modules/Masterlist/Controllers/MasterlistController.php',
     'App\\Modules\\Masterlist\\Controllers\\TitleController' => $baseDir . '/app/Modules/Masterlist/Controllers/TitleController.php',
->>>>>>> a005eab8a63776e755428c8084208604975af3d3
+
     'App\\Modules\\Reports\\Controllers\\ReportsController' => $baseDir . '/app/Modules/Reports/Controllers/ReportsController.php',
     'App\\Modules\\VehiclePricing\\Controllers\\VehiclePricingController' => $baseDir . '/app/Modules/VehiclePricing/Controllers/VehiclePricingController.php',
     'App\\Modules\\VehiclePricing\\Models\\VehiclePricing' => $baseDir . '/app/Modules/VehiclePricing/Models/VehiclePricing.php',
