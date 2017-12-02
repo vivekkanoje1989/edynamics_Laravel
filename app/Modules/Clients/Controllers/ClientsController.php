@@ -875,7 +875,8 @@ class ClientsController extends Controller {
             $postdata = file_get_contents("php://input");
             $request = json_decode($postdata, true);
         }
-       
+        
+        
         $invoiceData = $request['generateData'];
         $clientId = $request['clientId'];
         $serviceId = $request['servicestype'][0];
@@ -885,18 +886,18 @@ class ClientsController extends Controller {
         $to_date = date('Y-m-d', strtotime($invoiceData['end_date']));
         
         
-        $clientData =  ClientInfo::select('id','website')->where('id',$clientId)->where('deleted_status','0')->first();
-           
-        $client_url =  $clientData->website;
-        $url = $client_url . "/api/Companies/getCompanyid";
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, 0);
-        $result = curl_exec($ch);
-        curl_close($ch);
+//        $clientData =  ClientInfo::select('id','website')->where('id',$clientId)->where('deleted_status','0')->first();
+//           
+//        $client_url =  $clientData->website;
+//        $url = $client_url . "/api/Companies/getCompanyid";
+//        $ch = curl_init($url);
+//        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//        curl_setopt($ch, CURLOPT_POST, 0);
+//        $result = curl_exec($ch);
+//        curl_close($ch);
             
-        $company_id = !empty($result) ? $result : 0;
-          
+//        $company_id = !empty($result) ? $result : 0;
+          $company_id = 0;
             
         $month = date('M Y', strtotime($invoiceData['start_date']));
         $billmonth = date('F Y', strtotime($invoiceData['start_date']));
@@ -906,6 +907,8 @@ class ClientsController extends Controller {
         $total_numbers = \App\Models\CtBillingSetting::select('rent_amount', DB::raw('SUM((CASE WHEN number_status = 1 THEN 1 ELSE 0 END)) AS is_active'), DB::raw('SUM((CASE WHEN number_status = 2 THEN 1 ELSE 0 END)) AS is_freezed'), DB::raw('SUM((CASE WHEN number_status = 3 THEN 1 ELSE 0 END)) AS is_zerorental'), DB::raw('SUM((CASE WHEN number_status = 4 THEN 1 ELSE 0 END)) AS is_deactive'))->where('client_id', $clientId)->get();
         $billingsratesob = \App\Models\CtBillingSetting::select('rent_amount','incoming_pulse_rate', 'local_outbound_pulse_rate', 'isd_outbound_pulse_rate')->where('client_id', $clientId)->where('default_number', 1)->first();
         $billingsrates = \App\Models\CtBillingSetting::select('rent_amount','incoming_pulse_rate', 'local_outbound_pulse_rate', 'isd_outbound_pulse_rate')->where('client_id', $clientId)->where('default_number', 0)->first();
+        
+      
         $rentamount = $billingsrates->rent_amount;
 
         $activeNumbers = $total_numbers[0]->is_active;
@@ -957,9 +960,8 @@ class ClientsController extends Controller {
             'ttime' => '23:59:59'
         );
 
-        $array = json_encode($array);
         $client_url = $clients->website;
-        $url = $client_url . "/api/cloudcallinglogs/getCtlogsInboundPulse";
+        $url = $client_url . "/office.php/cloudcallinglogs/getCtlogsInboundPulse";
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $array);
@@ -985,7 +987,7 @@ class ClientsController extends Controller {
 
 
         $allsubtotal = $SubtotaloutgoingPulse + $SubtotalincommingPulse + $SubtotalPrilines + $Subtotalzerorental + $Subtotalfreezed + $Subtotalactive;
-
+ 
         //get HSN_SAC from value added service
         
         $hsn = MlstValueAddedService::select('hsn_sac')->where('id',3)->first();
@@ -1086,7 +1088,7 @@ class ClientsController extends Controller {
         
         
 
-        $owndetails = \App\Models\ClientInfo::where(['id' => 2])->first();
+        $owndetails = \App\Models\ClientInfo::where(['id' => 1])->first();
 
         
             
@@ -1147,7 +1149,7 @@ class ClientsController extends Controller {
             $array = json_encode($array);
             
             $client_url = $clients->website;
-            $url = $client_url . "/api/bills/sendInvoiceToClient";
+             $url = $client_url . "/office.php/Bills/setBill'";
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $array);

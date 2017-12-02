@@ -21,28 +21,28 @@ class InvoicesController extends Controller {
         
         
     
-    public function manageClientInvoices(){
-        $postdata = file_get_contents("php://input");
-        $request = json_decode($postdata, true);
-        
-        if (!empty($request['client_id']) && $request['client_id'] != 0) {
+        public function manageClientInvoices(){
+            $postdata = file_get_contents("php://input");
+            $request = json_decode($postdata, true);
 
-            $getClientinvoiceLists = AccInvoice::where('client_id', $request['client_id'])->orderBy('id','DESC')->get();
-            $getClientinfo =    ClientInfo::select('marketing_name')->where('id', $request['client_id'])->first();
-            $count = 0;
-            if (!empty($getClientinvoiceLists)) {
-                $count = count($getClientinvoiceLists);
-                $result = ['success' => true, 'records' => $getClientinvoiceLists, 'count' => $count, 'clientName' => $getClientinfo->marketing_name];
-                return json_encode($result);
+            if (!empty($request['client_id']) && $request['client_id'] != 0) {
+
+                $getClientinvoiceLists = AccInvoice::where('client_id', $request['client_id'])->orderBy('id','DESC')->get();
+                $getClientinfo =    ClientInfo::select('marketing_name')->where('id', $request['client_id'])->first();
+                $count = 0;
+                if (!empty($getClientinvoiceLists)) {
+                    $count = count($getClientinvoiceLists);
+                    $result = ['success' => true, 'records' => $getClientinvoiceLists, 'count' => $count, 'clientName' => $getClientinfo->marketing_name];
+                    return json_encode($result);
+                } else {
+                    $result = ['success' => false, 'message' => 'Something went wrong', 'count' => $count];
+                    return json_encode($result);
+                }
             } else {
                 $result = ['success' => false, 'message' => 'Something went wrong', 'count' => $count];
                 return json_encode($result);
             }
-        } else {
-            $result = ['success' => false, 'message' => 'Something went wrong', 'count' => $count];
-            return json_encode($result);
         }
-    }
 
 	/**
 	 * Show the form for creating a new resource.

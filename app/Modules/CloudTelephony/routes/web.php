@@ -63,7 +63,13 @@ Route::group(array('module' => 'CloudTelephony', 'namespace' => 'App\Modules\Clo
      Route::post('/cloudcallinglogs/filteredData', 'CloudCallingLogsController@filteredData');
      Route::post('/cloudcallinglogs/filteredoutboundData', 'CloudCallingLogsController@filteredoutboundData');
     
-    
+    // ct bill settings 
+     
+     Route::get('/ctbillsettings/index/{id}','CtBillSettingsController@index');
+     Route::post('/ctbillsettings/manageClientCtnumbers', 'CtBillSettingsController@manageClientCtnumbers');
+     Route::post('/ctbillsettings/addCtnumbers', 'CtBillSettingsController@addCtnumbers');
+     Route::post('/ctbillsettings/updateCtnumbers', 'CtBillSettingsController@updateCtnumbers');
+     Route::post('/ctbillsettings/getCtnumber', 'CtBillSettingsController@getCtnumber');
 });	
 
 
