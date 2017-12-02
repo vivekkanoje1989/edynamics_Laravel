@@ -709,16 +709,16 @@ class ClientsController extends Controller {
             $Acc_invoice_row->servicetax_total = $Invoiceservicetax;
             $Acc_invoice_row->save();
 
-            $final_invoice_ammount = round($Invoiceservicetax + $last_amount);
-            $final_invoice_ammount = $this->numberTowords($final_invoice_ammount);
+            $final_digit_ammount = round($Invoiceservicetax + $last_amount);
+            $final_invoice_ammount = $this->numberTowords($final_digit_ammount);
 
-            $result = $this->generatePDF($modelEmail, $modelSMS, $client_id, $company_id, $invoiceno, $invoice_date, $regcnt, $final_invoice_ammount);
+            $result = $this->generatePDF($modelEmail, $modelSMS, $client_id, $company_id, $invoiceno, $invoice_date, $regcnt, $final_invoice_ammount,$final_digit_ammount);
 
             return 1;
         }
     }
 
-    public function generatePDF($modelEmail, $modelSMS, $client_id, $company_id, $invoiceno, $invoice_date, $count = 0, $final_invoice_ammount) {
+    public function generatePDF($modelEmail, $modelSMS, $client_id, $company_id, $invoiceno, $invoice_date, $count = 0, $final_invoice_ammount,$final_digit_ammount) {
        $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATOR;
       
         $clients = \App\Models\ClientInfo::where(['id' => $client_id])->first();
@@ -755,7 +755,7 @@ class ClientsController extends Controller {
             
             $mPDF1->SetDisplayMode('fullpage');
             
-            $view = \View::make('Clients::pdf', ['modelEmail' => $modelEmail, 'modelSMS' => $modelSMS, 'client' => $clients, 'owndetails' => $owndetails, 'invoiceno' => $invoiceno, 'invoice_date' => $invoice_date, 'final_invoice_ammount' => $final_invoice_ammount]);
+            $view = \View::make('Clients::pdf', ['modelEmail' => $modelEmail, 'modelSMS' => $modelSMS, 'client' => $clients, 'owndetails' => $owndetails, 'invoiceno' => $invoiceno, 'invoice_date' => $invoice_date, 'final_invoice_ammount' => $final_invoice_ammount,'final_digit_ammount'=>$final_digit_ammount]);
             
             $contents = (string) $view;
            
