@@ -43,7 +43,7 @@ angular.module('app').config(['$routeProvider', '$locationProvider', function ($
                     templateUrl: 'website/news',
                     controller: 'AppCtrl'
                 })
-                 .when('/news-details/:newsId', {
+                .when('/news-details/:newsId', {
                     templateUrl: function (urlattr) {
                         return 'website/news-details/' + urlattr.newsId;
                     },
@@ -77,6 +77,18 @@ angular.module('app').config(['$routeProvider', '$locationProvider', function ($
                     templateUrl: 'website/partnership',
                     controller: 'AppCtrl'
                 })
+                .when('/privacy_policy', {
+                    templateUrl: 'website/privacy_policy',
+                    controller: 'AppCtrl'
+                })
+                .when('/Bms_builder_and_Developer', {
+                    templateUrl: 'website/Bms_builder_and_Developer',
+                    controller: 'AppCtrl'
+                })
+                .when('/BMS_for_Property_Consultants', {
+                    templateUrl: 'website/BMS_for_Property_Consultants',
+                    controller: 'AppCtrl'
+                })
                 .otherwise({
                     redirectTo: '/'
                 });
@@ -92,8 +104,8 @@ app.controller('AppCtrl', ['$scope', 'Upload', '$timeout', '$http', '$location',
                 $scope.jobPostRow = response.data.result;
             });
         };
-        
-        
+
+
         $scope.random = function () {
             return 0.5 - Math.random();
         }
@@ -329,34 +341,51 @@ app.controller('AppCtrl', ['$scope', 'Upload', '$timeout', '$http', '$location',
 
 
         $scope.doContactAction = function (contact) {
-            $scope.contactBtndisabled = true;
-            $http.post(baseUrl + 'doContactAction', {contact: contact}).then(function (response) {
-                if (response.status) {
-                    $timeout(function () {
-                        $scope.contact = '';
-                        $scope.sbtBtn = false;
-                        $scope.successMssg = true;
-                    }, 1000);
-                    $timeout(function () {
-                        $scope.contactBtndisabled = false;
-                        $scope.successMssg = false;
-                    }, 2500);
-                }
+            var v = grecaptcha.getResponse();
+            if (v.length != '0') {
+                $scope.contactBtndisabled = true;
+                $http.post(baseUrl + 'doContactAction', {contact: contact}).then(function (response) {
+                    if (response.status) {
+                        $timeout(function () {
+                            $scope.contact = '';
+                            $scope.sbtBtn = false;
+                            $scope.successMssg = true;
+                            grecaptcha.reset();
+                        }, 1000);
+                        $timeout(function () {
+                            $scope.contactBtndisabled = false;
+                            $scope.successMssg = false;
+                        }, 2500);
+                    }
 
-            });
+                });
+            } else {
+                $scope.recaptcha = "Please revalidate captcha";
+            }
         }
 
         $scope.requestDemos = function (request) {
-          $scope.requestBtn = true;
-            $timeout(function () {
-                $scope.request = '';
-                $scope.sbtBtn1 = false;
-                $scope.requestMssg = true;
-            }, 1000);
-            $timeout(function () {
-                $scope.requestBtn = false;
-                $scope.requestMssg = false;
-            }, 2500);
+            var v = grecaptcha.getResponse();
+            if (v.length != '0') {
+                $scope.requestBtn = true;
+                $timeout(function () {
+                    $scope.request = '';
+                    $scope.sbtBtn1 = false;
+                    $scope.requestMssg = true;
+                }, 1000);
+                $timeout(function () {
+                    $scope.requestBtn = false;
+                    $scope.requestMssg = false;
+                }, 2500);
+
+            } else {
+                $scope.recaptcha = "Please revalidate captcha";
+            }
+        }
+
+          
+        $scope.openModal = function(){
+            $('#login-box').modal('show');
         }
 
         $scope.doApplicantAction = function (career, resumeFileName, photoUrl)

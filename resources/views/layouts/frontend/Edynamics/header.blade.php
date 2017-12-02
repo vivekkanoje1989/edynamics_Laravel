@@ -42,7 +42,7 @@
                                     </div>
                                     <a class="open_close" id="close_in"><i class="fa fa-times"></i></a>
                                     <ul>
-                                        <li class="active"><a href="[[ URL::to('/') ]]/index">HOME </a></li>
+                                        <li><a href="[[ URL::to('/') ]]/index" >HOME </a></li>
                                         <li><a href="[[ URL::to('/') ]]/about">ABOUT US </a> </li>
                                         <li><a href="[[ URL::to('/') ]]/products">PRODUCTS </a></li>
                                         <li><a href="[[ URL::to('/') ]]/bmsnetwork"> BMS NETWORK</a> </li>

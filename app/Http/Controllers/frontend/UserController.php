@@ -334,6 +334,16 @@ class UserController extends Controller {
     public function blog() {
         return view('frontend.' . $this->themeName . '.blog');
     }
+    
+    public function privacy_policy() {
+        return view('frontend.' . $this->themeName . '.privacy_policy');
+    }
+    public function Bms_builder_and_Developer() {
+        return view('frontend.' . $this->themeName . '.Bms-builder-and-Developer');
+    }
+    public function BMS_for_Property_Consultants() {
+        return view('frontend.' . $this->themeName . '.BMS-for-Property-Consultants');
+    }
 
     public function blogdetails($blog_id) {
         return view('frontend.' . $this->themeName . '.blog-details')->with('blog_id', $blog_id);

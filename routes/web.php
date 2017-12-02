@@ -75,10 +75,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/password/reset/{token}/{checkState?}', 'backend\Auth\ResetPasswordController@showResetForm');
     Route::post('/password/reset', 'backend\Auth\ResetPasswordController@reset');
 
-      $frontActions = ["/index", "/about", "/careers", "/blogs", "/contact", "/testimonials", "/projects", "/project-details/{projectId}", "/blog-details/{blogId}",
+      $frontActions = ["/index", "/about", "/career", "/blogs", "/contact", "/testimonials", "/projects", "/project-details/{projectId}", "/blog-details/{blogId}",
         "/news", "/news-details/{newsId}", "/press-release", "/events", "/scheduleTestDrive", "/sendwebEnquiry", "/sendwebContact", "/insurance",
         "/sendJobpost", "/sendcontact", "/addAppointment", "/getservicelocation", "getfCities", "getfCountries", "/sendInsurance", "/customerform/{id}", "/scheduletestdriveform/{id}", "getfGender", "getfProfession", '/getemployeedetails/{id}', '/registration/{id}', '/getfBloodGroup', '/getfEducationList', '/thanking-you', '/compassdetails',
-        '/getnextfollowupTime', "/index/{id}", '/about/{id}','/products','/bmsnetwork','/clients','/partnership'];
+        '/getnextfollowupTime', "/index/{id}", '/about/{id}','/products','/bmsnetwork','/clients','/partnership','/privacy_policy','/Bms_builder_and_Developer','/BMS_for_Property_Consultants'];
 
     if (in_array(\Request::server('REQUEST_URI'), $frontActions)) {
         Route::get('/{param}', 'frontend\UserController@onPageReload');
@@ -94,6 +94,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get($getWebsiteUrl . '/clients', 'frontend\UserController@clients');
     Route::post($getWebsiteUrl . '/doContactAction', 'frontend\UserController@doContactAction');
     Route::get($getWebsiteUrl . '/partnership', 'frontend\UserController@partnership');
+    Route::get($getWebsiteUrl . '/privacy_policy', 'frontend\UserController@privacy_policy');
+    Route::get($getWebsiteUrl . '/Bms_builder_and_Developer', 'frontend\UserController@Bms_builder_and_Developer');
+    Route::get($getWebsiteUrl . '/BMS_for_Property_Consultants', 'frontend\UserController@BMS_for_Property_Consultants');
     Route::post($getWebsiteUrl . '/register_applicant', 'frontend\UserController@register_applicant');
     Route::get($getWebsiteUrl . '/jobPost', 'frontend\UserController@jobPost');
     Route::get($getWebsiteUrl . '/background', 'frontend\UserController@getBackGroundImages');
