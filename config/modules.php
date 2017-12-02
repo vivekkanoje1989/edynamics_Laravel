@@ -68,5 +68,7 @@ return [
         "ManageTaskStatus",
         "ManageTaskPriority",
         "TaskManagement",
+        "Invoices",
+        
     ),
 ];

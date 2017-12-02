@@ -12,7 +12,12 @@ $GLOBALS['server'] = $server_name;
 session_start();
 $domain = ltrim($_SERVER['HTTP_HOST'], "www.");
 // print_r($domain['client_info']);exit;
+session_unset();
+
+
+
 if (empty($_SESSION[$domain]['client_info']) || empty($_SESSION[$domain]['aws_bucket_id'])) {
+    
     $connetion = mysqli_connect("$server_name", "$uname", "$password");
     if (!$connetion) {
        echo "<div style='text-align: center;margin-top: 100px;font-size: 35px;color: red;'>
@@ -21,6 +26,7 @@ if (empty($_SESSION[$domain]['client_info']) || empty($_SESSION[$domain]['aws_bu
             </div>";
         exit;
     } else {
+        
         mysqli_select_db($connetion, $dbname);
         $sql = "SELECT *  FROM `client_informations` WHERE `id` = 1";
         $result = mysqli_query($connetion, $sql);
@@ -38,6 +44,9 @@ if (empty($_SESSION[$domain]['client_info']) || empty($_SESSION[$domain]['aws_bu
         $system_row = mysqli_fetch_assoc($system_result);
         $GLOBALS['aws_bucket_id'] = $system_row['aws_bucket_id'];
         $_SESSION[$domain]['aws_bucket_id'] = $system_row['aws_bucket_id'];
+    
+      
+     
 
         // print_r($GLOBALS);exit;
     }
@@ -47,7 +56,8 @@ else
     $GLOBALS['client_info'] = json_encode($_SESSION[$domain]['client_info']);
     $GLOBALS['client_id']= $_SESSION[$domain]['client_id'];
     $GLOBALS['brand_id']= $_SESSION[$domain]['brand_id'];
-    $GLOBALS['aws_bucket_id'] = $_SESSION[$domain]['aws_bucket_id'];    
+   $GLOBALS['aws_bucket_id'] = $_SESSION[$domain]['aws_bucket_id'];    
+   
 }
 /*
   |--------------------------------------------------------------------------

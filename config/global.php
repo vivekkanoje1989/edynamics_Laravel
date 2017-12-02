@@ -6,23 +6,6 @@
  * and open the template in the editor.
  */
 
-/* old data
-
-return [
-    'getUrl' => 'office',
-    'getWebsiteUrl' => 'website',
-    //'companyName' => 'BMS BUILDER',
-    'companyName' => 'Edynamics BMS',
-    'rootPath' => base_path(),
-    'randomNoDigits' => 4,
-    's3Path' => "https://s3.ap-south-1.amazonaws.com/bmsbuilderv2",
-    'themeName' => '',
-    'backendUrl' => 'office.php',
-    'recordsPerPage' =>30,
-    'client_id' => 1,
-    'recordsPerPage' => 30,
-];
-*/
 
 
 /*
@@ -33,8 +16,8 @@ return [
 
 return [
     'getUrl' => 'office',
-    's3Path'=>'https://storage.googleapis.com/edynamicsdevelopment',
-    //'s3Path'=>'https://storage.googleapis.com/'.$GLOBALS['aws_bucket_id'],
+//    's3Path'=>'https://storage.googleapis.com/',
+   's3Path'=>'https://storage.googleapis.com/'.$GLOBALS['aws_bucket_id'],
     'mastergcsPath'=>'https://storage.googleapis.com/businessapps.co.in',
     'getWebsiteUrl' => 'website',
     'companyName' => 'Edynamics BMS',

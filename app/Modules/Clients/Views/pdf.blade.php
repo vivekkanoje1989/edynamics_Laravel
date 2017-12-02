@@ -138,8 +138,7 @@ table{ border-collapse:collapse;} table td{ border-collapse:collapse;}
                       <td style="width: 200px;text-align:left;"><b>From&nbsp;,&nbsp;</b></td>
                     </tr>
                     <tr>
-                      <td style="width:200px;" valign="top"><?php echo ucwords( $client->marketing_name );?><br>
-                                                                    <?php echo ucwords($client->office_address);?><br>
+                      <td style="width:200px;" valign="top"><?php echo ucwords($client->office_address);?><br>
                                                                     <?php echo ucwords($client->city_name);
                                                                            echo ' '.ucwords($client->pin_code).' ,';?><br>
                                                                     <?php echo ucwords($client->state_name);?></td>
@@ -200,7 +199,7 @@ table{ border-collapse:collapse;} table td{ border-collapse:collapse;}
         </table>
         
         
-<!--        <table width="800"  align="center" cellspacing="0" cellpadding="0" border="0" class="devicewidth" style="padding: 12px;">
+        <table width="800"  align="center" cellspacing="0" cellpadding="0" border="0" class="devicewidth" style="padding: 12px;">
           <tbody>
             <tr>
               <td width="100%" height="10"></td>
@@ -217,7 +216,7 @@ table{ border-collapse:collapse;} table td{ border-collapse:collapse;}
                     <tr>
                     <td style="border-bottom:1px solid #ccc; text-align:center">&nbsp;Previous Balance</td>
                     </tr><tr>
-                    <td style="text-align:center">&nbsp;5,000</td>
+                    <td style="text-align:center">&nbsp;0</td>
                     </tr>
                     </table>
                       
@@ -228,7 +227,7 @@ table{ border-collapse:collapse;} table td{ border-collapse:collapse;}
                     <tr>
                     <td style="border-bottom:1px solid #ccc; text-align:center">&nbsp;Last Payment</td>
                     </tr><tr>
-                    <td style="text-align:center">&nbsp;5,000</td>
+                    <td style="text-align:center">&nbsp;0</td>
                     </tr>
                     </table></td> 
                           <td  style="width:15;text-align:center"  width="25">&nbsp;=&nbsp;</td>    
@@ -237,7 +236,7 @@ table{ border-collapse:collapse;} table td{ border-collapse:collapse;}
                     <tr>
                     <td style="border-bottom:1px solid #ccc; text-align:center">&nbsp;Balance</td>
                     </tr><tr>
-                    <td style="text-align:center">&nbsp;5,000</td>
+                    <td style="text-align:center">&nbsp;0</td>
                     </tr>
                     </table></td>
                         <td  style="width:15;text-align:center" width="25">&nbsp;+&nbsp;</td>    
@@ -246,28 +245,28 @@ table{ border-collapse:collapse;} table td{ border-collapse:collapse;}
                     <tr>
                     <td style="border-bottom:1px solid #ccc; text-align:center">&nbsp;This Month's Bill</td>
                     </tr><tr>
-                    <td style="text-align:center">&nbsp;5,000</td>
+                    <td style="text-align:center">&nbsp;&#8377; <?php echo $final_digit_ammount; ?></td>
                     </tr>
                     </table></td>
                        <td  style="width:15;text-align:center" width="25">&nbsp;=&nbsp;</td>
                    <td  style="width:145px; text-align:center;" width="145px">
                           <table width="145px" align="center" cellspacing="0" bordercolor="#999999" cellpadding="5" border="1" >
                     <tr>
-                        <td style="border-bottom:1px solid #ccc; text-align:center">&nbsp;Amount Due on or<br>Before : 14-9-2017</td>
+                        <td style="border-bottom:1px solid #ccc; text-align:center">&nbsp; Total Bill Amount</td>
                     </tr><tr>
-                    <td style="text-align:center">&nbsp;5,000</td>
+                    <td style="text-align:center">&nbsp;&#8377; <?php echo $final_digit_ammount; ?></td>
                     </tr>
                     </table></td>
                     </tr>
                     <tr>
                       <td colspan="8" width="100%" height="10">&nbsp;</td>
                     </tr>
-                     end of title 
+                     
                   </tbody>
                 </table></td>
             </tr>
           </tbody>
-        </table>-->
+        </table>
           
           <table width="800"  align="center" cellspacing="0" cellpadding="0" border="0" class="devicewidth" style="padding: 12px;">
                             <tbody>

@@ -40,8 +40,7 @@ class CtBillingSetting extends Eloquent
 {
         
 	public $timestamps = false;
-        protected $connection = 'masterdb';
-         
+
 	protected $casts = [
 		'client_id' => 'int',
 		'default_number' => 'bool',
@@ -60,26 +59,22 @@ class CtBillingSetting extends Eloquent
 	];
 
 	protected $dates = [
-//		'activation_date',
-//		'created_date',
-//		'deactivation_date',
-//		'updated_date'
+		'activation_date',
+		'created_date',
+		'deactivation_date',
+		'updated_date'
 	];
 
 	protected $fillable = [
 		'client_id',
 		'virtual_number',
-                'display_number',
 		'default_number',
 		'incoming_call_status',
 		'incoming_pulse_duration',
 		'incoming_pulse_rate',
 		'outbound_call_status',
-		'local_outbound_pulse_duration',
-		'local_outbound_pulse_rate',
-                'isd_outbound_pulse_duration',
-		'isd_outbound_pulse_rate',
-		'dial_outbound_callas',
+		'outbound_pulse_duration',
+		'outbound_pulse_rate',
 		'activation_date',
 		'rent_duration',
 		'rent_amount',
@@ -126,7 +121,35 @@ class CtBillingSetting extends Eloquent
         return $rules;
     }
     
-   
+    public static function createNumber($input = array()) {
+        $affectedRows = new CtBillingSetting();
+        
+        $affectedRows->client_id = $input['client_id'];
+           $affectedRows->virtual_number = $input['virtual_number'];
+           $affectedRows->default_number = $input['default_number'];
+           $affectedRows->incoming_call_status = $input['incoming_call_status'];            
+           $affectedRows->incoming_pulse_duration = $input['incoming_pulse_duration'];
+           $affectedRows->incoming_pulse_rate = $input['incoming_pulse_rate'];
+           $affectedRows->outbound_call_status = $input['outbound_call_status'];
+           $affectedRows->outbound_pulse_duration = $input['outbound_pulse_duration'];
+           $affectedRows->outbound_pulse_rate = $input['outbound_pulse_rate'];
+           $affectedRows->rent_duration = $input['rent_duration'];
+           $affectedRows->rent_amount = $input['rent_amount'];
+           $affectedRows->activation_date = date('Y-m-d', strtotime($input['activation_date']));
+           $affectedRows->created_by = Auth()->guard('admin')->user()->id;
+        
+        
+        if($affectedRows->save()){
+            $input['id'] = $affectedRows->id;
+            CtBillingSetting::ctbiillinglogs($input);
+            return true;
+        }else{
+            return false;
+        }
+        //$this->ctbiillinglogs($input);
+        
+        
+    }
     
     public static function updateNumber($input = array()) {
         $affectedRows = CtBillingSetting::where('id', '=', $input['id'])->update([
