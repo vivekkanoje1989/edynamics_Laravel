@@ -2,50 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
-<<<<<<< HEAD
-            <file>file:/var/www/html/edynamics_Laravel/resources/views/frontend/Edynamics/career.blade.php</file>
-            <file>file:/var/www/html/edynamics_Laravel/resources/views/frontend/Edynamics/contact.blade.php</file>
-            <file>file:/var/www/html/edynamics_Laravel/public/frontend/Edynamics/js/script.js</file>
-            <file>file:/var/www/html/edynamics_Laravel/resources/views/layouts/frontend/Edynamics/header.blade.php</file>
-            <file>file:/var/www/html/edynamics_Laravel/resources/views/frontend/theme31/contact.blade.php</file>
-            <file>file:/var/www/html/edynamics_Laravel/resources/views/frontend/Edynamics/news.blade.php</file>
-            <file>file:/var/www/html/edynamics_Laravel/resources/views/frontend/Edynamics/products.blade.php</file>
             <file>file:/var/www/html/edynamics_Laravel/app/Http/Controllers/frontend/UserController.php</file>
-            <file>file:/var/www/html/edynamics_Laravel/public/frontend/Edynamics/css/mdb.css</file>
-=======
-<<<<<<< HEAD
-            <file>file:/var/www/html/edynamics_Laravel/app/Modules/Clients/Views/index.blade.php</file>
-            <file>file:/var/www/html/edynamics_Laravel/app/Modules/Clients/Views/client_info.blade.php</file>
-            <file>file:/var/www/html/edynamics_Laravel/public/backend/clientInfoController.js</file>
-            <file>file:/var/www/html/edynamics_Laravel/app/Modules/Clients/Views/pdf.blade.php</file>
-            <file>file:/var/www/html/edynamics_Laravel/app/Modules/Clients/Controllers/ClientsController.php</file>
-            <file>file:/var/www/html/edynamics_Laravel/app/Models/ClientInfo.php</file>
-=======
-            <file>file:/var/www/html/edynamics_Laravel/resources/views/frontend/Edynamics/newsroom.blade.php</file>
-            <file>file:/var/www/html/edynamics_Laravel/resources/views/layouts/frontend/Edynamics/main.blade.php</file>
-            <file>file:/var/www/html/edynamics_Laravel/resources/views/frontend/Edynamics/about.blade.php</file>
-            <file>file:/var/www/html/edynamics_Laravel/resources/views/frontend/Edynamics/contact-us.blade.php</file>
-            <file>file:/var/www/html/edynamics_Laravel/resources/views/frontend/Edynamics/clients.blade.php</file>
-            <file>file:/var/www/html/edynamics_Laravel/dbcredentials/127.0.0.1:8000.php</file>
-            <file>file:/var/www/html/edynamics_Laravel/resources/views/frontend/Edynamics/careers.blade.php</file>
->>>>>>> 83913adb42bc4924e8a491e6b4b14145735d3704
             <file>file:/var/www/html/edynamics_Laravel/public/frontend/route.js</file>
             <file>file:/var/www/html/edynamics_Laravel/routes/web.php</file>
-            <file>file:/var/www/html/edynamics_Laravel/resources/views/frontend/Edynamics/index.blade.php</file>
-            <file>file:/var/www/html/edynamics_Laravel/resources/views/backendApp.blade.php</file>
-            <file>file:/var/www/html/edynamics_Laravel/resources/views/frontend/Edynamics/Bms-builder-and-Developer.blade.php</file>
-            <file>file:/var/www/html/edynamics_Laravel/resources/views/frontend/Edynamics/BMS-for-Property-Consultants.blade.php</file>
-            <file>file:/var/www/html/edynamics_Laravel/resources/views/layouts/frontend/Edynamics/footer.blade.php</file>
-<<<<<<< HEAD
-=======
-            <file>file:/var/www/html/edynamics_Laravel/resources/views/layouts/frontend/Edynamics/style.blade.php</file>
->>>>>>> dadabdc2e90dbda8b4d10202a64ff0372d756ad6
->>>>>>> 83913adb42bc4924e8a491e6b4b14145735d3704
+            <file>file:/var/www/html/edynamics_Laravel/resources/views/frontend/Edynamics/career.blade.php</file>
+            <file>file:/var/www/html/edynamics_Laravel/app/Classes/S3.php</file>
         </group>
->>>>>>> acaffe769def7e1dec087f2ba9da21aac9536388
     </open-files>
 </project-private>

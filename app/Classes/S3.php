@@ -19,8 +19,8 @@ class S3 {
     public static function s3Configuration() {
         $data = DB::table('system_configs')->where('id', 1)->get();
        
-     //  Config::set('filesystems.disks.gcs.bucket', $data[0]->aws_bucket_id);
-        Config::set('filesystems.disks.gcs.bucket', 'bkt_bms_laravel');
+       Config::set('filesystems.disks.gcs.bucket', $data[0]->aws_bucket_id);
+//        Config::set('filesystems.disks.gcs.bucket', 'bkt_bms_laravel');
         Config::set('filesystems.disks.gcs.project_id','756686641793');
         Config::set('filesystems.disks.gcs.driver', 'gcs');
         
@@ -49,8 +49,8 @@ class S3 {
     
     // google storage
      public static function s3FileUpload($filepath, $filename, $s3FolderName) {
-          echo "filepath= ".$filepath." filename=". $filename." s3FolderName". $s3FolderName."<br>";
-exit;
+//          echo "filepath= ".$filepath." filename=". $filename." s3FolderName". $s3FolderName."<br>";
+//exit;
         S3::s3Configuration();       
 
         $name = '';
