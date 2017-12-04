@@ -180,7 +180,7 @@ class VirtualNumberController extends Controller {
         if (empty($input['vnumberData']['loggedInUserId'])) {
             $input['vnumberData']['loggedInUserId'] = Auth::guard('admin')->user()->id;
         }
-        echo "<pre>";print_r($input);exit;
+        
         if ($input['vnumberData']['id'] > 0 || !empty($input['vnumberData']['id'])) {
             if ($input['vnumberData']['welcome_tune_type_id'] == 3) {
                 if (!empty($input['vnumberData']['welcome_tune_audio'])) {

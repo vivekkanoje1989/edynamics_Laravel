@@ -49,8 +49,7 @@ class S3 {
     
     // google storage
      public static function s3FileUpload($filepath, $filename, $s3FolderName) {
-//          echo "filepath= ".$filepath." filename=". $filename." s3FolderName". $s3FolderName."<br>";
-//exit;
+
         S3::s3Configuration();       
 
         $name = '';
