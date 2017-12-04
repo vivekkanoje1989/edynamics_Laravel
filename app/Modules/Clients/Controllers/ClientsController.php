@@ -1097,7 +1097,7 @@ class ClientsController extends Controller {
             else
                 $current_datetime = date('y-m-d H-i-s');
 
-            $marketing_name = $clients->marketing_name;
+            $marketing_name = str_replace(' ','_',$clients->marketing_name);
 
             $mPDF1 = new \mPDF('', '', 0, '', 8, 8, 8, 8, 8, 8, 'A4');
             $mPDF1->SetDisplayMode('fullpage');
@@ -1107,7 +1107,7 @@ class ClientsController extends Controller {
                         'incommingPulse'=>$incommingPulse,'incoming_pulse_rate'=>$incoming_pulse_rate,'SubtotalincommingPulse'=>$SubtotalincommingPulse,
                         'outgoingPulse'=>$outgoingPulse,'local_outbound_pulse_rate'=>$local_outbound_pulse_rate,'SubtotaloutgoingPulse'=>$SubtotaloutgoingPulse,
                 'client' => $clients, 'owndetails' => $owndetails, 'invoiceno' => $invoiceno, 'invoice_date' => $invoice_date,
-                        'final_invoice_ammount_inword' => $final_invoice_ammount_inword, 'billmonth' => $billmonth,'HSN'=>$HSN,'last_amount'=>$last_amount,'cgst'=>$cgst,'sgst'=>$sgst]);
+                        'final_invoice_ammount_inword' => $final_invoice_ammount_inword,'final_invoice_ammount'=>$final_invoice_ammount, 'billmonth' => $billmonth,'HSN'=>$HSN,'last_amount'=>$last_amount,'cgst'=>$cgst,'sgst'=>$sgst]);
             $contents = (string) $view;
             $contents = $view->render();
             $mPDF1->WriteHTML($contents);

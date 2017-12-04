@@ -481,7 +481,7 @@ app.controller('clientInfoCtrl', ['$scope', 'Data', 'toaster','$rootScope','Uplo
                             Data.post('clients/generateCtInvoice',{
                              generateData:$scope.generateData,servicestype:services,clientId:client_id
                         }).then(function (response) {
-                          
+                          console.log(response);return false;
                             $scope.invoicebtn =false;
                                 $('#generateInvoiceModal').modal('toggle');
                                 if (response.success) {

@@ -29,7 +29,7 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                                 <!-- title -->
 
                                                 <tr>
-                                                    <td  style="font-family: Helvetica,arial,sans-serif;font-size: 19px;color:rgb(0, 0, 0);text-align: center;line-height: 15px;font-weight: 800;"><h4 style="margin: 0;">Business Apps</h4></td>
+                                                    <td  style="font-family: Helvetica,arial,sans-serif;font-size: 19px;color:rgb(0, 0, 0);text-align: center;line-height: 15px;font-weight: 800;"><h4 style="margin: 0;">Edynamics Business Services LLP.</h4></td>
                                                 </tr>
                                                 <tr>
                                                     <td width="100%" height="10">&nbsp;</td>
@@ -87,7 +87,10 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                                                 </tr>
                                                             </tbody>
                                                         </table></td>
-                                                    <td align="right" width="150"><img src="<?php echo $uploads_dir; ?>lms.png"  style="width: 120px;height: auto;"/><br><img src="<?php echo $uploads_dir; ?>Nextedge.png"  style="width: 120px;height: auto;"/></td>
+                                                     <td align="right" width="150">
+                                                            <img src="<?php echo $uploads_dir;?>bms.png"  style="width: 120px;height: auto;"/><br>
+                                                            <!--<img src="<?php echo $uploads_dir;?>Nextedge.png"  style="width: 120px;height: auto;"/>-->
+                                                        </td>
                                                 </tr>
 
 
@@ -186,7 +189,7 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                 <tr>
                                     <td width="800"><table width="800" align="center" cellspacing="0" cellpadding="0" border="0" >
                                             <tbody>
-                                                title 
+                                               
 
                                                 <tr>
                                                     <td  style="font-family: Helvetica,arial,sans-serif;font-size: 10px;color:rgb(0, 0, 0);text-align: center;line-height: 15px;font-weight: 800;"><h4 style="margin: 0;">Your Account Summary</h4></td>
@@ -194,7 +197,7 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                                 <tr>
                                                     <td width="100%" height="10">&nbsp;</td>
                                                 </tr>
-                                                end of title 
+                                               
                                             </tbody>
                                         </table></td>
                                 </tr>
@@ -202,7 +205,7 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                         </table>
 
 
-<!--       <table width="800"  align="center" cellspacing="0" cellpadding="0" border="0" class="devicewidth" style="padding: 12px;">
+       <table width="800"  align="center" cellspacing="0" cellpadding="0" border="0" class="devicewidth" style="padding: 12px;">
   <tbody>
     <tr>
       <td width="100%" height="10"></td>
@@ -211,7 +214,7 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
       <td width="800">
       <table width="800" align="center" cellspacing="0" cellpadding="0" border="0" >
           <tbody>
-             title 
+              
             
             <tr>
               <td  style="width:145px; text-align:center; " width="145px">
@@ -219,7 +222,7 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
             <tr>
             <td style="border-bottom:1px solid #ccc; text-align:center">&nbsp;Previous Balance</td>
             </tr><tr>
-            <td style="text-align:center">&nbsp;5,000</td>
+            <td style="text-align:center">&nbsp;&#8377; 0</td>
             </tr>
             </table>
               
@@ -230,7 +233,7 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
             <tr>
             <td style="border-bottom:1px solid #ccc; text-align:center">&nbsp;Last Payment</td>
             </tr><tr>
-            <td style="text-align:center">&nbsp;5,000</td>
+            <td style="text-align:center">&nbsp;&#8377; 0</td>
             </tr>
             </table></td> 
                   <td  style="width:15;text-align:center"  width="25">&nbsp;=&nbsp;</td>    
@@ -239,7 +242,7 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
             <tr>
             <td style="border-bottom:1px solid #ccc; text-align:center">&nbsp;Balance</td>
             </tr><tr>
-            <td style="text-align:center">&nbsp;5,000</td>
+            <td style="text-align:center">&nbsp;&#8377; 0</td>
             </tr>
             </table></td>
                 <td  style="width:15;text-align:center" width="25">&nbsp;+&nbsp;</td>    
@@ -248,28 +251,28 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
             <tr>
             <td style="border-bottom:1px solid #ccc; text-align:center">&nbsp;This Month's Bill</td>
             </tr><tr>
-            <td style="text-align:center">&nbsp;5,000</td>
+            <td style="text-align:center">&nbsp;&#8377; <?php echo $final_invoice_ammount; ?></td>
             </tr>
             </table></td>
                <td  style="width:15;text-align:center" width="25">&nbsp;=&nbsp;</td>
            <td  style="width:145px; text-align:center;" width="145px">
                   <table width="145px" align="center" cellspacing="0" bordercolor="#999999" cellpadding="5" border="1" >
             <tr>
-                <td style="border-bottom:1px solid #ccc; text-align:center">&nbsp;Amount Due on or<br>Before : 14-9-2017</td>
+                <td style="border-bottom:1px solid #ccc; text-align:center">&nbsp;Total Bill Amount</td>
             </tr><tr>
-            <td style="text-align:center">&nbsp;5,000</td>
+            <td style="text-align:center">&nbsp;&#8377; <?php echo $final_invoice_ammount; ?></td>
             </tr>
             </table></td>
             </tr>
             <tr>
               <td colspan="8" width="100%" height="10">&nbsp;</td>
             </tr>
-             end of title 
+            
           </tbody>
         </table></td>
     </tr>
   </tbody>
-</table>-->
+</table>
 
                         <table width="800"  align="center" cellspacing="0" cellpadding="0" border="0" class="devicewidth" style="padding: 12px;">
                             <tbody>
@@ -686,11 +689,11 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                                         <tr>
                                                             <td  style="font-size:10px;width: 800px;">
                                                                 <ul>
-    <?php // if(!empty($modelEmail->discount)){ ?>  <li> <?php echo 'Discount for LMS' . $modelEmail->discount_for . ' ( Rs. ' . $modelEmail->discount . ' - ' . $modelEmail->quantity . ' G Suit ID )';
+    <?php // if(!empty($modelEmail->discount)){ ?>  <li> <?php echo 'Discount for BMS' . $modelEmail->discount_for . ' ( Rs. ' . $modelEmail->discount . ' - ' . $modelEmail->quantity . ' G Suit ID )';
 
     //} 
     ?> </li>
-    <?php // if(!empty($modelSMS->discount)){  ?> <li> <?php echo 'Discount for LMS' . $modelSMS->discount_for . ' ( Rs. ' . $modelSMS->discount . ' - Qty. ' . $modelSMS->quantity . ' SMS )';
+    <?php // if(!empty($modelSMS->discount)){  ?> <li> <?php echo 'Discount for BMS' . $modelSMS->discount_for . ' ( Rs. ' . $modelSMS->discount . ' - Qty. ' . $modelSMS->quantity . ' SMS )';
 } ?> </li>
                                                             </ul>	
                                                         </td>
@@ -748,11 +751,11 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                                 <tr>
                                                     <td  style="font-size:8px;width: 800px;">
                                                         <ul>
-                                                            <li> Training's & Technical backup would be provided online, telephonic or personally as per needed by the sole direction of Business Apps.</li>
+                                                            <li> Training's & Technical backup would be provided online, telephonic or personally as per needed by the sole direction of Edynamics Business Services LLP..</li>
                                                             <li> Data security will be applicable as per cloud services policy.</li>
                                                             <li> All above amounts are inclusive of Taxes.</li>
-                                                            <li> Purchase Order and all Payments should be made in the name of "Business Apps".</li>
-                                                            <li> Terms & conditions * of the services are applicable as mentioned on www.businessapps.co.in.</li>
+                                                            <li> Purchase Order and all Payments should be made in the name of "Edynamics Business Services LLP."</li>
+                                                            <li> Terms & conditions * of the services are applicable as mentioned on www.edynamics.co.in.</li>
                                                         </ul>	
                                                     </td>
                                                 </tr>
@@ -772,12 +775,12 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                                 <tr>
                                                     <td style="width:299px;" style="border-right:1px solid #000">
                                                         <ul>
-                                                            Kindly pay by cheque / DD in favor of <b> Business Apps. </b> payable at<br>
+                                                            Kindly pay by cheque / DD in favor of <b> Edynamics Business Services LLP. </b> payable at<br>
                                                             <b>PUNE</b> immediately on receipt of this invoice<br>
                                                             <b>Bank Name</b>&nbsp;:&nbsp;<?php echo ucwords($owndetails->bank_name); ?>,&nbsp;&nbsp;<b>Branch Name</b>&nbsp;:&nbsp;<?php echo ucwords($owndetails->branch_name); ?> <br>
                                                             <b>Account Type</b>&nbsp;:&nbsp;<?php echo ucwords($owndetails->accountlist->account_type); ?>,&nbsp;&nbsp;<b>Account No.</b>&nbsp;:&nbsp;<?php echo ucwords($owndetails->account_no); ?> <br>
                                                             <b>IFSC Code</b>&nbsp;:&nbsp;<?php echo ucwords($owndetails->ifsc_code); ?>,&nbsp;&nbsp;<b>MICR Code</b>&nbsp;:&nbsp;<?php echo ucwords($owndetails->micr_code); ?> <br>
-                                                            <b>Corporate No.</b>&nbsp;:&nbsp;+91 - 8657 33 77 33
+                                                            <b>Corporate No.</b>&nbsp;:&nbsp;+91 -  9595 01 80 00
                                                         </ul>
                                                     </td>												
                                                 </tr>										
@@ -787,11 +790,11 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                     <td width="200">
                                         <table width="100%" align="right" cellspacing="0" cellpadding="0" border="0" >
                                             <tbody>
-                                                <tr><td style="width: 200px;" align="center">For Business Apps</td></tr>
+                                                <tr><td style="width: 200px;" align="center">For Edynamics Business Services LLP</td></tr>
                                                 <tr>
 
                                                     <td style="width:200px;" align="center">
-                                                        <!--<span style="width: 130px;text-align: center;">For Business Apps</span>-->
+                                                        <!--<span style="width: 130px;text-align: center;">For Edynamics Business Services LLP.</span>-->
                                                         <img src="<?php echo $uploads_dir; ?>stamp.png" style="width:100px;height:auto;margin-bottom: 12px;">
                                                          <!--<span style="width: 130px;padding-top: 5px;margin-top: 5px;text-align: center;">Authorised Signatory</span>-->
                                                     </td>												
