@@ -92,8 +92,9 @@ table{ border-collapse:collapse;} table td{ border-collapse:collapse;}
                           </tbody>
                         </table></td>
                       <td align="right" width="150">
-                          <img src="<?php echo $uploads_dir;?>bms.png"  style="width: 120px;height: auto;"/><br>
-                          <!--<img src="<?php echo $uploads_dir;?>Nextedge.png"  style="width: 120px;height: auto;"/>-->
+                          <img src="<?php echo $uploads_dir;?>bms.png"  style="width: 120px;height: 50px;"/>
+                          <br>
+                          <img src="<?php echo $uploads_dir;?>Nextedge.png"  style="width: 120px;height: auto;"/>
                       </td>
                     </tr>
                     
