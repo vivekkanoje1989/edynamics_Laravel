@@ -190,10 +190,11 @@ class UserController extends Controller {
             'mobile_number' => $input['career']['mobile_number'],
             'email_id' => $input['career']['email_id'],
             'career_id' => $input['career']['career_id'],
-            'resume_file_name' => $resume_file_name
+            'resume_file_name' => $resume_file_name,
+             'created_date'=>   date('Y-m-d'),
+             'created_at'=>   date('Y-m-d h:i:s'),
         ];
-        print_r($input);
-        exit;
+        
         $result = WebCareersApplications::create($post);
         if (!empty($result)) {
             return json_encode(['result' => $result, 'status' => true]);
