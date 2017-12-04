@@ -192,7 +192,7 @@ class UserController extends Controller {
             'career_id' => $input['career']['career_id'],
             'resume_file_name' => $resume_file_name
         ];
-        print_r($post);
+        print_r($input);
         exit;
         $result = WebCareersApplications::create($post);
         if (!empty($result)) {
