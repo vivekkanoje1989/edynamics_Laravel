@@ -756,7 +756,7 @@ table{ border-collapse:collapse;} table td{ border-collapse:collapse;}
                                                             <b>Bank Name</b>&nbsp;:&nbsp;<?php echo ucwords($owndetails->bank_name);?>,&nbsp;&nbsp;<b>Branch Name</b>&nbsp;:&nbsp;<?php echo ucwords($owndetails->branch_name);?> <br>
                                                             <b>Account Type</b>&nbsp;:&nbsp;<?php echo ucwords($owndetails->accountlist->account_type);?>,&nbsp;&nbsp;<b>Account No.</b>&nbsp;:&nbsp;<?php echo ucwords($owndetails->account_no);?> <br>
                                                             <b>IFSC Code</b>&nbsp;:&nbsp;<?php echo ucwords($owndetails->ifsc_code);?>,&nbsp;&nbsp;<b>MICR Code</b>&nbsp;:&nbsp;<?php echo ucwords($owndetails->micr_code);?> <br>
-                                                            <b>Corporate No.</b>&nbsp;:&nbsp;+91 - 8657 33 77 33
+                                                            <b>Corporate No.</b>&nbsp;:&nbsp;+91 - 9595 01 80 00
                                                         </ul>
                                                     </td>												
                                                 </tr>										
