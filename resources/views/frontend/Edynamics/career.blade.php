@@ -28,234 +28,27 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <div class="panel panel-default post-panel wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="panel-heading">
-                        <div class="red-head">PHP Developer</div>
-                    </div>
-                    <div  class="post-date bg-blue">Job Posting Date:<small>21-01-2017</small></div>
-                    <div class="panel-body">
-                        <div class="row m0">
-                            <div class="col-lg-12 col-md-12 col-sm-12 pr0 col-xs-12">
-                                <p class=""><b>Location:</b> Pune</p>
-                                <p class=""><b> Eligibility criteria:</b> Bachelor Degree in Computers </p>
-                                <p class=""><b> Experience:</b> 2 - 3 Years</p>
-                                <p class=""><b> Skills:</b> PHP, Mysql,Jquery, Javascript, MVC Frameworks(Codeigniter / Laravel), <b>AngularJs Mandatory</b></p>
-                                <p><b>Application Closed by:</b> 31-12-2017</p>
+            <?php foreach ($carrier as $career) { ?>
+                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                    <div class="panel panel-default post-panel wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="panel-heading">
+                            <div class="red-head"><b><?php echo $career->job_title; ?></b></div>
+                        </div>
+                        <div  class="post-date bg-blue">Job Posting Date:<small><b><?php echo $career->created_date; ?></b></small></div>
+                        <div class="panel-body">
+                            <div class="row m0">
+                                <div class="col-lg-12 col-md-12 col-sm-12 pr0 col-xs-12">
+                                    <p class=""><b>Location:</b> <?php echo $career->job_locations; ?></p>
+                                    <p class=""><b> Eligibility criteria:</b><?php echo $career->job_eligibility; ?></p>
+                                    <p class=""><b> Responsibilities:</b> <?php echo $career->job_responsibilities; ?></p>
+                                    <p><b>Application Closed by:</b><?php echo $career->application_close_date; ?></p>
+                                </div>
                             </div>
                         </div>
+                        <div	 class=" text-center p0  panel-footer"><button  ng-click="openModal(<?php echo $career->id; ?>)"  class="btn apply btn-default" >Apply</button></div>
                     </div>
-                    <div	 class=" text-center p0  panel-footer"><button  ng-click="openModal()"  class="btn apply btn-default" >Apply</button></div>
                 </div>
-            </div>
-            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <div class="panel panel-default post-panel wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="panel-heading">
-                        <div class="red-head">Senior PHP Developer</div>
-                    </div>
-                    <div  class="post-date bg-blue">Job Posting Date:<small>21-01-2017</small></div>
-                    <div class="panel-body">
-                        <div class="row m0">
-                            <div class="col-lg-12 col-md-12 col-sm-12 pr0 col-xs-12">
-                                <p class=""><b>Location:</b> Pune</p>
-                                <p class=""><b> Eligibility criteria:</b> Bachelor Degree in Computers </p>
-                                <p class=""><b> Experience:</b> 2 - 4 Years</p>
-                                <p class=""><b> Skills:</b> PHP, Mysql,Jquery, Javascript, MVC Frameworks(Codeigniter / Laravel), <b>AngularJs Mandatory</b></p>
-                                <p><b>Application Closed by:</b> 31-12-2017</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div	 class=" text-center p0  panel-footer"><a ng-click="openModal()"  class="btn apply btn-default"  >Apply</a></div>
-                </div>
-            </div>
-
-            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <div class="panel panel-default post-panel wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="panel-heading">
-                        <div class="red-head">Lead PHP Developer</div>
-                    </div>
-                    <div  class="post-date bg-blue">Job Posting Date:<small>21-01-2017</small></div>
-                    <div class="panel-body">
-                        <div class="row m0">
-                            <div class="col-lg-12 col-md-12 col-sm-12 pr0 col-xs-12">
-
-                                <p class=""><b>Location:</b> Pune</p>
-                                <p class=""><b> Eligibility criteria:</b> Bachelor Degree in Computers </p>
-                                <p class=""><b> Experience:</b> 3 - 5 Years</p>
-                                <p class=""><b> Skills:</b> PHP, Mysql,Jquery, Javascript, MVC Frameworks(Codeigniter / Laravel), <b>AngularJs Mandatory</b></p>
-                                <p><b>Application Closed by:</b> 31-12-2017</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div	 class=" text-center p0  panel-footer"><a ng-click="openModal()" class="btn apply btn-default" >Apply</a></div>
-                </div>
-            </div>
-
-
-            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <div class="panel panel-default post-panel wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="panel-heading">
-                        <div class="red-head">          
-                            Lead Android Developer
-                        </div>
-                    </div>
-                    <div  class="post-date bg-blue">Job Posting Date:<small>21-01-2017</small></div>
-                    <div class="panel-body">
-                        <div class="row m0">
-                            <div class="col-lg-12 col-md-12 col-sm-12 pr0 col-xs-12">
-
-                                <p class=""><b>Location:</b> Pune</p>
-                                <p class=""><b> Eligibility criteria:</b> Bachelor Degree in Computers </p>
-                                <p class=""><b> Experience:</b>3 - 5 Years</p>
-                                <p class=""><b> Skills:</b> JAVA, Android SDK, APIS, Material Design, Ionic Framework, AngularJs</p>
-                                <p><b>Application Closed by:</b> 31-12-2017</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div	 class=" text-center p0  panel-footer"><a ng-click="openModal()"  class="btn apply btn-default"  >Apply</a></div>
-                </div>
-            </div>
-
-
-            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <div class="panel panel-default post-panel wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="panel-heading">
-                        <div class="red-head">          
-                            IOS Developer
-                        </div>
-                    </div>
-                    <div  class="post-date bg-blue">Job Posting Date:<small>21-01-2017</small></div>
-                    <div class="panel-body">
-                        <div class="row m0">
-                            <div class="col-lg-12 col-md-12 col-sm-12 pr0 col-xs-12">
-
-                                <p class=""><b>Location:</b> Pune</p>
-                                <p class=""><b> Eligibility criteria:</b> Bachelor Degree in Computers </p>
-                                <p class=""><b> Experience:</b>2 - 3 Years</p>
-                                <p class=""><b> Skills:</b> IOS, Objective C, Swift, Design Guidelines, Core Text, 
-                                    Core Animation, Core Data, Git and GitHub</p>
-                                <p><b>Application Closed by:</b> 31-12-2017</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div	 class=" text-center p0  panel-footer"><a ng-click="openModal()"  class="btn apply btn-default" >Apply</a></div>
-                </div>
-            </div>
-
-            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <div class="panel panel-default post-panel wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="panel-heading">
-                        <div class="red-head">Application / Client Supprot Executive (Semi Voice)</div>
-                    </div>
-                    <div  class="post-date bg-blue">Job Posting Date:<small>21-01-2017</small></div>
-                    <div class="panel-body">
-                        <div class="row m0">
-                            <div class="col-lg-12 col-md-12 col-sm-12 pr0 col-xs-12">
-
-                                <p class=""><b>Location:</b> Pune</p>
-                                <p class=""><b> Eligibility criteria:</b> Bachelor Degree in Computers </p>
-                                <p class=""><b> Experience:</b> 1 - 3 Years</p>
-                                <p class=""><b> Skills:</b> Basic Knowledge of PHP,Communication Skill, Email Writing,
-                                    Telephone Etiquette.</p>
-                                <p><b>Application Closed by:</b> 31-12-2017</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div	 class=" text-center p0  panel-footer"><a ng-click="openModal()"  class="btn apply btn-default" >Apply</a></div>
-                </div>
-            </div>
-
-            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <div class="panel panel-default post-panel wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="panel-heading">
-                        <div class="red-head">Receptionist Cum Tele caller</div>
-                    </div>
-                    <div  class="post-date bg-blue">Job Posting Date:<small>21-01-2017</small></div>
-                    <div class="panel-body">
-                        <div class="row m0">
-                            <div class="col-lg-12 col-md-12 col-sm-12 pr0 col-xs-12">
-
-                                <p class=""><b>Location:</b> Pune</p>
-                                <p class=""><b> Eligibility criteria:</b> HSC Pass</p>
-                                <p class=""><b> Experience:</b> 0 - 2 Years</p>
-                                <p class=""><b> Skills:</b>Communication, Presentable, Telephone Etiquette, Basic Computer knowledge</p>
-                                <p><b>Application Closed by:</b> 31-12-2017</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div	 class=" text-center p0  panel-footer"><a ng-click="openModal()"  class="btn apply btn-default" >Apply</a></div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <div class="panel panel-default post-panel wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="panel-heading">
-                        <div class="red-head">          
-                            Tele caller / Lead generation Executive
-                        </div>
-                    </div>
-                    <div  class="post-date bg-blue">Job Posting Date:<small>21-01-2017</small></div>
-                    <div class="panel-body">
-                        <div class="row m0">
-                            <div class="col-lg-12 col-md-12 col-sm-12 pr0 col-xs-12">
-
-                                <p class=""><b>Location:</b> Bangalore</p>
-                                <p class=""><b> Eligibility criteria:</b> HSC Pass</p>
-                                <p class=""><b> Experience:</b> 0 - 2 Years</p>
-                                <p class=""><b> Skills:</b>Communication, cold calling,  Telephone Etiquette, Basic Computer knowledge</p>
-                                <p><b>Application Closed by:</b> 31-12-2017</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div	 class=" text-center p0  panel-footer"><a ng-click="openModal()" class="btn apply btn-default" >Apply</a></div>
-                </div>
-            </div>
-
-            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <div class="panel panel-default post-panel wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="panel-heading">
-                        <div class="red-head">          
-                            Area Sales Manager
-                        </div>
-                    </div>
-                    <div  class="post-date bg-blue">Job Posting Date:<small>21-01-2017</small></div>
-                    <div class="panel-body">
-                        <div class="row m0">
-                            <div class="col-lg-12 col-md-12 col-sm-12 pr0 col-xs-12">
-
-                                <p class=""><b>Location:</b> Bangalore</p>
-                                <p class=""><b> Eligibility criteria:</b>MBA</p>
-                                <p class=""><b> Experience:</b>1 - 3 Years</p>
-                                <p class=""><b> Skills:</b> Communication,B2B Sales, IT Sales Field Work.</p>
-                                <p><b>Application Closed by:</b> 31-12-2017</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div	 class=" text-center p0  panel-footer"><a ng-click="openModal()"  class="btn apply btn-default"  >Apply</a></div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <div class="panel panel-default post-panel wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="panel-heading">
-                        <div class="red-head">          
-                            Administrator
-                        </div>
-                    </div>
-                    <div  class="post-date bg-blue">Job Posting Date:<small>21-01-2017</small></div>
-                    <div class="panel-body">
-                        <div class="row m0">
-                            <div class="col-lg-12 col-md-12 col-sm-12 pr0 col-xs-12">
-
-                                <p class=""><b>Location:</b> Pune</p>
-                                <p class=""><b> Eligibility criteria:</b>MBA</p>
-                                <p class=""><b> Experience:</b>1 - 2 Years</p>
-                                <p class=""><b> Skills:</b> Linux Administration, Server Administration</p>
-                                <p><b>Application Closed by:</b> 31-12-2017</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div	 class=" text-center p0  panel-footer"><a ng-click="openModal()"  class="btn apply btn-default" >Apply</a></div>
-                </div>
-            </div>
+            <?php } ?>
         </div>
 </section>
 
@@ -272,38 +65,48 @@
             </div>
             <!--Body-->
             <div class="modal-body mb-0">
-                <form name="careerForm" ng-submit="careerForm.$valid && careerforms(career)">
+                <form name="careerForm" novalidate ng-submit="careerForm.$valid && doApplicantAction(career, career.resumeFile)" enctype="multipart/form-data">
+                    <input type="hidden" name="career_id" id='career_id' ng-model="career.career_id">
                     <div class="md-form form-sm"> <i class="fa fa-envelope prefix"></i>
                         <input type="text" id="form19" name="first_name" ng-model="career.first_name" class="form-control" required>
                         <label for="form19">First name</label>
                         <div ng-show="sbtBtn" ng-messages="careerForm.first_name.$error">
-                            <span ng-message="required"></span>
+                            <span ng-show="careerForm.first_name.$error.required" ng-message="required" class="sp-error">First name is required</span>
                         </div>
                     </div>
                     <div class="md-form form-sm"> <i class="fa fa-envelope prefix"></i>
                         <input type="text" id="last_name" name="last_name" ng-model="career.last_name" class="form-control" required>
                         <label for="last_name">Last name</label>
                         <div ng-show="sbtBtn" ng-messages="careerForm.last_name.$error">
-                            <span ng-message="required"></span>
+                            <span ng-show="careerForm.last_name.$error.required" ng-message="required" class="sp-error">Last name is required</span>
                         </div>
                     </div>
                     <div class="md-form form-sm"> <i class="fa fa-lock prefix"></i>
                         <input type="text" id="form20" name="email_id"  ng-model="career.email_id"  class="form-control" required>
-                        <label for="form20">Your email</label>
+                        <label for="form20">Email Id</label>
                         <div ng-show="sbtBtn" ng-messages="careerForm.email_id.$error">
-                            <span ng-message="required"></span>
+                            <span ng-show="careerForm.email_id.$error.required" ng-message="required" class="sp-error">Last name is required</span>
                         </div>
                     </div>
+                    <div class="md-form form-sm"> <i class="fa fa-mobile prefix"></i>
+                        <input type="text" id="form20" name="mobile_number"  ng-model="career.mobile_number"  class="form-control" required>
+                        <label for="form20">Contact Number</label>
+                        <div ng-show="sbtBtn" ng-messages="careerForm.mobile_number.$error">
+                            <span ng-show="careerForm.mobile_number.$error.required"  ng-message="required" class="sp-error">Mobile number is required</span>
+                        </div>
+                    </div>
+                    <!---->
                     <div class="form-group md-form">
-                        <input type="file" name="resume" ng-model="career.name" required class="file">
-                        <div class="input-group col-xs-12 browse"> <span class="input-group-btn">
+                        <input type="file" ngf-select name="resumeFile" id="resumeFile" ng-model-options="{ allowInvalid: true, debounce: 300 }"  ng-model="career.resumeFile" class="form-control" ngf-model-invalid="errorFile" required>
+                        <!--<input type="file"  file-upload  id="resumeFile"  name="resumeFile" ng-model="resumeFile"    >-->
+<!--                        <div class="input-group col-xs-12 browse"> <span class="input-group-btn">
                                 <button class="input-sm btn btn-info ht40 m0 waves-effect waves-light" type="button"><i class="fa  fa-upload"></i> Resume</button>
                             </span>
-                            <input type="text"  class="form-control input-sm no_border" disabled placeholder="No file Selected" required>
-                        </div>
-                        <div ng-show="sbtBtn" ng-messages="careerForm.name.$error">
-                            <span ng-message="required"></span>
-                        </div>
+                            <input type="text" name="resume"   class="form-control input-sm no_border" disabled placeholder="No file Selected" >
+                        </div>-->
+<!--                        <div ng-show="sbtBtn" >
+                            <span ng-if="!careerForm.resumeFile.$valid" class="sp-error">Resume is required</span>
+                        </div>-->
                     </div>
                     <div class="text-center mt-1-half">
                         <button class="btn btn-default mb-2" ng-click="sbtBtn = true">Apply <i class="fa fa-send ml-1"></i></button>
@@ -314,12 +117,3 @@
     </div>
 </div>
 @endsection() 
-<script>
-            jQuery(document).on('click', '.browse', function () {
-                var file = $(this).parent().parent().parent().find('.file');
-                file.trigger('click');
-            });
-            jQuery(document).on('change', '.file', function () {
-                $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, ''));
-            });
-</script>
