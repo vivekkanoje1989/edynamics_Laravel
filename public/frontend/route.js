@@ -45,7 +45,7 @@ angular.module('app').config(['$routeProvider', '$locationProvider', function ($
                 })
                 .when('/news-details/:newsId', {
                     templateUrl: function (urlattr) {
-           
+
                         return 'website/news-details/' + urlattr.newsId;
                     },
                     controller: 'AppCtrl'
@@ -100,7 +100,7 @@ app.controller('AppCtrl', ['$scope', 'Upload', '$timeout', '$http', '$location',
         $scope.submitted = false;
         $scope.empl = true;
         var baseUrl = 'website/';
-     
+
         $scope.getPostsDropdown = function () {
             $http.get(baseUrl + 'jobPost').then(function (response) {
                 $scope.jobPostRow = response.data.result;
@@ -391,15 +391,14 @@ app.controller('AppCtrl', ['$scope', 'Upload', '$timeout', '$http', '$location',
             $scope.career = {};
             $scope.career.career_id = career_id;
         }
-        
-       
+
+
 
         $scope.doApplicantAction = function (career, resumeFileName)
         {
 //            var v = grecaptcha.getResponse();
 //            if (v.length != '0') {
-          
-             console.log(resumeFileName);
+
             var url = baseUrl + 'register_applicant';
             var data = {'career': career, 'resumeFileName': resumeFileName};
             resumeFileName.upload = Upload.upload({
@@ -408,14 +407,20 @@ app.controller('AppCtrl', ['$scope', 'Upload', '$timeout', '$http', '$location',
                 data: data
             });
             resumeFileName.upload.then(function (response) {
-                $timeout(function () {
-                    $scope.career = {};
-                    $scope.careerForm.$setPristine();
-                    $scope.submitted = true;
+
+                $scope.career = {};
+                $scope.careerForm.$setPristine();
+                $scope.submitted = true;
 //                    grecaptcha.reset();
-                    $scope.sbtBtn = false;
+                $scope.careerbtn = true;
+                $scope.successMssg1 = true;
+                $scope.sbtBtn = false;
+                $timeout(function () {
+                    $('#login-box').modal('toggle');
+                    $scope.successMssg1 = false;
                     $scope.recaptcha = '';
-                });
+                    $scope.careerbtn = false;
+                }, 5000);
             }, function (response) {
                 if (response.status !== 200) {
                     $scope.err_msg = "Please Select image for upload";
@@ -481,14 +486,14 @@ app.directive('validFile', function () {
 
 app.directive('fileUpload', function () {
     return {
-        scope: true,        //create a new scope
+        scope: true, //create a new scope
         link: function (scope, el, attrs) {
             el.bind('change', function (event) {
                 var files = event.target.files;
-                for (var i = 0;i<files.length;i++) {
+                for (var i = 0; i < files.length; i++) {
                     console.log(files[i])
-                    scope.$emit("fileSelected", { file: files[i] });
-                }                                       
+                    scope.$emit("fileSelected", {file: files[i]});
+                }
             });
         }
     };

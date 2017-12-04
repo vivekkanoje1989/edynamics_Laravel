@@ -69,7 +69,7 @@
                     <input type="hidden" name="career_id" id='career_id' ng-model="career.career_id">
                     <div class="md-form form-sm"> <i class="fa fa-envelope prefix"></i>
                         <input type="text" id="form19" name="first_name" ng-model="career.first_name" class="form-control" required>
-                        <label for="form19">First name</label>
+                        <label for="form19">First name{{sbtBtn}}</label>
                         <div ng-show="sbtBtn" ng-messages="careerForm.first_name.$error">
                             <span ng-show="careerForm.first_name.$error.required" ng-message="required" class="sp-error">First name is required</span>
                         </div>
@@ -104,12 +104,15 @@
                             </span>
                             <input type="text" name="resume"   class="form-control input-sm no_border" disabled placeholder="No file Selected" >
                         </div>-->
-<!--                        <div ng-show="sbtBtn" >
+                        <div ng-show="sbtBtn" ng-messages="careerForm.resumeFile.$error">
                             <span ng-if="!careerForm.resumeFile.$valid" class="sp-error">Resume is required</span>
-                        </div>-->
+                        </div>
+                    </div>
+                    <div class="alert alert-success" ng-if="successMssg1">
+                        <strong>Thank you for choosing Edynamics to work with. </strong>
                     </div>
                     <div class="text-center mt-1-half">
-                        <button class="btn btn-default mb-2" ng-click="sbtBtn = true">Apply <i class="fa fa-send ml-1"></i></button>
+                        <button class="btn btn-default mb-2" ng-disabled="careerbtn" ng-click="sbtBtn = true">Apply <i class="fa fa-send ml-1"></i></button>
                     </div>
                 </form>
             </div>
