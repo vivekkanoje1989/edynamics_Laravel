@@ -56,6 +56,33 @@
                         <?php } ?>  
                     </ul>
                 </div>
+                <a class="twitter-timeline"  href="https://twitter.com/search?q=edynamicsindia" data-widget-id="770585273830739968">Tweets about edynamicsindia</a>
+                   <script>
+                       !function (d, s, id) {
+                           var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                           if (!d.getElementById(id)) {
+                               js = d.createElement(s);
+                               js.id = id;
+                               js.src = p + "://platform.twitter.com/widgets.js";
+                               fjs.parentNode.insertBefore(js, fjs);
+                           }
+                       }(document, "script", "twitter-wjs");
+                   </script>
+
+                   <hr style="border: 1px dotted #ddd;">
+                  <div id="fb-root"></div>
+                   <script>
+                           (function(d, s, id) {
+                         var js, fjs = d.getElementsByTagName(s)[0];
+                         if (d.getElementById(id)) return;
+                         js = d.createElement(s); js.id = id;
+                         js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.7";
+                         fjs.parentNode.insertBefore(js, fjs);
+                       }(document, 'script', 'facebook-jssdk'));
+                   </script>
+
+
+                   <center><div class="fb-page" data-href="https://www.facebook.com/edynamicsindia" data-tabs="timeline" data-height="600" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"><blockquote cite="https://www.facebook.com/edynamicsindia" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/edynamicsindia">edynamics</a></blockquote></div></center>
             </div>
         </div>
     </div>

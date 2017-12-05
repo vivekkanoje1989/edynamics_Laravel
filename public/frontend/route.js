@@ -343,46 +343,51 @@ app.controller('AppCtrl', ['$scope', 'Upload', '$timeout', '$http', '$location',
 
 
         $scope.doContactAction = function (contact) {
-            var v = grecaptcha.getResponse();
-            if (v.length != '0') {
-                $scope.contactBtndisabled = true;
-                $http.post(baseUrl + 'doContactAction', {contact: contact}).then(function (response) {
-                    if (response.status) {
-                        $timeout(function () {
-                            $scope.contact = '';
-                            $scope.sbtBtn = false;
-                            $scope.successMssg = true;
-                            grecaptcha.reset();
-                        }, 1000);
-                        $timeout(function () {
-                            $scope.contactBtndisabled = false;
-                            $scope.successMssg = false;
-                        }, 2500);
-                    }
+//            var v = grecaptcha.getResponse();
+//            if (v.length != '0') {
+            $scope.contactBtndisabled = true;
+            $http.post(baseUrl + 'doContactAction', {contact: contact}).then(function (response) {
+                if (response.status) {
+                    $timeout(function () {
+                        $scope.contact = '';
+                        $scope.sbtBtn = false;
+                        $scope.successMssg = true;
+//                            grecaptcha.reset();
+                    }, 1000);
+                    $timeout(function () {
+                        $scope.contactBtndisabled = false;
+                        $scope.successMssg = false;
+                    }, 2500);
+                }
 
-                });
-            } else {
-                $scope.recaptcha = "Please revalidate captcha";
-            }
+            });
+//            } else {
+//                $scope.recaptcha = "Please revalidate captcha";
+//            }
         }
 
         $scope.requestDemos = function (request) {
-            var v = grecaptcha.getResponse();
-            if (v.length != '0') {
-                $scope.requestBtn = true;
-                $timeout(function () {
-                    $scope.request = '';
-                    $scope.sbtBtn1 = false;
-                    $scope.requestMssg = true;
-                }, 1000);
-                $timeout(function () {
-                    $scope.requestBtn = false;
-                    $scope.requestMssg = false;
-                }, 2500);
+//            var v = grecaptcha.getResponse();
+//            if (v.length != '0') {
+            $scope.requestBtn = true;
+            $http.post(baseUrl + 'requestDemos', {request: request}).then(function (response) {
+                if (response.status) {
+                    $timeout(function () {
+                        $scope.request = '';
+                        $scope.sbtBtn1 = false;
+                        $scope.requestMssg = true;
+                    }, 1000);
+                    $timeout(function () {
+                        $scope.requestBtn = false;
+                        $scope.requestMssg = false;
+                    }, 1500);
+                }
 
-            } else {
-                $scope.recaptcha = "Please revalidate captcha";
-            }
+            });
+
+//            } else {
+//                $scope.recaptcha = "Please revalidate captcha";
+//            }
         }
 
 

@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace App\Classes;
 
 use DB;
@@ -17,7 +18,7 @@ use App\Models\backend\Employee;
 class CommonFunctions {
 
     public static function getMacAddress() {
-        exec('netstat -ie', $result);         
+        exec('netstat -ie', $result);
         if (is_array($result) && !empty($result)) {
             $iface = array();
             foreach ($result as $key => $line) {
@@ -30,7 +31,7 @@ class CommonFunctions {
                         }
                     }
                 }
-            }            
+            }
             //return $iface[0]['mac'];
             return "38:D5:47:18:91:88";
         } else {
@@ -61,7 +62,7 @@ class CommonFunctions {
         $data = \Location::get("175.100.138.136");
         $otherInfoArray = "Country:$data->countryName,State:$data->regionName,City:$data->cityName,Latitude:$data->latitude,Logitude:$data->longitude";
         $otherInfo = iconv('UTF-8', 'ISO-8859-1//TRANSLIT//IGNORE', $otherInfoArray);
-        DB::select('CALL employees_login_logs(' . $empId . ',"' . $mobile . '","' . $password . '","' . $loginDateTime . '",' . $loginStatus . ',' . $loginFailureReason . ','.$platformType.',"' . $loginIP . '","' . $loginBrowser . '","' . $loginMacId . '","' . $otherInfo . '")');
+        DB::select('CALL employees_login_logs(' . $empId . ',"' . $mobile . '","' . $password . '","' . $loginDateTime . '",' . $loginStatus . ',' . $loginFailureReason . ',' . $platformType . ',"' . $loginIP . '","' . $loginBrowser . '","' . $loginMacId . '","' . $otherInfo . '")');
     }
 
     public static function insertMainTableRecords($loggedInUserId) {
@@ -76,11 +77,11 @@ class CommonFunctions {
         $create = ['updated_date' => date('Y-m-d'), 'updated_by' => $loggedInUserId, 'updated_IP' => $_SERVER['REMOTE_ADDR'], 'updated_browser' => $_SERVER['HTTP_USER_AGENT'], 'updated_mac_id' => $getMacAddress];
         return $create;
     }
-    
+
     public static function deleteMainTableRecords($loggedInUserId) {
         $getMacAddress = CommonFunctions::getMacAddress();
         // $create = ['deleted_status'=> '1','deleted_date' => date('Y-m-d'), 'deleted_by' => $loggedInUserId, 'deleted_IP' => $_SERVER['REMOTE_ADDR'], 'deleted_browser' => $_SERVER['HTTP_USER_AGENT'], 'deleted_mac_id' => $getMacAddress];
-        $create = ['deleted_status'=> '1', 'deleted_by' => $loggedInUserId, 'deleted_IP' => $_SERVER['REMOTE_ADDR'], 'deleted_browser' => $_SERVER['HTTP_USER_AGENT'], 'deleted_mac_id' => $getMacAddress];
+        $create = ['deleted_status' => '1', 'deleted_by' => $loggedInUserId, 'deleted_IP' => $_SERVER['REMOTE_ADDR'], 'deleted_browser' => $_SERVER['HTTP_USER_AGENT'], 'deleted_mac_id' => $getMacAddress];
         return $create;
     }
 
@@ -93,16 +94,16 @@ class CommonFunctions {
     }
 
     public static function sendMail($userName, $password, $data) {
-        
+
         try {
-        
+
             config(['mail.username' => $userName, 'mail.password' => $password]);
-            
+
             Mail::send('layouts.backend.email_template', $data, function ($message) use ($data) {
 
                 $tomail = '"$data[to]"';
                 $ccmail = '"$data[cc]"';
-                
+
                 $message->from($data['fromEmail'], $data['fromName']);
                 $message->subject($data['subject']);
                 $message->to('vivekkanoje1989@gmail.com')->cc('vivekn@nextedgegroup.co.in');
@@ -118,7 +119,7 @@ class CommonFunctions {
     }
 
     public static function templateData($alertdata) {
-       
+
         $customer_id = $alertdata['customer_id'];
         $employee_id = $alertdata['employee_id'];
         $client_id = $alertdata['client_id'];
@@ -126,19 +127,19 @@ class CommonFunctions {
         $eventid_customer = !empty($alertdata['event_id_customer']) ? $alertdata['event_id_customer'] : "0";
         $eventid_employee = !empty($alertdata['event_id_employee']) ? $alertdata['event_id_employee'] : "0";
         $template_setting_employee = $alertdata['template_setting_employee'];
-		if(!empty($alertdata['cust_attached_file']))
-			$cust_attachedfile = $alertdata['cust_attached_file'];
-	   else
-		   $cust_attachedfile = "";
-		if(!empty($alertdata['emp_attached_file']))
-			$emp_attachedfile = $alertdata['emp_attached_file'];
-	   else
-		   $emp_attachedfile = "";
-		   
+        if (!empty($alertdata['cust_attached_file']))
+            $cust_attachedfile = $alertdata['cust_attached_file'];
+        else
+            $cust_attachedfile = "";
+        if (!empty($alertdata['emp_attached_file']))
+            $emp_attachedfile = $alertdata['emp_attached_file'];
+        else
+            $emp_attachedfile = "";
+
         //$model_id = $alertdata['model_id'];
         $car_image = "https://s3-ap-south-1.amazonaws.com/lms-auto-common/images/car.png";
         $loc_image = "https://s3-ap-south-1.amazonaws.com/lms-auto-common/images/loc2.png";
-       
+
         if (!empty($customer_id > 0)) {
             $template_settings_customer = TemplatesSetting::where(['client_id' => $client_id, 'templates_event_id' => $eventid_customer, 'template_for' => 1])->first();
             if (!empty($template_settings_customer)) {
@@ -149,7 +150,7 @@ class CommonFunctions {
                 }
             }
         }
-        
+
         //employee  
         if (!empty($employee_id > 0)) {
             $template_settings_employee = TemplatesSetting::where(['id' => $template_setting_employee])->first();
@@ -163,7 +164,7 @@ class CommonFunctions {
             }
         }
 
-       
+
         $email_from_id = "";
         if (!empty($template_employee)) {
             $emp_emailTemplate = $template_employee->email_body;
@@ -174,7 +175,7 @@ class CommonFunctions {
             $emp_emailTemplate = "";
             $emp_smsTemplate = "";
         }
-        
+
         if (!empty($template_customer)) {
             $cust_emailTemplate = $template_customer->email_body;
             $cust_smsTemplate = $template_customer->sms_body;
@@ -220,7 +221,7 @@ class CommonFunctions {
         }
 
         if ($employee_id > 0) {
-            $employee = Employee::where('id','=', $employee_id)->first();
+            $employee = Employee::where('id', '=', $employee_id)->first();
             if (empty($employee->office_email_id)) {
                 $emp_email = $employee->personal_email1;
             } else {
@@ -241,8 +242,8 @@ class CommonFunctions {
         if ($customer_id > 0) {
             $customer_contact = \App\Models\CustomersContact::where('customer_id', $customer_id)->first();
 
-            $customer_data =Customer::where('id', $customer_id)->first();
-			//echo '<pre>';print_r($customer_data);print_r($customer_contact);exit;
+            $customer_data = Customer::where('id', $customer_id)->first();
+            //echo '<pre>';print_r($customer_data);print_r($customer_contact);exit;
             $search = array('[#custName#]', '[#custMobile#]', '[#custEmail#]');
 
             $replace = array(ucwords($customer_data->first_name . ' ' . $customer_data->last_name), $customer_contact->mobile_number, $customer_contact->email_id);
@@ -275,15 +276,15 @@ class CommonFunctions {
 
         $userName = "bmstracking@edynamics.co.in"; //$emailConfig->email;
         $password = "bmstrack@2016#"; //$emailConfig->password;
-        
+
         $companyName = $client->marketing_name;
-        
-        if (!empty($customer_id > 0)) {            
+
+        if (!empty($customer_id > 0)) {
             if (!empty($template_settings_customer)) {
                 if ($template_settings_customer->email_status == 1) {
-                   
+
                     $subject = $template_customer->email_subject;
-                    $data = ['mailBody' => $cust_emailTemplate, "fromEmail" => $userName, "fromName" => $companyName, "subject" => $subject, "to" => $customer_contact->email_id, "cc" => $template_customer->email_cc_ids,"attachment"=>$cust_attachedfile];
+                    $data = ['mailBody' => $cust_emailTemplate, "fromEmail" => $userName, "fromName" => $companyName, "subject" => $subject, "to" => $customer_contact->email_id, "cc" => $template_customer->email_cc_ids, "attachment" => $cust_attachedfile];
                     $sentSuccessfully = CommonFunctions::sendMail($userName, $password, $data);
                     // echo"send".$sentSuccessfully;exit;return false;
                 }
@@ -295,29 +296,28 @@ class CommonFunctions {
                 }
             }
         }
-        
+
 
         if (!empty($employee_id > 0)) {
-           
+
             if (!empty($template_settings_employee)) {
                 if ($template_settings_employee->email_status == 1) {
 
                     $subject = $template_employee->email_subject;
-                    $data = ['mailBody' => $emp_emailTemplate, "fromEmail" => $userName, "fromName" => $companyName, "subject" => $subject, "to" => $emp_email, "cc" => $template_employee->email_cc_ids,"attachment"=>$emp_attachedfile];
+                    $data = ['mailBody' => $emp_emailTemplate, "fromEmail" => $userName, "fromName" => $companyName, "subject" => $subject, "to" => $emp_email, "cc" => $template_employee->email_cc_ids, "attachment" => $emp_attachedfile];
                     $sentSuccessfully = CommonFunctions::sendMail($userName, $password, $data);
-                    
                 }
                 if ($template_settings_employee->sms_status == 1) {
                     $mobile = $employee->username;
                     $customer = "No";
-                    $customerId = 0;                    
-                    $result = Gupshup::sendSMS($emp_smsTemplate, $mobile, $employee_id, $customer, $customerId, $isInternational, $sendingType, $smsType);                   
+                    $customerId = 0;
+                    $result = Gupshup::sendSMS($emp_smsTemplate, $mobile, $employee_id, $customer, $customerId, $isInternational, $sendingType, $smsType);
                 }
             }
-        }        
+        }
         return true;
     }
-    
+
 //    public static function templateData($alertdata) {
 //        $customer_id = $alertdata['customer_id'];
 //        $employee_id = $alertdata['employee_id'];
@@ -664,5 +664,61 @@ class CommonFunctions {
 //        }
 //        return true;
 //    }
+
+
+
+    public static function texttemplateData($alertdata, $obj_api, $request) {
+        $emailConfig = EmailConfiguration::where('id', 1)->first();
+        $isInternational = 0;
+        $sendingType = 1;
+        $smsType = "T_SMS";
+        $client_id = $alertdata['client_id'];
+        $client = \App\Models\ClientInfo::where('id', $client_id)->first();
+        if (!empty($client->project_id)) {
+            $project = Project::where('id', $client->project_id)->first();
+        }
+        $companyMarketingName = $companyGoogleMap = $companyAddress = $companyLogo = $brandColor = $displayImage = $employeeName = $employeeMobile = $employeeEmail = $mobile_number = $customerEmail = $customerName = " ";
+
+        if (!empty($client->company_logo))
+            $companyLogo = config('global.s3Path') . '/client/' . $client_id . '/' . $client->company_logo;
+
+        if (!empty($client->marketing_name))
+            $companyMarketingName = ucwords($client->marketing_name);
+
+        $companyGoogleMap = '';
+        if (!empty($client->office_addres))
+            $companyAddress = $client->office_addres;
+
+        if (!empty($client->pin_code))
+            $companyAddress .= $client->pin_code;
+
+        if (!empty($client->website)) {
+            $website = $client->website;
+        } else {
+            $website = '';
+        }
+
+        array_push($alertdata['arrExtra']['1'], $companyLogo);
+        array_push($alertdata['arrExtra']['1'], $companyMarketingName);
+        array_push($alertdata['arrExtra']['1'], $companyAddress);
+        array_push($alertdata['arrExtra']['1'], $website);
+
+        $cust_emailTemplate = $obj_api['customer_email_template'];
+        $search = $alertdata['arrExtra']['0'];
+        $replace = $alertdata['arrExtra']['1'];
+        $cust_emailTemplate = str_replace($search, $replace, $cust_emailTemplate);
+        if (!empty($emailConfig->email)) {
+            $userName = $emailConfig->email; //$emailConfig->email;
+            $password = $emailConfig->password;  //$emailConfig->password;
+        } else {
+            $userName = '';
+            $password = '';
+        }
+        
+        $data = ['mailBody' => $cust_emailTemplate, "fromEmail" => $userName, "fromName" => "", "subject" => $obj_api['customer_email_subject_line'], "to" => 'manoj@nextedgegroup.co.in', 'cc' => str_replace(' ', '', $obj_api['customer_email_cc']), 'bcc' => str_replace(' ', '', $obj_api['customer_email_bcc'])];
+        $sentSuccessfully = CommonFunctions::sendMail($userName, $password, $data);
+         return $sentSuccessfully;
+        
+    }
 
 }

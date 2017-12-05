@@ -53,6 +53,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class Project extends Eloquent {
     protected $primaryKey = 'id';
+    protected $table = 'projects';
     protected $casts = [
         'project_type_id' => 'int',
         'project_status' => 'int',

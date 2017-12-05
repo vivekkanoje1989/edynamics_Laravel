@@ -28,6 +28,7 @@ use Config;
 use DB;
 use App\Modules\ContactUs\Models\WebContactus;
 use App\Models\Contactus;
+use App\Classes\CommonFunctions;
 
 class UserController extends Controller {
 
@@ -69,6 +70,46 @@ class UserController extends Controller {
         }
     }
 
+    public function requestDemos() {
+        $postdata = file_get_contents('php://input');
+        $request = json_decode($postdata, true);
+        $templatedata['client_id'] = config('global.client_id');
+        $obj_api['customer_email_template'] = "";
+        $templatedata['customer_status'] = 1;
+        $obj_api['send_email_customer'] = 1;
+        $obj_api['customer_email_subject_line'] = "Request Demo";
+        $obj_api['customer_email_template'] = "Hello,<br/>
+                                               Requesting for demo details ,<br/><br/>
+                                               [#name#]<br/>
+                                               [#company_name#]<br/>
+                                               [#email_id#]<br/>
+                                               [#mobile_number#]<br/>
+                                               [#request_client#]<br/>
+                                               [#request_city#] <br/>";
+        $obj_api['email_id'] = "manoj@nextedgegroup.co.in";
+        $obj_api['customer_email_cc'] = "";
+        $obj_api['customer_email_bcc'] = "";
+        $templatedata['arrExtra'][0] = array(
+            '[#name#]',
+            '[#company_name#]',
+            '[#email_id#]',
+            '[#mobile_number#]',
+            '[#request_client#]',
+            '[#request_city#]',
+        );
+
+        $templatedata['arrExtra'][1] = array(
+            $request['request']['fname'],
+            $request['request']['company_name'],
+            $request['request']['email_id'],
+            $request['request']['mobile_number'],
+            $request['request']['request_client'],
+            $request['request']['request_city'],
+        );
+
+        $sentSuccessfully = CommonFunctions::texttemplateData($templatedata, $obj_api, '');
+    }
+
     public function index() {
         $testimonials = WebTestimonials::where(['web_status' => '1', 'approve_status' => '1'])->get();
         $employees = DB::table('laravel_developement_master_edynamics.mlst_bmsb_designations as db1')
@@ -77,15 +118,21 @@ class UserController extends Controller {
                         ->orderByRaw("RAND()")->get();
         $images = WebPage::where('page_name', 'index')->select('banner_images')->first();
         $currentResult = [];
-        $current = Project::join('laravel_developement_master_edynamics.mlst_bmsb_project_status as mlst_bmsb_project_status', 'mlst_bmsb_project_status.id', '=', 'projects.project_status')
+        $current = DB::table('projects')->join('laravel_developement_master_edynamics.mlst_bmsb_project_status as mlst_bmsb_project_status', 'mlst_bmsb_project_status.id', '=', 'projects.project_status')
                 ->join('project_web_pages', 'project_web_pages.project_id', '=', 'projects.id')
                 ->select('mlst_bmsb_project_status.project_status as status', 'projects.id', 'projects.project_name', 'project_web_pages.project_logo', 'project_web_pages.project_amenities_list', 'project_web_pages.short_description')
                 ->where('mlst_bmsb_project_status.project_status', '=', 'Current')
                 ->get();
+
         for ($i = 0; $i < count($current); $i++) {
-            $aminity = explode(',', $current[$i]['project_amenities_list']);
+            if (!empty($current[$i]->project_amenities_list)) {
+                $project_amenities_list = $current[$i]->project_amenities_list;
+            } else {
+                $project_amenities_list = '';
+            }
+            $aminity = explode(',', $project_amenities_list);
             $aminities = DB::table('laravel_developement_master_edynamics.mlst_bmsb_amenities')->whereIn('id', $aminity)->select('name_of_amenity')->get();
-            $result = ['id' => $current[$i]['id'], 'project_name' => $current[$i]['project_name'], 'project_logo' => $current[$i]['project_logo'], 'amenities' => $aminities];
+            $result = ['id' => $current[$i]->id, 'project_name' => $current[$i]->project_name, 'project_logo' => $current[$i]->project_logo, 'amenities' => $aminities];
             array_push($currentResult, $result);
         }
         return view('frontend.' . $this->themeName . '.index')->with(["testimonials" => $testimonials, 'employee' => $employees, 'background' => $images, 'current' => $currentResult]);
@@ -171,7 +218,7 @@ class UserController extends Controller {
 
     public function register_applicant() {
         $input = Input::all();
-        
+
         if (!empty($input['resumeFileName'])) {
             $originalName = $input['resumeFileName']->getClientOriginalName();
             if ($originalName !== 'fileNotSelected') {
@@ -191,10 +238,10 @@ class UserController extends Controller {
             'email_id' => $input['career']['email_id'],
             'career_id' => $input['career']['career_id'],
             'resume_file_name' => $resume_file_name,
-             'created_date'=>   date('Y-m-d'),
-             'created_at'=>   date('Y-m-d h:i:s'),
+            'created_date' => date('Y-m-d'),
+            'created_at' => date('Y-m-d h:i:s'),
         ];
-        
+
         $result = WebCareersApplications::create($post);
         if (!empty($result)) {
             return json_encode(['result' => $result, 'status' => true]);
