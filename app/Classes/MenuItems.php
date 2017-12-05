@@ -7,7 +7,7 @@ class MenuItems {
     public static function getMenuItems() {
         $getUrl = config('global.getUrl');
         $menulist = array(
-            1 => array('id' => 'Dashborad', 'name' => 'Dashborad', 'icon' => 'dash-img menu-icon-sz', 'micon' => 'img/dashboard.png', 'uiSrefActive' => '', 'url' => '', 'slug' => 'dashboard', 'has_submenu' => true, 'total_submenu' => 7,
+            1 => array('id' => 'Dashborad', 'name' => 'Dashboard', 'icon' => 'dash-img menu-icon-sz', 'micon' => 'img/dashboard.png', 'uiSrefActive' => '', 'url' => '', 'slug' => 'dashboard', 'has_submenu' => true, 'total_submenu' => 7,
                 'submenu_ids' => '0101,0102,0103,0104,0105,0106,0107', 'anchorClass' => 'menu-dropdown', 'submenuClass' => 'submenu', 'liClass' => 'open', 'submenu' => array(
                     1 => array('id' => '0101', 'name' => 'My Salary Slips', 'micon' => 'img/salorySlip.png', 'icon' => '', 'url' => '/employeeSalaryslip', 'slug' => 'mySalaryslip', 'uiSrefActive' => 'active', 'total_submenu' => 1),
                     2 => array('id' => '0102', 'name' => 'Request Leave', 'micon' => 'img/requestLeave.png', 'icon' => '', 'url' => '/requestLeave/index', 'slug' => 'requestLeaveIndex', 'uiSrefActive' => 'active', 'total_submenu' => 1),
@@ -380,7 +380,7 @@ class MenuItems {
                     2 => array('id' => '01202', 'name' => 'Shared With Me', 'icon' => '', 'url' => '/storagelist/index', 'slug' => 'sharedWithMe', 'uiSrefActive' => 'active', 'total_submenu' => 1),
                     3 => array('id' => '01203', 'name' => 'Recycle Bin', 'icon' => '', 'url' => '/recyclebin/index', 'slug' => 'recycleBin', 'uiSrefActive' => 'active', 'total_submenu' => 1),
                 )),
-            13 => array('name' => 'Client Info', 'icon' => 'fa fa-users thm-color circular', 'micon' => 'img/client.0.png', 'ui-sref-active' => '', 'url' => '', 'slug' => 'client', 'has_submenu' => true, 'total_submenu' => 3,
+            13 => array('name' => 'Client Info', 'icon' => 'hr-img menu-icon-sz', 'micon' => 'img/client.0.png', 'ui-sref-active' => '', 'url' => '', 'slug' => 'client', 'has_submenu' => true, 'total_submenu' => 3,
                 'submenu_ids' => '01501,01502,01503', 'anchorClass' => 'menu-dropdown', 'submenuClass' => 'submenu', 'liClass' => 'open', 'submenu' => array(
                     1 => array('id' => '01501', 'name' => 'Manage Group', 'icon' => '', 'micon' => 'img/clientgroup.png', 'url' => '/clientgroups/index', 'slug' => 'clientgroupsIndex', 'uiSrefActive' => 'active', 'total_submenu' => 1),
                     2 => array('id' => '01502', 'name' => 'Create Client', 'icon' => '', 'micon' => 'img/clientinfo.png', 'url' => '/clients/create', 'slug' => 'createClient', 'uiSrefActive' => 'active', 'total_submenu' => 1),

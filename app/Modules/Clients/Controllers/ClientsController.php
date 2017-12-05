@@ -406,6 +406,45 @@ class ClientsController extends Controller {
                    $data['gmail'] = 2;
                 }
                 
+                
+            } 
+             
+            
+           // for gmail and sms cron invoice
+          if(!empty($data['sms_service_id']) || !empty($data['gmail_service_id']) )
+                    $this->generatemanualinvoice($data);
+
+          
+        
+          
+          
+        }
+       
+        
+    }
+     public function generatecronctinvoice(){
+        
+        $data['invoice_date'] = date("Y-m-d", strtotime("first day of this month"));
+        $data['start_date'] = date("Y-m-d", strtotime("first day of previous month"));
+        $data['end_date'] = date("Y-m-d", strtotime("last day of previous month"));
+        
+        
+        $clientData =  ClientInfo::select('id')->where('deleted_status','0')->get();
+        foreach ($clientData as $client){
+            $data['client_id'] = $client_id = $client->id;
+            
+            $client_url = $client->website;
+            $url = $client_url . "/api/Companies/getCompanyid";
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POST, 0);
+            $result = curl_exec($ch);
+            curl_close($ch);
+            
+            $data['company_id'] = $result;
+            
+            $services = SubscribedService::select('service_id')->where('client_id',$client_id)->get();
+            foreach($services  as $serviceid){
                 if($serviceid->service_id == 3){
                    $data['servicestype'][] = 3;
                 }
@@ -414,17 +453,17 @@ class ClientsController extends Controller {
              
             
            // for gmail and sms cron invoice
-          if(!empty($data['sms_service_id']) || !empty($data['gmail_service_id']) )
-                    $this->generatemanualinvoice($data);
+//          if(!empty($data['sms_service_id']) || !empty($data['gmail_service_id']) )
+//                    $this->generatemanualinvoice($data);
            
            // for cloudtelephony cron invoice
             
-//           $data['generateData']['invoice_date'] = $data['invoice_date'];
-//           $data['generateData']['start_date'] = $data['start_date'];
-//           $data['generateData']['end_date'] = $data['end_date'];
-//           $data['clientId'] = $client_id;
-//            if(!empty($data['servicestype']))
-//              $this->generateCtInvoice($data);
+           $data['generateData']['invoice_date'] = $data['invoice_date'];
+           $data['generateData']['start_date'] = $data['start_date'];
+           $data['generateData']['end_date'] = $data['end_date'];
+           $data['clientId'] = $client_id;
+            if(!empty($data['servicestype']))
+              $this->generateCtInvoice($data);
           
         
           
@@ -944,7 +983,7 @@ class ClientsController extends Controller {
         $noofPrilines = $prilines->pri;
         $priPrice = $prilines->pri_price;
 
-        if (!empty($noofPrilines))
+        if(!empty($noofPrilines))
             $SubtotalPrilines = $noofPrilines * $priPrice;
 
 
@@ -1083,7 +1122,6 @@ class ClientsController extends Controller {
             $clients = json_decode($result);
         } else {
             $clients = \App\Models\ClientInfo::select('states.name as state_name', 'city.name as city_name', 'client_infos.*')->leftjoin('laravel_developement_master_edynamics.mlst_states as states', 'states.id', '=', 'client_infos.state_id')->leftjoin('laravel_developement_master_edynamics.mlst_cities as city', 'city.id', '=', 'client_infos.city_id')->where(['client_infos.id' => $clientId])->first();
-            
         }
         
         
@@ -1120,7 +1158,7 @@ class ClientsController extends Controller {
 
             $mPDF1->Output(base_path() . "/common/" . $file_name, "F");
             $awsPath = 'invoices/' . $client_id;
-                $file_name = S3::s3FileUpload(base_path() . "/common/" . $file_name, $file_name, $awsPath);
+            $file_name = S3::s3FileUpload(base_path() . "/common/" . $file_name, $file_name, $awsPath);
             //unlink($uploads_dir . $file_name);
 
 
