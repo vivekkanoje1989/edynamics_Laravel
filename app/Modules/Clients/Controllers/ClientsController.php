@@ -1110,6 +1110,7 @@ class ClientsController extends Controller {
                         'final_invoice_ammount_inword' => $final_invoice_ammount_inword,'final_invoice_ammount'=>$final_invoice_ammount, 'billmonth' => $billmonth,'HSN'=>$HSN,'last_amount'=>$last_amount,'cgst'=>$cgst,'sgst'=>$sgst]);
             $contents = (string) $view;
             $contents = $view->render();
+         
             $mPDF1->WriteHTML($contents);
 
             $file_name = "Invoicefor-$marketing_name-on-$current_datetime" . ".pdf";
@@ -1118,8 +1119,8 @@ class ClientsController extends Controller {
 
 
             $mPDF1->Output(base_path() . "/common/" . $file_name, "F");
-            //$awsPath = 'invoices/' . $client_id;
-            //$file_name = S3::s3FileUpload(base_path() . "/common/" . $file_name, $file_name, $awsPath);
+            $awsPath = 'invoices/' . $client_id;
+                $file_name = S3::s3FileUpload(base_path() . "/common/" . $file_name, $file_name, $awsPath);
             //unlink($uploads_dir . $file_name);
 
 
@@ -1129,7 +1130,8 @@ class ClientsController extends Controller {
             $invoice_for = 'Cloudtelephony';
             
             $acc_invoice->invoice_file = $file_name;
-         
+            $acc_invoice->save();
+            
             $due_date = date('Y-m-d', strtotime($invoice_date . ' + 9 days'));
 
             $array = array(
@@ -1145,11 +1147,10 @@ class ClientsController extends Controller {
                 'invoice_for' => $invoice_for
             );
 
-
-            $array = json_encode($array);
+           
             
             $client_url = $clients->website;
-             $url = $client_url . "/office.php/Bills/setBill'";
+           //  $url = $client_url . "/office.php/Bills/setBill'";
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $array);

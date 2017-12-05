@@ -26,7 +26,7 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                 <tr>
                                     <td width="800"><table width="800" align="center" cellspacing="0" cellpadding="0" border="0" >
                                             <tbody>
-                                                <!-- title -->
+
 
                                                 <tr>
                                                     <td  style="font-family: Helvetica,arial,sans-serif;font-size: 19px;color:rgb(0, 0, 0);text-align: center;line-height: 15px;font-weight: 800;"><h4 style="margin: 0;">Edynamics Business Services LLP.</h4></td>
@@ -34,7 +34,7 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                                 <tr>
                                                     <td width="100%" height="10">&nbsp;</td>
                                                 </tr>
-                                                <!-- end of title -->
+
                                             </tbody>
                                         </table></td>
                                 </tr>
@@ -47,7 +47,9 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                     <td width="800"><table width="800"  cellspacing="0" cellpadding="0" border="0" >
                                             <tbody>
                                                 <tr>
-                                                    <td align="left" width="150"><img src="<?php echo $uploads_dir; ?>logo.png" style="height: 65px;width: auto;"/></td>
+                                                    <td align="left" width="150">
+                                                        <img src="<?php echo $uploads_dir; ?>logo.jpg" style="height: 65px;width: auto;"/>
+                                                    </td>
                                                     <td align="center" width="500"><table width="500" cellpadding="0" cellspacing="0" border="0">
                                                             <tbody>
 
@@ -87,10 +89,11 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                                                 </tr>
                                                             </tbody>
                                                         </table></td>
-                                                     <td align="right" width="150">
-                                                            <img src="<?php echo $uploads_dir;?>bms.png"  style="width: 120px;height: auto;"/><br>
-                                                            <!--<img src="<?php echo $uploads_dir;?>Nextedge.png"  style="width: 120px;height: auto;"/>-->
-                                                        </td>
+                                                    <td align="right" width="150">
+                                                        <img src="<?php echo $uploads_dir; ?>bms.png"  style="width: 120px;height: 50px;"/>
+                                                        <br>
+                                                        <img src="<?php echo $uploads_dir; ?>Nextedge.png"  style="width: 120px;height: auto;"/>
+                                                    </td>
                                                 </tr>
 
 
@@ -110,7 +113,7 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                     <td width="800">
                                         <table width="800" align="center" cellspacing="0" cellpadding="0" border="0" >
                                             <tbody>
-                                                <!-- title -->
+
                                                 <tr>
                                                     <td style="width: 325px;text-align: right;color: #000;padding-top: 5px;" valign="top">
                                                         ____________________________________________________________
@@ -124,7 +127,7 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                     <td width="800">
                                         <table width="800" align="center" cellspacing="0" cellpadding="0" border="0">
                                             <tbody>
-                                                <!-- title -->
+
 
                                                 <tr>
                                                     <td style="width: 200px;"><b>To&nbsp;,&nbsp;</b>
@@ -136,17 +139,19 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                                 <tr>
                                                     <td style="width:200px;" valign="top"><?php echo ucwords($client->marketing_name); ?><br>
                                                         <?php echo ucwords($client->office_address); ?><br>
-                                                        <?php echo ucwords($client->city_name);
+                                                        <?php
+                                                        echo ucwords($client->city_name);
                                                         echo ' ' . ucwords($client->pin_code) . ' ,';
                                                         ?><br>
-<?php echo ucwords($client->state_name); ?></td>
+                                                        <?php echo ucwords($client->state_name); ?></td>
                                                     <td style="width: 400px;">&nbsp;&nbsp;
                                                     </td>  
 
                                                     <td style="width: 200px;text-align: left;" valign="top"><?php echo ucwords($owndetails->marketing_name); ?><br>
 
                                                         <?php echo ucwords($owndetails->office_address); ?><br>
-                                                        <?php echo ucwords($owndetails->cityList->name);
+                                                        <?php
+                                                        echo ucwords($owndetails->cityList->name);
                                                         echo ' ' . ucwords($owndetails->pin_code) . ' ,';
                                                         ?><br>
 <?php echo ucwords($owndetails->stateList->name); ?>
@@ -170,10 +175,10 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                                 <tr>
                                                     <td style="width: 200px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                     <td style="width: 200px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                     <td style="width: 200px;"><b> HSN/SAC &nbsp;:&nbsp;<?php echo $HSN; ?> </b></td>
+                                                    <td style="width: 200px;"><b> HSN/SAC &nbsp;:&nbsp;<?php echo $HSN; ?> </b></td>
                                                 </tr>
 
-                                                <!-- end of title -->
+
                                             </tbody>
                                         </table></td>
                                 </tr>
@@ -189,7 +194,7 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                 <tr>
                                     <td width="800"><table width="800" align="center" cellspacing="0" cellpadding="0" border="0" >
                                             <tbody>
-                                               
+
 
                                                 <tr>
                                                     <td  style="font-family: Helvetica,arial,sans-serif;font-size: 10px;color:rgb(0, 0, 0);text-align: center;line-height: 15px;font-weight: 800;"><h4 style="margin: 0;">Your Account Summary</h4></td>
@@ -197,7 +202,7 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                                 <tr>
                                                     <td width="100%" height="10">&nbsp;</td>
                                                 </tr>
-                                               
+
                                             </tbody>
                                         </table></td>
                                 </tr>
@@ -205,74 +210,74 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                         </table>
 
 
-       <table width="800"  align="center" cellspacing="0" cellpadding="0" border="0" class="devicewidth" style="padding: 12px;">
-  <tbody>
-    <tr>
-      <td width="100%" height="10"></td>
-    </tr>
-    <tr>
-      <td width="800">
-      <table width="800" align="center" cellspacing="0" cellpadding="0" border="0" >
-          <tbody>
-              
-            
-            <tr>
-              <td  style="width:145px; text-align:center; " width="145px">
-            <table width="145px" align="center" cellspacing="0" bordercolor="#999999" cellpadding="5" border="1" >
-            <tr>
-            <td style="border-bottom:1px solid #ccc; text-align:center">&nbsp;Previous Balance</td>
-            </tr><tr>
-            <td style="text-align:center">&nbsp;&#8377; 0</td>
-            </tr>
-            </table>
-              
-              </td> 
-                 <td  style="width:15;text-align:center; border:none;"> &nbsp;-&nbsp;</td>   
-                     <td  style="width:145px; text-align:center; " width="145px">
-                  <table width="145px" align="center" cellspacing="0" bordercolor="#999999" cellpadding="5" border="1" >
-            <tr>
-            <td style="border-bottom:1px solid #ccc; text-align:center">&nbsp;Last Payment</td>
-            </tr><tr>
-            <td style="text-align:center">&nbsp;&#8377; 0</td>
-            </tr>
-            </table></td> 
-                  <td  style="width:15;text-align:center"  width="25">&nbsp;=&nbsp;</td>    
-                 <td  style="width:145px; text-align:center; " width="145px">
-                  <table width="145px" align="center" cellspacing="0" bordercolor="#999999" cellpadding="5" border="1" >
-            <tr>
-            <td style="border-bottom:1px solid #ccc; text-align:center">&nbsp;Balance</td>
-            </tr><tr>
-            <td style="text-align:center">&nbsp;&#8377; 0</td>
-            </tr>
-            </table></td>
-                <td  style="width:15;text-align:center" width="25">&nbsp;+&nbsp;</td>    
-               <td  style="width:145px; text-align:center; " width="145px">
-                  <table width="145px" align="center" cellspacing="0" bordercolor="#999999" cellpadding="5" border="1" >
-            <tr>
-            <td style="border-bottom:1px solid #ccc; text-align:center">&nbsp;This Month's Bill</td>
-            </tr><tr>
-            <td style="text-align:center">&nbsp;&#8377; <?php echo $final_invoice_ammount; ?></td>
-            </tr>
-            </table></td>
-               <td  style="width:15;text-align:center" width="25">&nbsp;=&nbsp;</td>
-           <td  style="width:145px; text-align:center;" width="145px">
-                  <table width="145px" align="center" cellspacing="0" bordercolor="#999999" cellpadding="5" border="1" >
-            <tr>
-                <td style="border-bottom:1px solid #ccc; text-align:center">&nbsp;Total Bill Amount</td>
-            </tr><tr>
-            <td style="text-align:center">&nbsp;&#8377; <?php echo $final_invoice_ammount; ?></td>
-            </tr>
-            </table></td>
-            </tr>
-            <tr>
-              <td colspan="8" width="100%" height="10">&nbsp;</td>
-            </tr>
-            
-          </tbody>
-        </table></td>
-    </tr>
-  </tbody>
-</table>
+                        <table width="800"  align="center" cellspacing="0" cellpadding="0" border="0" class="devicewidth" style="padding: 12px;">
+                            <tbody>
+                                <tr>
+                                    <td width="100%" height="10"></td>
+                                </tr>
+                                <tr>
+                                    <td width="800">
+                                        <table width="800" align="center" cellspacing="0" cellpadding="0" border="0" >
+                                            <tbody>
+
+
+                                                <tr>
+                                                    <td  style="width:145px; text-align:center; " width="145px">
+                                                        <table width="145px" align="center" cellspacing="0" bordercolor="#999999" cellpadding="5" border="1" >
+                                                            <tr>
+                                                                <td style="border-bottom:1px solid #ccc; text-align:center">&nbsp;Previous Balance</td>
+                                                            </tr><tr>
+                                                                <td style="text-align:center">&nbsp;&#8377; 0</td>
+                                                            </tr>
+                                                        </table>
+
+                                                    </td> 
+                                                    <td  style="width:15;text-align:center; border:none;"> &nbsp;-&nbsp;</td>   
+                                                    <td  style="width:145px; text-align:center; " width="145px">
+                                                        <table width="145px" align="center" cellspacing="0" bordercolor="#999999" cellpadding="5" border="1" >
+                                                            <tr>
+                                                                <td style="border-bottom:1px solid #ccc; text-align:center">&nbsp;Last Payment</td>
+                                                            </tr><tr>
+                                                                <td style="text-align:center">&nbsp;&#8377; 0</td>
+                                                            </tr>
+                                                        </table></td> 
+                                                    <td  style="width:15;text-align:center"  width="25">&nbsp;=&nbsp;</td>    
+                                                    <td  style="width:145px; text-align:center; " width="145px">
+                                                        <table width="145px" align="center" cellspacing="0" bordercolor="#999999" cellpadding="5" border="1" >
+                                                            <tr>
+                                                                <td style="border-bottom:1px solid #ccc; text-align:center">&nbsp;Balance</td>
+                                                            </tr><tr>
+                                                                <td style="text-align:center">&nbsp;&#8377; 0</td>
+                                                            </tr>
+                                                        </table></td>
+                                                    <td  style="width:15;text-align:center" width="25">&nbsp;+&nbsp;</td>    
+                                                    <td  style="width:145px; text-align:center; " width="145px">
+                                                        <table width="145px" align="center" cellspacing="0" bordercolor="#999999" cellpadding="5" border="1" >
+                                                            <tr>
+                                                                <td style="border-bottom:1px solid #ccc; text-align:center">&nbsp;This Month's Bill</td>
+                                                            </tr><tr>
+                                                                <td style="text-align:center">&nbsp;&#8377; <?php echo $final_invoice_ammount; ?></td>
+                                                            </tr>
+                                                        </table></td>
+                                                    <td  style="width:15;text-align:center" width="25">&nbsp;=&nbsp;</td>
+                                                    <td  style="width:145px; text-align:center;" width="145px">
+                                                        <table width="145px" align="center" cellspacing="0" bordercolor="#999999" cellpadding="5" border="1" >
+                                                            <tr>
+                                                                <td style="border-bottom:1px solid #ccc; text-align:center">&nbsp;Total Bill Amount</td>
+                                                            </tr><tr>
+                                                                <td style="text-align:center">&nbsp;&#8377; <?php echo $final_invoice_ammount; ?></td>
+                                                            </tr>
+                                                        </table></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="8" width="100%" height="10">&nbsp;</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table></td>
+                                </tr>
+                            </tbody>
+                        </table>
 
                         <table width="800"  align="center" cellspacing="0" cellpadding="0" border="0" class="devicewidth" style="padding: 12px;">
                             <tbody>
@@ -281,7 +286,7 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                     <td width="800">
                                         <table width="800" style="font-size:14px;" align="center" cellspacing="0" cellpadding="3" border="0" >
                                             <tbody>
-                                                <!-- start 1 table -->
+
 
                                                 <tr style="background: #ececec; height: 35px;"  width="800">
 
@@ -358,19 +363,19 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                                         &nbsp;&nbsp; Zero Rental
                                                     </td>
                                                     <td style="border: 1px solid #000; border-collapse: collapse;text-align:right; font-size: 12px;">
-                                                        &nbsp;&nbsp; <?php echo $zerorentalNumbers;  ?>
+                                                        &nbsp;&nbsp; <?php echo $zerorentalNumbers; ?>
                                                     </td>
                                                     <td style="border: 1px solid #000; border-collapse: collapse;text-align:right; font-size: 12px;">
-                                                        &nbsp;&nbsp;<?php echo 0;  ?>
+                                                        &nbsp;&nbsp;<?php echo 0; ?>
                                                     </td>
                                                     <td style="border: 1px solid #000; border-collapse: collapse;text-align:right; font-size: 12px;">
-                                                        &nbsp;&nbsp; <?php echo $Subtotalzerorental;  ?>
+                                                        &nbsp;&nbsp; <?php echo $Subtotalzerorental; ?>
                                                     </td>
                                                     <td style="border: 1px solid #000; border-collapse: collapse;text-align:right; font-size: 12px;">
                                                         &nbsp;&nbsp; 0
                                                     </td>
                                                     <td style="border: 1px solid #000; border-collapse: collapse;text-align:right; font-size: 12px;">
-                                                        &nbsp;&nbsp; <?php echo $Subtotalzerorental;  ?>
+                                                        &nbsp;&nbsp; <?php echo $Subtotalzerorental; ?>
                                                     </td>
                                                 </tr>
 
@@ -380,19 +385,27 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                                         &nbsp;&nbsp;Pri Lines Channel Rental
                                                     </td>
                                                     <td  style="border: 1px solid #000; border-collapse: collapse;text-align:right; font-size: 12px;">
-                                                        &nbsp;&nbsp;<?php echo $noofPrilines;?>
+                                                        &nbsp;&nbsp;<?php echo $noofPrilines; ?>
                                                     </td>
                                                     <td  style="border: 1px solid #000; border-collapse: collapse;text-align:right; font-size: 12px;">
-                                                        &nbsp;&nbsp;<?php echo $priPrice;?>
+                                                        &nbsp;&nbsp;<?php echo $priPrice; ?>
                                                     </td>
                                                     <td  style="border: 1px solid #000; border-collapse: collapse;text-align:right; font-size: 12px;">
-                                                        &nbsp;&nbsp;<?php echo $SubtotalPrilines;?>
+                                                        &nbsp;&nbsp;<?php echo $SubtotalPrilines; ?>
                                                     </td>
                                                     <td  style="border: 1px solid #000; border-collapse: collapse;text-align:right; font-size: 12px;">
-                                                        &nbsp;&nbsp;<?php if(!empty($pridiscount)){echo $pridiscount;}else { echo '0';}?>
+                                                        &nbsp;&nbsp;<?php if (!empty($pridiscount)) {
+    echo $pridiscount;
+} else {
+    echo '0';
+} ?>
                                                     </td>
                                                     <td  style="border: 1px solid #000; border-collapse: collapse;text-align:right; font-size: 12px;">
-                                                        &nbsp;&nbsp;<?php if(!empty($pritotal)){echo $pritotal;}else{echo $SubtotalPrilines; }; ?>
+                                                        &nbsp;&nbsp;<?php if (!empty($pritotal)) {
+    echo $pritotal;
+} else {
+    echo $SubtotalPrilines;
+}; ?>
                                                     </td>
 
                                                 </tr>
@@ -408,13 +421,13 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                                         &nbsp;&nbsp;<?php echo $incoming_pulse_rate; ?>
                                                     </td>
                                                     <td  style="border: 1px solid #000; border-collapse: collapse;text-align:right; font-size: 12px;">
-                                                        &nbsp;&nbsp;<?php echo $SubtotalincommingPulse;?>
+                                                        &nbsp;&nbsp;<?php echo $SubtotalincommingPulse; ?>
                                                     </td>
                                                     <td  style="border: 1px solid #000; border-collapse: collapse;text-align:right; font-size: 12px;">
                                                         &nbsp;&nbsp;0
                                                     </td>
                                                     <td  style="border: 1px solid #000; border-collapse: collapse;text-align:right; font-size: 12px;">
-                                                        &nbsp;&nbsp;<?php echo $SubtotalincommingPulse;?>
+                                                        &nbsp;&nbsp;<?php echo $SubtotalincommingPulse; ?>
                                                     </td>
 
                                                 </tr>
@@ -428,20 +441,20 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                                         &nbsp;&nbsp;Local / STD
                                                     </td>
                                                     <td  style="border: 1px solid #000; border-collapse: collapse;text-align:right; font-size: 12px;">
-                                                        &nbsp;&nbsp;<?php echo $outgoingPulse;?>
+                                                        &nbsp;&nbsp;<?php echo $outgoingPulse; ?>
                                                     </td>
 
                                                     <td  style="border: 1px solid #000; border-collapse: collapse;text-align:right; font-size: 12px;">
-                                                        &nbsp;&nbsp;<?php echo $local_outbound_pulse_rate;?>
+                                                        &nbsp;&nbsp;<?php echo $local_outbound_pulse_rate; ?>
                                                     </td>
                                                     <td  style="border: 1px solid #000; border-collapse: collapse;text-align:right; font-size: 12px;">
-                                                        &nbsp;&nbsp;<?php echo $SubtotaloutgoingPulse;?> 
+                                                        &nbsp;&nbsp;<?php echo $SubtotaloutgoingPulse; ?> 
                                                     </td>
                                                     <td  style="border: 1px solid #000; border-collapse: collapse;text-align:right; font-size: 12px;">
                                                         &nbsp;&nbsp;0
                                                     </td>
                                                     <td  style="border: 1px solid #000; border-collapse: collapse;text-align:right; font-size: 12px;">
-                                                        &nbsp;&nbsp;<?php echo $SubtotaloutgoingPulse;?>
+                                                        &nbsp;&nbsp;<?php echo $SubtotaloutgoingPulse; ?>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -484,7 +497,7 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                                 </tr>
 
 
-                                               
+
                                                 <tr style="height: 35px;width:100%;font-size:12px;"  width="800">
                                                     <td colspan="3" style="border-collapse: collapse;">
                                                         &nbsp;
@@ -499,7 +512,7 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                                     </td>
                                                 </tr>
 
-                                               
+
                                                 <tr style="height: 35px;width:100%;font-size:12px;"  width="800">
                                                     <td colspan="3" style="border-collapse: collapse;">
                                                         &nbsp;
@@ -526,9 +539,9 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                                         &nbsp;&nbsp; 0
                                                     </td>
                                                 </tr>
-                                                <?php 
-                                                $grand_total = $sgst + $cgst + $last_amount;
-                                                ?>
+<?php
+$grand_total = $sgst + $cgst + $last_amount;
+?>
 
                                                 <tr style="height: 35px;width:100%;font-size:12px;"  width="800">
                                                     <td colspan="3" style="border-collapse: collapse;">
@@ -544,7 +557,7 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                                     </td>
                                                 </tr>
 
-                                                <!-- end 2 table -->
+
                                             </tbody>
                                         </table>
                                     </td>
@@ -612,30 +625,30 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
 
                                                 </tr>
 
-                                                    <tr>
-                                                        <td><?php echo $HSN; ?></td>
-                                                        <td style=" text-align: center;">
-                                                              <?php  echo $last_amount;?> </td>
+                                                <tr>
+                                                    <td><?php echo $HSN; ?></td>
+                                                    <td style=" text-align: center;">
+                                                        <?php echo $last_amount; ?> </td>
 
-                                                        <td style="width:75px; text-align: center;"> (9%) </td>
+                                                    <td style="width:75px; text-align: center;"> (9%) </td>
 
-                                                        <td style="width:75px; text-align: center;"> <?php echo $sgst; ?></td>
+                                                    <td style="width:75px; text-align: center;"> <?php echo $sgst; ?></td>
 
-                                                        <td  style="width:75px; text-align: center;"> (9%)</td>
+                                                    <td  style="width:75px; text-align: center;"> (9%)</td>
 
-                                                        <td style="width:75px; text-align: center;"><?php echo $cgst; ?></td>
-                                                        <td style="width:75px; text-align: center;">(18%)</td>
+                                                    <td style="width:75px; text-align: center;"><?php echo $cgst; ?></td>
+                                                    <td style="width:75px; text-align: center;">(18%)</td>
 
-                                                        <td style="width:75px; text-align: center;">0</td>
+                                                    <td style="width:75px; text-align: center;">0</td>
 
 
-                                                    </tr>
+                                                </tr>
 
-                                                      
-                                                       
+
+
                                                 <tr>
                                                     <td style=" text-align: right; font-weight: bold">Total</td>
-                                                    <td style=" text-align: center;font-weight: bold"> <?php  echo $last_amount;?> </td>
+                                                    <td style=" text-align: center;font-weight: bold"> <?php echo $last_amount; ?> </td>
 
                                                     <td style="width:75px; text-align: center;">&nbsp;</td>
 
@@ -656,7 +669,8 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                 </tr>
                             </tbody>
                         </table>
-<?php //if(!empty($modelEmail->discount) || !empty($modelSMS->discount))
+<?php
+//if(!empty($modelEmail->discount) || !empty($modelSMS->discount))
 {
     ?>
                             <!-- table width="800"  align="center" cellspacing="0" cellpadding="0" border="0" class="devicewidth" style="padding: 12px;">
@@ -689,24 +703,26 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                                         <tr>
                                                             <td  style="font-size:10px;width: 800px;">
                                                                 <ul>
-    <?php // if(!empty($modelEmail->discount)){ ?>  <li> <?php echo 'Discount for BMS' . $modelEmail->discount_for . ' ( Rs. ' . $modelEmail->discount . ' - ' . $modelEmail->quantity . ' G Suit ID )';
+    <?php // if(!empty($modelEmail->discount)){  ?>  <li> <?php
+    echo 'Discount for BMS' . $modelEmail->discount_for . ' ( Rs. ' . $modelEmail->discount . ' - ' . $modelEmail->quantity . ' G Suit ID )';
 
     //} 
     ?> </li>
-    <?php // if(!empty($modelSMS->discount)){  ?> <li> <?php echo 'Discount for BMS' . $modelSMS->discount_for . ' ( Rs. ' . $modelSMS->discount . ' - Qty. ' . $modelSMS->quantity . ' SMS )';
-} ?> </li>
-                                                            </ul>	
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                    <tr><td style="height:10px;">&nbsp;</td></tr>
-                                </tbody>
-                            </table -->
+    <?php // if(!empty($modelSMS->discount)){   ?> <li> <?php echo 'Discount for BMS' . $modelSMS->discount_for . ' ( Rs. ' . $modelSMS->discount . ' - Qty. ' . $modelSMS->quantity . ' SMS )';
+}
+?> </li>
+                                                        </ul>	
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr><td style="height:10px;">&nbsp;</td></tr>
+                            </tbody>
+                        </table -->
 
-<?php //}  ?>
+<?php //}   ?>
                         <table width="800"  align="center" cellspacing="0" cellpadding="0" border="0" class="devicewidth" style="padding: 12px;">
                             <tbody>
                                 <tr>
@@ -792,11 +808,8 @@ $uploads_dir = base_path() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATO
                                             <tbody>
                                                 <tr><td style="width: 200px;" align="center">For Edynamics Business Services LLP</td></tr>
                                                 <tr>
-
                                                     <td style="width:200px;" align="center">
-                                                        <!--<span style="width: 130px;text-align: center;">For Edynamics Business Services LLP.</span>-->
                                                         <img src="<?php echo $uploads_dir; ?>stamp.png" style="width:100px;height:auto;margin-bottom: 12px;">
-                                                         <!--<span style="width: 130px;padding-top: 5px;margin-top: 5px;text-align: center;">Authorised Signatory</span>-->
                                                     </td>												
                                                 </tr>	
                                                 <tr><td style="width: 200px;" align="center">Authorised Signatory</td></tr>

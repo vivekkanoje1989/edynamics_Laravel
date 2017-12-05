@@ -473,9 +473,10 @@ app.controller('clientInfoCtrl', ['$scope', 'Data', 'toaster','$rootScope','Uplo
             $scope.serviceTypesData ={};
             $scope.generateInvoice = function (generateData,client_id,services){
                     $scope.generateData = generateData;
-                   
+                   console.log(generateData);
+                   console.log(services);
                    $scope.invoicebtn =true;
-                   
+                  
                     if(services[0] == 3){
                         
                             Data.post('clients/generateCtInvoice',{
