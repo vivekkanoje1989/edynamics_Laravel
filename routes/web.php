@@ -93,6 +93,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get($getWebsiteUrl . '/bmsnetwork', 'frontend\UserController@bmsnetwork');
     Route::get($getWebsiteUrl . '/clients', 'frontend\UserController@clients');
     Route::post($getWebsiteUrl . '/doContactAction', 'frontend\UserController@doContactAction');
+    Route::post($getWebsiteUrl . '/requestDemos', 'frontend\UserController@requestDemos');
     Route::get($getWebsiteUrl . '/partnership', 'frontend\UserController@partnership');
     Route::get($getWebsiteUrl . '/privacy_policy', 'frontend\UserController@privacy_policy');
     Route::get($getWebsiteUrl . '/Bms_builder_and_Developer', 'frontend\UserController@Bms_builder_and_Developer');

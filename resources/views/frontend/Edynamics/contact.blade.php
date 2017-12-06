@@ -70,7 +70,7 @@
                         <div class="md-form">
                             <i class="fa fa-envelope prefix"></i>
                             <input type="email" name="email_id" ng-model="contact.email_id" id="email_id" class="form-control validate" required>
-                            <label for="email" data-error="wrong" >Your email *</label>
+                            <label for="email" >Your email *</label>
                             <div ng-if="sbtBtn" ng-messages="contactUs.email_id.$error">
                                 <span ng-message="required" class="sp-error">This field is required</span>
                             </div>
@@ -78,7 +78,7 @@
                         <div class="md-form">
                             <i class="fa fa-mobile-phone prefix"></i>
                             <input type="number" id="mobile_number" ng-model="contact.mobile_number" class="form-control validate" maxlength="10" required>
-                            <label for="mobile-no" data-error="wrong" >Your Mobile Number *</label>
+                            <label for="mobile-no" >Your Mobile Number *</label>
                             <div ng-if="sbtBtn" ng-messages="contactUs.mobile_number.$error">
                                 <span ng-message="required" class="sp-error">This field is required</span>
                             </div>
@@ -86,17 +86,17 @@
                         <div class="md-form">
                             <i class="fa fa-pencil prefix"></i>
                             <textarea type="text" id="message" ng-model="contact.message" class="md-textarea" required></textarea>
-                            <label for="message">Textarea *</label>
+                            <label for="message">Message *</label>
                             <div ng-if="sbtBtn" ng-messages="contactUs.message.$error">
                                 <span ng-message="required" class="sp-error">This field is required</span>
                             </div>
                         </div>
-                        <div class="form-item">
+<!--                        <div class="form-item">
                             <div class="g-recaptcha" data-sitekey="6LdhNTsUAAAAACHfPY-OoLOjD3dp_0NRUqrUNmEy"></div>
                             <div class="help-block"  >
                                 <div class="err"  style="float: left;">{{recaptcha}}</div>
                             </div>
-                        </div>
+                        </div>-->
                         <!--ng-if="recaptcha"-->
                         <div class="text-xs-center text-center">
                             <button class="btn btn-default mb-2 waves-effect waves-light" ng-disabled="contactBtndisabled" ng-click="sbtBtn = true;">Send <i class="fa fa-send ml-1"></i></button>
